@@ -1,0 +1,14 @@
+// List all tables(collections)
+db.getCollectionNames()
+// Print some info
+db.users.explain()
+// Get # of rows(document)
+db.users.count();
+// List all rows(documents)
+db.users.find()
+// Insert a row(document)
+db.users.insert([{
+    "name":"a", "email":"a@a.com"
+}]);
+// Delete a row
+db.users.findOneAndDelete("5b05924bb26ca72855cbf4ce")

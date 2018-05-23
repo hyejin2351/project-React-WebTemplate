@@ -19,7 +19,7 @@ module.exports = (uri, options) => new Promise((resolve, reject) => {
     return reject(err);
   })
   .catch((err) => {
-    console.error(err);
+    console.error('>>>>>>>>>>>>>>>>>>>>>>', err);
     return reject(err);
   });
 });
