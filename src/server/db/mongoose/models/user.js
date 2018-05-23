@@ -10,6 +10,11 @@ const UserSchema = new mongoose.Schema({
   name: String
 });
 
+UserSchema.virtual('id')
+.get(function() {
+  return this._id.toHexString();
+});
+
 /* UserSchema.plugin(modAuth, {
   usernameField: 'email',
   saltlen: 32,
