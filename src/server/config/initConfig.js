@@ -1,6 +1,11 @@
 //
 // init configuration
 //
+
+//
+// load .env
+require('dotenv/config');
+
 const config = require('./');
 const initProcess = require('./initProcess');
 const initExpress = require('./initExpress');
