@@ -1,7 +1,7 @@
 {
-  "name": "hackernews",
-  "version": "0.5.0",
-  "description": "A hacker news clone built from the ground up to demonstrate React and GraphQL",
+  "name": "was-starter",
+  "version": "0.1.0",
+  "description": "Web Application Server Starter",
   "engines": {
     "node": ">=6.9.4"
   },
@@ -21,13 +21,13 @@
     "build-static-website": "NODE_ENV=production rm -rf build/client/static && yarn install --dev && next build src/client && next export src/client -o build/client/static",
     "start": "NODE_ENV=production node build/app/server/index.js"
   },
-  "author": "Clinton D'Annolfo",
+  "author": "peterk",
   "license": "Apache-2.0",
   "keywords": [
-    "hacker-news",
-    "clone",
-    "react",
-    "graphql"
+    "nextjs",
+    "graphql",
+    "apollo",
+    "react"
   ],
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.10",
