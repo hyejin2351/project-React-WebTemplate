@@ -26,6 +26,11 @@ export const GRAPHQL_URL = `${APP_URI}${graphQLPath}`;
 export const GRAPHIQL_URL = `${APP_URI}${graphiQLPath}`;
 
 //
+// MongoDB
+//
+export const MONGODB_URI = process.env.MONGODB_URI;
+
+//
 // Auth
 //
 export const AUTH_DB_URI = process.env.AUTH_DB_URI;

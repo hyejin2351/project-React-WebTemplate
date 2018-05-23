@@ -1,8 +1,7 @@
 //
 // init next
 //
-const TAG = 'app:nextjs';
-const d = require('debug')(TAG);
+const d = require('debug')('app:nextjs');
 
 const createNextApp = require('next');
 const {

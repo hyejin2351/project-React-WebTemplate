@@ -1,8 +1,7 @@
 //
 // init express
 //
-const TAG = 'app:express';
-const d = require('debug')(TAG);
+const d = require('debug')('app:express');
 
 const express = require('express');
 const morgan = require('morgan');
@@ -12,7 +11,7 @@ const {
 
 
 module.exports = ({
-  server,     // express app
+  server, // express app
   docRootDir, // should be absolute path
 } = {}) => {
   if (!server) {

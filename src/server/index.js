@@ -4,12 +4,7 @@
 
 //
 // load .env
-require('dotenv/config');
-//
-// debug
-const TAG = 'app:server';
-const d = require('debug')(TAG);
-
+import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
@@ -41,6 +36,9 @@ import {
   initConfig
 } from './config';
 
+//
+// debug
+const d = require('debug')('app:server');
 d('Start loading...');
 
 // Seed the in-memory data using the HN api
@@ -180,10 +178,13 @@ initConfig({})
     /* END EXPRESS ROUTES */
 
     server.listen(APP_PORT, (err) => {
-      if (err) throw err;
-      d(`> App ready on ${APP_URI}`);
-      d(`> GraphQL Ready on ${GRAPHQL_URL}`);
-      d(`> Dev: ${isDev}`);
+      if (err) {
+        console.error(err);
+        throw err;
+      }
+      console.log(`> App ready on ${APP_URI}`);
+      console.log(`> GraphQL Ready on ${GRAPHQL_URL}`);
+      console.log(`> Dev: ${isDev}`);
     });
   })
   .catch((ex) => {
