@@ -13,6 +13,7 @@ const devRules = {
   "no-trailing-spaces": "off",
   "global-require": "off",
   "spaced-comment": "off",
+  "no-underscore-dangle": "off",
 }
 
 const config = {

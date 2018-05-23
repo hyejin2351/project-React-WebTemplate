@@ -1,10 +1,8 @@
 
 const { UserModel } = require('../models');
 
-const getUsers = () => {
-    return UserModel.find();
-}
+const getUsers = () => UserModel.find();
 
 module.exports = {
-    getUsers,
-}
+  getUsers,
+};

@@ -11,9 +11,9 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.virtual('id')
-.get(function() {
-  return this._id.toHexString();
-});
+  .get(function rename() {
+    return this._id.toHexString();
+  });
 
 /* UserSchema.plugin(modAuth, {
   usernameField: 'email',

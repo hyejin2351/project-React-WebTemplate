@@ -7,19 +7,15 @@ const mongoose = require('mongoose');
 
 module.exports = (uri, options) => new Promise((resolve, reject) => {
   // See http://mongoosejs.com/docs/connections.html#options
-  const {
+  // const {
     //      user, pass, autoIndex, dbName, ...
     //      autoIndex, poolSize, ...
-  } = options;
+  // } = options;
 
   const db = mongoose.connect(uri, options);
-  db.then(() => {
-    return resolve(db)
-  }, (err) => {
-    return reject(err);
-  })
-  .catch((err) => {
-    console.error('>>>>>>>>>>>>>>>>>>>>>>', err);
-    return reject(err);
-  });
+  db.then(() => resolve(db), err => reject(err))
+    .catch((err) => {
+      console.error('>>>>>>>>>>>>>>>>>>>>>>', err);
+      return reject(err);
+    });
 });

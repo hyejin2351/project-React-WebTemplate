@@ -34,25 +34,25 @@ import initMongoose from '../config/initMongoose';
 //
 
 initMongoose()
-.then(() => {
-  const app = express();
+  .then(() => {
+    const app = express();
 
-  // Mount GraphQL Server middleware
-  app.use(graphQLPath, bodyParser.json(), graphqlExpress(request => ({
-    schema: Schema,
-    rootValue: { request },
-    context: {
-      UserModel
-    },
-    debug: true,
-  })));
+    // Mount GraphQL Server middleware
+    app.use(graphQLPath, bodyParser.json(), graphqlExpress(request => ({
+      schema: Schema,
+      rootValue: { request },
+      context: {
+        UserModel
+      },
+      debug: true,
+    })));
   
-  app.use(graphiQLPath, graphiqlExpress({
-    endpointURL: graphQLPath,
-  }));
+    app.use(graphiQLPath, graphiqlExpress({
+      endpointURL: graphQLPath,
+    }));
   
-  app.listen(APP_PORT, () => {
-    console.info(`==> 📈 GraphQL Server on ${GRAPHQL_URL}`);
-    console.info(`==> 🌎  Go to ${GRAPHIQL_URL}`);
+    app.listen(APP_PORT, () => {
+      console.info(`==> 📈 GraphQL Server on ${GRAPHQL_URL}`);
+      console.info(`==> 🌎  Go to ${GRAPHIQL_URL}`);
+    });
   });
-});

@@ -39,6 +39,7 @@ import {
 //
 // debug
 const d = require('debug')('app:server');
+
 d('Start loading...');
 
 // Seed the in-memory data using the HN api

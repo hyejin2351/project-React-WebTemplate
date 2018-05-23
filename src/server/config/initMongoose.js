@@ -10,7 +10,7 @@ const {
 } = require('./');
   
 module.exports = (appOptions = {}) => new Promise((resolve, reject) => {
-  if ( !MONGODB_URI ) {
+  if (!MONGODB_URI) {
     console.error('app:mongoose', 'MONGODB_URI is not defined');
     return reject('MONGODB_URI is not defined');
   }
@@ -29,10 +29,10 @@ module.exports = (appOptions = {}) => new Promise((resolve, reject) => {
     },
     (err) => {
       d(`Failed while connecting to ${uri}`);
-      return reject(err)
+      return reject(err);
     })
     .catch((err) => {
       d(`Exception while connecting to ${uri}`);
-      return reject(err)
+      return reject(err);
     });
 });
