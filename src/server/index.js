@@ -11,26 +11,8 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import bodyParser from 'body-parser';
 import {
-  graphqlExpress,
-  graphiqlExpress,
-} from 'apollo-server-express';
-
-import Schema from './data/Schema';
-import {
-  seedCache,
-} from './data/HNDataAPI';
-import {
-  Comment,
-  Feed,
-  NewsItem,
-  User,
-} from './data/Models';
-import {
-  appPath,
   APP_PORT,
   APP_URI,
-  graphQLPath,
-  graphiQLPath,
   GRAPHQL_URL,
   isDev,
   initConfig
@@ -41,10 +23,6 @@ import {
 const d = require('debug')('app:server');
 
 d('Start loading...');
-
-// Seed the in-memory data using the HN api
-const delay = isDev ? /* 1000 * 60 * 1  1 minute */ 0 : 0;
-seedCache(delay);
 
 initConfig({})
   .then((appConfig) => {
@@ -133,31 +111,6 @@ initConfig({})
 
     /* END PASSPORT.JS AUTHENTICATION */
 
-    /* BEGIN GRAPHQL */
-
-    server.use(graphQLPath, bodyParser.json(), graphqlExpress(
-      (req) => {
-        const userId = req.user && req.user.id;
-        return {
-          schema: Schema,
-          rootValue: { req },
-          context: {
-            Feed,
-            NewsItem,
-            Comment,
-            User,
-            userId,
-          },
-          debug: isDev,
-        };
-      },
-    ));
-
-    server.use(graphiQLPath, graphiqlExpress({
-      endpointURL: graphQLPath,
-    }));
-
-    /* END GRAPHQL */
 
     /* BEGIN EXPRESS ROUTES */
 

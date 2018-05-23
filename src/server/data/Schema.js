@@ -1,19 +1,17 @@
-import {
+const {
   GraphQLScalarType,
-} from 'graphql';
-import {
+} = require('graphql');
+const {
   Kind,
-} from 'graphql/language';
-import {
-  makeExecutableSchema,
-} from 'graphql-tools';
-import debug from 'debug';
+} = require('graphql/language');
 
-// Read the complete docs for graphql-tools here:
-// http://dev.apollodata.com/tools/graphql-tools/generate-schema.html
+const debug = require('debug');
 
 const logger = debug('app:Schema');
 logger.log = console.log.bind(console);
+
+// Read the complete docs for graphql-tools here:
+// http://dev.apollodata.com/tools/graphql-tools/generate-schema.html
 
 /*
   Schema properties are in following order:
@@ -22,7 +20,7 @@ logger.log = console.log.bind(console);
 
   Comments are provided when property is not obvious
 */
-const typeDefs = `
+const types = `
 
   type Comment {
     id: Int!
@@ -103,10 +101,10 @@ const typeDefs = `
     url: String
 
     # Fetches the author based on submitterId
-    author: User
+    author: HNUser
   }
 
-  type User {
+  type HNUser {
     # The user ID is a string of the username
     id: String!
 
@@ -132,9 +130,9 @@ const typeDefs = `
     
     posts: [Int]!
   }
+`;
 
-  # the schema allows the following queries:
-  type Query {
+const queries = `
     # A comment, it's parent could be another comment or a news item.
     comment(id: Int!): Comment
 
@@ -156,11 +154,10 @@ const typeDefs = `
     newsItem(id: Int!): NewsItem
 
     # A user
-    user(id: String!): User
-  }
+    user(id: String!): HNUser
+`;
 
-  # This schema allows the following mutations:
-  type Mutation {
+const mutations = `
     upvoteNewsItem (
       id: Int!
     ): NewsItem
@@ -174,11 +171,9 @@ const typeDefs = `
       url: String
       text: String
     ): NewsItem
-  }
-
 `;
 
-export const resolvers = {
+const resolvers = {
 
   /*
     http://dev.apollodata.com/tools/graphql-tools/resolvers.html
@@ -286,10 +281,12 @@ export const resolvers = {
   },
 };
 
-export default makeExecutableSchema({
-  typeDefs,
+module.exports = {
+  types,
+  queries,
+  mutations,
   resolvers,
-});
+};
 
 // Example query
 // query {

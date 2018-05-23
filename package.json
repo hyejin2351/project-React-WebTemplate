@@ -11,7 +11,7 @@
     "debug": "DEBUG=app:*,-app:HNDataAPI npm run dev",
     "debug-all": "DEBUG=* npm run dev",
     "debug-mode": "babel-node --inspect src/server/index.js",
-    "graphiql": "babel-node ./src/server/gql/graphiql",
+    "graphiql": "babel-node ./src/server/gql/graphiqlServer.js",
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore .",
     "build": "npm run build-clean && babel src -d build/app --ignore '**/*__tests__','**/*__mocks__' && cp -R src/client/static build/app/client/static && next build build/app/client",

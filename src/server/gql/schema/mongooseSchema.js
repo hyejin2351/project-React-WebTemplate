@@ -2,14 +2,12 @@
 // Schema
 //
 const d = require('debug')('app:gql');
-const { makeExecutableSchema } = require('graphql-tools');
-const { getUsers } = require('../db/mongoose/resolvers');
+const { getUsers } = require('../../db/mongoose/resolvers');
 
 //
 // See https://www.apollographql.com/docs/apollo-server/example.html
 //
-const typeDefs = `
-
+const types = `
   # User type for response
   type User {
     _id: String  
@@ -23,17 +21,18 @@ const typeDefs = `
     email: String
     name: String
   }
-  
-  type Query {
+`;
+
+const queries = `
     getUsers
     : [User]
 
     getUser(
         id: String!
     ): User
-  }
+`;
 
-  type Mutation {
+const mutations = `
     createUser (
       email: String!
       name: String
@@ -47,8 +46,6 @@ const typeDefs = `
       id: String!
       userData: UserData
     ): User
-  }
-
 `;
 
 const resolvers = {
@@ -71,6 +68,13 @@ const resolvers = {
 
     updateUser: (_, { id, userData }, { UserModel }) => UserModel.findByIdAndUpdate(id, userData, { new: true }),
   }
+};
+
+module.exports = {
+  types,
+  queries,
+  mutations,
+  resolvers,
 };
 
 /**
@@ -122,9 +126,3 @@ mutation {
 }
 */
 
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-});
-
-export default schema;

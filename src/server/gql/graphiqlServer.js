@@ -16,15 +16,15 @@ import {
 
 import Schema from './schema';
 import {
+  UserModel,
+} from '../db/mongoose/models';
+import {
   APP_PORT,
   graphQLPath,
   graphiQLPath,
   GRAPHQL_URL,
   GRAPHIQL_URL,
 } from '../config';
-import {
-  UserModel,
-} from '../db/mongoose/models';
 
 import initMongoose from '../config/initMongoose';
 
@@ -38,9 +38,9 @@ initMongoose()
     const app = express();
 
     // Mount GraphQL Server middleware
-    app.use(graphQLPath, bodyParser.json(), graphqlExpress(request => ({
+    app.use(graphQLPath, bodyParser.json(), graphqlExpress(req => ({
       schema: Schema,
-      rootValue: { request },
+      rootValue: { req },
       context: {
         UserModel
       },
