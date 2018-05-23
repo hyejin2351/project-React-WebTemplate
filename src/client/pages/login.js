@@ -111,7 +111,7 @@ class Page extends React.Component {
       <Blank>
         {message && <p>{message}</p>}
         {this.state.validationMessage && <p>{this.state.validationMessage}</p>}
-        <b>Login...</b>
+        <b>Login</b>
         <br />
         <br />
         <form method="post" action="/login" onSubmit={e => this.validateLogin(e)} style={{ marginBottom: '1em' }}>

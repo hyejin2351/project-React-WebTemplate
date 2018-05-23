@@ -7,10 +7,10 @@ import debug from 'debug';
 import initApollo from './initApollo';
 
 const logger = debug('app:withData');
-logger.log = console.log.bind(console);
+// logger.log = console.log.bind(console);
 
 function parseCookies(ctx = {}, options = {}) {
-  const data = ctx.req && ctx.req.headers && ctx.req.headers.cookie || ''; // document.cookie
+  const data = (ctx.req && ctx.req.headers && ctx.req.headers.cookie) || ''; // document.cookie
   const mycookie = cookie.parse(data, options);
   logger('Parsing cookie: ', mycookie);
   return mycookie;
@@ -27,7 +27,8 @@ export default ComposedComponent => class WithData extends React.Component {
 
       // Setup a server-side one-time-use apollo client for initial props and
       // rendering (on server)
-      logger('getInitialProps with context: ', context);
+
+      // logger('getInitialProps with context: ', context);
       const apollo = initApollo({}, {
         getToken: () => parseCookies(context), // ['connect.sid'], // .token,
       });

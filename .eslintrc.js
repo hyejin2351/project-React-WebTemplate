@@ -11,6 +11,8 @@ const devRules = {
   "quotes": "off",
   "comma-dangle": "off",
   "no-trailing-spaces": "off",
+  "global-require": "off",
+  "spaced-comment": "off",
 }
 
 const config = {

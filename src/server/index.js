@@ -1,8 +1,17 @@
-import dotenv from 'dotenv/config';
-import express from 'express';
+//
+// server main
+//
+
+//
+// load .env
+require('dotenv/config');
+//
+// debug
+const TAG = 'app:server';
+const d = require('debug')(TAG);
+
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import nextApp from 'next';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import bodyParser from 'body-parser';
@@ -28,22 +37,24 @@ import {
   graphQLPath,
   graphiQLPath,
   GRAPHQL_URL,
-  dev,
+  isDev,
+  initConfig
 } from './config';
 
+d('Start loading...');
+
 // Seed the in-memory data using the HN api
-const delay = dev ? /* 1000 * 60 * 1  1 minute */ 0 : 0;
+const delay = isDev ? /* 1000 * 60 * 1  1 minute */ 0 : 0;
 seedCache(delay);
 
-const app = nextApp({ dir: appPath, dev });
-const handle = app.getRequestHandler();
-
-app.prepare()
-  .then(() => {
-    const server = express();
+initConfig({})
+  .then((appConfig) => {
+    const { 
+      server,
+      nextApp
+    } = appConfig;
 
     /* BEGIN PASSPORT.JS AUTHENTICATION */
-
     passport.use(new LocalStrategy(
       {
         usernameField: 'id',
@@ -62,11 +73,11 @@ app.prepare()
     ));
 
     /*
-      In this example, only the user ID is serialized to the session,
-      keeping the amount of data stored within the session small. When
-      subsequent requests are received, this ID is used to find the user,
-      which will be restored to req.user.
-    */
+    In this example, only the user ID is serialized to the session,
+    keeping the amount of data stored within the session small. When
+    subsequent requests are received, this ID is used to find the user,
+    which will be restored to req.user.
+  */
     passport.serializeUser((user, cb) => {
       cb(null, user.id);
     });
@@ -138,7 +149,7 @@ app.prepare()
             User,
             userId,
           },
-          debug: dev,
+          debug: isDev,
         };
       },
     ));
@@ -160,18 +171,19 @@ app.prepare()
 
     server.get('/news', (req, res) => {
       const actualPage = '/';
-      app.render(req, res, actualPage);
+      nextApp.render(req, res, actualPage);
     });
 
+    const handle = nextApp.getRequestHandler();
     server.get('*', (req, res) => handle(req, res));
 
     /* END EXPRESS ROUTES */
 
     server.listen(APP_PORT, (err) => {
       if (err) throw err;
-      console.log(`> App ready on ${APP_URI}`);
-      console.log(`> GraphQL Ready on ${GRAPHQL_URL}`);
-      console.log(`Dev: ${dev}`);
+      d(`> App ready on ${APP_URI}`);
+      d(`> GraphQL Ready on ${GRAPHQL_URL}`);
+      d(`> Dev: ${isDev}`);
     });
   })
   .catch((ex) => {
@@ -179,4 +191,4 @@ app.prepare()
     process.exit(1);
   });
 
-export default app;
+export default {};
