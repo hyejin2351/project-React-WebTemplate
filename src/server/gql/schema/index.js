@@ -33,16 +33,20 @@ const typeDefs = `
 console.log(typeDefs);
 console.log('----------------------------------------------------');
  */
+// extract query and mutation
+const { Query: mQuery, Mutation: mMutation, ...mRest } = mongoResolvers;
+const { Query: dQuery, Mutation: dMutation, ...dRest } = dataResolvers;
+// merge all
 const resolvers = {
-  ...mongoResolvers,
-  ...dataResolvers,
+  ...mRest,
+  ...dRest,
   Query: {
-    ...mongoResolvers.Query,
-    ...dataResolvers.Query
+    ...mQuery,
+    ...dQuery
   },
   Mutation: {
-    ...mongoResolvers.Mutation,
-    ...dataResolvers.Mutation
+    ...mMutation,
+    ...dMutation
   }
 };
 
