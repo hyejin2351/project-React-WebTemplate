@@ -14,6 +14,7 @@ const devRules = {
   "global-require": "off",
   "spaced-comment": "off",
   "no-underscore-dangle": "off",
+  "no-param-reassign": "off",
 }
 
 const config = {

@@ -12,4 +12,4 @@ module.exports = {
   NewsItem: require('./models/NewsItem').default,
   User: require('./models/User').default,
   Comment: require('./models/Comment').default,
-}
+};

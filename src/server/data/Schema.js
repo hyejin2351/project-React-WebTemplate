@@ -41,7 +41,7 @@ const types = `
     upvoted: Boolean!
 
     # The User who submitted the comment
-    author: User
+    author: HNUser
   }
 
   scalar Date
@@ -132,6 +132,42 @@ const types = `
   }
 `;
 
+/**
+ * gql quries
+# {
+#     comment(id: 0) {
+#       id
+#     }
+# }
+
+# {
+#   feed(
+#     type:NEW,
+#     first:10,
+#     skip:0
+#   ) {
+#     id
+#   }
+# }
+
+# {
+#     me {
+#       id
+#     }
+# }
+
+# {
+#   newsItem(id: 0) {
+#     id
+#   }
+# }
+
+# {
+#   user(id: ""){
+#     id
+#   }
+# }
+*/
 const queries = `
     # A comment, it's parent could be another comment or a news item.
     comment(id: Int!): Comment
@@ -148,7 +184,7 @@ const queries = `
     ): [NewsItem]
 
     # The currently logged in user or null if not logged in
-    me: User
+    me: HNUser
 
     # A news item
     newsItem(id: Int!): NewsItem

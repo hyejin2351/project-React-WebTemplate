@@ -77,6 +77,18 @@ module.exports = {
   resolvers,
 };
 
+/* const tmpTypes = '';
+const tmpQueries = '';
+const tmpMutations = '';
+const tmpResolvers = {Query:{}, Mutation:{}};
+
+module.exports = {
+  types: tmpTypes,
+  queries: tmpQueries,
+  mutations: tmpMutations,
+  resolvers: tmpResolvers,
+};
+ */
 /**
  * Request graphql query
  *
