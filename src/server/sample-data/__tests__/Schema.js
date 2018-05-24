@@ -1,6 +1,6 @@
 import { resolvers } from '../Schema';
 
-import data from '../../data/SampleData';
+import data from '../SampleData';
 
 // const comment = data.topStoriesCache[0].comments[0];
 

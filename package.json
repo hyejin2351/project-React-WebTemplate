@@ -14,6 +14,7 @@
     "graphiql": "babel-node ./src/server/gql/graphiqlServer.js",
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore .",
+    "lint-fix": "npm run lint -- --fix",
     "build": "npm run build-clean && babel src -d build/app --ignore '**/*__tests__','**/*__mocks__' && cp -R src/client/static build/app/client/static && next build build/app/client",
     "build-clean": "rm -rf build/app",
     "build-next": "next build src/client",
@@ -79,7 +80,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.2.1",
     "jest": "^22.4.2",
-    "jest-enzyme": "^5.0.2",
+    "jest-enzyme": "^6.0.0",
     "mockdate": "^2.0.2",
     "nodemon": "^1.12.0",
     "react-test-renderer": "^16.0.0"

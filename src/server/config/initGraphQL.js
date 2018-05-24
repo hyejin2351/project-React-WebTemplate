@@ -19,17 +19,17 @@ const {
 } = require('./');
 
 //
-// data folder
+// SAMPLE-DATA folder
 //
 const {
   Comment,
   Feed,
   NewsItem,
   User,
-} = require('../data/Models');
+} = require('../sample-data/Models');
 const {
   seedCache,
-} = require('../data/HNDataAPI');
+} = require('../sample-data/HNDataAPI');
 // Seed the in-memory data using the HN api
 seedCache(isDev ? /* 1000 * 60 * 1  1 minute */ 0 : 0);
 
@@ -41,7 +41,7 @@ const formatError = (err) => {
     err.message = err.originalError.error_message;
   }
   return err;
-}
+};
 
 module.exports = (server, { // express app
   graphQLPath, // such as /graphql
@@ -78,14 +78,14 @@ module.exports = (server, { // express app
     tracing: isDev,
     cacheControl: !isDev,
     formatError,
-  }
+  };
 
   const fnOptions = (req) => {
     const userId = req.user && req.user.id;
     options.context.userId = userId;
     options.rootValue = { req };
     return options;
-  }
+  };
 
   server.use(
     graphQLPath, 

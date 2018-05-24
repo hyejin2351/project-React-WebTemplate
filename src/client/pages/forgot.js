@@ -40,7 +40,7 @@ const Page = ({ registerUser, url }) => {
       <b>Login</b>
       <br />
       <br />
-      <form method="post" action="/login" style={{ marginBottom: '1em' }}>
+      <form method="post" action="./login" style={{ marginBottom: '1em' }}>
         <input type="hidden" name="goto" value="news" />
         <table style={{ border: '0px' }} >
           <tbody>
@@ -61,7 +61,7 @@ const Page = ({ registerUser, url }) => {
         <br />
         <input type="submit" value="login" />
       </form>
-      <Link prefetch href="/forgot">
+      <Link prefetch href="./forgot">
         <a>Forgot your password?</a>
       </Link>
       <br />
@@ -69,7 +69,7 @@ const Page = ({ registerUser, url }) => {
       <b>Create Account</b>
       <br />
       <br />
-      <form method="post" action="/login" /* onSubmit={e => e.preventDefault()} */ style={{ marginBottom: '1em' }}>
+      <form method="post" action="./login" /* onSubmit={e => e.preventDefault()} */ style={{ marginBottom: '1em' }}>
         <input type="hidden" name="goto" value={`user?id=${user}`} />
         <input type="hidden" name="creating" value />
         <table style={{ border: '0px' }} >

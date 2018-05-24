@@ -230,8 +230,6 @@ const resolvers = {
 
 
   /*          QUERY RESOLVERS        */
-
-
   Query: {
     comment: (_, { id }, context) => context.Comment.getComment(id),
 
@@ -252,8 +250,6 @@ const resolvers = {
   },
 
   /*       MUTATION RESOLVERS       */
-
-
   Mutation: {
     upvoteNewsItem: (_, { id }, context) => {
       if (!context.userId) throw new Error('Must be logged in to vote.');
@@ -272,8 +268,6 @@ const resolvers = {
   },
 
   /*       GRAPHQL TYPE RESOLVERS        */
-
-
   Comment: {
     author: (comment, _, context) => context.User.getUser(comment.submitterId),
     comments: (comment, _, context) => context.Comment.getComments(comment.comments),
@@ -312,7 +306,7 @@ const resolvers = {
     upvoted: (newsItem, _, context) => newsItem.upvotes.includes(context.userId),
   },
 
-  User: {
+  HNUser: {
     posts: (user, _, context) => context.User.getPostsForUser(user.id),
   },
 };

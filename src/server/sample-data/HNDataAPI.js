@@ -15,7 +15,6 @@ import {
 } from './Models';
 
 const logger = debug('app:HNDataAPI');
-logger.log = console.log.bind(console);
 
 Firebase.initializeApp({
   databaseURL: HN_DB_URI,

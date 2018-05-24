@@ -10,13 +10,15 @@ const Header = props => (
       <table style={{ border: '0px', padding: '2px', borderSpacing: '0px', width: '100%' }}>
         <tbody>
           <tr>
+
             <td style={{ width: '18px', padding: '0px', paddingRight: '4px' }}>
-              <Link prefetch href="/">
+              <Link href="./">
                 <a>
                   <img src="/static/y18.gif" style={{ width: '18px', height: '18px', border: '1px', borderColor: 'white', borderStyle: 'solid' }} />
                 </a>
               </Link>
             </td>
+
             <td style={{ lineHeight: '12px', height: '10px', padding: '0px' }}>
               <HeaderNav {...props} />
             </td>
@@ -25,17 +27,17 @@ const Header = props => (
               {
                 props.me ?
                   <span className="pagetop">
-                    <Link prefetch href={`/user?id=${props.me.id}`}>
+                    <Link href={`./user?id=${props.me.id}`}>
                       <a>
                         {props.me.id}
                       </a>
                     </Link>
                     {` (${props.me.karma}) | `}
-                    <a href={`/logout?auth=d78ccc2c6120ffe08f32451519c2ff46d34c51ab&amp;goto=${props.currentURL}`}>logout</a>
+                    <a href={`./logout?auth=d78ccc2c6120ffe08f32451519c2ff46d34c51ab&amp;goto=${props.currentURL}`}>logout</a>
                   </span>
                   :
                   <span className="pagetop">
-                    <Link prefetch href={`/login?goto=${props.currentURL}`}>
+                    <Link prefetch href={`./login?goto=${props.currentURL}`}>
                       <a>
                         login
                       </a>
@@ -43,6 +45,7 @@ const Header = props => (
                   </span>
               }
             </td>
+
           </tr>
         </tbody>
       </table>

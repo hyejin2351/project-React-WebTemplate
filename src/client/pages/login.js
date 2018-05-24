@@ -79,7 +79,7 @@ class Page extends React.Component {
   validateLogin = (e) => {
     if (this.props.me) {
       e.preventDefault();
-      Router.push('/login?how=loggedin');
+      Router.push('./login?how=loggedin');
     } else {
       try {
         isValidNewUser(this.state.login);
@@ -92,7 +92,7 @@ class Page extends React.Component {
   validateRegister = (e) => {
     if (this.props.me) {
       e.preventDefault();
-      Router.push('/login?how=loggedin');
+      Router.push('./login?how=loggedin');
     } else {
       try {
         isValidNewUser(this.state.register);
@@ -114,7 +114,7 @@ class Page extends React.Component {
         <b>Login</b>
         <br />
         <br />
-        <form method="post" action="/login" onSubmit={e => this.validateLogin(e)} style={{ marginBottom: '1em' }}>
+        <form method="post" action="./login" onSubmit={e => this.validateLogin(e)} style={{ marginBottom: '1em' }}>
           <input type="hidden" name="goto" value={(this.props.url && this.props.url.query.goto) || 'news'} />
           <table style={{ border: '0px' }} >
             <tbody>
@@ -135,7 +135,7 @@ class Page extends React.Component {
           <br />
           <input type="submit" value="login" />
         </form>
-        <Link prefetch href="/forgot">
+        <Link prefetch href="./forgot">
           <a>Forgot your password?</a>
         </Link>
         <br />
@@ -143,7 +143,7 @@ class Page extends React.Component {
         <b>Create Account</b>
         <br />
         <br />
-        <form method="post" action="/register" onSubmit={e => this.validateRegister(e)} style={{ marginBottom: '1em' }}>
+        <form method="post" action="./register" onSubmit={e => this.validateRegister(e)} style={{ marginBottom: '1em' }}>
           <table style={{ border: '0px' }} >
             <tbody>
               <tr>
