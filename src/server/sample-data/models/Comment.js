@@ -4,6 +4,7 @@ import cache from '../Cache';
 import * as HNDB from '../HNDataAPI';
 
 const logger = debug('app:Comment');
+logger.log = console.log.bind(console);
 
 export default class Comment {
   constructor(props) {

@@ -15,6 +15,7 @@ import {
 } from './Models';
 
 const logger = debug('app:HNDataAPI');
+logger.log = console.log.bind(console);
 
 Firebase.initializeApp({
   databaseURL: HN_DB_URI,
@@ -125,9 +126,9 @@ const rebuildFeed = (feedType) => {
 
 
 export function seedCache(delay) {
-  logger(`Waiting ${delay} ms before seeding the app with data.`);
+//  logger(`Waiting ${delay} ms before seeding the app with data.`);
   setTimeout(() => {
-    logger('Seeding cache');
+//    logger('Seeding cache');
     ['top', 'new', 'best', 'show', 'ask', 'job'].forEach((feedType) => {
       rebuildFeed(feedType);
     });

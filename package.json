@@ -89,6 +89,12 @@
     "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js",
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/src/client/.next/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/tmp/"
     ]
   },
   "nodemonConfig": {
