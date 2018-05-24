@@ -15,6 +15,9 @@ const devRules = {
   "spaced-comment": "off",
   "no-underscore-dangle": "off",
   "no-param-reassign": "off",
+  "react/no-unescaped-entities": "off",
+  "jsx-a11y/anchor-has-content": "off",
+  "react/jsx-indent": "off",
 }
 
 const config = {
