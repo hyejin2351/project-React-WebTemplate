@@ -1,16 +1,16 @@
 
-/* import {
+import {
   graphQLPath,
-  graphiQLPath
-} from '../client/consts';
- */
-export const graphQLPath = '/graphql';
-export const graphiQLPath = '/graphiql';
+  graphiQLPath,
+  isDev,
+} from '../../client/config';
 
-export const isDev = process.env.NODE_ENV !== 'production';
-
+export {
+  isDev,
+  graphQLPath,
+  graphiQLPath,
+};
 export const nextAppDir = process.env.NODE_ENV === 'production' ? './build/app/client' : './src/client';
-
 // export const docRootDir = '';
 
 export const HN_DB_URI = process.env.DB_URI || 'https://hacker-news.firebaseio.com';
