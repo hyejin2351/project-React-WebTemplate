@@ -19,7 +19,7 @@ module.exports = ({
   // create new nextjs app if no one created
   const app = nextApp || createNextApp({
     dir: nextAppDir,
-    isDev
+    dev: isDev
   });
   //
   // init next app
