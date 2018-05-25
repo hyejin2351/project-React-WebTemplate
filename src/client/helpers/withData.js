@@ -4,10 +4,10 @@ import cookie from 'cookie';
 import PropTypes from 'prop-types';
 import debug from 'debug';
 
+import { isBrowser } from '../config';
 import initApollo from './initApollo';
 
 const logger = debug('app:withData');
-// logger.log = console.log.bind(console);
 
 function parseCookies(ctx = {}, options = {}) {
   const data = (ctx.req && ctx.req.headers && ctx.req.headers.cookie) || ''; // document.cookie
@@ -41,7 +41,7 @@ export default ComposedComponent => class WithData extends React.Component {
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      if (!process.browser) {
+      if (!isBrowser) {
         if (context.res && context.res.finished) {
           // When redirecting, the response is finished.
           // No point in continuing to render

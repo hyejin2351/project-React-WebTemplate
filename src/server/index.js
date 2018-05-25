@@ -10,13 +10,15 @@ import session from 'express-session';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import bodyParser from 'body-parser';
+
 import {
   APP_PORT,
   APP_URI,
   GRAPHQL_URL,
   isDev,
-  initConfig
 } from './config';
+
+import initConfig from './config/initConfig';
 
 //
 // debug
