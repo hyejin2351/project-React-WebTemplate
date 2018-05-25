@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 
-import Blank from '../components/layouts/Blank';
+import Blank from '../layouts/Blank';
 import withData from '../helpers/withData';
 
 

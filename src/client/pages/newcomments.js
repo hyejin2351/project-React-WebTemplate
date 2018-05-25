@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Main from '../components/layouts/Main';
+import Main from '../layouts/Main';
 import NewsFeed from '../components/presentational/NewsFeed';
 import withData from '../helpers/withData';
 

@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 
-import Blank from '../components/layouts/Blank';
+import Blank from '../layouts/Blank';
 import withData from '../helpers/withData';
 import meQuery from '../gql/queries/meQuery';
 import {

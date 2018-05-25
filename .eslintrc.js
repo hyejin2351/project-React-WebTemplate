@@ -18,6 +18,7 @@ const devRules = {
   "react/no-unescaped-entities": "off",
   "jsx-a11y/anchor-has-content": "off",
   "react/jsx-indent": "off",
+  "jsx-a11y/alt-text": "off",
 }
 
 const config = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-import Blank from '../components/layouts/Blank';
+import Blank from '../layouts/Blank';
 
 const spanStyle = { fontSize: '11.5pt', fontFamily: 'Helvetica', color: '#444444' };
 const paragraphStyle = { marginBottom: '7.5pt', lineHeight: 'normal', background: 'white' };

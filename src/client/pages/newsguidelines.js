@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import Notice from '../components/layouts/Notice';
+import Notice from '../layouts/Notice';
 
 export default () => (
   <Notice>

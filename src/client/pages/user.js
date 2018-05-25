@@ -5,8 +5,8 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import renderHTML from 'react-render-html';
 
-import Main from '../components/layouts/Main';
-import Blank from '../components/layouts/Blank';
+import Main from '../layouts/Main';
+import Blank from '../layouts/Blank';
 import withData from '../helpers/withData';
 import timeAgo from '../helpers/convertNumberToTimeAgo';
 

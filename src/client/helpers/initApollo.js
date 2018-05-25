@@ -21,7 +21,6 @@ if (!isBrowser) {
 }
 
 function create(initialState, { getToken }) {
-
 /**
  * 
     link: ApolloLink;

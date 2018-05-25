@@ -16,7 +16,7 @@ export const GRAPHQL_URL = process.env.GRAPHQL_URL || `${APP_URI}${graphQLPath}`
 export const GRAPHIQL_URL = graphiQLPath ? `${APP_URI}${graphiQLPath}` : '';
 // set HOST to environment variable
 // so we can use it from the client config for SSR
-if ( !process.env.HOST ) {
+if (!process.env.HOST) {
   process.env.HOST = HOST;
 }
 

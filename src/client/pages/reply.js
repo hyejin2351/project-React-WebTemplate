@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import Main from '../components/layouts/Main';
+import Main from '../layouts/Main';
 import Comment from '../components/presentational/Comment';
 import withData from '../helpers/withData';
 

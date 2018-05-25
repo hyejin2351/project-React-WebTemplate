@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { graphql } from 'react-apollo';
 
-import Header from '../presentational/Header';
-import Footer from '../presentational/Footer';
-import meQuery from '../../gql/queries/meQuery';
+import Header from '../components/presentational/Header';
+import Footer from '../components/presentational/Footer';
+import meQuery from '../gql/queries/meQuery';
 
 
 const Main = props => (

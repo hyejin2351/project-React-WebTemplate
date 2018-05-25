@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 
-import Main from '../components/layouts/Main';
+import Main from '../layouts/Main';
 import withData from '../helpers/withData';
 import mutationSubmitNewsItem from '../gql/mutations/submitNewsItem';
 
@@ -28,7 +28,7 @@ const Page = ({ submitNewsItem, currentURL }) => {
             <table style={{ border: '0' }} >
               <tbody>
                 <tr>
-                  <td>title</td>
+                  <td>title: </td>
                   <td>
                     <input type="text" name="title" defaultValue="" size="50" onChange={onTitleChange} />
                     <span style={{ marginLeft: '10px' }} />

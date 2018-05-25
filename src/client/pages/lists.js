@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import Main from '../components/layouts/Main';
+import Main from '../layouts/Main';
 import withData from '../helpers/withData';
 
 export default withData(props => (

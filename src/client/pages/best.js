@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import Main from '../components/layouts/Main';
+import Main from '../layouts/Main';
 import NewsFeed from '../components/presentational/NewsFeed';
 import NewsFeedApolloHOC from '../components/container/NewsFeedWithApolloRenderer';
 import withData from '../helpers/withData';
