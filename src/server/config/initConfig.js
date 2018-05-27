@@ -13,6 +13,8 @@ const initNext = require('./initNext');
 const initMongoose = require('./initMongoose');
 const initGraphQL = require('./initGraphQL');
 
+const initUsers = require('../users');
+
 module.exports = (options = {}) => new Promise((resolve, reject) => {
   // merge
   const mergedOptions = {
@@ -35,6 +37,9 @@ module.exports = (options = {}) => new Promise((resolve, reject) => {
     })
     .then(() => initMongoose(mergedOptions))
     .then((mongoose) => {
+      // init auth
+      initUsers(ret.server, mergedOptions);
+
       // init graphql
       initGraphQL(ret.server, mergedOptions);
 

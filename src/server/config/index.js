@@ -29,7 +29,7 @@ export const MONGODB_URI = process.env.MONGODB_URI;
 // Auth
 //
 export const AUTH_DB_URI = process.env.AUTH_DB_URI;
-export const AUTH_JWT_SECRET = process.env.AUTH_JWT_SECRET;
+export const AUTH_JWT_SECRET = process.env.AUTH_JWT_SECRET || "SET_JWT_SECRET";
 
 /*
   Cryptography
