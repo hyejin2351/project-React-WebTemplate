@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "babel-node src/server/index.js",
-    "nodemon": "nodemon src/server/index.js --exec babel-node",
+    "nodemon": "DEBUG=app:*,-app:HNDataAPI nodemon src/server/index.js --exec babel-node",
     "debug": "DEBUG=app:*,-app:HNDataAPI npm run dev",
     "debug-all": "DEBUG=* npm run dev",
     "debug-mode": "babel-node --inspect src/server/index.js",
@@ -32,6 +32,7 @@
     "react"
   ],
   "dependencies": {
+    "@material-ui/core": "^1.1.0",
     "apollo-cache-inmemory": "^1.1.10",
     "apollo-client": "^2.2.6",
     "apollo-fetch": "^0.7.0",
@@ -44,13 +45,13 @@
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
-    "express-session": "^1.15.5",
     "firebase": "^4.3.1",
     "graphql": "^0.13.1",
     "graphql-tag": "^2.8.0",
     "graphql-tools": "^2.21.0",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.2.1",
+    "jss": "^9.8.1",
     "lru-cache": "^4.1.1",
     "mongoose": "^5.1.2",
     "morgan": "^1.9.0",
@@ -62,7 +63,9 @@
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
+    "react-jss": "^8.4.0",
     "react-render-html": "^0.6.0",
+    "styled-jsx": "^2.2.6",
     "url": "^0.11.0"
   },
   "devDependencies": {
@@ -105,10 +108,10 @@
       "src/client/.next*",
       "src/client/pages*"
     ],
-    "delay": "10",
+    "delay": "500",
     "verbose": false,
     "watch": [
-      "src"
+      "src/server"
     ]
   }
 }

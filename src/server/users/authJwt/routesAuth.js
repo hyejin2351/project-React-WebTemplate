@@ -15,7 +15,7 @@ module.exports = ({
 
   router.post(routePath.login, login, (req, res) => {
     const { user } = req;
-        
+    d('Loggined user: ', user);
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -25,14 +25,14 @@ module.exports = ({
 
     // create payload
     const payload = {
-      sub: user._id
+      sub: user.id
     };
 
     // create a token string with payload
     const token = jwt.sign(payload, AUTH_JWT_SECRET);
         
     const data = {
-      name: user.name
+      userId: user.id
     };
 
     return res.json({

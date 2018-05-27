@@ -11,4 +11,4 @@ db.users.insert([{
     "name":"a", "email":"a@a.com"
 }]);
 // Delete a row
-db.users.findOneAndDelete("5b05924bb26ca72855cbf4ce")
+db.users.findOneAndDelete("5b0a7e1619c0946521869e26")

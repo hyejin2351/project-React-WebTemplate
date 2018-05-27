@@ -14,12 +14,12 @@ module.exports = ({
 
   router.post(routePath.register, register(UserModel), (req, res) => {
     d('Register is successful... Redirecting to /(router root)');
-    res.redirect('/');
+    res.redirect('./');
   });
 
   router.post(routePath.unregister, unregister(UserModel), (req, res) => {
     d('Unregister is successful... Redirecting to /(router root)');
-    res.redirect('/');
+    res.redirect('./');
   });
 
   return router;

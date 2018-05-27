@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import HeaderNav from './HeaderNav';
+import UserProfile from '../../users/components/UserProfile';
 
 const Header = props => (
   <tr>
@@ -24,26 +25,7 @@ const Header = props => (
             </td>
 
             <td style={{ textAlign: 'right', padding: '0px', paddingRight: '4px' }}>
-              {
-                props.me ?
-                  <span className="pagetop">
-                    <Link href={`./user?id=${props.me.id}`}>
-                      <a>
-                        {props.me.id}
-                      </a>
-                    </Link>
-                    {` (${props.me.karma}) | `}
-                    <a href={`./logout?auth=d78ccc2c6120ffe08f32451519c2ff46d34c51ab&amp;goto=${props.currentURL}`}>logout</a>
-                  </span>
-                  :
-                  <span className="pagetop">
-                    <Link prefetch href={`./login?goto=${props.currentURL}`}>
-                      <a>
-                        login
-                      </a>
-                    </Link>
-                  </span>
-              }
+              <UserProfile />
             </td>
 
           </tr>
@@ -66,3 +48,27 @@ Header.propTypes = {
 };
 
 export default Header;
+
+/*
+              {
+                props.me ?
+                  <span className="pagetop">
+                    <Link href={`./user?id=${props.me.id}`}>
+                      <a>
+                        {props.me.id}
+                      </a>
+                    </Link>
+                    {` (${props.me.karma}) | `}
+                    <a href={`./logout?auth=d78ccc2c6120ffe08f32451519c2ff46d34c51ab&amp;goto=${props.currentURL}`}>logout</a>
+                  </span>
+                  :
+                  <span className="pagetop">
+                    <Link prefetch href={`./users/login?goto=${props.currentURL}`}>
+                      <a>
+                        login
+                      </a>
+                    </Link>
+                  </span>
+              }
+
+*/

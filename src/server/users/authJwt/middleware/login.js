@@ -9,6 +9,6 @@ const {
 
 module.exports = !dev ? passport.authenticate('local') :
   (req, res, next) => {
-    d('++++++++++ login middleware...', req.body);
+    d('Login middleware...', req.body);
     passport.authenticate('local')(req, res, next);
   };

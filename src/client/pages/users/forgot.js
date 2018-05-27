@@ -5,8 +5,8 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 
-import Blank from '../layouts/Blank';
-import withData from '../helpers/withData';
+import Blank from '../../layouts/Blank';
+import withData from '../../helpers/withData';
 
 
 const Page = ({ registerUser, url }) => {
@@ -40,7 +40,7 @@ const Page = ({ registerUser, url }) => {
       <b>Login</b>
       <br />
       <br />
-      <form method="post" action="./login" style={{ marginBottom: '1em' }}>
+      <form method="post" action="/auth/login" style={{ marginBottom: '1em' }}>
         <input type="hidden" name="goto" value="news" />
         <table style={{ border: '0px' }} >
           <tbody>
@@ -69,7 +69,7 @@ const Page = ({ registerUser, url }) => {
       <b>Create Account</b>
       <br />
       <br />
-      <form method="post" action="./login" /* onSubmit={e => e.preventDefault()} */ style={{ marginBottom: '1em' }}>
+      <form method="post" action="/auth/login" /* onSubmit={e => e.preventDefault()} */ style={{ marginBottom: '1em' }}>
         <input type="hidden" name="goto" value={`user?id=${user}`} />
         <input type="hidden" name="creating" value />
         <table style={{ border: '0px' }} >
@@ -113,7 +113,7 @@ const PageWithData = graphql(registerUser, {
     registerUser: (id, password) => mutate({
       variables: { id, password },
     })
-      // .then(() => Router.push(`/login?id=${id}&password=${password}`))
+      // .then(() => Router.push(`/users/login?id=${id}&password=${password}`))
       .catch(reason => console.error(reason)),
 
   }),

@@ -11,12 +11,12 @@ export default graphql(hideNewsItem, {
       mutate({
         variables: { id },
       })
-      // .then(() => Router.push(`/login?id=${id}&password=${password}`))
-        .catch(() => Router.push('/login', `/hide?id=${id}&how=up&goto=news`)),
+      // .then(() => Router.push(`/users/login?id=${id}&password=${password}`))
+        .catch(() => Router.push('/users/login', `/hide?id=${id}&how=up&goto=news`)),
     unhideNewsItem: id =>
       mutate({
         variables: { id },
       })
-        .catch(() => Router.push('/login', `/unhide?id=${id}&how=up&goto=news`)),
+        .catch(() => Router.push('/users/login', `/unhide?id=${id}&how=up&goto=news`)),
   }),
 })(NewsDetail);

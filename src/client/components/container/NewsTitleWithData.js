@@ -11,7 +11,7 @@ export default graphql(upvoteNewsItem, {
       mutate({
         variables: { id },
       })
-      // .then(() => Router.push(`/login?id=${id}&password=${password}`))
-        .catch(() => Router.push('/login', `/vote?id=${id}&how=up&goto=news`)),
+      // .then(() => Router.push(`/users/login?id=${id}&password=${password}`))
+        .catch(() => Router.push('/users/login', `/vote?id=${id}&how=up&goto=news`)),
   }),
 })(NewsTitle);

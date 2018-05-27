@@ -19,6 +19,9 @@ const devRules = {
   "jsx-a11y/anchor-has-content": "off",
   "react/jsx-indent": "off",
   "jsx-a11y/alt-text": "off",
+  "react/require-default": "off",
+  "react/require-default-props": "off",
+  "react/no-did-mount-set-state": "off",
 }
 
 const config = {

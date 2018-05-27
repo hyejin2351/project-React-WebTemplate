@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Page from '../user';
+import Page from '../users/login';
 
 
-describe('User Page', () => {
+describe('Login Page', () => {
   it('is defined', () => {
     const app = shallow(<Page serverState={{ apollo: {} }} />);
     expect(app).toBeDefined();

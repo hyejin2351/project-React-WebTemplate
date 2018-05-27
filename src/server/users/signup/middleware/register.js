@@ -9,16 +9,14 @@ const d = require('debug')('app:auth');
 function validateUserData({
   email, password, name
 }) {
-  if (!email || !password || !name) return null;
+  if (!email || !password) return null;
 
-  name = name.trim();
   email = email.trim();
   password = password.trim();
 
   // more... validation
 
   return {
-    name,
     email,
     password,
   };
@@ -33,7 +31,7 @@ module.exports = UserModel => (req, res, next) => {
   // validate user data in req.body
   const userData = validateUserData(req.body);
   if (!userData) {
-    d('!!! Invalid user data in req.body');
+    d('!!! Invalid user data in req.body', req.body);
     return res.status(400).end();
   }
 

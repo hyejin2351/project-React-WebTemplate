@@ -5,10 +5,10 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import renderHTML from 'react-render-html';
 
-import Main from '../layouts/Main';
-import Blank from '../layouts/Blank';
-import withData from '../helpers/withData';
-import timeAgo from '../helpers/convertNumberToTimeAgo';
+import Main from '../../layouts/Main';
+import Blank from '../../layouts/Blank';
+import withData from '../../helpers/withData';
+import timeAgo from '../../helpers/convertNumberToTimeAgo';
 
 const Page = ({ loading, error, user, me, options: { currentURL } }) => {
   if (error) return <Blank>Error loading news items.</Blank>;
