@@ -10,9 +10,21 @@ import initApollo from './initApollo';
 const logger = debug('app:withData');
 
 function parseCookies(ctx = {}, options = {}) {
-  const data = (ctx.req && ctx.req.headers && ctx.req.headers.cookie) || ''; // document.cookie
-  const mycookie = cookie.parse(data, options);
-  logger('Parsing cookie: ', mycookie);
+  let mycookie = '';
+
+  if ( ctx.req && ctx.req.headers ) {
+    logger('>>>>>>>>>>>>', ctx.req.headers.authorization);
+    logger('>>>>>>>>>>>>', ctx.req.headers.Authorization);
+    if ( ctx.req.headers.authorization || ctx.req.headers.Authorization ) {
+      const data = ctx.req.headers.authorization || ctx.req.headers.Authorization;
+      mycookie = data.split(' ')[1];
+    } 
+    else if ( ctx.req.headers.cookie ) {
+      const data = ctx.req.headers.cookie; // document.cookie
+      mycookie = cookie.parse(data, options);
+    }
+  }
+  logger('>>>>>>>>>>>>>>>>>>>>>>>>>Parsing cookie: ', mycookie);
   return mycookie;
 }
 

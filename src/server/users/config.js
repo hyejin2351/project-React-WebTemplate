@@ -1,6 +1,7 @@
 exports.dev = process.env.NODE_ENV !== 'production';
 
 exports.routePath = {
+  prefix: '/api/auth',
   login: '/login',
   logout: '/logout',
   register: '/register',

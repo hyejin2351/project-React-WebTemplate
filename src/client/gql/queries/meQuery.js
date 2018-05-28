@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
   query HNUser {
-    me {
+    hnme {
       id
       karma
     }

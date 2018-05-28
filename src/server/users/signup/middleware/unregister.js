@@ -1,6 +1,6 @@
 
 module.exports = UserModel => (req, res, next) => {
-  if (!req.headers.authorization) {
+  if (!req.headers.Authorization) {
     return res.status(401).end();
   }
   

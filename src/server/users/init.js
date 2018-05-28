@@ -63,12 +63,12 @@ module.exports = function init(server, {
   ));
 
   // set routes for signup
-  server.use('/auth', routeSignup({
+  server.use(routePath.prefix, routeSignup({
     UserModel, 
     routePath
   }));
   // set routes for login
-  server.use('/auth', routeAuthJwt({
+  server.use(routePath.prefix, routeAuthJwt({
     AUTH_JWT_SECRET,
     routePath
   }));

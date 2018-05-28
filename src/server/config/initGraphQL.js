@@ -13,9 +13,12 @@ const {
 const Schema = require('../gql/schema');
 const {
   UserModel,
-} = require('../db/mongoose/models');
+  validateJwtToken
+} = require('../users');
+
 const {
   isDev,
+  AUTH_JWT_SECRET
 } = require('./');
 
 //
@@ -89,7 +92,12 @@ module.exports = (server, { // express app
 
   server.use(
     graphQLPath, 
-    bodyParser.json(), 
+    validateJwtToken({
+      secret: AUTH_JWT_SECRET,
+      credentialsRequired: false
+    }));
+  server.use(
+    graphQLPath, 
     graphqlExpress(fnOptions));
 
   // use graphiql feature

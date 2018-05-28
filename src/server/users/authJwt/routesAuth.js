@@ -15,13 +15,13 @@ module.exports = ({
 
   router.post(routePath.login, login, (req, res) => {
     const { user } = req;
-    d('Loggined user: ', user);
     if (!user) {
       return res.status(400).json({
         success: false,
         message: 'login failure'
       });
     }
+    d('Loggined user: ', user.id);
 
     // create payload
     const payload = {

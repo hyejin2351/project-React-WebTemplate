@@ -5,7 +5,7 @@ const {
   queries: mongoQueries,
   mutations: mongoMutations,
   resolvers: mongoResolvers
-} = require('./mongooseSchema');
+} = require('../../users/gql/schema');
 
 //
 // SAMPLE-DATA folder

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import AuthService from './AuthService';
 
 export default function withAuth(AuthComponent) {
@@ -12,7 +13,7 @@ export default function withAuth(AuthComponent) {
 
     componentDidMount() {
       if (!AuthService.loggedIn()) {
-        this.props.url.replaceTo('/');
+        Router.push('/');
       }
       // TODO
       this.setState({ isLoading: false });

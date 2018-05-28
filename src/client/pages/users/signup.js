@@ -29,7 +29,7 @@ class Page extends React.Component {
     super(props);
     this.state = {
       register: {
-        id: '',
+        email: '',
         password: '',
       },
       validationMessage: '',
@@ -40,7 +40,7 @@ class Page extends React.Component {
   onRegisterIDChange = (e) => {
     this.setState({
       register: {
-        id: e.target.value,
+        email: e.target.value,
         password: this.state.register.password,
       },
     });
@@ -48,7 +48,7 @@ class Page extends React.Component {
   onRegisterPasswordChange = (e) => {
     this.setState({
       register: {
-        id: this.state.register.id,
+        email: this.state.register.email,
         password: e.target.value,
       },
     });
@@ -60,7 +60,7 @@ class Page extends React.Component {
       Router.push('./login?how=loggedin');
     } else {
       try {
-        isValidNewUser(this.state.register);
+        // isValidNewUser(this.state.register);
       } catch (err) {
         e.preventDefault();
         this.setState({ validationMessage: err.message });
@@ -79,7 +79,7 @@ class Page extends React.Component {
         <b>Create Account</b>
         <br />
         <br />
-        <form method="post" action="/auth/register" onSubmit={e => this.validateRegister(e)} style={{ marginBottom: '1em' }}>
+        <form method="post" action="/api/auth/register" onSubmit={e => this.validateRegister(e)} style={{ marginBottom: '1em' }}>
           <table style={{ border: '0px' }} >
             <tbody>
               <tr>

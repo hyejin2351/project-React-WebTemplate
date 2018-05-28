@@ -184,13 +184,13 @@ const queries = `
     ): [NewsItem]
 
     # The currently logged in user or null if not logged in
-    me: HNUser
+    hnme: HNUser
 
     # A news item
     newsItem(id: Int!): NewsItem
 
     # A user
-    user(id: String!): HNUser
+    hnuser(id: String!): HNUser
 `;
 
 const mutations = `
@@ -239,14 +239,14 @@ const resolvers = {
       return context.Feed.getForType(type, limit, skip);
     },
 
-    me: (_, __, context) => {
+    hnme: (_, __, context) => {
       logger('Me: userId:', context.userId);
       return context.userId && context.User.getUser(context.userId);
     },
 
     newsItem: (_, { id }, context) => context.NewsItem.getNewsItem(id),
 
-    user: (_, { id }, context) => context.User.getUser(id),
+    hnuser: (_, { id }, context) => context.User.getUser(id),
   },
 
   /*       MUTATION RESOLVERS       */

@@ -60,7 +60,7 @@ class Page extends React.Component {
 
     AuthService.login(this.state.login.email, this.state.login.password)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         Router.push('/');
         // this.props.url.replaceTo('/');
       })

@@ -1,8 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+
+import Link from 'next/link';
+
+import { graphql, Query } from 'react-apollo';
+import gql from 'graphql-tag';
+
 import renderHTML from 'react-render-html';
 
 import Main from '../../layouts/Main';
@@ -10,16 +13,17 @@ import Blank from '../../layouts/Blank';
 import withData from '../../helpers/withData';
 import timeAgo from '../../helpers/convertNumberToTimeAgo';
 
-const Page = ({ loading, error, user, me, options: { currentURL } }) => {
-  if (error) return <Blank>Error loading news items.</Blank>;
-  if (!user) return <Blank>No such user.</Blank>;
+import withAuth from '../../users/libs/withAuth';
 
-  let about = user.about || '';
-  let email = user.email || '';
-  const onAboutChange = (e) => { about = e.target.value; };
+const Page = ({ loading, error, data, options: { currentURL } }) => {
+  if (error) return <Blank>Error loading news items.</Blank>;
+  console.log(data);
+  const {me} = data;
+  if (!me) return <Blank>INVALID ME</Blank>
+  let email = me.email || '';
   const onEmailChange = (e) => { email = e.target.value; };
 
-  if (me && user.id === me.id) {
+  if (me && me.id) {
     return (
       <Main currentURL={currentURL} isFooterVisible={false} >
         <tr>
@@ -181,56 +185,6 @@ const Page = ({ loading, error, user, me, options: { currentURL } }) => {
       </Main>
     );
   }
-  return (
-    <Main currentURL={currentURL} isFooterVisible={false} >
-      <tr>
-        <td>
-          <table style={{ border: '0' }} >
-            <tbody>
-              <tr className="athing">
-                <td style={{ verticalAlign: 'top' }}>user:</td>
-                <td>
-                  <a href={`user?id=${user.id}`} className="hnuser">{user.id}</a>
-                </td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: 'top' }}>created:</td>
-                <td>{timeAgo(user.creationTime)}</td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: 'top' }}>karma:</td>
-                <td>{user.karma}</td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: 'top' }} >about:</td>
-                <td>{user.about && renderHTML(user.about)}</td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <a href={`submitted?id=${user.id}`}><u>submissions</u></a>
-                </td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <a href={`threads?id=${user.id}`}><u>comments</u></a>
-                </td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <a href={`favorites?id=${user.id}`}><u>favorites</u></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-          <br />
-        </td>
-      </tr>
-    </Main>
-  );
 };
 // Page.propTypes = {
 //   user: PropTypes.shape({
@@ -239,44 +193,33 @@ const Page = ({ loading, error, user, me, options: { currentURL } }) => {
 //   }).isRequired,
 // }
 
-const query = gql`
-  query User($id: String!) {
-    user(id: $id) {
-      id
-      about
-      creationTime
-      email
-      karma
-    }
-    me {
-      id
-    }
+const GET_ME = gql`
+query {
+  me {
+    id
+    email
   }
+}
 `;
 
-const UserPageWithData = graphql(query, {
-  options: ({ options: { id } }) => ({
-    variables: {
-      id,
-    },
-  }),
-  props: ({ data: { loading, error, user, me } }) => ({
+/*
+graphql(query, {
+  props: ({ data: { loading, error, me } }) => ({
     loading,
     error,
-    user,
     me,
   }),
-})(Page);
+})(withAuth(Page));
+*/
 
-export default withData((props) => {
-  const userId = (props.url.query && props.url.query.id) || '';
-  return (
-    <UserPageWithData
+export default withData(props => (
+  <Query query={GET_ME}>
+    {result => {console.log('>>>', result.data); return (
+    <Page 
       options={{
-        id: userId,
         currentURL: props.url.pathname,
-        // isFooterVisible: false,
       }}
-    />
-  );
-});
+      {...result}
+    />)}}
+  </Query>
+));

@@ -2,14 +2,12 @@ import debug from 'debug';
 
 const d = debug('app:auth');
 
-const domain = 'http://localhost:3000';
+const domain = '';
 
 class AuthService {
   static login(email, password) {
-    d('try to login: ', email);
-    console.log('try to login: >>>', email);
     // Get a token
-    return AuthService.fetch(`${domain}/auth/login`, {
+    return AuthService.fetch(`${domain}/api/auth/login`, {
       method: 'POST',
       body: JSON.stringify({
         email,

@@ -6,12 +6,13 @@
     "node": ">=6.9.4"
   },
   "scripts": {
-    "dev": "babel-node src/server/index.js",
-    "nodemon": "DEBUG=app:*,-app:HNDataAPI nodemon src/server/index.js --exec babel-node",
-    "debug": "DEBUG=app:*,-app:HNDataAPI npm run dev",
+    "dev": "DEBUG=app:*,-app:HNDataAPI npm run nodemon",
+    "nodemon": "nodemon src/server/index.js --exec babel-node",
+    "debug": "DEBUG=app:*,-app:HNDataAPI npm run start-dev",
     "debug-all": "DEBUG=* npm run dev",
     "debug-mode": "babel-node --inspect src/server/index.js",
     "graphiql": "babel-node ./src/server/gql/graphiqlServer.js",
+    "mongod": "sudo systemctl start mongod",
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore .",
     "lint-fix": "npm run lint -- --fix",
@@ -21,6 +22,7 @@
     "postinstall": "yarn build-next",
     "build-docker": "docker build -t clintonwoo/hackernews-react-graphql . && docker run -p 80:3000 --name hackernews-react-graphql clintonwoo/hackernews-react-graphql",
     "build-static-website": "NODE_ENV=production rm -rf build/client/static && next build src/client && next export src/client -o build/client/static",
+    "start-dev": "babel-node src/server/index.js",
     "start": "NODE_ENV=production node build/app/server/index.js"
   },
   "author": "peterk",
@@ -36,6 +38,7 @@
     "apollo-cache-inmemory": "^1.1.10",
     "apollo-client": "^2.2.6",
     "apollo-fetch": "^0.7.0",
+    "apollo-link-context": "^1.0.8",
     "apollo-link-http": "^1.5.3",
     "apollo-server-express": "^1.3.2",
     "babel-runtime": "^6.26.0",

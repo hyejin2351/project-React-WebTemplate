@@ -40,7 +40,7 @@ const Page = ({ registerUser, url }) => {
       <b>Login</b>
       <br />
       <br />
-      <form method="post" action="/auth/login" style={{ marginBottom: '1em' }}>
+      <form method="post" action="/api/auth/login" style={{ marginBottom: '1em' }}>
         <input type="hidden" name="goto" value="news" />
         <table style={{ border: '0px' }} >
           <tbody>
@@ -69,7 +69,7 @@ const Page = ({ registerUser, url }) => {
       <b>Create Account</b>
       <br />
       <br />
-      <form method="post" action="/auth/login" /* onSubmit={e => e.preventDefault()} */ style={{ marginBottom: '1em' }}>
+      <form method="post" action="/api/auth/login" /* onSubmit={e => e.preventDefault()} */ style={{ marginBottom: '1em' }}>
         <input type="hidden" name="goto" value={`user?id=${user}`} />
         <input type="hidden" name="creating" value />
         <table style={{ border: '0px' }} >

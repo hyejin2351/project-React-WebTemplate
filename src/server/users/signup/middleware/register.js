@@ -24,7 +24,7 @@ function validateUserData({
 
 module.exports = UserModel => (req, res, next) => {
   // login user can't register
-  if (req.headers.authorization) {
+  if (req.headers.Authorization) {
     d('!!! login user can not register');
     return res.status(400).end();
   }
