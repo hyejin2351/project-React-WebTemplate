@@ -23,9 +23,9 @@ module.exports = (appOptions = {}) => new Promise((resolve, reject) => {
   };
 
   connect(uri, options)
-    .then((mongoose) => {
+    .then((mongooseConnection) => {
       d(`Connected to ${uri}`);
-      return resolve(mongoose);
+      return resolve(mongooseConnection);
     },
     (err) => {
       d(`Failed while connecting to ${uri}`);

@@ -12,8 +12,8 @@ module.exports = (uri, options) => new Promise((resolve, reject) => {
   //      autoIndex, poolSize, ...
   // } = options;
 
-  const db = mongoose.connect(uri, options);
-  db.then(() => resolve(db), err => reject(err))
+  const connPromise = mongoose.connect(uri, options);
+  connPromise.then(() => resolve(mongoose.connection), err => reject(err))
     .catch((err) => {
       console.error('>>>>>>>>>>>>>>>>>>>>>>', err);
       return reject(err);

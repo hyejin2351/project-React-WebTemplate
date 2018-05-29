@@ -36,14 +36,14 @@ module.exports = (options = {}) => new Promise((resolve, reject) => {
       ret.nextApp = nextApp;
     })
     .then(() => initMongoose(mergedOptions))
-    .then((mongoose) => {
+    .then((mongooseConnection) => {
+      ret.mongooseConnection = mongooseConnection;
       // init auth
-      initUsers(ret.server, mergedOptions);
+      initUsers(ret.server, mongooseConnection, mergedOptions);
 
       // init graphql
       initGraphQL(ret.server, mergedOptions);
 
-      ret.mongoose = mongoose;
       return resolve(ret);
     });
 });

@@ -9,6 +9,7 @@
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.3",
+    "connect-mongo": "^2.0.1",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "debug": "^3.1.0",
