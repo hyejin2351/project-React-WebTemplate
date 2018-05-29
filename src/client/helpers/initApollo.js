@@ -36,7 +36,9 @@ function createLinkUsingCookie(uri, getToken) {
 // See https://www.apollographql.com/docs/react/recipes/authentication.html#Header
 function createLinkUsingAuthHeader(uri, getToken) {
   const httpLink = createHttpLink({
-    uri
+    uri,
+    credentials: 'same-origin', // if your backend server is the same domain
+    // credentials: 'include',  // if your backend is a different domain.
   });
   
   const authLink = setContext((_, { headers }) => {
@@ -46,7 +48,7 @@ function createLinkUsingAuthHeader(uri, getToken) {
     return {
       headers: {
         ...headers,
-        Authorization: token ? `Bearer ${token}` : "",
+        authorization: token ? `Bearer ${token}` : '',
       }
     };
   });
@@ -55,6 +57,7 @@ function createLinkUsingAuthHeader(uri, getToken) {
 }
 
 function create(initialState, { getToken }) {
+  // const link = createLinkUsingAuthHeader(GRAPHQL_URL, getToken);
   const link = createLinkUsingAuthHeader(GRAPHQL_URL, getToken);
   /**
  * 

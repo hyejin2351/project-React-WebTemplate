@@ -5,9 +5,12 @@ import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 
 import Blank from '../../layouts/Blank';
-import withRoot from '../../helpers/withRoot';
-
-import AuthService from '../../users/libs/AuthService';
+import withData from '../../helpers/withData';
+import meQuery from '../../gql/queries/meQuery';
+import {
+  isValidNewUser,
+} from '../../helpers/validation/User';
+import UserLoginErrorCode from '../../helpers/enums/UserLoginErrorCode';
 
 class Page extends React.Component {
   static propTypes = {
@@ -26,16 +29,16 @@ class Page extends React.Component {
       validationMessage: '',
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.validateLogin = this.validateLogin.bind(this);
+    // this.onLoginIDChange = this.onLoginIDChange.bind(this);
+    // this.onLoginPasswordChange = this.onLoginPasswordChange.bind(this);
   }
 
   componentDidMount() {
-    if (AuthService.loggedIn()) {
+    if (this.props.me) {
       Router.push('/');
-      // this.props.url.replaceTo('/')   // redirect if you're already logged in
     }
   }
-
 
   /* Login User */
   onLoginIDChange = (e) => {
@@ -55,31 +58,18 @@ class Page extends React.Component {
     });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    AuthService.login(this.state.login.email, this.state.login.password)
-      .then((res) => {
-        // console.log(res);
-        Router.push('/');
-        // this.props.url.replaceTo('/');
-      })
-      .catch((err) => {
+  validateLogin = (e) => {
+    if (this.props.me) {
+      e.preventDefault();
+      Router.push('./login?how=loggedin');
+    } else {
+      try {
+        // isValidNewUser(this.state.register);
+      } catch (err) {
+        e.preventDefault();
         this.setState({ validationMessage: err.message });
-        console.log(err);
-      }); // you would show/hide error messages with component state here 
-    
-    // if (this.props.me) {
-    //   Router.push('./login?how=loggedin');
-    // } else {
-    //   try {
-    //     isValidNewUser(this.state.login);
-
-    //   } catch (err) {
-    //     e.preventDefault();
-    //     this.setState({ validationMessage: err.message });
-    //   }
-    // }
+      }
+    }
   }
 
   render() {
@@ -90,11 +80,11 @@ class Page extends React.Component {
       <Blank>
         {message && <p>{message}</p>}
         {this.state.validationMessage && <p>{this.state.validationMessage}</p>}
-        <b>Login</b>
+        <b>Login...</b>
         <br />
         <br />
-        <form onSubmit={e => this.handleSubmit(e)} style={{ marginBottom: '1em' }}>
-          <input type="hidden" name="goto" value={(this.props.url && this.props.url.query.goto) || 'news'} />
+        <form method="post" action="/api/auth/login" onSubmit={e => this.validateLogin(e)} style={{ marginBottom: '1em' }}>
+          <input type="hidden" name="goto" value={(this.props.url && this.props.url.query.goto) || '/news'} />
           <table style={{ border: '0px' }} >
             <tbody>
               <tr>
@@ -122,6 +112,14 @@ class Page extends React.Component {
   }
 }
 
-export default withRoot(props => (
-  <Page url={props.url} />
+const LoginPage = graphql(meQuery, {
+  options: {
+  },
+  props: ({ data: { me } }) => ({
+    me,
+  }),
+})(Page);
+
+export default withData(props => (
+  <LoginPage url={props.url} />
 ));

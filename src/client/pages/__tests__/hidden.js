@@ -6,7 +6,7 @@ import Page from '../hidden';
 
 describe('Hidden Posts Page', () => {
   it('is defined', () => {
-    const app = shallow(<Page serverState={{ apollo: {} }} />);
+    const app = shallow(<Page apolloState={{ apollo: {} }} />);
     expect(app).toBeDefined();
   });
 });

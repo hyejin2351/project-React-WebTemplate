@@ -57,7 +57,7 @@ class AuthService {
     error.response = response;
     throw error;
   }
-  
+
   static fetch(url, options) {
     // performs api calls sending the required authentication headers
     const headers = {

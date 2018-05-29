@@ -13,37 +13,36 @@ module.exports = ({
     return res.status(401).end();
   }
 
-  if ( !req.headers.Authorization ) {
+  if (!req.headers.Authorization) {
     // pass
     return next();
-  } else {
-    // get the last part from a authorization header string like "bearer token-value"
-    const token = req.headers.Authorization.split(' ')[1];
-    d('validateJwtToken: token', token);
+  } 
+  // get the last part from a authorization header string like "bearer token-value"
+  const token = req.headers.Authorization.split(' ')[1];
+  d('validateJwtToken: token', token);
     
-    // decode the token using a secret key-phrase
-    return jwt.verify(token, secret, (err, decoded) => {
-      // the 401 code is for unauthorized status
-      if (err) { 
-        d('validateJwtToken: invalid auth token in the request header', err);
-        return res.status(401).end(); 
+  // decode the token using a secret key-phrase
+  return jwt.verify(token, secret, (err, decoded) => {
+    // the 401 code is for unauthorized status
+    if (err) { 
+      d('validateJwtToken: invalid auth token in the request header', err);
+      return res.status(401).end(); 
+    }
+
+    const userId = decoded.sub;
+    d('validateJwtToken: userId', userId);
+
+    // check if a user exists
+    return UserModel.findById(userId, (userErr, user) => {
+      if (userErr || !user) {
+        d('validateJwtToken: invalid auth token for user', err);
+        return res.status(401).end();
       }
-
-      const userId = decoded.sub;
-      d('validateJwtToken: userId', userId);
-
-      // check if a user exists
-      return UserModel.findById(userId, (userErr, user) => {
-        if (userErr || !user) {
-          d('validateJwtToken: invalid auth token for user', err);
-          return res.status(401).end();
-        }
-        // pass user details onto next route
-        req.user = user;
-        return next();
-      });
+      // pass user details onto next route
+      req.user = user;
+      return next();
     });
-  }
+  });
 };
 
 //

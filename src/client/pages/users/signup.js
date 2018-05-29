@@ -45,6 +45,7 @@ class Page extends React.Component {
       },
     });
   }
+  
   onRegisterPasswordChange = (e) => {
     this.setState({
       register: {

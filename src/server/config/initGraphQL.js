@@ -18,7 +18,8 @@ const {
 
 const {
   isDev,
-  AUTH_JWT_SECRET
+  AUTH_JWT_SECRET,
+  AUTH_SESSION_SECRET,
 } = require('./');
 
 //
@@ -90,14 +91,16 @@ module.exports = (server, { // express app
     return options;
   };
 
+  // server.use(
+  //   graphQLPath, 
+  //   validateJwtToken({
+  //     secret: AUTH_JWT_SECRET,
+  //     credentialsRequired: false
+  //   }));
+
   server.use(
-    graphQLPath, 
-    validateJwtToken({
-      secret: AUTH_JWT_SECRET,
-      credentialsRequired: false
-    }));
-  server.use(
-    graphQLPath, 
+    graphQLPath,
+    bodyParser.json(),
     graphqlExpress(fnOptions));
 
   // use graphiql feature

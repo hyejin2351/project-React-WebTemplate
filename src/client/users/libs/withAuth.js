@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
-import AuthService from './AuthService';
+import checkLoggedIn from './checkLoggedIn';
+import redirect from '../../helpers/redirect';
 
 export default function withAuth(AuthComponent) {
   return class Authenticated extends Component {
+    static async getInitialProps(context) {
+      const { loggedInUser } = await checkLoggedIn(context.apolloClient);
+      if (!loggedInUser || !loggedInUser.user) {
+        redirect(context, '/');
+      }
+      return { loggedInUser };
+    }
+      
     constructor(props) {
       super(props);
       this.state = {
-        isLoading: true
+        isLoading: false
       };
-    }
-
-    componentDidMount() {
-      if (!AuthService.loggedIn()) {
-        Router.push('/');
-      }
-      // TODO
-      this.setState({ isLoading: false });
     }
 
     render() {

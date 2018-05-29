@@ -19,3 +19,5 @@
 
 ## References
 - [hackernews-react-graphql](https://github.com/clintonwoo/hackernews-react-graphql)
+- [nextjs-starter](https://github.com/iaincollins/nextjs-starter)
+

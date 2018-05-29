@@ -6,7 +6,7 @@ import Page from '../formatdoc';
 
 describe('Format Doc Page', () => {
   it('is defined', () => {
-    const app = shallow(<Page serverState={{ apollo: {} }} />);
+    const app = shallow(<Page apolloState={{ apollo: {} }} />);
     expect(app).toBeDefined();
   });
 });

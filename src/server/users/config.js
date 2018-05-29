@@ -13,3 +13,4 @@ exports.passwordField = 'password';
 exports.saltlen = 32;
 
 exports.AUTH_JWT_SECRET = process.env.AUTH_JWT_SECRET;
+exports.AUTH_SESSION_SECRET = process.env.AUTH_SESSION_SECRET;

@@ -13,8 +13,6 @@ function parseCookies(ctx = {}, options = {}) {
   let mycookie = '';
 
   if ( ctx.req && ctx.req.headers ) {
-    logger('>>>>>>>>>>>>', ctx.req.headers.authorization);
-    logger('>>>>>>>>>>>>', ctx.req.headers.Authorization);
     if ( ctx.req.headers.authorization || ctx.req.headers.Authorization ) {
       const data = ctx.req.headers.authorization || ctx.req.headers.Authorization;
       mycookie = data.split(' ')[1];
@@ -24,7 +22,6 @@ function parseCookies(ctx = {}, options = {}) {
       mycookie = cookie.parse(data, options);
     }
   }
-  logger('>>>>>>>>>>>>>>>>>>>>>>>>>Parsing cookie: ', mycookie);
   return mycookie;
 }
 

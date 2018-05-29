@@ -18,8 +18,8 @@ import withAuth from '../../users/libs/withAuth';
 const Page = ({ loading, error, data, options: { currentURL } }) => {
   if (error) return <Blank>Error loading news items.</Blank>;
   console.log(data);
-  const {me} = data;
-  if (!me) return <Blank>INVALID ME</Blank>
+  const { me } = data;
+  if (!me) return <Blank>INVALID ME</Blank>;
   let email = me.email || '';
   const onEmailChange = (e) => { email = e.target.value; };
 
@@ -214,12 +214,14 @@ graphql(query, {
 
 export default withData(props => (
   <Query query={GET_ME}>
-    {result => {console.log('>>>', result.data); return (
-    <Page 
-      options={{
-        currentURL: props.url.pathname,
-      }}
-      {...result}
-    />)}}
+    {(result) => {
+      console.log('>>>', result.data); return (
+        <Page 
+          options={{
+            currentURL: props.url.pathname,
+          }}
+          {...result}
+        />); 
+    }}
   </Query>
 ));

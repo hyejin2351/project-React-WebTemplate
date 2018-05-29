@@ -7,8 +7,8 @@ const {
   dev
 } = require('../../config');
 
-module.exports = !dev ? passport.authenticate('local') :
+module.exports = (options = {}) => (!dev ? passport.authenticate('local', options) :
   (req, res, next) => {
     d('Login middleware...', req.body);
-    passport.authenticate('local')(req, res, next);
-  };
+    passport.authenticate('local', options)(req, res, next);
+  });

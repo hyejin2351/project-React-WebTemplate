@@ -6,7 +6,7 @@ import Page from '../reply';
 
 describe('Reply Page', () => {
   it('is defined', () => {
-    const app = shallow(<Page serverState={{ apollo: {} }} />);
+    const app = shallow(<Page apolloState={{ apollo: {} }} />);
     expect(app).toBeDefined();
   });
 });
