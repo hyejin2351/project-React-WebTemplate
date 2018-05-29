@@ -4,7 +4,7 @@ const d = require('debug')('app:auth');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
-const cors = require('cors');
+// const cors = require('cors');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -55,12 +55,12 @@ module.exports = function init(server, {
 
   server.use(passport.session());
   
- // enable cors
-   var corsOptions = {
- //   origin: '<insert uri of front-end domain>',
-    credentials: true // <-- REQUIRED backend setting
-  };
-  server.use(cors(corsOptions));
+  // enable cors
+  // const corsOptions = {
+  //   origin: '<insert uri of front-end domain>',
+  //    credentials: true // <-- REQUIRED backend setting
+  //  };
+  //  server.use(cors(corsOptions));
  
 
   //

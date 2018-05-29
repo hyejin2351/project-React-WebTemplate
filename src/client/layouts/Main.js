@@ -50,16 +50,6 @@ Main.propTypes = {
     id: PropTypes.string,
     karma: PropTypes.number,
   }),
-  currentURL: PropTypes.string.isRequired,
 };
 
-export default graphql(meQuery, {
-  options: {
-    // fetchPolicy: 'cache-and-network',
-    // ssr: false,
-  },
-  props: ({ data: { me } }) => ({
-    me,
-  }),
-})(Main);
-
+export default Main;

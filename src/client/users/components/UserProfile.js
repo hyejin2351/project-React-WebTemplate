@@ -1,27 +1,21 @@
 import React from 'react';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import AuthService from '../libs/AuthService';
+import Link from 'next/link';
+import Router from 'next/router';
+import { graphql } from 'react-apollo';
 
-class UserProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false
-    };
-  }
+import withData from '../../helpers/withData';
+import { meQuery } from '../queries/meQuery';
 
-  componentDidMount() {
-    if (AuthService.loggedIn()) {
-      this.setState({
-        isLogin: true
-      });
-    }
+class PageController extends React.PureComponent {
+  static propTypes = {
+    me: PropTypes.shape({
+    }).isRequired,
   }
 
   render() {
-    return this.state.isLogin ?
+    return this.props.me ?
       (
         <div>
           <Link href="/users/profile">
@@ -44,4 +38,14 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+const PageWithData = graphql(meQuery, {
+  options: {
+  },
+  props: ({ data: { me } }) => ({
+    me,
+  }),
+})(PageController);
+
+export default withData(props => (
+  <PageWithData />
+));

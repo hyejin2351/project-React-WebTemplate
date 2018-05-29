@@ -75,12 +75,12 @@ class PageController extends React.Component {
 
     return (
       <PageView
-        loginUri = {'/api/auth/login'}
-        message = {message}
-        onLoginIDChange = {this.onLoginIDChange}
-        onLoginPasswordChange = {this.onLoginPasswordChange}
-        onSubmit = {this.validateLogin}
-       />
+        loginUri={'/api/auth/login'}
+        message={message}
+        onLoginIDChange={this.onLoginIDChange}
+        onLoginPasswordChange={this.onLoginPasswordChange}
+        onSubmit={this.validateLogin}
+      />
     );
   }
 }

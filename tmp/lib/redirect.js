@@ -1,4 +1,4 @@
-import Router from 'next/router'
+import Router from 'next/router';
 
 export default (context, target) => {
   if (context.res) {
@@ -8,6 +8,6 @@ export default (context, target) => {
     // context.res.end()
   } else {
     // In the browser, we just pretend like this never even happened ;)
-    Router.replace(target)
+    Router.replace(target);
   }
-}
+};

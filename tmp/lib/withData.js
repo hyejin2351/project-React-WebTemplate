@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cookie from 'cookie';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import Head from 'next/head'
+import Head from 'next/head';
 import debug from 'debug';
 
 import initApollo from './initApollo';
@@ -26,7 +26,7 @@ function parseAuthHeader(req, options = {}) {
   return auth;
 }
 
-export default (ComposedComponent) => class WithData extends React.Component {
+export default ComposedComponent => class WithData extends React.Component {
     static displayName = `WithData(${ComposedComponent.displayName})`;
 
     static propTypes = {
@@ -39,11 +39,11 @@ export default (ComposedComponent) => class WithData extends React.Component {
 
     static async getInitialProps(context) {
       const { Component, router, req, res } = context;
-      let apolloState = {apollo: {data: {}}};
+      let apolloState = { apollo: { data: {} } };
 
       const apolloClient = initApollo(
-        {},                       // initial state
-        {                         // options
+        {}, // initial state
+        { // options
           getToken: () => parseCookies(req).token
         });
 
@@ -90,7 +90,7 @@ export default (ComposedComponent) => class WithData extends React.Component {
       apolloState = {
         apollo: {
           data: apolloClient.cache.extract(),
-      }};
+        } };
 
       return {
         ...appProps,

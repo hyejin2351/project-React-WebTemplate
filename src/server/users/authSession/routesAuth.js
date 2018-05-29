@@ -19,7 +19,7 @@ module.exports = ({
     },
     login({
       successReturnToOrRedirect: '/',
-      failureRedirect: '/login?how=unsuccessful',
+      failureRedirect: '/users/login?how=unsuccessful',
     })
   );
 

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const meQuery = gql`
+export const meQuery = gql`
   query User {
     me {
       id
@@ -9,6 +9,6 @@ const meQuery = gql`
   }
 `;
 
-export {
+export default {
   meQuery
-}
+};

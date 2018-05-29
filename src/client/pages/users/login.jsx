@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
-import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 
 import Blank from '../../layouts/Blank';

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default apolloClient => (
   apolloClient.query({
@@ -10,10 +10,8 @@ export default apolloClient => (
         }
       }
     `
-  }).then(({ data }) => {
-    return { loggedInUser: data }
-  }).catch(() => {
+  }).then(({ data }) => ({ loggedInUser: data })).catch(() => 
     // Fail gracefully
-    return { loggedInUser: {} }
-  })
-)
+    ({ loggedInUser: {} })
+  )
+);
