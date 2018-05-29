@@ -13,7 +13,7 @@ const Header = props => (
           <tr>
 
             <td style={{ width: '18px', padding: '0px', paddingRight: '4px' }}>
-              <Link href="./">
+              <Link href="/">
                 <a>
                   <img src="/static/y18.gif" style={{ width: '18px', height: '18px', border: '1px', borderColor: 'white', borderStyle: 'solid' }} />
                 </a>

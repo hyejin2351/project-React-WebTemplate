@@ -13,7 +13,7 @@ function parseCookies(ctx = {}, options = {}) {
   const cookieStr = ctx.req ? ctx.req.headers.cookie
     : (typeof document === 'object') && document.cookie;
   logger('cookie str: ', cookieStr);  
-  return cookieStr ? cookie.parse(cookieStr) : '';
+  return cookieStr ? cookie.parse(cookieStr) : {};
 }
 
 export default ComposedComponent => class WithData extends React.Component {
