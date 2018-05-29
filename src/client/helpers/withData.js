@@ -10,19 +10,10 @@ import initApollo from './initApollo';
 const logger = debug('app:withData');
 
 function parseCookies(ctx = {}, options = {}) {
-  let mycookie = '';
-
-  if ( ctx.req && ctx.req.headers ) {
-    if ( ctx.req.headers.authorization || ctx.req.headers.Authorization ) {
-      const data = ctx.req.headers.authorization || ctx.req.headers.Authorization;
-      mycookie = data.split(' ')[1];
-    } 
-    else if ( ctx.req.headers.cookie ) {
-      const data = ctx.req.headers.cookie; // document.cookie
-      mycookie = cookie.parse(data, options);
-    }
-  }
-  return mycookie;
+  const cookieStr = ctx.req ? ctx.req.headers.cookie
+    : (typeof document === 'object') && document.cookie;
+  logger('cookie str: ', cookieStr);  
+  return cookieStr ? cookie.parse(cookieStr) : '';
 }
 
 export default ComposedComponent => class WithData extends React.Component {

@@ -85,7 +85,7 @@ module.exports = (server, { // express app
   };
 
   const fnOptions = (req) => {
-    const userId = req.user && req.user.id;
+    const userId = req.user && (req.user.id && req.user._id);
     options.context.userId = userId;
     options.rootValue = { req };
     return options;

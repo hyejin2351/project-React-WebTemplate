@@ -22,7 +22,7 @@ if (!isBrowser) {
 }
 
 // See https://www.apollographql.com/docs/react/recipes/authentication.html#Cookie
-function createLinkUsingCookie(uri, getToken) {
+/* function createLinkUsingCookie(uri, getToken) {
   return createHttpLink({
     uri,
     credentials: 'same-origin',
@@ -32,6 +32,7 @@ function createLinkUsingCookie(uri, getToken) {
     },
   });
 }
+ */
 
 // See https://www.apollographql.com/docs/react/recipes/authentication.html#Header
 function createLinkUsingAuthHeader(uri, getToken) {
@@ -39,9 +40,13 @@ function createLinkUsingAuthHeader(uri, getToken) {
     uri,
     credentials: 'same-origin', // if your backend server is the same domain
     // credentials: 'include',  // if your backend is a different domain.
+    headers: {
+      // HTTP Header:  Cookie: <cookiename>=<cookievalue>
+      Cookie: `connect.sid=${getToken()['connect.sid']}`,
+    },
   });
   
-  const authLink = setContext((_, { headers }) => {
+/*   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     const token = getToken();
     // return the headers to the context so httpLink can read them
@@ -54,6 +59,8 @@ function createLinkUsingAuthHeader(uri, getToken) {
   });
 
   return authLink.concat(httpLink);
+ */
+  return httpLink;
 }
 
 function create(initialState, { getToken }) {

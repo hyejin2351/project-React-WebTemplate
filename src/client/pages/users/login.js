@@ -4,15 +4,14 @@ import Router from 'next/router';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 
-import Blank from '../../layouts/Blank';
 import withData from '../../helpers/withData';
-import meQuery from '../../gql/queries/meQuery';
-import {
-  isValidNewUser,
-} from '../../helpers/validation/User';
-import UserLoginErrorCode from '../../helpers/enums/UserLoginErrorCode';
+import { meQuery } from '../../users/queries/meQuery';
+import { isValidNewUser } from '../../users/libs/userValidation';
+import LoginErrorCode from '../../users/libs/LoginErrorCode';
 
-class Page extends React.Component {
+import PageView from './login.jsx';
+
+class PageController extends React.Component {
   static propTypes = {
     url: PropTypes.shape({
       query: PropTypes.shape(),
@@ -28,19 +27,16 @@ class Page extends React.Component {
       },
       validationMessage: '',
     };
-
-    // this.validateLogin = this.validateLogin.bind(this);
-    // this.onLoginIDChange = this.onLoginIDChange.bind(this);
-    // this.onLoginPasswordChange = this.onLoginPasswordChange.bind(this);
   }
 
   componentDidMount() {
+    console.log('props.me: ', this.props.me);
+    // already logged in.
     if (this.props.me) {
       Router.push('/');
     }
   }
 
-  /* Login User */
   onLoginIDChange = (e) => {
     this.setState({
       login: {
@@ -49,6 +45,7 @@ class Page extends React.Component {
       },
     });
   }
+
   onLoginPasswordChange = (e) => {
     this.setState({
       login: {
@@ -74,52 +71,28 @@ class Page extends React.Component {
 
   render() {
     let message = '';
-    if (this.props.url && this.props.url.query.how) message = UserLoginErrorCode.messages[this.props.url.query.how];
+    if (this.props.url && this.props.url.query.how) message = LoginErrorCode.messages[this.props.url.query.how];
 
     return (
-      <Blank>
-        {message && <p>{message}</p>}
-        {this.state.validationMessage && <p>{this.state.validationMessage}</p>}
-        <b>Login...</b>
-        <br />
-        <br />
-        <form method="post" action="/api/auth/login" onSubmit={e => this.validateLogin(e)} style={{ marginBottom: '1em' }}>
-          <input type="hidden" name="goto" value={(this.props.url && this.props.url.query.goto) || '/news'} />
-          <table style={{ border: '0px' }} >
-            <tbody>
-              <tr>
-                <td>username:</td>
-                <td>
-                  <input type="text" name="email" onChange={this.onLoginIDChange} size="20" autoCorrect="off" spellCheck="false" autoCapitalize="off" autoFocus="true" />
-                </td>
-              </tr>
-              <tr>
-                <td>password:</td>
-                <td>
-                  <input type="password" name="password" onChange={this.onLoginPasswordChange} size="20" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-          <input type="submit" value="login" />
-        </form>
-        <Link prefetch href="./forgot">
-          <a>Forgot your password?</a>
-        </Link>
-      </Blank>
+      <PageView
+        loginUri = {'/api/auth/login'}
+        message = {message}
+        onLoginIDChange = {this.onLoginIDChange}
+        onLoginPasswordChange = {this.onLoginPasswordChange}
+        onSubmit = {this.validateLogin}
+       />
     );
   }
 }
 
-const LoginPage = graphql(meQuery, {
+const PageWithData = graphql(meQuery, {
   options: {
   },
   props: ({ data: { me } }) => ({
     me,
   }),
-})(Page);
+})(PageController);
 
 export default withData(props => (
-  <LoginPage url={props.url} />
+  <PageWithData url={props.url} />
 ));

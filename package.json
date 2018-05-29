@@ -14,6 +14,7 @@
     "graphiql": "babel-node ./src/server/gql/graphiqlServer.js",
     "mongod": "sudo systemctl start mongod",
     "test": "jest",
+    "upp": "yarn upgrade file:./src/custom_modules/passport-local-mongoose",
     "lint": "eslint --ignore-path .gitignore .",
     "lint-fix": "npm run lint -- --fix",
     "build": "npm run build-clean && babel src -d build/app --ignore '**/*__tests__','**/*__mocks__' && cp -R src/client/static build/app/client/static && next build build/app/client",

@@ -33,6 +33,13 @@ module.exports = {
       //     '/p/481': { page: '/post', query: { id: '481' } },
     };
   },
+  serverRuntimeConfig: { // Will only be available on the server side
+    mySecret: 'secret'
+  },
+  publicRuntimeConfig: { // Will be available on both server and client
+    staticFolder: '/static'
+  }
+
   // webpack: (config, { dev }) => {
   //   // Perform customizations to webpack config
   //   if (!dev) {
