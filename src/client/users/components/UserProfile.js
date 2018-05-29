@@ -8,10 +8,12 @@ import { graphql } from 'react-apollo';
 import withData from '../../helpers/withData';
 import { meQuery } from '../queries/meQuery';
 
-class PageController extends React.PureComponent {
+class UserProfilePageController extends React.PureComponent {
   static propTypes = {
-    me: PropTypes.shape({
-    }).isRequired,
+    me: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.any]).isRequired,
+  }
+  static defaultProps = {
+    me: {}
   }
 
   render() {
@@ -21,7 +23,7 @@ class PageController extends React.PureComponent {
           <Link href="/users/profile">
             <a > Profile </a>
           </Link>
-          <Link href="/users/logout" >
+          <Link href="/api/auth/logout" >
             <a > Logout </a>
           </Link>
         </div>
@@ -44,7 +46,7 @@ const PageWithData = graphql(meQuery, {
   props: ({ data: { me } }) => ({
     me,
   }),
-})(PageController);
+})(UserProfilePageController);
 
 export default withData(props => (
   <PageWithData />

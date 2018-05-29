@@ -15,7 +15,7 @@ import timeAgo from '../../helpers/convertNumberToTimeAgo';
 import { meQuery } from '../../users/queries/meQuery';
 import PageView from './profile.jsx';
 
-const PageController = ({ 
+const ProfilePageController = ({ 
   loading, error, me, options: { currentURL } 
 }) => {
   if (error) return <Blank>Error loading news items.</Blank>;
@@ -41,7 +41,7 @@ const PageWithData = graphql(meQuery, {
   props: ({ data: { me } }) => ({
     me,
   }),
-})(PageController);
+})(ProfilePageController);
 
 export default withData(props => (
   <PageWithData options={{

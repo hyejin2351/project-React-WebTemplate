@@ -11,7 +11,7 @@ import LoginErrorCode from '../../users/libs/LoginErrorCode';
 
 import PageView from './login.jsx';
 
-class PageController extends React.Component {
+class LoginPageController extends React.Component {
   static propTypes = {
     url: PropTypes.shape({
       query: PropTypes.shape(),
@@ -30,7 +30,6 @@ class PageController extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props.me: ', this.props.me);
     // already logged in.
     if (this.props.me) {
       Router.push('/');
@@ -91,7 +90,7 @@ const PageWithData = graphql(meQuery, {
   props: ({ data: { me } }) => ({
     me,
   }),
-})(PageController);
+})(LoginPageController);
 
 export default withData(props => (
   <PageWithData url={props.url} />
