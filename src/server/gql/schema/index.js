@@ -20,13 +20,16 @@ const {
 const typeDefs = `
     ${mongoTypes}
     ${dataTypes}
+
     type Query {
         ${mongoQueries}
         ${dataQueries}
+
     }
     type Mutation {
         ${mongoMutations}
-        ${dataMutations}        
+        ${dataMutations}  
+
     }
 `;
 /* console.log('====================================================');
@@ -34,19 +37,32 @@ console.log(typeDefs);
 console.log('----------------------------------------------------');
  */
 // extract query and mutation
-const { Query: mQuery, Mutation: mMutation, ...mRest } = mongoResolvers;
-const { Query: dQuery, Mutation: dMutation, ...dRest } = dataResolvers;
+const { 
+  Query: mQuery, 
+  Mutation: mMutation, 
+  ...mRest 
+} = mongoResolvers;
+
+const { 
+  Query: dQuery, 
+  Mutation: dMutation, 
+  ...dRest 
+} = dataResolvers;
+
 // merge all
 const resolvers = {
   ...mRest,
   ...dRest,
+
   Query: {
     ...mQuery,
     ...dQuery
+
   },
   Mutation: {
     ...mMutation,
     ...dMutation
+    
   }
 };
 
