@@ -4,65 +4,56 @@
 
 //
 // load .env
-import 'dotenv/config';
-import passport from 'passport';
-import LocalStrategy from 'passport-local';
-import bodyParser from 'body-parser';
-
-import {
-  APP_PORT,
-  APP_URI,
-  GRAPHQL_URL,
-  isDev,
-} from './config';
-
-import initConfig from './config/initConfig';
-
+require('dotenv/config');
 //
 // debug
 const d = require('debug')('app:server');
 
+const {
+  APP_PORT,
+  isDev,
+} = require('./config');
+
+const initApp = require('./init');
+
 d('Start loading...');
+initApp({})
+  .then(
+    //  
+    // App is initialized successfully
+    async (appInst) => {
+      const { server, nextApp } = appInst;
 
-initConfig({})
-  .then((appConfig) => {
-    const { 
-      server,
-      nextApp
-    } = appConfig;
+      server.get('/news', (req, res) => {
+        const actualPage = '/';
+        nextApp.render(req, res, actualPage);
+      });
+    
+      server.get('*', (req, res) => nextApp.getRequestHandler()(req, res));
 
-
-    /* BEGIN EXPRESS ROUTES */
-
-    // This is how to render a masked route with NextJS
-    // server.get('/p/:id', (req, res) => {
-    //   const actualPage = '/post';
-    //   const queryParams = { id: req.params.id };
-    //   app.render(req, res, actualPage, queryParams);
-    // });
-    server.get('/news', (req, res) => {
-      const actualPage = '/';
-      nextApp.render(req, res, actualPage);
-    });
-
-    const handle = nextApp.getRequestHandler();
-    server.get('*', (req, res) => handle(req, res));
-
-    /* END EXPRESS ROUTES */
-
-    server.listen(APP_PORT, (err) => {
-      if (err) {
+      //
+      // start listening
+      try {
+        await server.listen(APP_PORT);
+        console.log(`> App ready on port: ${APP_PORT}`);
+        console.log(`> isDevMode: ${isDev}`);
+      } catch (err) {
         console.error(err);
-        throw err;
+        process.exit(1);
       }
-      console.log(`> App ready on ${APP_URI}`);
-      console.log(`> GraphQL Ready on ${GRAPHQL_URL}`);
-      console.log(`> Dev: ${isDev}`);
-    });
-  })
-  .catch((ex) => {
-    console.error(ex.stack);
+    },
+
+    //  
+    // Error while initApp()
+    (error) => {
+      console.error('!!! Error occurred: ', error);
+      process.exit(1);
+    })
+//  
+// Exception while initApp()
+  .catch((exception) => {
+    console.error('!!! Exception occurred: ', exception);
     process.exit(1);
   });
 
-export default {};
+module.exports = {};

@@ -22,6 +22,8 @@ const devRules = {
   "react/require-default": "off",
   "react/require-default-props": "off",
   "react/no-did-mount-set-state": "off",
+  "no-multi-assign": "off",
+  
 }
 
 const config = {

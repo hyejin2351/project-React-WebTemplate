@@ -26,7 +26,7 @@ import {
   GRAPHIQL_URL,
 } from '../config';
 
-import initMongoose from '../config/initMongoose';
+import initMongoose from '../init/initMongoose';
 
 //
 // make connection to mongodb

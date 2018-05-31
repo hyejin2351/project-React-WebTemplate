@@ -15,7 +15,7 @@ const {
   queries: dataQueries,
   mutations: dataMutations,
   resolvers: dataResolvers
-} = require('../../sample-data/Schema');
+} = require('../../mods/sample/gql/schema');
 
 const typeDefs = `
     ${mongoTypes}
