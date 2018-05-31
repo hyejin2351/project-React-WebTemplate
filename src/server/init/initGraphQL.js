@@ -11,23 +11,12 @@ const {
 } = require('apollo-server-express');
 
 const Schema = require('../gql/schema');
-const {
-  UserModel,
-  validateJwtToken
-} = require('../users');
 
 const {
   isDev,
   AUTH_JWT_SECRET,
   AUTH_SESSION_SECRET,
 } = require('./');
-
-//
-// SAMPLE-DATA folder
-//
-const {
-  SampleModel,
-} = require('../mods/sample/models');
 
 /**
  * A function to format errors before they are returned to the client.
@@ -64,8 +53,6 @@ module.exports = (server, { // express app
   const options = {
     schema: Schema,
     context: {
-      UserModel,
-      SampleModel,
     },
     debug: isDev,
     tracing: isDev,
@@ -79,13 +66,6 @@ module.exports = (server, { // express app
     options.rootValue = { req };
     return options;
   };
-
-  // server.use(
-  //   graphQLPath, 
-  //   validateJwtToken({
-  //     secret: AUTH_JWT_SECRET,
-  //     credentialsRequired: false
-  //   }));
 
   server.use(
     graphQLPath,

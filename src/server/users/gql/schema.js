@@ -2,8 +2,7 @@
 // Schema
 //
 const d = require('debug')('app:gql');
-const { getUsers } = require('../../db/mongoose/resolvers');
-
+const UserModel = require('../models/user');
 //
 // See https://www.apollographql.com/docs/apollo-server/example.html
 //
@@ -52,28 +51,24 @@ const mutations = `
 
 const resolvers = {
   Query: {
-    getUsers: (_, __, context) => getUsers(),
-
     getUser: (_, { id }, context) => {
-      const { UserModel } = context;
       return UserModel.findById(id);
     },
 
     me: (_, __, context) => {
-      const { UserModel } = context;
-      return context.userId && UserModel.findById(context.userId);
+      const { userId } = context;
+      return userId && UserModel.findById(userId);
     }
   },
 
   Mutation: {
     createUser: (_, userData, context) => {
-      const { UserModel } = context;
       return UserModel.create(userData);
     },
 
-    deleteUser: (_, { id }, { UserModel }) => UserModel.findByIdAndDelete(id),
+    deleteUser: (_, __, { userId }) => UserModel.findByIdAndDelete(userId),
 
-    updateUser: (_, { id, userData }, { UserModel }) => UserModel.findByIdAndUpdate(id, userData, { new: true }),
+    updateUser: (_, { userData }, { userId }) => UserModel.findByIdAndUpdate(userId, userData, { new: true }),
   }
 };
 

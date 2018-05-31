@@ -6,7 +6,6 @@ export default apolloClient => (
       query getUser {
         user {
           id
-          name
         }
       }
     `

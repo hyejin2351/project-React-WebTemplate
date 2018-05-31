@@ -4,6 +4,13 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'isomorphic-unfetch';
 
+import {
+  GRAPHQL_URL,
+  isBrowser
+} from '../config';
+
+const log = require('debug')('app:initApollo');
+
 let apolloClient = null;
 
 // Polyfill fetch() on the server (used by apollo-client)
@@ -13,7 +20,7 @@ if (!process.browser) {
 
 function create(initialState, { getToken }) {
   const httpLink = createHttpLink({
-    uri: 'https://api.graph.cool/simple/v1/cj5geu3slxl7t0127y8sity9r',
+    uri: GRAPHQL_URL,
     credentials: 'same-origin'
   });
 
