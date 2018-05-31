@@ -6,7 +6,7 @@ const d = require('debug')('app:nextjs');
 const createNextApp = require('next');
 const {
   isDev,
-} = require('./');
+} = require('../config');
   
 module.exports = ({
   nextApp, // nextjs app

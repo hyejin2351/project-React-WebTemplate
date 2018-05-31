@@ -14,7 +14,7 @@ const log = require('debug')('app:initApollo');
 let apolloClient = null;
 
 // Polyfill fetch() on the server (used by apollo-client)
-if (!process.browser) {
+if (!isBrowser) {
   global.fetch = fetch;
 }
 
@@ -26,17 +26,21 @@ function create(initialState, { getToken }) {
 
   const authLink = setContext((_, { headers }) => {
     const token = getToken();
+    // log('TOKEN: ', token);
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : ''
+        // HTTP Header:  Cookie: <cookiename>=<cookievalue>
+        // The setting below make it work on SSR 
+        Cookie: `connect.sid=${token['connect.sid']}`, 
+        // authorization: token ? `Bearer ${token}` : ''
       }
     };
   });
 
   return new ApolloClient({
-    connectToDevTools: process.browser,
-    ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
+    connectToDevTools: isBrowser,
+    ssrMode: !isBrowser, // Disables forceFetch on the server (so queries are only run once)
     link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState || {})
   });
@@ -45,7 +49,7 @@ function create(initialState, { getToken }) {
 export default function initApollo(initialState, options) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (!process.browser) {
+  if (!isBrowser) {
     return create(initialState, options);
   }
 

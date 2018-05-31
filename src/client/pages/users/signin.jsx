@@ -3,23 +3,19 @@ import Link from 'next/link';
 
 export default ({
   onSubmit,
-  errorMessage,
-  refEmail,
-  refPassword
+  onChange,
+  errors,
 }) => (
 <React.Fragment>
-  {/*<SignBox />*/}
-
   <form onSubmit={onSubmit} >
-    {errorMessage && <p>{errorMessage}</p>}
-    <input name="email" placeholder="Email" ref={refEmail} />
+    {errors.message && <p className="error-message">{errors.message}</p>}
+    <input name="email" placeholder="Email" onChange={onChange} />
     <br />
-    <input name="password" placeholder="Password" ref={refPassword} type="password" />
+    <input name="password" placeholder="Password" onChange={onChange} type="password" />
     <br />
     <button>Sign in</button>
   </form>
-
   <hr />
-  <span>Already have an accoun?????????</span> <Link prefetch href="./create-account"><a>Create account</a></Link>
+  <span>Already have an accoun?</span> <Link prefetch href="./create-account"><a>Create account</a></Link>
 </React.Fragment>
 );

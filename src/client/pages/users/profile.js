@@ -5,10 +5,9 @@ import Link from 'next/link';
 import debug from 'debug';
 
 import redirect from '../../lib/redirect';
-import checkLoggedIn from '../../lib/checkLoggedIn';
 import withAuth from '../../lib/withAuth';
 
-const d = debug('app:index');
+const log = debug('app:index');
 
 class Profile extends React.Component {
   signout(apolloClient) { 
@@ -30,20 +29,16 @@ class Profile extends React.Component {
     if (!this.props.me) return (<div>Loading...</div>);
 
     return (
-      <ApolloConsumer>
-        {client => (
-          <div>
-            <br />            
-            <p>Hello {this.props.me.name}!</p>
-            <br />
-            <br />
-            <Link href="/"><a>Go to Main</a></Link>
-            <br />
-            <br />
-            <button onClick={this.signout(client)}>Sign out</button>
-          </div>
-        )}
-      </ApolloConsumer>
+      <div>
+        <br />            
+        <p>Hello {this.props.me.id}!</p>
+        <br />
+        <br />
+        <Link href="/"><a>Go to Main</a></Link>
+        <br />
+        <br />
+        <button onClick={this.signout()}>Sign out</button>
+      </div>
     );
   }
 }

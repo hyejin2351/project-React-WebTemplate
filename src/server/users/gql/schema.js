@@ -26,7 +26,7 @@ const queries = `
     : [User]
 
     getUser(
-        id: String!
+        id: String
     ): User
 
     me
@@ -49,26 +49,47 @@ const mutations = `
     ): User
 `;
 
+function isAdminUser(userId) {
+  return false;
+}
+
 const resolvers = {
   Query: {
-    getUser: (_, { id }, context) => {
-      return UserModel.findById(id);
-    },
-
     me: (_, __, context) => {
       const { userId } = context;
       return userId && UserModel.findById(userId);
-    }
+    },
+    
+    getUser: (_, { id }, { userId }) => {
+      if (!isAdminUser(userId)) {
+        return null;
+      }
+      return UserModel.findById(id);
+    },
   },
 
   Mutation: {
-    createUser: (_, userData, context) => {
+    createUser: (_, userData, { userId }) => {
+      if (!isAdminUser(userId)) {
+        return null;
+      }
+      // admin only
       return UserModel.create(userData);
     },
 
-    deleteUser: (_, __, { userId }) => UserModel.findByIdAndDelete(userId),
+    deleteUser: (_, __, { userId }) => {
+      if (!isAdminUser(userId)) {
+        return null;
+      }
+      return UserModel.findByIdAndDelete(userId);
+    },
 
-    updateUser: (_, { userData }, { userId }) => UserModel.findByIdAndUpdate(userId, userData, { new: true }),
+    updateUser: (_, { userData }, { userId }) => {
+      if (!isAdminUser(userId)) {
+        return null;
+      }
+      return UserModel.findByIdAndUpdate(userId, userData, { new: true });
+    }
   }
 };
 

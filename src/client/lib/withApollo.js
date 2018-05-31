@@ -7,14 +7,14 @@ import debug from 'debug';
 
 import initApollo from './initApollo';
 
-const d = debug('app:withApollo');
+const log = debug('app:withApollo');
 
 function parseCookies(req, options = {}) {
   const parsedCookie = cookie.parse(
-    req ? req.headers.cookie || '' : document.cookie,
+    req ? (req.headers.cookie || '') : document.cookie,
     options
   );
-  d('parsed cookie: TOKEN: ', (parsedCookie ? parsedCookie.token : 'no cookie'));
+  log('parsed cookie: ', parsedCookie);
   return parsedCookie;
 }
 
@@ -24,7 +24,7 @@ export default (App) => {
       const { Component, router, ctx: { req, res } } = context;
       const apolloState = {};
       const apollo = initApollo({}, {
-        getToken: () => parseCookies(req).token
+        getToken: () => parseCookies(req), //[tokenName]
       });
 
       context.ctx.apolloClient = apollo;
@@ -80,7 +80,7 @@ export default (App) => {
       this.apolloClient =
         props.apolloClient ||
         initApollo(props.apolloState.data, {
-          getToken: () => parseCookies().token
+          getToken: () => parseCookies(), // [tokenName]
         });
     }
 

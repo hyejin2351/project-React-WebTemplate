@@ -1,15 +1,17 @@
 import gql from 'graphql-tag';
 
-export default apolloClient => (
+export default ({apolloClient}) => (
   apolloClient.query({
     query: gql`
-      query getUser {
-        user {
+      query Auth {
+        me {
           id
         }
       }
     `
-  }).then(({ data }) => ({ loggedInUser: data })).catch(() => 
+  })
+    .then(({ data }) => ({ me: data.me }))
+    .catch(() => 
     // Fail gracefully
-    ({ loggedInUser: {} }))
+      ({ me: {} }))
 );

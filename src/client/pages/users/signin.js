@@ -1,101 +1,138 @@
 import React from 'react';
-import { Mutation, withApollo } from 'react-apollo';
+import PropTypes from 'prop-types';
+import Router from 'next/router';
+import { ApolloConsumer } from 'react-apollo';
+import debug from 'debug';
 
-import gql from 'graphql-tag';
-import cookie from 'cookie';
+import SignInForm from './signin.jsx';
+import AuthService from '../../lib/AuthService';
 
-import redirect from '../../lib/redirect';
-import checkLoggedIn from '../../lib/checkLoggedIn';
+const log = debug('app:signin');
 
-import SignInView from './signin.jsx';
-
-const SIGN_IN = gql`
-  mutation Signin($email: String!, $password: String!) {
-    signinUser(email: { email: $email, password: $password}) {
-      token
-    }
-  }
-`;
-
-class SignIn extends React.Component {
-  static async getInitialProps(context) {
-    const { loggedInUser } = await checkLoggedIn(context.apolloClient);
-
-    if (loggedInUser.user) {
-      // Already signed in? No need to continue.
-      // Throw them back to the main page
-      redirect(context, '/');
-    }
-
-    return {};
-  }
-
+class LoginPage extends React.Component {
+  /**
+   * Class constructor.
+   */
   constructor(props) {
     super(props);
+
+    // set the initial component state
     this.state = {
-      errorMessage: ''
+      errors: {},
+      user: {
+        email: '',
+        password: ''
+      }
     };
+
+    this.processForm = this.processForm.bind(this);
+    this.changeUser = this.changeUser.bind(this);
   }
 
-  onSubmit(e, signinUser, data) {
-    e.preventDefault();
-    e.stopPropagation();
+  /**
+   * Process the form.
+   *
+   * @param {object} event - the JavaScript event object
+   */
+  async processForm(event, apolloClient) {
+    // prevent default action. in this case, action is the form submission event
+    event.preventDefault();
 
-    // request login
-    signinUser({
-      variables: {
-        email: this.email.value,
-        password: this.password.value
+    // const email = this.state.user.email;
+    // const password = this.state.user.password;
+    // log('processForm: ', email);
+    // try {
+    //   const res = await AuthService.login({
+    //     uri: '/api/auth/login',
+    //     apolloClient,
+    //   }, email, password);
+    //   // success
+    //   // change the component-container state
+    //   this.setState({
+    //     errors: {}
+    //   });
+    //   // redirect signed in user to dashboard
+    //   // this.props.history.push('/dashboard');
+    //   Router.replace('/');
+    // } catch (err) {
+    //   log(err);
+    //   // failure
+    //   // change the component state
+    //   const errors = err;
+
+    //   this.setState({
+    //     errors
+    //   });
+    // }
+
+    const email = encodeURIComponent(this.state.user.email);
+    const password = encodeURIComponent(this.state.user.password);
+    const formData = `email=${email}&password=${password}`;
+
+    // create an AJAX request
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', '/api/auth/login');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      const { status, response } = xhr;
+      log('status: ', status);
+      if ( status === 200 ) {
+        // success
+
+        // change the component-container state
+        this.setState({
+          errors: {}
+        });
+
+        // redirect signed in user to dashboard
+        // this.props.history.push('/dashboard');
+        Router.replace('/');
+        
+      } else {
+        // failure
+        // change the component state
+        const errors = response;
+
+        this.setState({
+          errors
+        });
       }
     });
-    this.email.value = this.password.value = '';
+    xhr.send(formData);
   }
 
-  refEmail(node) {
-    this.email = node;
+  /**
+   * Change the user object.
+   *
+   * @param {object} event - the JavaScript event object
+   */
+  changeUser(event) {
+    const field = event.target.name;
+    const user = this.state.user;
+    user[field] = event.target.value;
+
+    this.setState({
+      user
+    });
   }
 
-  refPassword(node) {
-    this.password = node;
-  }
-
+  /**
+   * Render the component.
+   */
   render() {
-    const { client } = this.props;
-    
     return (
-      <Mutation
-        mutation={SIGN_IN}
-
-        onCompleted={(data) => {
-          // Store the token in cookie
-          document.cookie = cookie.serialize('token', data.signinUser.token, {
-            maxAge: 30 * 24 * 60 * 60 // 30 days
-          });
-          // Force a reload of all the current queries now that the user is
-          // logged in
-          client.cache.reset().then(() => {
-            redirect({}, '/users/profile');
-          });
-        }}
-
-        onError={(error) => {
-          console.log(error);
-          this.setState({
-            errorMessage: error
-          });
-        }}
-      >
-        {(signinUser, { data, error }) => (
-          <SignInView
-            onSubmit={e => this.onSubmit(e, signinUser, data)}
-            errorMessage={this.state.errorMessage}
-            refEmail={node => this.refEmail(node)}
-            refPassword={node => this.refPassword(node)}
+      <ApolloConsumer>
+        {client => (
+          <SignInForm
+            onSubmit={e => this.processForm(e, client)}
+            onChange={this.changeUser}
+            errors={this.state.errors}
           />
         )}
-      </Mutation>
-    );
+        </ApolloConsumer>
+      );
   }
 }
 
-export default withApollo(SignIn);
+export default LoginPage;

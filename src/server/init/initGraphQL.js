@@ -10,13 +10,11 @@ const {
   graphiqlExpress,
 } = require('apollo-server-express');
 
-const Schema = require('../gql/schema');
-
 const {
   isDev,
-  AUTH_JWT_SECRET,
-  AUTH_SESSION_SECRET,
-} = require('./');
+} = require('../config');
+
+const schema = require('../gql/schema');
 
 /**
  * A function to format errors before they are returned to the client.
@@ -51,7 +49,7 @@ module.exports = (server, { // express app
    */
 
   const options = {
-    schema: Schema,
+    schema,
     context: {
     },
     debug: isDev,

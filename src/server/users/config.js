@@ -1,4 +1,4 @@
-exports.dev = process.env.NODE_ENV !== 'production';
+exports.isDevMode = process.env.NODE_ENV !== 'production';
 
 exports.routePath = {
   prefix: '/api/auth',

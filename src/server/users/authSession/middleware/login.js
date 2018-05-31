@@ -1,10 +1,9 @@
 //
 // debug
-const d = require('debug')('app:auth');
 
 const passport = require('passport');
 const {
-  dev
+  isDevMode
 } = require('../../config');
 
 /* module.exports = (options = {}) => (!dev ? passport.authenticate('local', options) :

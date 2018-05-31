@@ -7,7 +7,7 @@ const express = require('express');
 // const morgan = require('morgan');
 const {
   isDev,
-} = require('./');
+} = require('../config');
 
 
 module.exports = ({

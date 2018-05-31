@@ -14,7 +14,7 @@ const {
   usernameField, 
   passwordField,
   routePath,
-  dev,
+  isDevMode,
 } = require('./config');
 
 const routeSignup = require('./signup/routesSignup');
@@ -51,7 +51,7 @@ module.exports = function init(server, mongooseConnection, {
     mongooseConnection,
     ttl: sessionMaxAge,
     autoRemove: 'native', // Default
-    touchAfter: dev ? 10 : (1 * 60 * 60), // lazy update session. time period in seconds
+    touchAfter: isDevMode ? 10 : (1 * 60 * 60), // lazy update session. time period in seconds
     // collection: 'sessions', // session collection name
   }) : null;
 

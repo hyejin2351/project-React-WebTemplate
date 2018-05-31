@@ -6,29 +6,30 @@ import debug from 'debug';
 import redirect from './redirect';
 import checkLoggedIn from './checkLoggedIn';
 
-const d = debug('app:withAuth');
+const log = debug('app:withAuth');
 
 export default Component => class WithAuth extends React.Component {
   static async getInitialProps(context, apolloClient) {
-    const { loggedInUser } = await checkLoggedIn(context.apolloClient);
+    const { me } = await checkLoggedIn(context);
     let compProps = {};
     if (Component.getInitialProps) {
       compProps = await Component.getInitialProps(context);
     }
-    return { loggedInUser };
+    log(me);
+    return { me };
   }
 
   componentDidMount() {
-    const { loggedInUser } = this.props;
-    if (!loggedInUser || !loggedInUser.user) {
+    const { me } = this.props;
+    if (!me || !me.id) {
       // If not signed in, send them somewhere more useful
       redirect(null, '/users/signin');
-    }    
+    }
   }
 
   render() {
     return (
-      <Component {...this.props} me={this.props.loggedInUser.user} />
+      <Component {...this.props} me={this.props.me} />
     );
   }
 };
