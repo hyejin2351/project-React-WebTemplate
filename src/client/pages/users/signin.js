@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Router from 'next/router';
 import { ApolloConsumer } from 'react-apollo';
 import debug from 'debug';
 
+import redirect from '../../lib/redirect';
 import SignInForm from './signin.jsx';
 import AuthService from '../../lib/AuthService';
 
@@ -38,68 +38,67 @@ class LoginPage extends React.Component {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
 
-    // const email = this.state.user.email;
-    // const password = this.state.user.password;
-    // log('processForm: ', email);
-    // try {
-    //   const res = await AuthService.login({
-    //     uri: '/api/auth/login',
-    //     apolloClient,
-    //   }, email, password);
-    //   // success
-    //   // change the component-container state
-    //   this.setState({
-    //     errors: {}
-    //   });
-    //   // redirect signed in user to dashboard
-    //   // this.props.history.push('/dashboard');
-    //   Router.replace('/');
-    // } catch (err) {
-    //   log(err);
-    //   // failure
-    //   // change the component state
-    //   const errors = err;
+    const email = this.state.user.email;
+    const password = this.state.user.password;
+    log('processForm: ', email);
+    try {
+      const res = await AuthService.login({
+        uri: '/api/auth/login',
+        apolloClient,
+      }, email, password);
+      // success
+      // change the component-container state
+      this.setState({
+        errors: {}
+      });
+      // redirect signed in user to other page
+      redirect(null, '/');
+    } catch (err) {
+      log(err);
+      // failure
+      // change the component state
+      const errors = err;
 
-    //   this.setState({
-    //     errors
-    //   });
-    // }
+      this.setState({
+        errors
+      });
+    }
 
-    const email = encodeURIComponent(this.state.user.email);
-    const password = encodeURIComponent(this.state.user.password);
-    const formData = `email=${email}&password=${password}`;
+    // const email = encodeURIComponent(this.state.user.email);
+    // const password = encodeURIComponent(this.state.user.password);
+    // const formData = `email=${email}&password=${password}`;
 
-    // create an AJAX request
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/api/auth/login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      const { status, response } = xhr;
-      log('status: ', status);
-      if ( status === 200 ) {
-        // success
+    // // create an AJAX request
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('post', '/api/auth/login');
+    // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // xhr.responseType = 'json';
+    // xhr.addEventListener('load', () => {
+    //   const { status, response } = xhr;
+    //   log('status: ', status);
+    //   if ( status === 200 ) {
+    //     // success
 
-        // change the component-container state
-        this.setState({
-          errors: {}
-        });
+    //     // change the component-container state
+    //     this.setState({
+    //       errors: {}
+    //     });
 
-        // redirect signed in user to dashboard
-        // this.props.history.push('/dashboard');
-        Router.replace('/');
+    //     // redirect signed in user to dashboard
+    //     // this.props.history.push('/dashboard');
+    //     Router.replace('/');
         
-      } else {
-        // failure
-        // change the component state
-        const errors = response;
+    //   } else {
+    //     // failure
+    //     // change the component state
+    //     const errors = response;
 
-        this.setState({
-          errors
-        });
-      }
-    });
-    xhr.send(formData);
+    //     this.setState({
+    //       errors
+    //     });
+    //   }
+    // });
+    // xhr.send(formData);
   }
 
   /**

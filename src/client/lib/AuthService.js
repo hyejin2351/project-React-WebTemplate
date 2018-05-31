@@ -136,6 +136,9 @@ class AuthService {
 
     return fetch(url, {
       headers,
+      // Fetch does not send cookies.
+      // so you should add credentials: 'include' as fetch's parameter
+      credentials: 'include', // send 
       ...options
     })
       .then(AuthService._checkStatus)
