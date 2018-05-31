@@ -99,12 +99,12 @@ class AuthService {
       })
         .then((res) => {
           if (res.success) {
-            return removeToken(context);
+            return AuthService.removeToken(context);
           }
           return Promise.reject(res);
-        });      
+        });
     } else {
-      return removeToken(context);
+      return AuthService.removeToken(context);
     }
   }
 
