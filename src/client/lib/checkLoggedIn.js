@@ -6,12 +6,11 @@ export default apolloClient => (
       query getUser {
         user {
           id
-          email
+          name
         }
       }
     `
   }).then(({ data }) => ({ loggedInUser: data })).catch(() => 
     // Fail gracefully
-    ({ loggedInUser: {} })
-  )
+    ({ loggedInUser: {} }))
 );

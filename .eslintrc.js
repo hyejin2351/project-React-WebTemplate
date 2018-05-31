@@ -23,6 +23,13 @@ const devRules = {
   "react/require-default-props": "off",
   "react/no-did-mount-set-state": "off",
   "no-multi-assign": "off",
+  "one-var": "off",
+  "class-methods-use-this": "warning",
+
+}
+
+const devDangerousRules = {
+  "class-methods-use-this": "off",
   
 }
 
@@ -35,7 +42,8 @@ const config = {
     "jsx-a11y/no-autofocus": "off",
     "jsx-a11y/alt-text": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    ...devRules
+    ...devRules,
+    ...devDangerousRules,
   },
   "env": {
     "jest": true

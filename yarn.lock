@@ -5875,7 +5875,7 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
 
-"passport-local-mongoose@file:./src/custom_modules/passport-local-mongoose":
+"passport-local-mongoose@file:./custom_modules/passport-local-mongoose":
   version "5.0.0"
   dependencies:
     debug "^3.1.0"

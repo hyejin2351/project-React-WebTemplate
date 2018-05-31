@@ -1,3 +1,5 @@
+const { join } = require('path');
+
 const isDev = exports.isDev = process.env.NODE_ENV !== 'production';
 
 const graphQLPath = exports.graphQLPath = '/graphql';
@@ -6,7 +8,7 @@ const graphiQLPath = exports.graphiQLPath = isDev ? '/graphiql' : '';
 
 const nextAppDir = exports.nextAppDir = process.env.NODE_ENV === 'production' ? './build/app/client' : './src/client';
 
-// export const docRootDir = '';
+const docRootDir = exports.docRootDir = join(__dirname, '../../public');
 
 const HOST_NAME = exports.HOST_NAME = process.env.HOST_NAME || 'localhost';
 const APP_PORT = exports.APP_PORT = process.env.APP_PORT || 3000;
