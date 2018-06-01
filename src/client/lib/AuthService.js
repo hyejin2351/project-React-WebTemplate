@@ -56,12 +56,12 @@ const config = {
 
 const domain = '';
 
-function makeUrlEncodedFormData({email, password, goto}) {
+function makeUrlEncodedFormData({ email, password, goto }) {
   // 'application/x-www-form-urlencoded' format
-  return `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&goto=${encodeURIComponent(goto)}`;
+  return `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&goto=${encodeURIComponent(goto || '')}`;
 }
 
-function makeJsonFormData({email, password}) {
+function makeJsonFormData({ email, password }) {
   // 'application/json' format
   return JSON.stringify({
     email,
@@ -74,7 +74,7 @@ class AuthService {
     const { uri } = context;
     return AuthService.fetch(context, `${domain}${uri}`, {
       method: 'POST',
-      body: makeUrlEncodedFormData({email, password, goto}),
+      body: makeUrlEncodedFormData({ email, password, goto }),
     })
       .then((res) => {
         log('Got login response: ', res.success);
