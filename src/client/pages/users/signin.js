@@ -10,9 +10,6 @@ import AuthService from '../../lib/AuthService';
 const log = debug('app:signin');
 
 class LoginPage extends React.Component {
-  /**
-   * Class constructor.
-   */
   constructor(props) {
     super(props);
 
@@ -41,20 +38,26 @@ class LoginPage extends React.Component {
     const email = this.state.user.email;
     const password = this.state.user.password;
     log('processForm: ', email);
+
     try {
       const res = await AuthService.login({
         uri: '/api/auth/login',
         apolloClient,
       }, email, password);
+
+      
       // success
       // change the component-container state
       this.setState({
         errors: {}
       });
-      // redirect signed in user to other page
-      redirect(null, '/');
+      // Force a reload of all the current queries now that the user is
+      // logged in, so we don't accidentally leave any state around.
+      apolloClient.cache.reset().then(() => {
+        // redirect signed in user to other page
+        redirect(null, '/');
+      });
     } catch (err) {
-      log(err);
       // failure
       // change the component state
       const errors = err;

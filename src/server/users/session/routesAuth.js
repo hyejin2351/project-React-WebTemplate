@@ -78,7 +78,7 @@ module.exports = ({
           }
           log('redirecting to ', goto);
           return res.redirect(goto);
-      });
+        });
       })(req, res, next);
     },
   );

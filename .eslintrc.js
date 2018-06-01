@@ -31,6 +31,7 @@ const devRules = {
 const devDangerousRules = {
   "class-methods-use-this": "off",
   "no-unused-expressions": "off",
+  "no-return-assign": "off",
 }
 
 const config = {

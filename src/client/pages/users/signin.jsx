@@ -8,7 +8,7 @@ export default ({
 }) => (
 <React.Fragment>
   <form onSubmit={onSubmit} >
-    {errors.message && <p className="error-message">{errors.message}</p>}
+    {(errors && errors.message) && <p className="error-message">{errors.message}</p>}
     <input name="email" placeholder="Email" onChange={onChange} />
     <br />
     <input name="password" placeholder="Password" onChange={onChange} type="password" />

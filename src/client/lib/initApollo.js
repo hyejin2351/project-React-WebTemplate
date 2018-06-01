@@ -32,7 +32,7 @@ function create(initialState, { getToken }) {
         ...headers,
         // HTTP Header:  Cookie: <cookiename>=<cookievalue>
         // The setting below make it work on SSR 
-        Cookie: `connect.sid=${token['connect.sid']}`, 
+        Cookie: `connect.sid=${token['connect.sid']}; token=${token.token}`,
         // authorization: token ? `Bearer ${token}` : ''
       }
     };
