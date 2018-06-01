@@ -26,7 +26,7 @@ function create(initialState, { getToken }) {
 
   const authLink = setContext((_, { headers }) => {
     const token = getToken();
-    // log('TOKEN: ', token);
+    log('TOKEN: ', token);
     return {
       headers: {
         ...headers,

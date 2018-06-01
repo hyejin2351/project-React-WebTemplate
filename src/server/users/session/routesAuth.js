@@ -1,6 +1,6 @@
 //
 // debug
-const d = require('debug')('app:auth');
+const log = require('debug')('app:auth');
 const express = require('express');
 const passport = require('passport');
 
@@ -32,18 +32,19 @@ module.exports = ({
 
   router.post(routePath.login,
     (req, res, next) => {
-      d('auth request: ', req.body);
+      log('auth request: ', req.body);
       // data validation
       const ret = validateLoginData(req.body);
       if (!ret.success) {
-        d('validation failure: ', ret.message);
+        log('validation failure: ', ret.message);
         return res.status(400).json(ret);
       }
       // do authentication
+      const { goto = '/' } = req.body;
       req.body = ret;
       passport.authenticate('local', (err, user, info) => {
         if (err || !user) {
-          d('auth failure: ', err || '');
+          log('auth failure: ', err || '');
           return res.status(400).json({
             success: false,
             message: 'Invalid request'
@@ -51,7 +52,7 @@ module.exports = ({
         }
         req.login(user, (loginErr) => {
           if (loginErr) { 
-            d('logIn failure: ', loginErr || '');
+            log('logIn failure: ', loginErr || '');
             return res.status(400).json({
               success: false,
               message: 'Invalid request'
@@ -59,32 +60,51 @@ module.exports = ({
           }
           // Inside serializeUser callback. 
           // User id is saved to the session store here
-          d('authorized...');
-          d(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-          d(`req.user: ${JSON.stringify(req.user)}`);
-          const data = {
-            userId: req.user.id
-          };
-          return res.json({
-            success: true,
-            message: 'login success',
-            data
-          });
-        });
+          log('authorized...');
+          log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+          log(`req.user: ${JSON.stringify(req.user)}`);
+          //
+          // send response
+          if (req.accepts('application/json')) {
+            const data = {
+              userId: req.user.id
+            };
+            log('sending JSON response: data: ', data);
+            return res.json({
+              success: true,
+              message: 'login success',
+              data
+            });
+          }
+          log('redirecting to ', goto);
+          return res.redirect(goto);
+      });
       })(req, res, next);
     },
   );
 
   router.get(routePath.logout, (req, res) => {
+    log('logout request...');
     if (req.user) {
+      log('logged out user:', req.user.id);
+      // Invoking logout() will remove the req.user property and 
+      // clear the login session (if any).
       req.logout();
     } else {
-      d('invalid logout request');
+      log('invalid logout request');
     }
-    return res.json({
-      success: true,
-      message: 'logged out',
-    });
+    //
+    // send response
+    if (req.accepts('application/json')) {
+      log('sending JSON response');
+      return res.json({
+        success: true,
+        message: 'logged out',
+      });
+    }
+    const { goto = '/' } = req.query;
+    log('redirecting to ', goto);
+    return res.redirect(goto);
   });
 
   return router;

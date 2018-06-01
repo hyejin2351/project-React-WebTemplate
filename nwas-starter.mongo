@@ -14,4 +14,5 @@ db.users.insert([{
 db.users.findOneAndDelete("5b0b614a893f723e5a9cf4a2")
 db.sessions.explain()
 db.sessions.find()
+// !!! DROP sessions
 db.sessions.drop();

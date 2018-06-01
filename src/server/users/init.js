@@ -25,7 +25,7 @@ const routeAuthSession = require('./session/routesAuth');
 module.exports = function init(server, mongooseConnection, {
   isDev,
 } = {}) {
-  log(`Init users with isDevUsers, ${isDevUsers} (isDevApp${isDev})`);
+  log(`Init users with isDevUsers, ${isDevUsers} (isDevApp: ${isDev})`);
   log(`USERNAME_FIELD_NAME:${USERNAME_FIELD_NAME}, PASSWORD_FIELD_NAME:${PASSWORD_FIELD_NAME}`);
   // set env variable for SESSION
   if (!AUTH_SESSION_SECRET || AUTH_SESSION_SECRET.length < 10) {

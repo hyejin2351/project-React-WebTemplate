@@ -5,7 +5,7 @@ import checkLoggedIn from './checkLoggedIn';
 
 const log = debug('app:AuthService');
 
-const tokenName = 'connect.sid';
+const tokenName = 'token';
 const useSession = true;
 
 const getToken = ({ storage, req }, options = {}) => {
@@ -56,12 +56,12 @@ const config = {
 
 const domain = '';
 
-function makeUrlEncodedFormData(email, password) {
+function makeUrlEncodedFormData({email, password, goto}) {
   // 'application/x-www-form-urlencoded' format
-  return `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+  return `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&goto=${encodeURIComponent(goto)}`;
 }
 
-function makeJsonFormData(email, password) {
+function makeJsonFormData({email, password}) {
   // 'application/json' format
   return JSON.stringify({
     email,
@@ -70,20 +70,29 @@ function makeJsonFormData(email, password) {
 }
 
 class AuthService {
-  static login(context, email, password) {
+  static login(context, email, password, goto) {
     const { uri } = context;
     return AuthService.fetch(context, `${domain}${uri}`, {
       method: 'POST',
-      body: makeUrlEncodedFormData(email, password),
+      body: makeUrlEncodedFormData({email, password, goto}),
     })
       .then((res) => {
+        log('Got login response: ', res.success);
         if (res.success) {
           if (res[tokenName]) {
+            log('Save the received token: ', res[tokenName]);
             config.setToken(context, res[tokenName]);
           }
+          log('return successful response: ', res);
           return Promise.resolve(res);
         }
+        log('return failed response: ', res);
         return Promise.reject(res);
+      })
+      .catch((err) => {
+        log('Got exception: ', err);
+        // TODO: define response format
+        return Promise.reject(err);
       });
   }
 
@@ -138,7 +147,7 @@ class AuthService {
       headers,
       // Fetch does not send cookies.
       // so you should add credentials: 'include' as fetch's parameter
-      credentials: 'include', // send 
+      credentials: 'include',
       ...options
     })
       .then(AuthService._checkStatus)
