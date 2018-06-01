@@ -13,7 +13,7 @@ module.exports = {
   },
   publicRuntimeConfig: { // Will be available on both server and client
     staticFolder: '/static'
-  }
+  },
 
   // webpack: (config, { dev }) => {
   //   // Perform customizations to webpack config
