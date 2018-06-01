@@ -129,8 +129,8 @@ class LoginPage extends React.Component {
             errors={this.state.errors}
           />
         )}
-        </ApolloConsumer>
-      );
+      </ApolloConsumer>
+    );
   }
 }
 

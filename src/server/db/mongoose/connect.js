@@ -13,7 +13,9 @@ module.exports = (uri, options) => new Promise((resolve, reject) => {
   // } = options;
 
   const connPromise = mongoose.connect(uri, options);
-  connPromise.then(() => resolve(mongoose.connection), err => reject(err))
+  connPromise.then(
+    () => resolve(mongoose.connection), 
+    err => reject(err))
     .catch((err) => {
       console.error('>>>>>>>>>>>>>>>>>>>>>>', err);
       return reject(err);

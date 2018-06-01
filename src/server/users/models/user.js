@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const modAuth = require('./plugin');
 
 const {
-  usernameField,
-  passwordField,
-  saltlen
+  USERNAME_FIELD_NAME,
+  PASSWORD_FIELD_NAME,
+  SALT_LENGTH
 } = require('../config');
 
 // define the User model schema
@@ -22,9 +22,9 @@ UserSchema.virtual('id')
   });
 
 UserSchema.plugin(modAuth, {
-  usernameField,
-  passwordField,
-  saltlen,
+  usernameField: USERNAME_FIELD_NAME,
+  passwordField: PASSWORD_FIELD_NAME,
+  saltlen: SALT_LENGTH,
 });
 
 module.exports = mongoose.model('User', UserSchema);

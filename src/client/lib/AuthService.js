@@ -41,7 +41,7 @@ const setToken = ({ storage }, token) => {
   }
 };
 
-const isLoggedIn = (context) => checkLoggedIn(context);
+const isLoggedIn = context => checkLoggedIn(context);
 // const loggedIn = (context) => {
 //   const token = config.getToken(context);
 //   return !!token;// && !isTokenExpired(token); // handwaiving here
@@ -76,15 +76,15 @@ class AuthService {
       method: 'POST',
       body: makeUrlEncodedFormData(email, password),
     })
-    .then((res) => {
-      if (res.success) {
-        if (res[tokenName]) {
-          config.setToken(context, res[tokenName]);
+      .then((res) => {
+        if (res.success) {
+          if (res[tokenName]) {
+            config.setToken(context, res[tokenName]);
+          }
+          return Promise.resolve(res);
         }
-        return Promise.resolve(res);
-      }
-      return Promise.reject(res);
-    });
+        return Promise.reject(res);
+      });
   }
 
   static removeToken(context) {

@@ -14,10 +14,8 @@ import {
   graphiqlExpress,
 } from 'apollo-server-express';
 
-import Schema from './schema';
-import {
-  UserModel,
-} from '../db/mongoose/models';
+import schema from './schema';
+
 import {
   APP_PORT,
   graphQLPath,
@@ -39,7 +37,7 @@ initMongoose()
 
     // Mount GraphQL Server middleware
     app.use(graphQLPath, bodyParser.json(), graphqlExpress(req => ({
-      schema: Schema,
+      schema,
       rootValue: { req },
       context: {
         UserModel

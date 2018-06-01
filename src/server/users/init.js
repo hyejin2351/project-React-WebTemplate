@@ -1,6 +1,6 @@
 //
 // debug
-const d = require('debug')('app:auth');
+const log = require('debug')('app:auth');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
@@ -11,24 +11,25 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const UserModel = require('./models/user');
 const { 
-  usernameField, 
-  passwordField,
+  USERNAME_FIELD_NAME, 
+  PASSWORD_FIELD_NAME,
   routePath,
-  isDevMode,
+  isDevUsers,
+  AUTH_SESSION_SECRET,
 } = require('./config');
 
 const routeSignup = require('./signup/routesSignup');
 //const routeAuthJwt = require('./authJwt/routesAuth');
-const routeAuthSession = require('./authSession/routesAuth');
+const routeAuthSession = require('./session/routesAuth');
 
 module.exports = function init(server, mongooseConnection, {
-  AUTH_SESSION_SECRET,
-}) {
+  isDev,
+} = {}) {
+  log(`Init users with isDevUsers, ${isDevUsers} (isDevApp${isDev})`);
+  log(`USERNAME_FIELD_NAME:${USERNAME_FIELD_NAME}, PASSWORD_FIELD_NAME:${PASSWORD_FIELD_NAME}`);
   // set env variable for SESSION
-  if (process.env.AUTH_SESSION_SECRET) {
-    d('use existing AUTH_SESSION_SECRET');
-  } else {
-    process.env.AUTH_SESSION_SECRET = AUTH_SESSION_SECRET;
+  if (!AUTH_SESSION_SECRET || AUTH_SESSION_SECRET.length < 10) {
+    console.log('[app:auth] check your AUTH_SESSION_SECRET in config.js: ', AUTH_SESSION_SECRET);
   }
 
   // user serialization
@@ -36,13 +37,15 @@ module.exports = function init(server, mongooseConnection, {
   passport.deserializeUser(UserModel.deserializeUser());
 
   passport.use(new LocalStrategy({
-    usernameField,
-    passwordField,
+    usernameField: USERNAME_FIELD_NAME,
+    passwordField: PASSWORD_FIELD_NAME,
     session: true
   }, 
   UserModel.authenticate()));
 
   server.use(bodyParser.urlencoded({ extended: false }));
+  // server.use(bodyParser.json());
+
   server.use(cookieParser(AUTH_SESSION_SECRET));
 
   const sessionMaxAge = 7 * 24 * 60 * 60; // 7 days
@@ -51,7 +54,7 @@ module.exports = function init(server, mongooseConnection, {
     mongooseConnection,
     ttl: sessionMaxAge,
     autoRemove: 'native', // Default
-    touchAfter: isDevMode ? 10 : (1 * 60 * 60), // lazy update session. time period in seconds
+    touchAfter: isDevUsers ? 10 : (1 * 60 * 60), // lazy update session. time period in seconds
     // collection: 'sessions', // session collection name
   }) : null;
 
@@ -76,7 +79,6 @@ module.exports = function init(server, mongooseConnection, {
   //  };
   //  server.use(cors(corsOptions));
  
-
   //
   // routers
   //
@@ -87,14 +89,14 @@ module.exports = function init(server, mongooseConnection, {
     routePath
   }));
 
-  // // set routes for login
-  // server.use(routePath.prefix, routeAuthJwt({
-  //   AUTH_JWT_SECRET,
-  //   routePath
-  // }));
-
   // set routes for login
   server.use(routePath.prefix, routeAuthSession({
     routePath
   }));
+
+  // TODO: routes for JWT
+  // server.use(routePath.prefix, routeAuthJwt({
+  //   AUTH_JWT_SECRET,
+  //   routePath
+  // }));
 };

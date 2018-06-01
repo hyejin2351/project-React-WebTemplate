@@ -17,7 +17,7 @@ class Profile extends React.Component {
         uri: '/api/auth/logout',
         apolloClient
       });
-/*       document.cookie = cookie.serialize('token', '', {
+      /*       document.cookie = cookie.serialize('token', '', {
         maxAge: -1 // Expire the cookie immediately
       });
  */

@@ -3,7 +3,7 @@
 
 const passport = require('passport');
 const {
-  isDevMode
+  isDevUsers
 } = require('../../config');
 
 /* module.exports = (options = {}) => (!dev ? passport.authenticate('local', options) :

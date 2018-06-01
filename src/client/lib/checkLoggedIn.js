@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export default ({apolloClient}) => (
+export default ({ apolloClient }) => (
   apolloClient.query({
     query: gql`
       query Auth {

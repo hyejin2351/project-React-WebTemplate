@@ -36,7 +36,7 @@ initApp({})
       try {
         await server.listen(APP_PORT);
         console.log(`> App ready on port: ${APP_PORT}`);
-        console.log(`> isDevMode: ${isDev}`);
+        console.log(`> isDev: ${isDev}`);
       } catch (err) {
         console.error(err);
         process.exit(1);

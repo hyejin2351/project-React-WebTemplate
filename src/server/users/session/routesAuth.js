@@ -60,8 +60,8 @@ module.exports = ({
           // Inside serializeUser callback. 
           // User id is saved to the session store here
           d('authorized...');
-          d(`req.session.passport: ${JSON.stringify(req.session.passport)}`)
-          d(`req.user: ${JSON.stringify(req.user)}`)
+          d(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+          d(`req.user: ${JSON.stringify(req.user)}`);
           const data = {
             userId: req.user.id
           };
