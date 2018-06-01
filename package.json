@@ -65,7 +65,7 @@
     "next": "^6.0.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "file:./custom_modules/passport-local-mongoose",
+    "passport-local-mongoose": "file:./src/custom_modules/passport-local-mongoose",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
