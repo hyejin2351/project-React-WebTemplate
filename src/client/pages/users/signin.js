@@ -4,7 +4,7 @@ import { ApolloConsumer } from 'react-apollo';
 import debug from 'debug';
 
 import redirect from '../../lib/redirect';
-import SignInForm from './signin.jsx';
+import SignInForm from './signin_.jsx';
 import AuthService from '../../lib/AuthService';
 
 const log = debug('app:signin');
@@ -44,8 +44,6 @@ class LoginPage extends React.Component {
         uri: '/api/auth/login',
         apolloClient,
       }, email, password);
-
-      
       // success
       // change the component-container state
       this.setState({
@@ -54,16 +52,14 @@ class LoginPage extends React.Component {
       // Force a reload of all the current queries now that the user is
       // logged in, so we don't accidentally leave any state around.
       apolloClient.cache.reset().then(() => {
-        // redirect signed in user to other page
+        // redirect signed-in user to other page
         redirect(null, '/');
       });
     } catch (err) {
       // failure
       // change the component state
-      const errors = err;
-
       this.setState({
-        errors
+        errors: err
       });
     }
 

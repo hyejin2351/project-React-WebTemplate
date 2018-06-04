@@ -25,7 +25,7 @@ const devRules = {
   "no-multi-assign": "off",
   "one-var": "off",
   "class-methods-use-this": "warning",
-
+  
 }
 
 const devDangerousRules = {
@@ -42,6 +42,7 @@ const config = {
     "jsx-a11y/href-no-hash": "off",
     "jsx-a11y/no-autofocus": "off",
     "jsx-a11y/alt-text": "off",
+    "import/extensions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     ...devRules,
     ...devDangerousRules,

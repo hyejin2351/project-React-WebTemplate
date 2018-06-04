@@ -4,7 +4,10 @@ const log = require('debug')('app:auth');
 const express = require('express');
 const passport = require('passport');
 
+const JSONResponse = require('../../../lib/JSONResponse');
+
 function validateLoginData(data) {
+  // TODO more strict validation
   let error;
   let { email, password } = data;
 
@@ -30,21 +33,34 @@ module.exports = ({
 }) => {
   const router = new express.Router();
 
+  //
+  // handle login request
   router.post(routePath.login,
     (req, res, next) => {
       log('auth request: ', req.body);
+
+      // check session
+      if (req.user) {
+        log('already logged in user: ', req.user);
+        return JSONResponse.send(200, {
+          success: true,
+          message: 'already logged in'
+        })(req, res);
+      }
+
       // data validation
       const ret = validateLoginData(req.body);
       if (!ret.success) {
         log('validation failure: ', ret.message);
         return res.status(400).json(ret);
       }
+
       // do authentication
       const { goto = '/' } = req.body;
       req.body = ret;
       passport.authenticate('local', (err, user, info) => {
         if (err || !user) {
-          log('auth failure: ', err || '');
+          log('auth failure: ', err || 'no user');
           return res.status(400).json({
             success: false,
             message: 'Invalid request'

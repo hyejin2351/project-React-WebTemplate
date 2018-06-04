@@ -7,10 +7,11 @@ import debug from 'debug';
 import redirect from '../../lib/redirect';
 import withAuth from '../../lib/withAuth';
 import AuthService from '../../lib/AuthService';
+import ProfileView from './profile_.jsx';
 
 const log = debug('app:index');
 
-class Profile extends React.Component {
+class ProfilePage extends React.Component {
   signout(apolloClient) { 
     return async () => {
       await AuthService.logout({
@@ -22,12 +23,19 @@ class Profile extends React.Component {
         maxAge: -1 // Expire the cookie immediately
       });*/
 
-      // Force a reload of all the current queries now that the user is
-      // logged in, so we don't accidentally leave any state around.
-      apolloClient.cache.reset().then(() => {
-        // Redirect to a more useful page when signed out
-        redirect(null, '/');
+      // Redirect to a more useful page when signed out
+      redirect(null, '/');
+    };
+  }
+
+  unregister(apolloClient) {
+    return async () => {
+      await AuthService.unregister({
+        uri: '/api/auth/unregister',
+        apolloClient
       });
+      // Redirect
+      redirect(null, '/');
     };
   }
 
@@ -37,20 +45,15 @@ class Profile extends React.Component {
     return (
       <ApolloConsumer>
         {client => (
-          <div>
-            <br />            
-            <p>Hello {this.props.me.id}!</p>
-            <br />
-            <br />
-            <Link href="/"><a>Go to Main</a></Link>
-            <br />
-            <br />
-            <button onClick={this.signout(client)}>Sign out</button>
-          </div>
+          <ProfileView 
+            me={this.props.me}
+            logout={this.signout(client)}
+            unregister={this.unregister(client)}
+          />
         )}
       </ApolloConsumer>
     );
   }
 }
 
-export default withAuth(Profile);
+export default withAuth(ProfilePage);

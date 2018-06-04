@@ -1,46 +1,50 @@
 //
 // debug
-const d = require('debug')('app:auth');
+const log = require('debug')('app:register');
 
-// const {
-//   usernameField, passwordField
-// } = require('../../config');
+const JSONResponse = require('../../../../lib/JSONResponse');
 
-function validateUserData({
-  email, password, name
-}) {
-  if (!email || !password) return null;
+function validateSignupData(data) {
+  // TODO more strict validation
+  let error;
+  let { email, password, ...rest } = data; // eslint-disable-line prefer-const
 
-  email = email.trim();
-  password = password.trim();
-
-  // more... validation
-
-  return {
-    email,
-    password,
-  };
+  if (!email || !password) {
+    error = 'Invalid request';
+  } else {
+    email = email.trim();
+    password = password.trim();
+    if (email.length < 1 || password.length < 1) {
+      error = 'Invalid request';
+    }
+  }
+  return new JSONResponse(!error, error, { email, password, ...rest });
 }
 
 module.exports = UserModel => (req, res, next) => {
   // login user can't register
-  if (req.headers.Authorization) {
-    d('!!! login user can not register');
-    return res.status(400).end();
+  if (req.user) {
+    log('!!! logged-in user can not register');
+    return JSONResponse.sendInvalidRequest()(req, res);
   }
   // validate user data in req.body
-  const userData = validateUserData(req.body);
-  if (!userData) {
-    d('!!! Invalid user data in req.body', req.body);
-    return res.status(400).end();
+  const resData = validateSignupData(req.body);
+  if (!resData.success) {
+    log('!!! Invalid user data in req.body', resData);
+    return resData.send(400)(req, res);
   }
 
-  const user = new UserModel(userData);
-  return UserModel.register(new UserModel(userData), userData.password, (err) => {
+  const user = new UserModel(resData);
+  return UserModel.register(new UserModel(resData), resData.password, (err) => {
     if (err) {
-      d('!!! error while adding new user: ', err);
-      return res.status(400).end();
+      log('!!! error while adding new user: ', err);
+      resData.success = false;
+      resData.message = 'Invalid request';
+      resData.errCode = 400;
+      return resData.send(400)(req, res);
     }
+    // reset req body
+    req.body = resData;
     return next();
   });
 };

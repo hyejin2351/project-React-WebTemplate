@@ -1,16 +1,19 @@
+const log = require('debug')('app:unregister');
+
+const JSONResponse = require('../../../../lib/JSONResponse');
 
 module.exports = UserModel => (req, res, next) => {
-  if (!req.headers.Authorization) {
-    return res.status(401).end();
+  if (!req.user || !req.user.id) {
+    return JSONResponse.sendInvalidRequest(401)(req, res);
   }
   
-  const { _id } = req.body;
-  if (!_id) {
-    return res.status(401).end();
-  }
+  const { id } = req.user;
 
-  return UserModel.findByIdAndDelete(_id, (err) => {
-    if (err) return res.status(401).end();
+  return UserModel.findByIdAndDelete(id, (err) => {
+    if (err) {
+      log('!!! error while removing user: ', err);
+      return JSONResponse.sendInvalidRequest()(req, res);
+    }
     return next();
   });
 };

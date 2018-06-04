@@ -101,14 +101,18 @@ class AuthService {
   }
 
   static logout(context) {
-    const { uri } = context;
+    const { uri, apolloClient } = context;
     if (uri) {
       AuthService.fetch(context, `${domain}${uri}`, {
         method: 'GET',
       })
         .then((res) => {
           if (res.success) {
-            return AuthService.removeToken(context);
+            config.setToken(context, null);
+          }
+          // Force a reload of all the current queries
+          if (apolloClient) {
+            return apolloClient.cache.reset().then(() => Promise.reject(res));
           }
           return Promise.reject(res);
         });
@@ -119,6 +123,23 @@ class AuthService {
 
   static loggedIn(context) {
     return config.isLoggedIn(context);
+  }
+
+  static unregister(context) {
+    const { uri, apolloClient } = context;
+    AuthService.fetch(context, `${domain}${uri}`, {
+      method: 'POST',
+    })
+      .then((res) => {
+        if (res.success) {
+          config.setToken(context, null);
+        }
+        // Force a reload of all the current queries
+        if (apolloClient) {
+          return apolloClient.cache.reset().then(() => Promise.reject(res));
+        }
+        return Promise.reject(res);
+      });
   }
 
   static _checkStatus(response) {
