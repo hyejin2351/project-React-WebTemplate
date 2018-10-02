@@ -10,3 +10,5 @@ export const HOST = isBrowser ? hostOnBrowser : hostOnServer;
 export const APP_URI = `http://${HOST}`;
 export const GRAPHQL_URL = `${APP_URI}${graphQLPath}`;
 export const GRAPHIQL_URL = graphiQLPath && `${APP_URI}${graphiQLPath}`;
+
+export const ADMIN_IP = '127.0.0.1';

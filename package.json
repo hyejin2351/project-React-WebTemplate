@@ -6,6 +6,7 @@
     "node": ">=6.9.4"
   },
   "scripts": {
+    "win-dev": "set DEBUG=app:*,-app:HNDataAPI & npm run nodemon",
     "dev": "DEBUG=app:*,-app:HNDataAPI npm run nodemon",
     "nodemon": "nodemon src/server/index.js --exec node",
     "debug-all": "DEBUG=* npm run nodemon",

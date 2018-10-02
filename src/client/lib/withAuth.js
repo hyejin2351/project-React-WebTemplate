@@ -1,6 +1,4 @@
 import React from 'react';
-import cookie from 'cookie';
-import { ApolloConsumer } from 'react-apollo';
 import debug from 'debug';
 
 import redirect from './redirect';
