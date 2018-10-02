@@ -7,7 +7,7 @@ import Error from 'next/error';
 
 const config = require('../config');
 
-const log = debug('app:withAuth');
+const log = debug('app:withAdmin');
 
 export default Component => class WithAdmin extends React.Component {
   static async getInitialProps(context, apolloClient) {
