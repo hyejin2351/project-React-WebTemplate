@@ -65,6 +65,10 @@ export default Component => class WithAdmin extends React.Component {
       if (!me || !me.id) {
         // If not signed in, send them somewhere more useful
         redirect(null, '/admin/signin');
+      } else if(!me.roles || !me.roles.includes('admin')) {
+        this.setState({
+          statusCode: 401,
+        });
       }
     } else {
       this.setState({
@@ -76,10 +80,13 @@ export default Component => class WithAdmin extends React.Component {
   }
 
   render() {
-    console.log('this.state.statusCode = ' + this.state.statusCode);
+    console.log('this.props = ' + JSON.stringify(this.props));
+    
     if (this.state.statusCode !== 200) {
       return <Error statusCode={this.state.statusCode} />
     }
+
+    if (!this.props.me) return (<div>Loading...</div>);
 
     return (
         <Component {...this.props} me={this.props.me} />

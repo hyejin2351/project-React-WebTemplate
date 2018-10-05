@@ -13,7 +13,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     index: { unique: true }
   },
-  name: String
+  name: String,
+  roles: {
+    type: [{
+      type: String,
+      enum: ['user', 'admin']
+    }],
+    default: ['user'],
+    required: 'Please provide at least one role'
+  }
 });
 
 UserSchema.virtual('id')

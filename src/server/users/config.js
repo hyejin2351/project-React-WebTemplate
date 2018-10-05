@@ -5,7 +5,8 @@ exports.routePath = {
   login: '/login',
   logout: '/logout',
   register: '/register',
-  unregister: '/unregister'
+  unregister: '/unregister',
+  adminlogin: '/adminlogin'
 };
 
 exports.USERNAME_FIELD_NAME = 'email';

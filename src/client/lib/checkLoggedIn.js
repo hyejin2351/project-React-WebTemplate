@@ -5,7 +5,8 @@ export default ({ apolloClient }) => (
     query: gql`
       query Auth {
         me {
-          id
+          id,
+          roles
         }
       }
     `

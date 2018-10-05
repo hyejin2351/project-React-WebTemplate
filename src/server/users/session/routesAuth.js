@@ -123,5 +123,79 @@ module.exports = ({
     return res.redirect(goto);
   });
 
+  // handle login request
+  router.post(routePath.adminlogin,
+      (req, res, next) => {
+        log('auth request: ', req.body);
+
+        // check session
+        if (req.user) {
+          log('already logged in user: ', req.user);
+          return JSONResponse.send(200, {
+            success: true,
+            message: 'already logged in'
+          })(req, res);
+        }
+
+        // data validation
+        const ret = validateLoginData(req.body);
+        if (!ret.success) {
+          log('validation failure: ', ret.message);
+          return res.status(400).json(ret);
+        }
+
+        // do authentication
+        const { goto = '/' } = req.body;
+        req.body = ret;
+        passport.authenticate('local', (err, user, info) => {
+          if (err || !user) {
+            log('auth failure: ', err || 'no user');
+            return res.status(400).json({
+              success: false,
+              message: 'Invalid request'
+            });
+          }
+
+          if(!user.roles.includes('admin')) {
+            log('not admin accout');
+            return res.status(400).json({
+              success: false,
+              message: 'unauthorized account'
+            });
+          }
+
+          req.login(user, (loginErr) => {
+            if (loginErr) {
+              log('logIn failure: ', loginErr || '');
+              return res.status(400).json({
+                success: false,
+                message: 'Invalid request'
+              });
+            }
+            // Inside serializeUser callback.
+            // User id is saved to the session store here
+            log('authorized...');
+            log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+            log(`req.user: ${JSON.stringify(req.user)}`);
+            //
+            // send response
+            if (req.accepts('application/json')) {
+              const data = {
+                userId: req.user.id
+              };
+              log('sending JSON response: data: ', data);
+              return res.json({
+                success: true,
+                message: 'login success',
+                data
+              });
+            }
+            log('redirecting to ', goto);
+            return res.redirect(goto);
+          });
+        })(req, res, next);
+      },
+  );
+
   return router;
 };

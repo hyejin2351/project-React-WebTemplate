@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
 
     try {
       const res = await AuthService.login({
-        uri: '/api/auth/login',
+        uri: '/api/auth/adminlogin',
         apolloClient,
       }, email, password);
       // success

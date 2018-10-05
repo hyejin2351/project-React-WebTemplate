@@ -12,6 +12,7 @@ const types = `
     id: String
     email: String
     name: String
+    roles: [String]
   }
 
   # User type for input, such as creating or updating

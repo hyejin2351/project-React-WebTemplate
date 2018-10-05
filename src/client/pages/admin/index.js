@@ -9,6 +9,8 @@ import redirect from '../../lib/redirect';
 
 import { ApolloConsumer } from 'react-apollo';
 
+import withRoot from '../../lib/withRoot';
+
 const log = require('debug')('app:index');
 
 log.log = console.log.bind(console);
@@ -66,4 +68,4 @@ Index.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withAdmin(withStyles(styles)(Index));
+export default withAdmin(withRoot(withStyles(styles)(Index)));
