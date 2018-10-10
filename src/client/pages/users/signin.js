@@ -115,6 +115,18 @@ class LoginPage extends React.Component {
     });
   }
 
+  async processFacebook(apolloClient) {
+    redirect(null, '/api/auth/facebook');
+  }
+
+  async processGoogle(apolloClient) {
+    redirect(null, '/api/auth/google');
+  }
+
+  async processKakao(apolloClient) {
+    redirect(null, '/api/auth/kakao');
+  }
+
   /**
    * Render the component.
    */
@@ -125,6 +137,9 @@ class LoginPage extends React.Component {
           <SignInForm
             onSubmit={e => this.processForm(e, client)}
             onChange={this.changeUser}
+            onFacebook={e => this.processFacebook(client)}
+            onGoogle={e => this.processGoogle(client)}
+            onKakao={e => this.processKakao(client)}
             errors={this.state.errors}
           />
         )}

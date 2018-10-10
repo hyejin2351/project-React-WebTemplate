@@ -6,8 +6,6 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
 // const cors = require('cors');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 
 const UserModel = require('./models/user');
 const { 
@@ -22,6 +20,10 @@ const routeSignup = require('./signup/routesSignup');
 //const routeAuthJwt = require('./authJwt/routesAuth');
 const routeAuthSession = require('./session/routesAuth');
 
+const routePassport = require('./passport/routePassport');
+
+const passportInit = require('./passport');
+
 module.exports = function init(server, mongooseConnection, {
   isDev,
 } = {}) {
@@ -31,17 +33,6 @@ module.exports = function init(server, mongooseConnection, {
   if (!AUTH_SESSION_SECRET || AUTH_SESSION_SECRET.length < 10) {
     console.log('[app:auth] check your AUTH_SESSION_SECRET in config.js: ', AUTH_SESSION_SECRET);
   }
-
-  // user serialization
-  passport.serializeUser(UserModel.serializeUser());
-  passport.deserializeUser(UserModel.deserializeUser());
-
-  passport.use(new LocalStrategy({
-    usernameField: USERNAME_FIELD_NAME,
-    passwordField: PASSWORD_FIELD_NAME,
-    session: true
-  }, 
-  UserModel.authenticate()));
 
   server.use(bodyParser.urlencoded({ extended: false }));
   // server.use(bodyParser.json());
@@ -67,11 +58,9 @@ module.exports = function init(server, mongooseConnection, {
     store: sessionStore,
   }));
 
-  // pass the passport middleware
-  server.use(passport.initialize());
+  //  passport init
+  passportInit(server);
 
-  server.use(passport.session());
-  
   // enable cors
   // const corsOptions = {
   //   origin: '<insert uri of front-end domain>',
@@ -91,6 +80,10 @@ module.exports = function init(server, mongooseConnection, {
 
   // set routes for login
   server.use(routePath.prefix, routeAuthSession({
+    routePath
+  }));
+
+  server.use(routePath.prefix, routePassport({
     routePath
   }));
 

@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     index: { unique: true }
   },
   name: String,
+  profileImageURL: {
+    type: String,
+  },
   roles: {
     type: [{
       type: String,
@@ -21,7 +24,25 @@ const UserSchema = new mongoose.Schema({
     }],
     default: ['user'],
     required: 'Please provide at least one role'
-  }
+  },
+  providerType: {
+    type: String, default: 'local'
+  },
+  facebook: {
+    id: { type: String, required: false },
+    accessToken: { type: String, required: false },
+    providerData: {}
+  },
+  google: {
+    id: { type: String, required: false },
+    accessToken: { type: String, required: false },
+    providerData: {}
+  },
+  kakao: {
+    id: { type: String, required: false },
+    accessToken: { type: String, required: false },
+    providerData: {}
+  },
 });
 
 UserSchema.virtual('id')
