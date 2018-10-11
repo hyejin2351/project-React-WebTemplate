@@ -1,34 +1,46 @@
 const { makeExecutableSchema } = require('graphql-tools');
 
+// users
 const { 
-  types: mongoTypes,
-  queries: mongoQueries,
-  mutations: mongoMutations,
-  resolvers: mongoResolvers
+  types: usersTypes,
+  queries: usersQueries,
+  mutations: usersMutations,
+  resolvers: usersResolvers
 } = require('../../users/gql/schema');
+
+// articles
+const {
+    types: articlesTypes,
+    queries: articlesQueries,
+    mutations: articlesMutations,
+    resolvers: articlesResolvers
+} = require('../../mods/articles/gql/schema');
 
 //
 // SAMPLE-DATA folder
 //
 const { 
-  types: dataTypes, 
-  queries: dataQueries,
-  mutations: dataMutations,
-  resolvers: dataResolvers
+  types: sampleTypes, 
+  queries: sampleQueries,
+  mutations: sampleMutations,
+  resolvers: sampleResolvers
 } = require('../../mods/sample/gql/schema');
 
 const typeDefs = `
-    ${mongoTypes}
-    ${dataTypes}
+    ${usersTypes}
+    ${articlesTypes}
+    ${sampleTypes}
 
     type Query {
-        ${mongoQueries}
-        ${dataQueries}
+        ${usersQueries}
+        ${articlesQueries}
+        ${sampleQueries}
 
     }
     type Mutation {
-        ${mongoMutations}
-        ${dataMutations}  
+        ${usersMutations}
+        ${articlesMutations}  
+        ${sampleMutations}  
 
     }
 `;
@@ -38,30 +50,39 @@ console.log('----------------------------------------------------');
  */
 // extract query and mutation
 const { 
-  Query: mQuery, 
-  Mutation: mMutation, 
-  ...mRest 
-} = mongoResolvers;
+  Query: usersQuery,
+  Mutation: usersMutation,
+  ...usersRest
+} = usersResolvers;
+
+const {
+    Query: articlesQuery,
+    Mutation: articlesMutation,
+    ...articlesRest
+} = articlesResolvers;
 
 const { 
-  Query: dQuery, 
-  Mutation: dMutation, 
-  ...dRest 
-} = dataResolvers;
+  Query: sampleQuery,
+  Mutation: sampleMutation,
+  ...sampleRest
+} = sampleResolvers;
 
 // merge all
 const resolvers = {
-  ...mRest,
-  ...dRest,
+  ...usersRest,
+  ...articlesRest,
+  ...sampleRest,
 
   Query: {
-    ...mQuery,
-    ...dQuery
+    ...usersQuery,
+    ...articlesQuery,
+    ...sampleQuery
 
   },
   Mutation: {
-    ...mMutation,
-    ...dMutation
+    ...usersMutation,
+    ...articlesMutation,
+    ...sampleMutation
     
   }
 };

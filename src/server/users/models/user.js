@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
     index: { unique: true }
   },
   name: String,
+  nickName: String,
   profileImageURL: {
     type: String,
   },
@@ -28,6 +29,7 @@ const UserSchema = new mongoose.Schema({
   providerType: {
     type: String, default: 'local'
   },
+  created: { type: Date, default: Date.now },
   facebook: {
     id: { type: String, required: false },
     accessToken: { type: String, required: false },

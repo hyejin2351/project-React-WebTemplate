@@ -25,7 +25,8 @@
     "build": "NODE_ENV=production npm run build-clean && npm run build-next && npm run build-res && npm run build-server",
     "build-export": "next export src/client -o build/app-static",
     "build-static-website": "NODE_ENV=production rm -rf build/client/static && npm run build-next && npm run build-export",
-    "start": "NODE_ENV=production node build/app/server/index.js"
+    "start": "NODE_ENV=production node build/app/server/index.js",
+    "createData": "node task/createData.js"
   },
   "author": "peterk",
   "license": "Apache-2.0",
