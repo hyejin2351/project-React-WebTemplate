@@ -28,7 +28,7 @@ const SampleView = ({ classes, onHandleClick}) => {
     return (
         <div className={classes.root}>
             <Typography variant="display1" gutterBottom>
-                Welcome~
+                Welcome to Sample Page
             </Typography>
             <Typography variant="subheading" gutterBottom>
                 You have 2 choices

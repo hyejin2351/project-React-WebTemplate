@@ -3,7 +3,6 @@ import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
 import SampleView from './sample_.jsx';
-
 const log = debug('app:sample');
 
 class SamplePage extends React.Component {
