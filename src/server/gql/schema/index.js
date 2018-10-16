@@ -26,7 +26,7 @@ const {
   resolvers: sampleResolvers
 } = require('../../mods/sample/gql/schema');
 
-const typeDefs = `
+let typeDefs = `
     ${usersTypes}
     ${articlesTypes}
     ${sampleTypes}
@@ -68,7 +68,7 @@ const {
 } = sampleResolvers;
 
 // merge all
-const resolvers = {
+let resolvers = {
   ...usersRest,
   ...articlesRest,
   ...sampleRest,
@@ -84,8 +84,13 @@ const resolvers = {
     ...articlesMutation,
     ...sampleMutation
     
-  }
+  },
 };
+
+//customType
+const { customTypeDefs, customResolvers } = require('./customType');
+typeDefs = typeDefs.concat(customTypeDefs)
+resolvers = {...resolvers, ...customResolvers}
 
 const schema = makeExecutableSchema({
   typeDefs,

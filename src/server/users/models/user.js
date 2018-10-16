@@ -58,4 +58,23 @@ UserSchema.plugin(modAuth, {
   saltlen: SALT_LENGTH,
 });
 
+UserSchema.statics.findByIdChangePassword = function(id, curPassword, newPassword) {
+  const _this = this;
+
+  return new Promise(function (resolve, reject) {
+    _this.findById(id).then((user) => {
+      if(curPassword !== newPassword)
+        user.changePassword(curPassword, newPassword).then(resolve(user)).catch((err) => {
+          console.log(err);
+          reject(new Error(err.message));
+        })
+      else{
+        reject(new Error('The current password and the new password are the same.'))
+      }
+    }).catch((err) => {
+      reject(new Error(err.message));
+    })
+  });
+};
+
 module.exports = mongoose.model('User', UserSchema);

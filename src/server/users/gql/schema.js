@@ -3,6 +3,7 @@
 //
 const d = require('debug')('app:gql');
 const UserModel = require('../models/user');
+
 //
 // See https://www.apollographql.com/docs/apollo-server/example.html
 //
@@ -12,7 +13,11 @@ const types = `
     id: String
     email: String
     name: String
+    nickName: String
+    profileImageURL: String
     roles: [String]
+    providerType: String
+    created: Date
   }
 
   # User type for input, such as creating or updating
@@ -35,6 +40,11 @@ const queries = `
 `;
 
 const mutations = `
+    changePassword(
+      curPassword: String!
+      newPassword: String!
+    ): User
+    
     createUser (
       email: String!
       name: String
@@ -70,6 +80,15 @@ const resolvers = {
   },
 
   Mutation: {
+    //user
+    changePassword: (_, {curPassword, newPassword}, { userId }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      return UserModel.findByIdChangePassword(userId, curPassword, newPassword)
+    },
+
+    //admin
     createUser: (_, userData, { userId }) => {
       if (!isAdminUser(userId)) {
         return null;

@@ -6,7 +6,12 @@ export default ({ apolloClient }) => (
       query Auth {
         me {
           id,
-          roles
+          name,
+          nickName,
+          profileImageURL
+          roles,
+          providerType,
+          created
         }
       }
     `
