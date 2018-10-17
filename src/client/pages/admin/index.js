@@ -1,71 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
-
-import withAdmin from '../../lib/withAdmin';
-import AuthService from '../../lib/AuthService';
-import redirect from '../../lib/redirect';
-
+import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
-import withRoot from '../../lib/withRoot';
+import IndexView from './index_.jsx';
+const log = debug('app:index');
 
-const log = require('debug')('app:index');
-
-log.log = console.log.bind(console);
-
-const styles = theme => ({
-    root: {
-        textAlign: 'center',
-        paddingTop: theme.spacing.unit * 20,
-    },
-});
-
-class Index extends React.Component {
-    constructor(props) {
-        super(props);
+class IndexPage extends React.Component {
+    handleClick(event, client) {
+        log('event: ', event.target.id);
     }
 
-    signout(apolloClient) {
-        return async () => {
-            await AuthService.logout({
-                uri: '/api/auth/logout',
-                apolloClient
-            });
-
-            /*document.cookie = cookie.serialize('token', '', {
-             maxAge: -1 // Expire the cookie immediately
-             });*/
-
-            // Redirect to a more useful page when signed out
-            redirect(null, '/admin/signin');
-        };
-    }
-
+    /**
+     * Render the component.
+     */
     render() {
-        const {classes} = this.props;
-
         return (
             <ApolloConsumer>
                 {client => (
-                    <div className={classes.root}>
-                        <Typography variant="display1" gutterBottom>
-                            HELLO ADMIN
-                        </Typography>
-                        <Typography variant="subheading" gutterBottom>
-                            You have 2 choices
-                        </Typography>
-                        <button onClick={this.signout(client)}>Log out</button>
-                    </div>
+                    <IndexView
+                        onHandleClick={e=> this.handleClick(e, client)}
+                    />
                 )}
             </ApolloConsumer>
         );
     }
 }
 
-Index.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withAdmin(withRoot(withStyles(styles)(Index)));
+export default IndexPage;

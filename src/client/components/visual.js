@@ -30,12 +30,14 @@ function PaperSheet(props) {
         <React.Fragment>
             <Paper className={classes.root}>
                 <div className={classes.transBlack}>
+
                     <Typography variant="headline" component="h3" className={classes.typo}>
                         타이틀1
                     </Typography>
                     <Typography component="p" className={classes.typo}>
                         텍스트1
                     </Typography>
+
                 </div>
             </Paper>
         </React.Fragment>

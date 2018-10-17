@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import WithRoot from '../lib/withRoot';
 import Link from 'next/link';
 
 import MenuAppBar from '../components/appBar';
@@ -11,10 +10,10 @@ import MediaCard from '../components/mediaCards';
 
 
 const styles = theme => ({
-    back: {
+    root: {
         background: '#f5f6f8'
     },
-    root: {
+    back: {
         textAlign: 'center',
         paddingTop: theme.spacing.unit * 7,
     },
@@ -42,16 +41,14 @@ class IndexView extends React.Component {
         const {open} = this.state;
 
         return (
-            <div className={classes.back}>
-
-                <MenuAppBar></MenuAppBar>
-
-                <PaperSheet></PaperSheet>
-
+            <React.Fragment>
                 <div className={classes.root}>
-                    <MediaCard></MediaCard>
+
+                    <MenuAppBar></MenuAppBar>
+
+                    <PaperSheet></PaperSheet>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
@@ -60,4 +57,4 @@ IndexView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IndexView);
+export default WithRoot(withStyles(styles)(IndexView));

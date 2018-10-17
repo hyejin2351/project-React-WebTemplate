@@ -21,6 +21,7 @@ let imgUrl = '/static/images/line.png';
 //스타일링
 const styles = theme => ({
     root: {
+        flexGrow: 1,
         textAlign: 'center',
         paddingTop: theme.spacing.unit * 20,
         backgroundColor: '#f5f6f8',
