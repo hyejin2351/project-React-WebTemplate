@@ -61,6 +61,7 @@ module.exports = (server, { // express app
   const fnOptions = (req) => {
     const userId = req.user && (req.user.id && req.user._id);
     options.context.userId = userId;
+    options.context.roles = req.user && req.user.roles;
     options.rootValue = { req };
     return options;
   };
