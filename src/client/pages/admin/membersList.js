@@ -2,10 +2,10 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
-import IndexView from './index_.jsx';
-const log = debug('app:index');
+import MembersListView from './membersList_.jsx';
+const log = debug('app:membersList');
 
-class IndexPage extends React.Component {
+class MembersListPage extends React.Component {
     handleClick(event, client) {
         log('event: ', event.target.id);
     }
@@ -17,7 +17,7 @@ class IndexPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <IndexView
+                    <MembersListView
                         onHandleClick={e=> this.handleClick(e, client)}
                     />
                 )}
@@ -26,4 +26,4 @@ class IndexPage extends React.Component {
     }
 }
 
-export default IndexPage;
+export default MembersListPage;

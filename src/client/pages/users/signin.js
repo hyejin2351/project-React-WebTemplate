@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import { ApolloConsumer } from 'react-apollo';
 import debug from 'debug';
 
+//lib
 import redirect from '../../lib/redirect';
-import SignInForm from './signin_.jsx';
 import AuthService from '../../lib/AuthService';
 
+//jsx view
+import SignInForm from './signin_.jsx';
+
+//debug log
 const log = debug('app:signin');
 
+//Login page
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -62,42 +67,6 @@ class LoginPage extends React.Component {
         errors: err
       });
     }
-
-    // const email = encodeURIComponent(this.state.user.email);
-    // const password = encodeURIComponent(this.state.user.password);
-    // const formData = `email=${email}&password=${password}`;
-
-    // // create an AJAX request
-    // const xhr = new XMLHttpRequest();
-    // xhr.open('post', '/api/auth/login');
-    // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    // xhr.responseType = 'json';
-    // xhr.addEventListener('load', () => {
-    //   const { status, response } = xhr;
-    //   log('status: ', status);
-    //   if ( status === 200 ) {
-    //     // success
-
-    //     // change the component-container state
-    //     this.setState({
-    //       errors: {}
-    //     });
-
-    //     // redirect signed in user to dashboard
-    //     // this.props.history.push('/dashboard');
-    //     Router.replace('/');
-        
-    //   } else {
-    //     // failure
-    //     // change the component state
-    //     const errors = response;
-
-    //     this.setState({
-    //       errors
-    //     });
-    //   }
-    // });
-    // xhr.send(formData);
   }
 
   /**
