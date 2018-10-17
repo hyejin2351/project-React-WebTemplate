@@ -58,6 +58,7 @@
     "graphql": "^0.13.1",
     "graphql-tag": "^2.8.0",
     "graphql-tools": "^2.21.0",
+    "graphql-upload": "^8.0.0",
     "isomorphic-unfetch": "^2.0.0",
     "jsonwebtoken": "^8.2.1",
     "jss": "^9.8.1",

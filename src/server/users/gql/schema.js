@@ -24,11 +24,19 @@ const types = `
   input UserData {
     email: String
     name: String
+    nickName: String
   }
 `;
 
 const queries = `
-    getUsers
+    getUsers(
+      # 데이터를 정렬, 필드명 : 오름차순 정렬, -필드명 : 내림차순 정렬
+      sort: String
+      # 출력할 데이터 갯수를 제한
+      limit: Int
+      # 시작부분을 설정
+      skip: Int
+    )
     : [User]
 
     getUser(
@@ -46,8 +54,8 @@ const mutations = `
     ): User
     
     createUser (
-      email: String!
-      name: String
+      userData: UserData!
+      password: String!
     ): User
 
     deleteUser (
@@ -60,8 +68,13 @@ const mutations = `
     ): User
 `;
 
-function isAdminUser(userId) {
-  return false;
+function isAdminUser(roles) {
+  let isAdmin = false;
+
+  if(roles && roles.includes('admin'))
+    isAdmin = true;
+
+  return isAdmin;
 }
 
 const resolvers = {
@@ -71,11 +84,30 @@ const resolvers = {
       return userId && UserModel.findById(userId);
     },
     
-    getUser: (_, { id }, { userId }) => {
-      if (!isAdminUser(userId)) {
-        return null;
+    getUser: (_, { id }, { userId, roles }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      if (!isAdminUser(roles)) {
+        return new Error('No permission');
       }
+
       return UserModel.findById(id);
+    },
+
+    getUsers: (_, { sort, limit, skip}, { userId, roles }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      if (!isAdminUser(roles)) {
+        return new Error('No permission');
+      }
+
+      const sortS = sort ? sort : '';
+      const limitI = limit ? limit : 0;
+      const skipI = skip ? skip : 0;
+
+      return UserModel.find({ roles: { $ne: 'admin'} }).skip(skipI).limit(limitI).sort(sortS);
     },
   },
 
@@ -89,26 +121,38 @@ const resolvers = {
     },
 
     //admin
-    createUser: (_, userData, { userId }) => {
-      if (!isAdminUser(userId)) {
-        return null;
+    createUser: (_, { userData, password }, { userId, roles }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      if (!isAdminUser(roles)) {
+        return new Error('No permission');
       }
+
       // admin only
-      return UserModel.create(userData);
+      return UserModel.register(userData, password);
     },
 
-    deleteUser: (_, __, { userId }) => {
-      if (!isAdminUser(userId)) {
-        return null;
+    deleteUser: (_, {id}, { userId, roles }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      if (!isAdminUser(roles)) {
+        return new Error('No permission');
       }
-      return UserModel.findByIdAndDelete(userId);
+
+      return UserModel.findByIdAndDelete(id);
     },
 
-    updateUser: (_, { userData }, { userId }) => {
-      if (!isAdminUser(userId)) {
-        return null;
+    updateUser: (_, { id, userData }, { userId, roles }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      if (!isAdminUser(roles)) {
+        return new Error('No permission');
       }
-      return UserModel.findByIdAndUpdate(userId, userData, { new: true });
+
+      return UserModel.findByIdAndUpdate(id, userData, { new: true });
     }
   }
 };
@@ -137,8 +181,13 @@ module.exports = {
  *
 
  # getUsers()
-query {
-  getUsers {
+ query {
+  getUsers (
+    sort:"name",
+    limit: 0,
+		skip: 0
+  )
+  {
     name,
     email
   }
@@ -146,7 +195,7 @@ query {
 
 # getUser(id)
 query {
-  getUser(id:"5b05924bb26ca72855cbf4ce") {
+  getUser(id:"5bbf17361722083906004a62") {
     id,
     name,
     email
@@ -154,11 +203,12 @@ query {
 }
 
 # createUser(email, name)
-mutation {
-  createUser(
-    email:"c@c.com", 
-    name: "c"
-  ) {
+ mutation {
+  createUser(userData: {
+    email: "test@gmail.com"
+	name: "CC"
+	nickName: "CC"
+  }, password: "qw12QW!@") {
     id
   }
 }
