@@ -68,7 +68,7 @@ const createArticles = (dbConn) => {
                 for (let i = 0; i < createCount; i ++) {
                     const user = users[getRandomInt(0, users.length)];
                     const article = new Article({
-                        user: user._id,
+                        author: user.id,
                         title: '계시글 ' + i + ' 작성자 ' + user.name,
                         content: '계시글 내용 ' + i + ' 작성자 ' + user.name,
                         views: getRandomInt(0, 100),

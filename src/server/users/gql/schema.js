@@ -68,15 +68,6 @@ const mutations = `
     ): User
 `;
 
-function isAdminUser(roles) {
-  let isAdmin = false;
-
-  if(roles && roles.includes('admin'))
-    isAdmin = true;
-
-  return isAdmin;
-}
-
 const resolvers = {
   Query: {
     me: (_, __, context) => {
@@ -156,6 +147,15 @@ const resolvers = {
     }
   }
 };
+
+function isAdminUser(roles) {
+  let isAdmin = false;
+
+  if(roles && roles.includes('admin'))
+    isAdmin = true;
+
+  return isAdmin;
+}
 
 module.exports = {
   types,

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const ArticleSchema = new Schema({
-    user: ObjectId,
+    author: { type: ObjectId, ref: 'User' },
     title: { type: String, required: true },
     content: { type: String, required: true },
     views: { type: Number, default: 0 },
