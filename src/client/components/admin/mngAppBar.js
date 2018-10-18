@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 
 // 컴포넌트 (drawer)
 import DrawerView from '../../drawer/admin/adminDrawer';
-
+  
 //스타일링
 const styles = theme => ({
     root: {
@@ -39,7 +39,6 @@ const styles = theme => ({
         color: '#333'
     }
 });
-
 class MngBar extends React.Component {
     state = {
         auth: true,
