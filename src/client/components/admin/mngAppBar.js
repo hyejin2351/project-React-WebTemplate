@@ -12,6 +12,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
+// 컴포넌트 (drawer)
+import DrawerView from '../../drawer/admin/adminDrawer';
+
 //스타일링
 const styles = theme => ({
     root: {
@@ -64,10 +67,7 @@ class MngBar extends React.Component {
             <div className={classes.root}>
                 <AppBar position="static" className={classes.grow}>
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
-
+                        <DrawerView></DrawerView>
 
                         <Grid item xs={12} className={classes.logo}>
                             <Typography component="h1" variant="headline" color="inherit" className={classes.grow}>
@@ -81,6 +81,12 @@ class MngBar extends React.Component {
                         <Button className={classes.right_btn} color="inherit">
                             <Link href="/admin/signin">
                                 <a className={classes.btn_common}>LOGIN</a>
+                            </Link>
+                        </Button>
+
+                        <Button className={classes.right_btn} color="inherit">
+                            <Link href="/admin">
+                                <a className={classes.btn_common}>LOGOUT</a>
                             </Link>
                         </Button>
                     </Toolbar>

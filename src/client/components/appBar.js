@@ -9,10 +9,20 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Grid from '@material-ui/core/Grid';
+
+//아이콘
+import MenuIcon from '@material-ui/icons/Menu';
+import PersonIcon from '@material-ui/icons/Person';
+
+// 컴포넌트 (drawer)
+import DrawerView from '../drawer/users/adminDrawer';
+// 컴포넌트 (toggle)
+import SignOutToggle from '../components/admin/signoutState';
+import SignInToggle from '../components/admin/signinState';
+
 
 //스타일링
 const styles = theme => ({
@@ -63,9 +73,7 @@ class MenuAppBar extends React.Component {
                 <div className={classes.root}>
                     <AppBar position="static" className={classes.grow}>
                         <Toolbar>
-                            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                                <MenuIcon />
-                            </IconButton>
+                            <DrawerView></DrawerView>
 
                             <Grid item xs={12} className={classes.logo}>
                                 <Typography component="h1" variant="headline" color="inherit" className={classes.grow}>
@@ -77,51 +85,11 @@ class MenuAppBar extends React.Component {
 
                             {auth && (
                                 <div>
-                                    <IconButton
-                                        aria-owns={open ? 'menu-appbar' : null}
-                                        aria-haspopup="true"
-                                        onClick={this.handleMenu}
-                                        color="inherit"
-                                    >
-                                        <Avatar alt="Remy Sharp" src="/static/images/remy.jpg"
-                                                className={classes.avatar}/>
-                                    </IconButton>
 
-                                    <Menu
-                                        id="menu-appbar"
-                                        anchorEl={anchorEl}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                          }}
-                                        open={open}
-                                        onClose={this.handleClose}
-                                    >
-                                        <MenuItem onClick={this.handleClose}>
-                                            <Link href="/users/signin">
-                                                <a>로그인</a>
-                                            </Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={this.handleClose}>
-                                            <Link href="/users/signup">
-                                                <a>회원가입</a>
-                                            </Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={this.handleClose}>
-                                            <Link href="/users/myPage">
-                                                <a>마이페이지</a>
-                                            </Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={this.handleClose}>
-                                            <Link href="/board/users/board">
-                                                <a>게시판</a>
-                                            </Link>
-                                        </MenuItem>
-                                    </Menu>
+                                    <SignOutToggle></SignOutToggle>
+
+                                    <SignInToggle></SignInToggle>
+
                                 </div>
                             )}
                         </Toolbar>

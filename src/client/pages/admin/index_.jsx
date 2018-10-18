@@ -16,7 +16,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-// import TableHead from '@material-ui/core/TableHead';
 
 // 컴포넌트
 import MngBar from '../../components/admin/mngAppBar';
@@ -126,12 +125,14 @@ const styles = theme => ({
 
 
 function MyIndexPage(props) {
+
     const {classes} = props;
 
     return (
         <div>
             <MngBar></MngBar>
             <SimpleAppBar title="마이 페이지"></SimpleAppBar>
+
 
             <div className={classes.root}>
 
@@ -170,7 +171,8 @@ function MyIndexPage(props) {
                             <Typography variant="title" className={classes.paper_title}>내 개인정보 ></Typography>
                             <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
 
-                                <Paper elevation className={classNames(classes.table_wrap, classes.paper_inner_wrap)}>
+                                <Paper elevation
+                                       className={classNames(classes.table_wrap, classes.paper_inner_wrap)}>
                                     <Table className={classes.table}>
                                         <TableBody>
                                             <TableRow component="tr">
@@ -200,32 +202,17 @@ function MyIndexPage(props) {
                                         <a className={classes.btn_color}>비밀번호 변경</a>
                                     </Link>
                                 </Button>
-
                             </Paper>
-
-
-                            <Button className={classes.right_btn} color="inherit"><a href="/admin/membersList"
-                                                                                     className={classes.btn_common}>회원
-                                관리</a></Button>
-                            <Button className={classes.right_btn} color="inherit"><a href="/board/admin/board"
-                                                                                     className={classes.btn_common}>게시판
-                                관리</a></Button>
                         </div>
                     </Grid>
                 </Grid>
-
-
             </div>
-        </
-            div >
+        </div >
     )
-        ;
 }
 
-//props to classes
 MyIndexPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-//export MyIndexPage
 export default WithRoot(withStyles(styles)(MyIndexPage));

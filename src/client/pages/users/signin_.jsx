@@ -125,6 +125,7 @@ function SigninPage(props) {
                             onChange={onChange}>
                         </Input>
 
+
                         <Input
                             placeholder="비밀번호 (6자리 이상)"
                             className={classes.input}

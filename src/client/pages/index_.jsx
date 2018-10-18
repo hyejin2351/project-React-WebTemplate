@@ -8,7 +8,7 @@ import MenuAppBar from '../components/appBar';
 import PaperSheet from '../components/visual';
 import MediaCard from '../components/mediaCards';
 
-
+//스타일링
 const styles = theme => ({
     root: {
         background: '#f5f6f8'
@@ -18,6 +18,7 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 7,
     },
 });
+
 
 class IndexView extends React.Component {
     state = {
@@ -47,6 +48,7 @@ class IndexView extends React.Component {
                     <MenuAppBar></MenuAppBar>
 
                     <PaperSheet></PaperSheet>
+
                 </div>
             </React.Fragment>
         );

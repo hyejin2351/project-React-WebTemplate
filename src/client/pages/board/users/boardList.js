@@ -2,8 +2,8 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
-import BoardView from './board_.jsx';
-const log = debug('app:board');
+import BoardView from './boardList_.jsx';
+const log = debug('app:boardList');
 
 class BoardPage extends React.Component {
     handleClick(event, client) {
