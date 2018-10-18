@@ -148,7 +148,7 @@ function MyIndexPage(props) {
                                     justify="center"
                                     alignItems="center"
                                 >
-                                    <Paper elevation className={classes.paper_inner_wrap}>
+                                    <Paper elevation={0} className={classes.paper_inner_wrap}>
                                         <img src="/static/images/profile.png" alt="기본 프로필 사진"
                                              className={classes.profile_img}/>
                                         <Typography variant="body1" align="center"><strong>닉네임</strong></Typography>
@@ -171,7 +171,7 @@ function MyIndexPage(props) {
                             <Typography variant="title" className={classes.paper_title}>내 개인정보 ></Typography>
                             <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
 
-                                <Paper elevation
+                                <Paper elevation={0}
                                        className={classNames(classes.table_wrap, classes.paper_inner_wrap)}>
                                     <Table className={classes.table}>
                                         <TableBody>
