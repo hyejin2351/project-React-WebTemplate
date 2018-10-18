@@ -11,7 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import StarIcon from '@material-ui/icons/Star';
 import PeopleIcon from '@material-ui/icons/People';
-import ListAlt from '@material-ui/icons/ListAlt';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReportIcon from '@material-ui/icons/Report';
 
@@ -21,7 +21,7 @@ export const mailFolderListItems = (
         <Link href="/board/users/boardList">
             <ListItem button>
                 <ListItemIcon>
-                    <ListAlt />
+                    <ListAltIcon />
                 </ListItemIcon>
                 <ListItemText primary="게시판"/>
             </ListItem>

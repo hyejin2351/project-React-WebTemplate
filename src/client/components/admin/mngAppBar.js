@@ -7,14 +7,12 @@ import Link from 'next/link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 // 컴포넌트 (drawer)
 import DrawerView from '../../drawer/admin/adminDrawer';
-  
+
 //스타일링
 const styles = theme => ({
     root: {
