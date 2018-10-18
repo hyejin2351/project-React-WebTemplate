@@ -31,7 +31,6 @@ export const mailFolderListItems = (
 
 export const otherMailFolderListItems = (
     <div>
-
         <Link href="/board/admin/boardList">
             <ListItem button>
                 <ListItemIcon>

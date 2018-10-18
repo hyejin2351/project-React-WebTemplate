@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import {mailFolderListItems, otherMailFolderListItems} from './titleData';
+import { mailFolderListItems } from './titleData';
 
 //drawer button
 import IconButton from '@material-ui/core/IconButton';
@@ -41,16 +41,12 @@ class DrawerView extends React.Component {
         const sideList = (
             <div className={classes.list}>
                 <List>{mailFolderListItems}</List>
-                <Divider />
-                <List>{otherMailFolderListItems}</List>
             </div>
         );
 
         const fullList = (
             <div className={classes.fullList}>
                 <List>{mailFolderListItems}</List>
-                <Divider />
-                <List>{otherMailFolderListItems}</List>
             </div>
         );
 

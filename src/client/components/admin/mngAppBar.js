@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 // 컴포넌트 (drawer)
-import DrawerView from '../../drawer/admin/adminDrawer';
+import DrawerView from './adminDrawer';
 
 //스타일링
 const styles = theme => ({

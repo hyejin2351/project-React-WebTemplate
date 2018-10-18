@@ -4,21 +4,13 @@ import {withStyles} from '@material-ui/core/styles';
 import Link from 'next/link';
 
 //Core 컴포넌트
-import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import Grid from '@material-ui/core/Grid';
 
-//아이콘
-import MenuIcon from '@material-ui/icons/Menu';
-import PersonIcon from '@material-ui/icons/Person';
-
 // 컴포넌트 (drawer)
-import DrawerView from '../drawer/users/adminDrawer';
+import DrawerView from './adminDrawer';
 // 컴포넌트 (toggle)
 import SignOutToggle from '../components/admin/signoutState';
 import SignInToggle from '../components/admin/signinState';

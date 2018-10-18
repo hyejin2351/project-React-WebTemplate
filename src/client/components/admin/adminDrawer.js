@@ -15,10 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 const styles = {
     list: {
         width: 250,
-    },
-    fullList: {
-        width: 'auto',
-    },
+    }
 };
 
 class DrawerView extends React.Component {
@@ -40,14 +37,6 @@ class DrawerView extends React.Component {
 
         const sideList = (
             <div className={classes.list}>
-                <List>{mailFolderListItems}</List>
-                <Divider />
-                <List>{otherMailFolderListItems}</List>
-            </div>
-        );
-
-        const fullList = (
-            <div className={classes.fullList}>
                 <List>{mailFolderListItems}</List>
                 <Divider />
                 <List>{otherMailFolderListItems}</List>
