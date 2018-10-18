@@ -82,7 +82,7 @@ const styles = theme => ({
 });
 
 function MyPageView(props) {
-    const {classes} = props;
+    const {classes, onSignout} = props;
 
     return (
         <React.Fragment>
@@ -176,6 +176,11 @@ function MyPageView(props) {
                         </Paper>
                     </div>
                 </Grid>
+
+                <Button variant="contained" color="primary" size="medium"
+                        className={classes.float_right} onClick={onSignout}>
+                    로그아웃
+                </Button>
             </div>
         </React.Fragment>
     )
