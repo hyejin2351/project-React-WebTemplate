@@ -14,6 +14,7 @@ class JSONResponse {
     return (req, res) => JSONResponse.send(code, this)(req, res);
   }
 }
+
 JSONResponse.makeResponse = (success, message, data) => new JSONResponse(success, message, data);
 
 JSONResponse.send = (code, ret) => (req, res) => {

@@ -3,22 +3,41 @@
 const log = require('debug')('app:register');
 
 const JSONResponse = require('../../../../lib/JSONResponse');
+const StringLib = require('../../../../lib/stringLib');
+const { PASSWORD_LENGTH, PASSWORD_ROLE: { number, lowerCase, upperCase, special }} = require('../../config');
 
 function validateSignupData(data) {
   // TODO more strict validation
   let error;
-  let { email, password, ...rest } = data; // eslint-disable-line prefer-const
+  let { email, password, nickName, name, confirmPassword, serviceCheck, ...rest } = data; // eslint-disable-line prefer-const
 
-  if (!email || !password) {
+  log(data);
+
+  if (!email || !password || !nickName || !name || !confirmPassword || !serviceCheck ) {
     error = 'Invalid request';
   } else {
     email = email.trim();
     password = password.trim();
-    if (email.length < 1 || password.length < 1) {
-      error = 'Invalid request';
-    }
+    if(!StringLib.checkEmail(email))
+      error = 'Invalid email';
+    else if(PASSWORD_LENGTH >  password.length)
+      error = 'Password must be at least 8 characters.';
+    else if (number && !StringLib.checkNumber(password))
+      error = 'The minimum number should be included';
+    else if (lowerCase && !StringLib.checkLowercase(password))
+      error = 'The minimum lowerCase should be included';
+    else if (upperCase && !StringLib.checkUppercase(password))
+      error = 'The minimum upperCase should be included';
+    else if (special && !StringLib.checkSpecial(password))
+      error = 'The minimum special should be included';
+    else if(nickName.length < 2)
+      error = 'Nickname is more than 2 letters.';
+    else if(name.length < 2)
+      error = 'Name is more than 2 letters.';
+    else if(password !== confirmPassword)
+      error = 'Password and verification password are different.';
   }
-  return new JSONResponse(!error, error, { email, password, ...rest });
+  return new JSONResponse(!error, error, { email, password, nickName, name, ...rest });
 }
 
 module.exports = UserModel => (req, res, next) => {

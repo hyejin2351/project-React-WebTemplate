@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
       const res = await AuthService.login({
         uri: '/api/auth/login',
         apolloClient,
-      }, email, password);
+      }, { email: email, password: password });
       // success
       // change the component-container state
       this.setState({
@@ -78,9 +78,6 @@ class LoginPage extends React.Component {
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value;
-
-    log('field = ' + field);
-    log('event.target.value = ' + event.target.value);
 
     this.setState({
       user

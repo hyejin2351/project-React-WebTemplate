@@ -107,7 +107,7 @@ const styles = theme => ({
 });
 
 function signUp(props) {
-    const {classes, onFacebook, onGoogle, onKakao} = props;
+    const {classes, onChange, onChangeCheck, onSubmit, onFacebook, onGoogle, onKakao} = props;
 
     return (
         <React.Fragment>
@@ -121,18 +121,21 @@ function signUp(props) {
                         <Typography variant="caption" align="left">회원가입 후 웹 사이트의 다양한 서비스를 이용하세요.</Typography>
                     </div>
 
-
                     <div className={classes.container}>
                         <Input
                             placeholder="성명"
                             className={classes.input}
-                            type="text">
+                            type="text"
+                            name="name"
+                            onChange={onChange}>
                         </Input>
 
                         <Input
                             placeholder="닉네임"
                             className={classes.input}
-                            type="text">
+                            type="text"
+                            name="nickName"
+                            onChange={onChange}>
                         </Input>
                     </div>
 
@@ -140,26 +143,34 @@ function signUp(props) {
                         <Input
                             placeholder="이메일"
                             className={classes.input}
-                            type="text">
+                            type="text"
+                            name="email"
+                            onChange={onChange}>
                         </Input>
 
                         <Input
                             placeholder="비밀번호"
                             className={classes.input}
-                            type="password">
+                            type="password"
+                            name="password"
+                            onChange={onChange}>
                         </Input>
 
                         <Input
                             placeholder="비밀번호 재확인"
                             className={classes.input}
-                            type="password">
+                            type="password"
+                            name="confirmPassword"
+                            onChange={onChange}>
                         </Input>
                     </div>
 
-                    <CheckboxLabels></CheckboxLabels>
+                    <CheckboxLabels componentName={'serviceCheck'} onChange={onChangeCheck}></CheckboxLabels>
 
                     <Button fullWidth={true} variant="contained" color="primary"
-                            className={classes.signUpBtn}>회원가입하기</Button>
+                            className={classes.signUpBtn} onClick={onSubmit}>
+                        회원가입하기
+                    </Button>
 
 
                     <Typography align="right" className={classes.notYet}>이미 계정이 있으신가요?

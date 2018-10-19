@@ -56,11 +56,6 @@ const config = {
 
 const domain = '';
 
-function makeUrlEncodedFormData({ email, password, goto }) {
-  // 'application/x-www-form-urlencoded' format
-  return `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&goto=${encodeURIComponent(goto || '')}`;
-}
-
 function makeJsonFormData({ email, password }) {
   // 'application/json' format
   return JSON.stringify({
@@ -69,12 +64,30 @@ function makeJsonFormData({ email, password }) {
   });
 }
 
+function makeUrlEncodedFormData( param, goto) {
+  // 'application/x-www-form-urlencoded' format
+  let sData = '';
+  if(param) {
+    Object.keys(param).forEach(function(key) {
+      sData = sData.concat('&'+key+'=').concat(encodeURIComponent(param[key]));
+    })
+  }
+
+  if(goto)
+    sData = sData.concat('&goto=' + encodeURIComponent(goto || ''));
+
+  if(sData.length > 1)
+    sData = sData.substr(1);
+
+  return sData;
+}
+
 class AuthService {
-  static login(context, email, password, goto) {
+  static login(context, param, goto) {
     const { uri } = context;
     return AuthService.fetch(context, `${domain}${uri}`, {
       method: 'POST',
-      body: makeUrlEncodedFormData({ email, password, goto }),
+      body: makeUrlEncodedFormData( param, goto ),
     })
       .then((res) => {
         log('Got login response: ', res.success);
@@ -123,6 +136,26 @@ class AuthService {
 
   static loggedIn(context) {
     return config.isLoggedIn(context);
+  }
+
+  static register(context, param, goto) {
+    const { uri } = context;
+
+    return new Promise(function(resolve, reject) {
+      AuthService.fetch(context, `${domain}${uri}`, {
+            method: 'POST',
+            body: makeUrlEncodedFormData( param, goto),
+          })
+          .then((res) => {
+            // Force a reload of all the current queries
+            return resolve(res);
+          })
+          .catch((err) => {
+            log('Got exception: ', err);
+            // TODO: define response format
+            reject(err);
+          });
+    });
   }
 
   static unregister(context) {
@@ -199,7 +232,7 @@ class AuthService {
   //     // redirect signed in user to dashboard
   //     // this.props.history.push('/dashboard');
   //     Router.replace('/');
-        
+
   //   } else {
   //     // failure
   //     // change the component state

@@ -20,6 +20,14 @@ exports.SALT_LENGTH = 32;
 exports.AUTH_JWT_SECRET = process.env.AUTH_JWT_SECRET;
 exports.AUTH_SESSION_SECRET = process.env.AUTH_SESSION_SECRET;
 
+exports.PASSWORD_LENGTH = 8;
+exports.PASSWORD_ROLE = {
+    number: true,
+    lowerCase: true,
+    upperCase: true,
+    special: true
+};
+
 exports.facebook = {
     clientID: process.env.FACEBOOK_ID || '255589955299060',
     clientSecret: process.env.FACEBOOK_SECRET || '3b4e8ffd0d5357e5acb8f4f66d1c9d76',

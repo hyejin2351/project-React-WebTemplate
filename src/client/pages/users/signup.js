@@ -20,13 +20,18 @@ class SignUpPage extends React.Component {
         this.state = {
             errors: {},
             user: {
+                name: '',
+                nickName: '',
                 email: '',
-                password: ''
+                password: '',
+                confirmPassword: '',
+                serviceCheck: false
             }
         };
 
         this.processForm = this.processForm.bind(this);
         this.changeUser = this.changeUser.bind(this);
+        this.changeCheck = this.changeCheck.bind(this);
     }
 
     /**
@@ -38,26 +43,21 @@ class SignUpPage extends React.Component {
         // prevent default action. in this case, action is the form submission event
         event.preventDefault();
 
-        const email = this.state.user.email;
-        const password = this.state.user.password;
+        const { name, nickName, email, password, confirmPassword, serviceCheck } = this.state.user;
         log('processForm: ', email);
 
         try {
-            const res = await AuthService.signup({
-                uri: '/api/auth/signup',
+            const res = await AuthService.register({
+                uri: '/api/auth/register',
                 apolloClient,
-            }, email, password);
+            }, { name: name, nickName: nickName, email: email, password: password,
+                confirmPassword: confirmPassword, serviceCheck: serviceCheck});
             // success
             // change the component-container state
             this.setState({
                 errors: {}
             });
-            // Force a reload of all the current queries now that the user is
-            // logged in, so we don't accidentally leave any state around.
-            apolloClient.cache.reset().then(() => {
-                // redirect signed-in user to other page
-                redirect(null, '/');
-            });
+            redirect(null, '/users/signin');
         } catch (err) {
             // failure
             // change the component state
@@ -76,6 +76,21 @@ class SignUpPage extends React.Component {
         const field = event.target.name;
         const user = this.state.user;
         user[field] = event.target.value;
+
+        this.setState({
+            user
+        });
+    }
+
+    /**
+     * Change the user object.
+     *
+     * @param {object} event - the JavaScript event object
+     */
+    changeCheck(event, checked) {
+        const field = event.target.name;
+        const user = this.state.user;
+        user[field] = checked;
 
         this.setState({
             user
@@ -104,6 +119,7 @@ class SignUpPage extends React.Component {
                     <SignUpForm
                         onSubmit={e => this.processForm(e, client)}
                         onChange={this.changeUser}
+                        onChangeCheck={this.changeCheck}
                         onFacebook={e => this.processFacebook(client)}
                         onGoogle={e => this.processGoogle(client)}
                         onKakao={e => this.processKakao(client)}
