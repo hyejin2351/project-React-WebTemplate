@@ -112,7 +112,7 @@ function SigninPage(props) {
 
                 <Paper elevation={0} className={classes.paper}>
                     <div className={classes.SigninPage}>
-                        <Typography variant="title" align="left" className={classes.bold}>로그인</Typography>
+                        <Typography variant="h6" align="left" className={classes.bold}>로그인</Typography>
                         <Typography variant="caption" align="left">로그인 후 모든 서비스를 이용하세요.</Typography>
                     </div>
 
@@ -151,7 +151,7 @@ function SigninPage(props) {
 
                 <Paper elevation={0} className={classes.paper} align="left">
                     <div align="left">
-                        <Typography variant="title" className={classes.bold}>소셜 로그인</Typography>
+                        <Typography variant="h6" className={classes.bold}>소셜 로그인</Typography>
                         <Typography variant="caption">SNS 계정으로 간편하게 로그인하세요.</Typography>
                     </div>
 

@@ -101,7 +101,7 @@ function passwordChange(props) {
 
             <div className={classes.root}>
                 <Paper elevation={0} className={classes.body_title}>
-                    <Typography variant="title" className={classes.paper_title}>비밀번호 변경 ></Typography>
+                    <Typography variant="h6" className={classes.paper_title}>비밀번호 변경 ></Typography>
                     <Typography variant="caption" className={classes.paper_title}>
                         현재 사용 중인 비밀번호를 변경할 수 있습니다.
                     </Typography>

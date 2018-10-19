@@ -117,7 +117,7 @@ function signUp(props) {
 
                 <Paper className={classes.paper}>
                     <div className={classes.login}>
-                        <Typography variant="title" align="left" className={classes.bold}>회원가입</Typography>
+                        <Typography variant="h6" align="left" className={classes.bold}>회원가입</Typography>
                         <Typography variant="caption" align="left">회원가입 후 웹 사이트의 다양한 서비스를 이용하세요.</Typography>
                     </div>
 
@@ -183,7 +183,7 @@ function signUp(props) {
 
                 <Paper className={classes.paper} align="left">
                     <div align="left">
-                        <Typography variant="title" className={classes.bold}>소셜 회원가입</Typography>
+                        <Typography variant="h6" className={classes.bold}>소셜 회원가입</Typography>
                         <Typography variant="caption">SNS 계정으로 간편하게 회원가입하세요.</Typography>
                     </div>
 

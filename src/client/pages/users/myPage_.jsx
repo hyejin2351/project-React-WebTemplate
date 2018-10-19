@@ -94,7 +94,7 @@ function MyPageView(props) {
                 <Grid container spacing={16}>
                     <Grid item xs={12} md={6}>
                         <div className={classes.paper_wrap}>
-                            <Typography variant="title" className={classes.paper_title}>프로필 ></Typography>
+                            <Typography variant="h6" className={classes.paper_title}>프로필 ></Typography>
                             <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
                                 <Grid
                                     container
@@ -122,7 +122,7 @@ function MyPageView(props) {
 
                     <Grid item xs={12} md={6}>
                         <div className={classes.paper_wrap}>
-                            <Typography variant="title" className={classes.paper_title}>내 개인정보 ></Typography>
+                            <Typography variant="h6" className={classes.paper_title}>내 개인정보 ></Typography>
                             <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
 
                                 <Paper elevation={0}
@@ -164,7 +164,7 @@ function MyPageView(props) {
 
                 <Grid item xs={12}>
                     <div className={classes.paper_wrap}>
-                        <Typography variant="title" className={classes.paper_title}>계정 탈퇴 ></Typography>
+                        <Typography variant="h6" className={classes.paper_title}>계정 탈퇴 ></Typography>
                         <Paper className={classes.paper}>
                             <Typography variant="body1" className={classes.out_text}>서비스를 더 이상 이용하고 싶지 않다면 여기서 계정을 탈퇴할 수
                                 있습니다.</Typography>

@@ -21,10 +21,10 @@ const styles = theme => ({
 const SampleView = ({ classes, onHandleClick}) => {
     return (
         <div className={classes.root}>
-            <Typography variant="display1" gutterBottom>
+            <Typography variant="h4" gutterBottom>
                 Welcome to Sample Page
             </Typography>
-            <Typography variant="subheading" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
                 You have 2 choices
             </Typography>
             <Button onClick={e => onHandleClick(e)} variant="raised" color="secondary" >

@@ -140,7 +140,7 @@ function MyIndexPage(props) {
                 <Grid container spacing={16}>
                     <Grid item xs={12} md={6}>
                         <div className={classes.paper_wrap}>
-                            <Typography variant="title" className={classes.paper_title}>프로필 ></Typography>
+                            <Typography variant="h6" className={classes.paper_title}>프로필 ></Typography>
                             <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
                                 <Grid
                                     container
@@ -168,7 +168,7 @@ function MyIndexPage(props) {
 
                     <Grid item xs={12} md={6}>
                         <div className={classes.paper_wrap}>
-                            <Typography variant="title" className={classes.paper_title}>내 개인정보 ></Typography>
+                            <Typography variant="h6" className={classes.paper_title}>내 개인정보 ></Typography>
                             <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
 
                                 <Paper elevation={0}

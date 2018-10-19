@@ -71,7 +71,7 @@ function DeleteAccountView(props) {
 
             <div className={classes.root}>
                 <Paper elevation={0} className={classes.body_title}>
-                    <Typography variant="title" className={classes.paper_title}>계정 탈퇴 ></Typography>
+                    <Typography variant="h6" className={classes.paper_title}>계정 탈퇴 ></Typography>
                     <Typography variant="caption" className={classes.paper_title}>
                         회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.
                     </Typography>
@@ -80,11 +80,11 @@ function DeleteAccountView(props) {
 
                 <Grid container item xs={12}>
                     <Paper className={classes.outer_spacing}>
-                        <Typography variant="body2" gutterBottom>탈퇴 후에는 이메일 <span className={classes.email_span}>id@email.com</span>
+                        <Typography variant="body1" gutterBottom>탈퇴 후에는 이메일 <span className={classes.email_span}>id@email.com</span>
                             로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수
                             없습니다.</Typography>
-                        <Typography variant="body2" gutterBottom>게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</Typography>
-                        <Typography variant="body2">또한, 네이버 아이디를 사용해 다른 서비스에 로그인 할 수 없게 됩니다.</Typography>
+                        <Typography variant="body1" gutterBottom>게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</Typography>
+                        <Typography variant="body1">또한, 네이버 아이디를 사용해 다른 서비스에 로그인 할 수 없게 됩니다.</Typography>
                     </Paper>
                 </Grid>
 

@@ -36,7 +36,7 @@ function SimpleAppBar(props) {
         <div className={classes.root}>
             <AppBar position="static" className={classes.bar}>
                 <Toolbar variant="dense">
-                    <Typography variant="headline" color="inherit" className={classes.page_title}>
+                    <Typography variant="h5" color="inherit" className={classes.page_title}>
                         {title}
                     </Typography>
                 </Toolbar>

@@ -82,7 +82,7 @@ function signinPage(props) {
 
                 <Paper className={classes.paper}>
                     <div>
-                        <Typography variant="title" align="left" className={classes.bold}>관리자 로그인</Typography>
+                        <Typography variant="h6" align="left" className={classes.bold}>관리자 로그인</Typography>
                     </div>
 
 

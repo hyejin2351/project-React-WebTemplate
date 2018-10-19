@@ -67,7 +67,7 @@ class MngBar extends React.Component {
                         <DrawerView></DrawerView>
 
                         <Grid item xs={12} className={classes.logo}>
-                            <Typography component="h1" variant="headline" color="inherit" className={classes.grow}>
+                            <Typography component="h1" variant="h5" color="inherit" className={classes.grow}>
                                 <Link href="/admin" prefetch>
                                     <a className={classes.logo}>LOGO</a>
                                 </Link>

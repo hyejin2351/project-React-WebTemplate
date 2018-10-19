@@ -94,7 +94,7 @@ function profile(props) {
 
             <div className={classes.root}>
                 <Paper elevation={0} className={classes.body_title}>
-                    <Typography variant="title" className={classes.paper_title}>프로필 수정 ></Typography>
+                    <Typography variant="h6" className={classes.paper_title}>프로필 수정 ></Typography>
                     <Typography variant="caption" className={classes.paper_title}>
                         내 프로필 사진과 닉네임을 수정할 수 있습니다.
                     </Typography>

@@ -33,7 +33,7 @@ function MediaCard(props) {
         <React.Fragment>
             <Grid className={classes.root}>
 
-                <Typography variant="title" className={classes.margin_bottom}>카테고리 영역1</Typography>
+                <Typography variant="h6" className={classes.margin_bottom}>카테고리 영역1</Typography>
 
                 <Grid
                     container
