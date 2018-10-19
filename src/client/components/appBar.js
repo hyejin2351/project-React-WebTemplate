@@ -7,18 +7,13 @@ import Link from 'next/link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-
 
 import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 
-
 // 컴포넌트 (drawer)
 import DrawerView from './adminDrawer';
-
 
 //스타일링
 const styles = theme => ({
@@ -27,7 +22,6 @@ const styles = theme => ({
         textDecoration: 'none',
         color: '#fff'
     },
-
     right_area: {
         float: 'right',
     },
@@ -132,7 +126,6 @@ class MenuAppBar extends React.Component {
                                 <a className={classes.button_text}>로그아웃</a>
                             </Link>
                         </Button>
-
 
                     </Toolbar>
                 </AppBar>

@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 //스타일링
 const styles = theme => ({
     root: {
-        backgroundColor: '#007bff'
+        backgroundColor: '#007bff',
     },
     typo: {
         color: '#ffffff',
@@ -33,7 +33,7 @@ const styles = theme => ({
         },
     },
     visual_title: {
-        fontSize: 40
+        fontSize: 28
     },
 });
 

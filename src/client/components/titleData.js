@@ -11,7 +11,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 
 export const mailFolderListItems = (
     <div>
-        <Link href="/board/users/boardList">
+        <Link href="/users/board/boardList">
             <ListItem button>
                 <ListItemIcon>
                     <ListAltIcon />

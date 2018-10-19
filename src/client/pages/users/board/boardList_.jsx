@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import WithRoot from '../../../lib/withRoot';
 import Link from 'next/link';
-import classNames from 'classnames';
 
-// Core 컴포넌트
+//Core 컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 
 //컴포넌트
+import MenuAppBar from '../../../components/appBar';
 import SimpleAppBar from '../../../components/subBar';
-import MngBar from '../../../components/admin/mngAppBar';
-import SimpleTable from '../../../components/admin/boardTable';
+import SimpleTable from '../../../components/simpleTable';
 import CustomPaginationActionsTable from '../../../components/pignation';
 
 //아이콘
@@ -28,10 +26,10 @@ const styles = theme => ({
         margin: theme.spacing.unit * 3
     },
 
-    //페이퍼
+    //paper
     outer_paper: {},
 
-    //blue_border_bottom
+    //border bottom
     border_bottom: {
         padding: theme.spacing.unit * 3,
         borderBottom: '2px solid #3e9bff',
@@ -42,11 +40,6 @@ const styles = theme => ({
     add_btn: {
         float: 'right',
         fontWeight: 'bold'
-    },
-    //버튼
-    new_btn: {
-        textDecoration: 'none',
-        color: '#3e9bff'
     },
 
     //테이블
@@ -80,22 +73,29 @@ const styles = theme => ({
         fontSize: 20,
         marginRight: 5
     },
+
+    //버튼
+    new_btn: {
+        textDecoration: 'none',
+        color: '#3e9bff'
+    },
+
 });
 
 
-function board(props) {
+function BoardNewPage(props) {
     const {classes} = props;
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
-            <SimpleAppBar title="게시판 관리"></SimpleAppBar>
+            <MenuAppBar></MenuAppBar>
+            <SimpleAppBar title="게시판"></SimpleAppBar>
 
             <div className={classes.root}>
                 <Paper>
                     <Paper elevation={0} className={classes.border_bottom}>
                         <div className={classes.title_left}>
-                            <Typography component="h3" className={classes.paper_title}>게시판 관리</Typography>
+                            <Typography component="h3" className={classes.paper_title}>게시판</Typography>
                             <Typography variant="caption" className={classes.total}>총 <span
                                 className={classes.total_span}>70</span>개</Typography>
                         </div>
@@ -103,7 +103,7 @@ function board(props) {
                         <div className={classes.title_right}>
                             <Button color="primary" className={classes.add_btn}>
                                 <AddIcon className={classes.icon}/>
-                                <Link href="/board/admin/boardNew">
+                                <Link href="/users/board/boardNew">
                                     <a className={classes.new_btn}>등록</a>
                                 </Link>
                             </Button>
@@ -116,11 +116,11 @@ function board(props) {
 
             </div>
         </React.Fragment>
-    )
+    );
 }
 
-board.propTypes = {
+BoardNewPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(board));
+export default WithRoot(withStyles(styles)(BoardNewPage));

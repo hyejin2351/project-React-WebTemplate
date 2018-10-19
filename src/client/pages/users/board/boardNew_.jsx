@@ -1,18 +1,18 @@
 import React from 'react';
+import Link from '../../../../../node_modules/next/link';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import WithRoot from '../../../lib/withRoot'
-import Link from '../../../../../node_modules/next/link';
 
-// Core 컴포넌트
+//컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 // 컴포넌트
-import MngBar from '../../../components/admin/mngAppBar';
+import MenuAppBar from '../../../components/appBar';
 import SimpleAppBar from '../../../components/subBar';
 import TextFields from '../../../components/boardInput';
 
@@ -20,9 +20,7 @@ import TextFields from '../../../components/boardInput';
 import red from '@material-ui/core/colors/red';
 
 //아이콘
-import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-
 
 //스타일링
 const styles = theme => ({
@@ -107,30 +105,22 @@ const styles = theme => ({
 });
 
 //render
-function boardEdit(props) {
+function boardNewView(props) {
     const {classes} = props;
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
-            <SimpleAppBar title="게시물 수정"></SimpleAppBar>
+            <MenuAppBar></MenuAppBar>
+            <SimpleAppBar title="게시물 등록"></SimpleAppBar>
 
             <div className={classes.root}>
                 <Paper>
                     <Paper elevation={0} className={classes.border_bottom}>
                         <div className={classes.title_left}>
-                            <Typography component="h3" className={classes.paper_title}>게시물 수정</Typography>
-                        </div>
-
-                        <div className={classes.title_right}>
-                            <Button className={classes.delete_btn}>
-                                <DeleteIcon className={classes.icon}/>
-                                <Link href="/board/admin/board">
-                                    <a className={classes.delete_btn_props}>삭제</a>
-                                </Link>
-                            </Button>
+                            <Typography component="h3" className={classes.paper_title}>게시물 등록</Typography>
                         </div>
                     </Paper>
+
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
@@ -150,27 +140,19 @@ function boardEdit(props) {
                         <Button variant="contained" color="primary" size="medium"
                                 className={classNames(classes.save_btn, classes.btn_common)}>
                             <SaveIcon className={classes.icon}/>
-                            <Link href="/board/admin/boardDetail">
+                            <Link href="/users/board/boardList">
                                 <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
-                            </Link>
-                        </Button>
-
-                        <Button variant="outlined" size="medium"
-                                className={classNames(classes.cancel_btn, classes.btn_common)}>
-                            <Link href="/board/admin/boardDetail">
-                                <a className={classNames(classes.cancel_btn_color, classes.no_a)}>취소</a>
                             </Link>
                         </Button>
                     </Paper>
                 </Grid>
             </div>
-
         </React.Fragment>
     )
 }
 
-boardEdit.propTypes = {
+boardNewView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardEdit));
+export default WithRoot(withStyles(styles)(boardNewView));

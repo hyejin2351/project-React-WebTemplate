@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import WithRoot from '../../../lib/withRoot'
-import Link from '../../../../../node_modules/next/link';
+import Link from 'next/link';
 
-//Core 컴포넌트
+// Core 컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 // 컴포넌트
-import MenuAppBar from '../../../components/appBar';
+import MngBar from '../../../components/admin/mngAppBar';
 import SimpleAppBar from '../../../components/subBar';
 import TextFields from '../../../components/boardInput';
 
@@ -23,8 +23,10 @@ import red from '@material-ui/core/colors/red';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
+
 //스타일링
 const styles = theme => ({
+    //틀
     root: {
         minWidth: 450,
         flexGrow: 1,
@@ -104,13 +106,13 @@ const styles = theme => ({
     },
 });
 
-
-function boardEditPage(props) {
+//render
+function boardEdit(props) {
     const {classes} = props;
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
+            <MngBar></MngBar>
             <SimpleAppBar title="게시물 수정"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -123,13 +125,12 @@ function boardEditPage(props) {
                         <div className={classes.title_right}>
                             <Button className={classes.delete_btn}>
                                 <DeleteIcon className={classes.icon}/>
-                                <Link href="/board/users/boardEditPage">
+                                <Link href="/admin/board/boardList">
                                     <a className={classes.delete_btn_props}>삭제</a>
                                 </Link>
                             </Button>
                         </div>
                     </Paper>
-
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
@@ -149,27 +150,27 @@ function boardEditPage(props) {
                         <Button variant="contained" color="primary" size="medium"
                                 className={classNames(classes.save_btn, classes.btn_common)}>
                             <SaveIcon className={classes.icon}/>
-                            <Link href="/board/users/boardDetail">
+                            <Link href="/admin/board/boardDetail">
                                 <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
                             </Link>
                         </Button>
 
                         <Button variant="outlined" size="medium"
                                 className={classNames(classes.cancel_btn, classes.btn_common)}>
-                            <Link href="/board/users/boardDetail">
+                            <Link href="/admin/board/boardDetail">
                                 <a className={classNames(classes.cancel_btn_color, classes.no_a)}>취소</a>
                             </Link>
                         </Button>
                     </Paper>
                 </Grid>
             </div>
+
         </React.Fragment>
     )
-        ;
 }
 
-boardEditPage.propTypes = {
+boardEdit.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardEditPage));
+export default WithRoot(withStyles(styles)(boardEdit));

@@ -61,7 +61,7 @@ function SimpleTable(props) {
                                 <TableCell component="th" scope="row">
                                     {row.번호}
                                 </TableCell>
-                                <TableCell ><a href="/board/admin/boardDetail">{row.제목}</a></TableCell>
+                                <TableCell ><a href="/admin/board/boardDetail">{row.제목}</a></TableCell>
                                 <TableCell >{row.작성자}</TableCell>
                                 <TableCell >{row.날짜}</TableCell>
                                 <TableCell numeric>{row.조회}</TableCell>

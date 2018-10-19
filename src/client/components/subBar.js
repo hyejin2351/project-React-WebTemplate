@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 
 //Core 컴포넌트
 import AppBar from '@material-ui/core/AppBar';
@@ -12,6 +12,9 @@ const styles = {
     root: {
         flexGrow: 1,
     },
+    bar: {
+        backgroundColor: '#007bff'
+    },
     page_title: {
         fontWeight: 'bold',
         fontSize: '1.3125rem'
@@ -19,19 +22,19 @@ const styles = {
 };
 
 function SimpleAppBar(props) {
-    const { classes } = props;
-    let { title } = props;
+    const {classes} = props;
+    let {title} = props;
 
     console.log('1');
     console.log(props);
 
     // title 정보가 없는경우 기본 title명으로 메인페이지로 설정한다.
-    if(!title)
+    if (!title)
         title = '메인페이지';
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" color="primary">
+            <AppBar position="static" className={classes.bar}>
                 <Toolbar variant="dense">
                     <Typography variant="headline" color="inherit" className={classes.page_title}>
                         {title}

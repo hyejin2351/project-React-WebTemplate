@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import classNames from 'classnames';
 import WithRoot from '../../../lib/withRoot'
+import classNames from 'classnames';
 import Link from '../../../../../node_modules/next/link';
 
 //Core 컴포넌트
@@ -11,20 +11,17 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-//컬러
-import red from '@material-ui/core/colors/red';
-
 //컴포넌트
-import TextFields from '../../../components/boardInput';
-import MngBar from '../../../components/admin/mngAppBar';
+import MenuAppBar from '../../../components/appBar';
 import SimpleAppBar from '../../../components/subBar';
+import TextFieldsDisabled from '../../../components/boardInputDisabled';
 
 //아이콘
-import SaveIcon from '@material-ui/icons/Save';
+import EditIcon from '@material-ui/icons/Edit';
+import ListIcon from '@material-ui/icons/List';
 
 //스타일링
 const styles = theme => ({
-    //틀
     root: {
         minWidth: 450,
         flexGrow: 1,
@@ -42,13 +39,12 @@ const styles = theme => ({
     },
 
     //버튼
-    delete_btn: {
+    edit_btn: {
         float: 'right',
-        fontWeight: 'bold',
-        color: red[500]
+        fontWeight: 'bold'
     },
-    delete_btn_props: {
-        color: 'red',
+    edit_btn_props: {
+        color: '#3e9bff',
         textDecoration: 'none'
     },
 
@@ -74,86 +70,64 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3
     },
 
-    //버튼
-    two_btn_wrap: {
-        backgroundColor: 'transparent',
-        marginTop: theme.spacing.unit * 5
-    },
-    btn_common: {
-        height: 37,
-        margin: 5
-    },
-    no_a: {
-        textDecoration: 'none'
-    },
-    save_btn: {},
-    save_btn_color: {
-        color: 'white'
-    },
-    cancel_btn: {
-        backgroundColor: 'white'
-    },
-    cancel_btn_color: {
-        color: '#333'
-    },
-
     //아이콘
     icon: {
         fontSize: 20,
         marginRight: 5
     },
+
 });
 
-
-function boardNew(props) {
+//render
+function boardDetailPage(props) {
     const {classes} = props;
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
-            <SimpleAppBar title="게시물 등록"></SimpleAppBar>
+            <MenuAppBar></MenuAppBar>
+            <SimpleAppBar title="게시물 상세"></SimpleAppBar>
 
             <div className={classes.root}>
                 <Paper>
                     <Paper elevation={0} className={classes.border_bottom}>
                         <div className={classes.title_left}>
-                            <Typography component="h3" className={classes.paper_title}>게시물 등록</Typography>
+                            <Typography component="h3" className={classes.paper_title}>게시물 상세</Typography>
+                        </div>
+
+                        <div className={classes.title_right}>
+                            <Button color="primary" className={classes.edit_btn}>
+                                <EditIcon className={classes.icon}/>
+                                <Link href="/users/board/boardEdit">
+                                    <a className={classes.edit_btn_props}>수정</a>
+                                </Link>
+                            </Button>
+
+                            <Button color="primary" className={classes.edit_btn}>
+                                <ListIcon className={classes.icon}/>
+                                <Link href="/users/board/boardList">
+                                    <a className={classes.edit_btn_props}>목록</a>
+                                </Link>
+                            </Button>
                         </div>
                     </Paper>
 
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
-                                <TextFields></TextFields>
+                                <TextFieldsDisabled></TextFieldsDisabled>
                             </Paper>
                         </Grid>
                     </Paper>
                 </Paper>
 
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <Paper elevation={0} className={classes.two_btn_wrap}>
-                        <Button variant="contained" color="primary" size="medium"
-                                className={classNames(classes.save_btn, classes.btn_common)}>
-                            <SaveIcon className={classes.icon}/>
-
-                            <Link href="/board/admin/board" prefetch>
-                                <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
-                            </Link>
-                        </Button>
-                    </Paper>
-                </Grid>
             </div>
+
         </React.Fragment>
-    )
+    );
 }
 
-boardNew.propTypes = {
+boardDetailPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardNew));
+export default WithRoot(withStyles(styles)(boardDetailPage));

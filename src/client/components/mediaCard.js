@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
+//스타일링
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -46,7 +47,6 @@ function MediaCard(props) {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/images/cards/contemplative-reptile.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -74,7 +74,6 @@ function MediaCard(props) {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/images/cards/contemplative-reptile.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -102,7 +101,6 @@ function MediaCard(props) {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/images/cards/contemplative-reptile.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -130,7 +128,6 @@ function MediaCard(props) {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/images/cards/contemplative-reptile.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
