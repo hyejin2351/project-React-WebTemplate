@@ -8,34 +8,72 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+
+
+import IconButton from '@material-ui/core/IconButton';
+import PersonIcon from '@material-ui/icons/Person';
+
 
 // 컴포넌트 (drawer)
 import DrawerView from './adminDrawer';
-// 컴포넌트 (toggle)
-import SignOutToggle from '../components/admin/signoutState';
-import SignInToggle from '../components/admin/signinState';
 
 
 //스타일링
 const styles = theme => ({
-    root: {
-        flexGrow: 1
+    logo_text: {
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: '#fff'
     },
-    grow: {
-        flexGrow: 1,
-        background: '#f2f2f2',
-        color: '#333333'
+
+    right_area: {
+        float: 'right',
+    },
+    //right btn
+    right_btn: {
+        width: 60,
+        color: 'white',
+        textDecoration: 'none'
+    },
+    btn: {
+        fontSize: 13,
+        width: 60,
+        color: 'white',
+        textDecoration: 'none',
+    },
+    float_right: {
+        float: 'right'
     },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
     },
-    logo: {
-        textAlign: 'center',
+    root: {
+        flexGrow: 1,
+        backgroundColor: '#333',
+    },
+    grow: {
+        flexGrow: 1,
+        fontSize: 25,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
+    logo_text: {
+        color: 'white',
         textDecoration: 'none',
-        color: 'black'
-    }
-});
+        fontWeight: 'bold',
+        marginLeft: 20,
+    },
+    button_text: {
+        color: 'white',
+        textDecoration: 'none',
+    },
+})
+
 
 class MenuAppBar extends React.Component {
     state = {
@@ -62,31 +100,42 @@ class MenuAppBar extends React.Component {
 
         return (
             <React.Fragment>
-                <div className={classes.root}>
-                    <AppBar position="static" className={classes.grow}>
-                        <Toolbar>
-                            <DrawerView></DrawerView>
+                <AppBar position="static" className={classes.root}>
+                    <Toolbar>
 
-                            <Grid item xs={12} className={classes.logo}>
-                                <Typography component="h1" variant="headline" color="inherit" className={classes.grow}>
-                                    <Link href="/">
-                                        <a className={classes.logo}>LOGO</a>
-                                    </Link>
-                                </Typography>
-                            </Grid>
+                        <DrawerView></DrawerView>
 
-                            {auth && (
-                                <div>
+                        <Typography variant="h1" color="inherit" className={classes.grow}>
+                            <Link href="/">
+                                <a className={classes.logo_text}>로고</a>
+                            </Link>
+                        </Typography>
+                        <Button color="inherit">
+                            <Link href="/users/signin">
+                                <a className={classes.button_text}>로그인</a>
+                            </Link>
+                        </Button>
+                        <Button color="inherit">
+                            <Link href="/users/signup">
+                                <a className={classes.button_text}>회원가입</a>
+                            </Link>
+                        </Button>
 
-                                    <SignOutToggle></SignOutToggle>
+                        <IconButton color="inherit">
+                            <Link href="/users/myPage">
+                                <PersonIcon/>
+                            </Link>
+                        </IconButton>
 
-                                    <SignInToggle></SignInToggle>
+                        <Button color="inherit">
+                            <Link href="/">
+                                <a className={classes.button_text}>로그아웃</a>
+                            </Link>
+                        </Button>
 
-                                </div>
-                            )}
-                        </Toolbar>
-                    </AppBar>
-                </div>
+
+                    </Toolbar>
+                </AppBar>
             </React.Fragment>
         );
     }

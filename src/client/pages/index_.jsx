@@ -4,9 +4,15 @@ import {withStyles} from '@material-ui/core/styles';
 import WithRoot from '../lib/withRoot';
 import Link from 'next/link';
 
+//Core 컴포넌트
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
+// 컴포넌트
 import MenuAppBar from '../components/appBar';
 import PaperSheet from '../components/visual';
-import MediaCard from '../components/mediaCards';
+import MediaCard from '../components/mediaCard';
+
 
 //스타일링
 const styles = theme => ({
@@ -49,6 +55,8 @@ class IndexView extends React.Component {
 
                     <PaperSheet></PaperSheet>
 
+                    <MediaCard></MediaCard>
+                    
                 </div>
             </React.Fragment>
         );

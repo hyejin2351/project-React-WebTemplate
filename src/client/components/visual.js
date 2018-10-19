@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 // Core 컴포넌트
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 
 //스타일링
 const styles = theme => ({
@@ -16,27 +19,47 @@ const styles = theme => ({
         textAlign: 'center',
     },
     transBlack: {
-        paddingTop: theme.spacing.unit * 30,
-        paddingBottom: theme.spacing.unit * 30,
+        padding: theme.spacing.unit * 25,
         textAlign: 'center',
-
-    }
+    },
+    visual_btn: {
+        '&': {
+            color: 'black',
+            backgroundColor: 'white',
+            marginTop: theme.spacing.unit * 2,
+        },
+        '&:hover': {
+            backgroundColor: 'white'
+        },
+    },
+    visual_title: {
+        fontSize: 40
+    },
 });
+
 
 function PaperSheet(props) {
     const {classes} = props;
 
+
     return (
         <React.Fragment>
-            <Paper className={classes.root}>
+            <Paper square={true} className={classes.root}>
                 <div className={classes.transBlack}>
 
-                    <Typography variant="headline" component="h3" className={classes.typo}>
-                        타이틀1
+                    <Typography
+                        gutterBottom
+                        className={classNames(classes.typo, classes.visual_title)}>
+                        비주얼 영역 타이틀
                     </Typography>
-                    <Typography component="p" className={classes.typo}>
-                        텍스트1
+
+                    <Typography
+                        gutterBottom
+                        className={classes.typo}>
+                        비주얼 영역 텍스트
                     </Typography>
+
+                    <Button className={classes.visual_btn}> 자세히 보기 </Button>
 
                 </div>
             </Paper>

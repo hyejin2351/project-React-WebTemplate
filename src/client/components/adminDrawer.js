@@ -19,6 +19,8 @@ const styles = {
     fullList: {
         width: 'auto',
     },
+    menuButton: {
+    },
 };
 
 class DrawerView extends React.Component {
@@ -52,10 +54,10 @@ class DrawerView extends React.Component {
 
         return (
             <div>
-                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu"
+                <Button className={classes.menuButton} color="inherit" aria-label="Menu"
                             onClick={this.toggleDrawer('left', true)}>
                     <MenuIcon />
-                </IconButton>
+                </Button>
 
                 <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
                     <div
