@@ -48,6 +48,8 @@ function MediaCard(props) {
                                 <CardMedia
                                     className={classes.media}
                                     title="Contemplative Reptile"
+                                    src="/"
+                                    image="/"
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
@@ -75,6 +77,8 @@ function MediaCard(props) {
                                 <CardMedia
                                     className={classes.media}
                                     title="Contemplative Reptile"
+                                    src="/"
+                                    image="/"
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
@@ -102,6 +106,8 @@ function MediaCard(props) {
                                 <CardMedia
                                     className={classes.media}
                                     title="Contemplative Reptile"
+                                    src="/"
+                                    image="/"
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
@@ -129,6 +135,8 @@ function MediaCard(props) {
                                 <CardMedia
                                     className={classes.media}
                                     title="Contemplative Reptile"
+                                    src="/"
+                                    image="/"
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
