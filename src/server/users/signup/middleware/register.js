@@ -36,6 +36,8 @@ function validateSignupData(data) {
       error = 'Name is more than 2 letters.';
     else if(password !== confirmPassword)
       error = 'Password and verification password are different.';
+    else if(serviceCheck === 'false')
+      error = 'Consent to the Terms and Conditions is required.';
   }
   return new JSONResponse(!error, error, { email, password, nickName, name, ...rest });
 }
