@@ -2,6 +2,7 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
+import WidtAuth from '../../../lib/withAuth';
 import BoardNewView from './boardNew_.jsx';
 const log = debug('app:boardNew');
 
@@ -26,4 +27,4 @@ class BoardNewPage extends React.Component {
     }
 }
 
-export default BoardNewPage;
+export default WidtAuth(BoardNewPage);

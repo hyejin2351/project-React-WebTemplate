@@ -2,6 +2,8 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
+import WidtAuth from '../../../lib/withAuth';
+
 import BoardEditView from './boardEdit_.jsx';
 const log = debug('app:boardEdit');
 
@@ -26,4 +28,4 @@ class BoardEditPage extends React.Component {
     }
 }
 
-export default BoardEditPage;
+export default WidtAuth(BoardEditPage);

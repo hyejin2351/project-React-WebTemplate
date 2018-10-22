@@ -63,7 +63,7 @@ module.exports = ({
           log('auth failure: ', err || 'no user');
           return res.status(400).json({
             success: false,
-            message: 'Invalid request'
+            message: 'no user'
           });
         }
         req.login(user, (loginErr) => {

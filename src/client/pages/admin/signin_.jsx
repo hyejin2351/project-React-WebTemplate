@@ -72,7 +72,7 @@ const styles = theme => ({
 
 
 function signinPage(props) {
-    const {classes} = props;
+    const {classes, onSubmit, onChange} = props;
 
     return (
         <React.Fragment>
@@ -89,19 +89,23 @@ function signinPage(props) {
                     <div className={classes.container}>
                         <Input
                             placeholder="이메일"
-                            className={classes.input}>
+                            className={classes.input}
+                            name="email"
+                            onChange={onChange}>
                         </Input>
 
                         <Input
                             placeholder="비밀번호 (6자리 이상)"
                             className={classes.input}
-                            type="password">
+                            type="password"
+                            name="password"
+                            onChange={onChange}>
                         </Input>
                     </div>
 
 
                     <Button fullWidth={true} variant="contained" color="primary"
-                            className={classes.signUpBtn}>로그인하기</Button>
+                            className={classes.signUpBtn} onClick={onSubmit}>로그인하기</Button>
 
 
                 </Paper>

@@ -40,6 +40,9 @@ const queries = `
   getArticle(
     id: String!
   ): Article
+  
+  getArticlesCount
+  : Int
 `;
 
 const mutations = `
@@ -74,6 +77,14 @@ const resolvers = {
       }).catch(err => {
         return err;
       });
+    },
+
+    getArticlesCount: (_, __, context) => {
+      return ArticleModel.find( {} ).then( articles => {
+        return articles ? articles.length : 0
+      }).catch(err => {
+        return 0;
+      })
     },
   },
 
@@ -134,7 +145,7 @@ function isAdminUser(roles) {
 
 /*
  Request graphql
- 1. getArticles
+ # getArticles
 
  query {
    getArticles {
@@ -157,7 +168,7 @@ function isAdminUser(roles) {
    }
  }
 
-2. getArticle
+ # getArticle
  query {
    getArticle(id:"5bc6eed995e64c22f3a4c41e")
    {
@@ -169,7 +180,12 @@ function isAdminUser(roles) {
    }
  }
 
-3. createArticle
+ # getArticlesCount
+ query {
+ getArticlesCount
+ }
+
+ # createArticle
  mutation {
    createArticle(articleData: {
        title: "tes1t@gmail.com"
@@ -184,7 +200,7 @@ function isAdminUser(roles) {
    }
  }
 
-4. deleteArticle
+ # deleteArticle
  mutation {
    deleteArticle(
     id: "5bc6fd0581b34a28aa61a144"
@@ -198,7 +214,7 @@ function isAdminUser(roles) {
    }
  }
 
-5.
+ # updateArticle
  mutation {
    updateArticle(
      id: "5bc6eed995e64c22f3a4c437"

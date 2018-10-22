@@ -180,6 +180,20 @@ module.exports = {
  * Request graphql query
  *
 
+ # me
+ query Auth {
+        me {
+          id,
+          name,
+          email,
+          nickName,
+          profileImageURL
+          roles,
+          providerType,
+          created
+        }
+      }
+ 
  # getUsers()
  query {
   getUsers (

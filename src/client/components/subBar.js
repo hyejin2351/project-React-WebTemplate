@@ -25,9 +25,6 @@ function SimpleAppBar(props) {
     const {classes} = props;
     let {title} = props;
 
-    console.log('1');
-    console.log(props);
-
     // title 정보가 없는경우 기본 title명으로 메인페이지로 설정한다.
     if (!title)
         title = '메인페이지';

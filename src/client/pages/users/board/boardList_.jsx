@@ -83,8 +83,8 @@ const styles = theme => ({
 });
 
 
-function BoardNewPage(props) {
-    const {classes} = props;
+function BoardLIstView(props) {
+    const {classes, getArticles, getArticlesCount} = props;
 
     return (
         <React.Fragment>
@@ -97,7 +97,7 @@ function BoardNewPage(props) {
                         <div className={classes.title_left}>
                             <Typography component="h3" className={classes.paper_title}>게시판</Typography>
                             <Typography variant="caption" className={classes.total}>총 <span
-                                className={classes.total_span}>70</span>개</Typography>
+                                className={classes.total_span}>{getArticlesCount}</span>개</Typography>
                         </div>
 
                         <div className={classes.title_right}>
@@ -119,8 +119,8 @@ function BoardNewPage(props) {
     );
 }
 
-BoardNewPage.propTypes = {
+BoardLIstView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(BoardNewPage));
+export default WithRoot(withStyles(styles)(BoardLIstView));
