@@ -1,6 +1,7 @@
 import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
+import WithAdmin from '../../../lib/withAdmin';
 
 import BoardDetailView from './boardDetail_.jsx';
 const log = debug('app:boardDetail');
@@ -26,4 +27,4 @@ class BoardDetailPage extends React.Component {
     }
 }
 
-export default BoardDetailPage;
+export default WithAdmin(BoardDetailPage);
