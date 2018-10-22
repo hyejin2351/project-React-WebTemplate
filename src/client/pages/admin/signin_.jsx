@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 //컴포넌트
 import MngBar from '../../components/admin/mngAppBar';
@@ -87,20 +88,27 @@ function signinPage(props) {
 
 
                     <div className={classes.container}>
-                        <Input
-                            placeholder="이메일"
-                            className={classes.input}
-                            name="email"
-                            onChange={onChange}>
-                        </Input>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
+                                placeholder="이메일"
+                                className={classes.input}
+                                name="email"
+                                onChange={onChange}>
+                            </TextField>
 
-                        <Input
-                            placeholder="비밀번호 (6자리 이상)"
-                            className={classes.input}
-                            type="password"
-                            name="password"
-                            onChange={onChange}>
-                        </Input>
+
+                            <TextField
+                                fullWidth
+                                autoComplete="off"
+                                placeholder="비밀번호 (6자리 이상)"
+                                className={classes.input}
+                                type="password"
+                                name="password"
+                                onChange={onChange}>
+                            </TextField>
+                        </form>
                     </div>
 
 

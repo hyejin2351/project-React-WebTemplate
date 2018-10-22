@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
 //컴포넌트
 import SimpleAppBar from '../../components/subBar';
@@ -132,7 +133,7 @@ function profile(props) {
                                     <Paper elevation={0} className={classes.nick_paper_wrap}>
                                         <Typography
                                             className={classes.paper_title}>닉네임</Typography>
-                                        <input type="text" className={classes.nick_input}/>
+                                        <TextField type="text" className={classes.nick_input}></TextField>
                                     </Paper>
                                 </Grid>
                             </Paper>
