@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 
 import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
@@ -117,7 +118,9 @@ class MenuAppBar extends React.Component {
 
                         <IconButton color="inherit">
                             <Link href="/users/myPage">
-                                <PersonIcon/>
+                                <Avatar src="/static/images/defaultProfile.png"
+                                        className={classes.profile_img}
+                                ></Avatar>
                             </Link>
                         </IconButton>
 

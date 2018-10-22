@@ -82,7 +82,6 @@ const styles = theme => ({
     },
     pwd_text: {
         width: 200,
-        fontSize: 13,
         textAlign: 'left'
     },
     pwd_input: {
@@ -124,8 +123,8 @@ function passwordChange(props) {
                                           alignItems="center"
                                     >
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <p className={classNames(classes.pwd_area, classes.pwd_text)}>
-                                                현재 비밀번호</p>
+                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                                현재 비밀번호</Typography>
                                         </Paper>
                                         <Paper elevation={0} className={classes.inner_paper}>
                                             <p>
@@ -148,9 +147,8 @@ function passwordChange(props) {
                                           alignItems="center"
                                     >
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <p className={classNames(classes.pwd_area, classes.pwd_text)}>
-                                                새 비밀번호
-                                            </p>
+                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                                새 비밀번호</Typography>
                                         </Paper>
                                         <Paper elevation={0} className={classes.inner_paper}>
                                             <p className={classes.pwd_area}><input type="password"
@@ -167,9 +165,8 @@ function passwordChange(props) {
                                           alignItems="center"
                                     >
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <p className={classNames(classes.pwd_area, classes.pwd_text)}>
-                                                새 비밀번호 재확인
-                                            </p>
+                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                                새 비밀번호 재확인</Typography>
                                         </Paper>
                                         <Paper elevation={0} className={classes.inner_paper}>
                                             <p className={classes.pwd_area}>

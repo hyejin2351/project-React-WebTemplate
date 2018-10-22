@@ -2,8 +2,8 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
-import ProfileView from './profile_.jsx';
-const log = debug('app:profile');
+import ProfileView from './profileChange_.jsx';
+const log = debug('app:profileChange');
 
 class ProfilePage extends React.Component {
     handleClick(event, client) {

@@ -2,36 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Link from 'next/link';
 import WithRoot from '../../lib/withRoot';
+import Link from 'next/link';
 
-// Core 컴포넌트
+//Core 컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-// 컴포넌트
+//컴포넌트
 import MenuAppBar from '../../components/appBar';
 import SimpleAppBar from '../../components/subBar';
 
-// 이미지
-// let imgUrl = '/static/images/line.png'
-
-// 스타일링
+//스타일링
 const styles = theme => ({
     root: {
+        minWidth: 450,
         flexGrow: 1,
         margin: theme.spacing.unit * 3
     },
 
-    //버튼
+    //버튼 스타일
     btn_color: {
         color: '#fff',
         textDecoration: 'none'
     },
 
-    //페이퍼
+    //페이퍼 스타일
     paper: {
         padding: theme.spacing.unit * 3,
         overflow: 'hidden',
@@ -44,17 +42,6 @@ const styles = theme => ({
         fontWeight: 'bold',
         marginBottom: theme.spacing.unit * 2
     },
-    firstline_paper_height: {
-        minHeight: 350,
-        maxHeight: 350
-    },
-    paper_inner_wrap: {
-        minHeight: 265
-    },
-    profile_img: {
-        display: 'block',
-        maxWidth: 300
-    },
     body_title: {
         padding: theme.spacing.unit * 1,
         backgroundColor: 'transparent'
@@ -65,7 +52,7 @@ const styles = theme => ({
         width: '140px',
         margin: '0 auto',
         backgroundColor: 'transparent',
-        marginBottom: theme.spacing.unit * 10
+        marginTop: theme.spacing.unit * 7
     },
     right_btn: {
         marginLeft: 12,
@@ -76,96 +63,146 @@ const styles = theme => ({
         textDecoration: 'none'
     },
 
-    //닉네임 수정란
-    nick_paper_wrap: {
-        maxWidth: 200,
-        paddingTop: theme.spacing.unit * 13
+    //페이퍼
+    outer_spacing: {
+        width: '100%',
+        margin: theme.spacing.unit * 1
     },
-    nick_input: {
+    outer_paper: {
+        width: '100%',
+        padding: theme.spacing.unit * 2
+    },
+    border_bottom: {
+        borderBottom: '1px solid #eee'
+    },
+
+    //비밀번호 수정란
+    pwd_area: {
+        width: '100%'
+    },
+    pwd_text: {
+        width: 200,
+        textAlign: 'left'
+    },
+    pwd_input: {
         padding: theme.spacing.unit * 1
     }
 });
 
-function passwordChangeView(props) {
+
+function passwordChange(props) {
     const {classes} = props;
 
     return (
         <React.Fragment>
             <MenuAppBar></MenuAppBar>
-            <SimpleAppBar title="프로필 수정"></SimpleAppBar>
+            <SimpleAppBar title="비밀번호 변경"></SimpleAppBar>
 
             <div className={classes.root}>
                 <Paper elevation={0} className={classes.body_title}>
-                    <Typography variant="h6" className={classes.paper_title}>프로필 수정 ></Typography>
+                    <Typography variant="h6" className={classes.paper_title}>비밀번호 변경 ></Typography>
                     <Typography variant="caption" className={classes.paper_title}>
-                        내 프로필 사진과 닉네임을 수정할 수 있습니다.
+                        현재 사용 중인 비밀번호를 변경할 수 있습니다.
                     </Typography>
                 </Paper>
 
-                <Grid container spacing={16}>
-                    <Grid item xs={12} md={6}>
-                        <div className={classes.paper_wrap}>
-                            <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
-                                <Grid
-                                    container
-                                    direction="row"
-                                    justify="center"
-                                    alignItems="center"
-                                >
-                                    <Paper elevation={0} className={classes.paper_inner_wrap}>
-                                        <img src="/static/images/profile.png" alt="변경 또는 삭제할 프로필 사진"
-                                             className={classes.profile_img}/>
 
-                                        <Paper elevation={0} className={classes.two_btn_wrap}>
-                                            <Button variant="outlined" size="small">변경</Button>
-                                            <Button variant="outlined" size="small"
-                                                    className={classes.right_btn}>삭제</Button>
+                <Grid container item xs={12}>
+                    <Paper className={classes.outer_spacing}>
+                        <Paper square={true} elevation={0}
+                               className={classNames(classes.outer_paper, classes.border_bottom)}>
+
+                            <Grid item xs={12}>
+                                <Paper elevation={0} className={classes.mid_paper}>
+
+
+                                    <Grid item xs={12} sm={12}
+                                          container
+                                          direction="row"
+                                          justify="center"
+                                          alignItems="center"
+                                    >
+                                        <Paper elevation={0} className={classes.inner_paper}>
+                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                                현재 비밀번호</Typography>
                                         </Paper>
-                                    </Paper>
-                                </Grid>
-                            </Paper>
-                        </div>
-                    </Grid>
+                                        <Paper elevation={0} className={classes.inner_paper}>
+                                            <p>
+                                                <input type="password" className={classes.pwd_input}/>
+                                            </p>
+                                        </Paper>
+                                    </Grid>
+                                </Paper>
+                            </Grid>
+                        </Paper>
+
+                        <Paper square={true} elevation={0} className={classes.outer_paper}>
+
+                            <Grid item xs={12}>
+                                <Paper elevation={0} className={classes.mid_paper}>
+                                    <Grid item xs={12} sm={12}
+                                          container
+                                          direction="row"
+                                          justify="center"
+                                          alignItems="center"
+                                    >
+                                        <Paper elevation={0} className={classes.inner_paper}>
+                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                                새 비밀번호</Typography>
+                                        </Paper>
+                                        <Paper elevation={0} className={classes.inner_paper}>
+                                            <p className={classes.pwd_area}><input type="password"
+                                                                                   className={classes.pwd_input}/>
+                                            </p>
+                                        </Paper>
+                                    </Grid>
 
 
-                    <Grid item xs={12} md={6}>
-                        <div className={classes.paper_wrap}>
-                            <Paper className={classNames(classes.paper, classes.firstline_paper_height)}>
-                                <Grid container justify="center" alignItems="center" direction="row">
-                                    <Paper elevation={0} className={classes.nick_paper_wrap}>
-                                        <Typography
-                                            className={classes.paper_title}>닉네임</Typography>
-                                        <input type="text" className={classes.nick_input}/>
-                                    </Paper>
-                                </Grid>
-                            </Paper>
-                        </div>
-                    </Grid>
+                                    <Grid item xs={12} sm={12}
+                                          container
+                                          direction="row"
+                                          justify="center"
+                                          alignItems="center"
+                                    >
+                                        <Paper elevation={0} className={classes.inner_paper}>
+                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                                새 비밀번호 재확인</Typography>
+                                        </Paper>
+                                        <Paper elevation={0} className={classes.inner_paper}>
+                                            <p className={classes.pwd_area}>
+                                                <input type="password" className={classes.pwd_input}/>
+                                            </p>
+                                        </Paper>
+
+                                    </Grid>
+                                </Paper>
+                            </Grid>
+                        </Paper>
+                    </Paper>
                 </Grid>
             </div>
 
 
-            <Paper elevation={0}
-                   className={classes.two_btn_wrap}>
-                <Button variant="contained" color="primary" size="medium">
-                    <Link href="/users/myPage" prefetch>
+            <Paper elevation={0} className={classes.two_btn_wrap}>
+                <Button variant="contained" color="primary" size="medium" className={classes.float_right}>
+                    <Link href="/users/myPage">
                         <a className={classes.btn_color}>적용</a>
                     </Link>
                 </Button>
 
                 <Button variant="outlined" size="medium"
                         className={classes.right_btn}>
-                    <Link href="/users/myPage" prefetch>
+                    <Link href="/users/myPage">
                         <a className={classes.black_color_btn}>취소</a>
                     </Link>
                 </Button>
             </Paper>
         </React.Fragment>
-    );
+    )
 }
 
-passwordChangeView.propTypes = {
+passwordChange.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(passwordChangeView));
+export default WithRoot(withStyles(styles)(passwordChange));
