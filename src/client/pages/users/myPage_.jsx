@@ -103,7 +103,7 @@ function MyPageView(props) {
                                     alignItems="center"
                                 >
                                     <Paper elevation={0} className={classes.paper_inner_wrap}>
-                                        <img src="/static/images/profile.png" alt="기본 프로필 사진"
+                                        <img src="/static/images/defaultProfile.png" alt="기본 프로필 사진"
                                              className={classes.profile_img}/>
                                         <Typography variant="body1" align="center"><strong>닉네임</strong></Typography>
                                         <Typography variant="body1" align="center">홍당무</Typography>

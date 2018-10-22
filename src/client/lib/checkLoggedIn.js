@@ -7,6 +7,7 @@ export default ({ apolloClient }) => (
         me {
           id,
           name,
+          email,
           nickName,
           profileImageURL
           roles,

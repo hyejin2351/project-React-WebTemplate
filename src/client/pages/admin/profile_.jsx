@@ -111,7 +111,7 @@ function profile(props) {
                                     alignItems="center"
                                 >
                                     <Paper elevation={0} className={classes.paper_inner_wrap}>
-                                        <img src="/static/images/profile.png" alt="변경 또는 삭제할 프로필 사진"
+                                        <img src="/static/images/defaultProfile.png" alt="변경 또는 삭제할 프로필 사진"
                                              className={classes.profile_img}/>
                                         <Paper elevation={0} className={classes.two_btn_wrap}>
                                             <Button variant="outlined" size="small">변경</Button>
