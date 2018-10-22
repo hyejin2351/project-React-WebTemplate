@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 //컴포넌트
 import MenuAppBar from '../../components/appBar';
@@ -122,47 +123,62 @@ function signUp(props) {
                     </div>
 
                     <div className={classes.container}>
-                        <Input
-                            placeholder="성명"
-                            className={classes.input}
-                            type="text"
-                            name="name"
-                            onChange={onChange}>
-                        </Input>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
+                                placeholder="성명"
+                                className={classes.input}
+                                type="text"
+                                name="name"
+                                onChange={onChange}>
+                            </TextField>
 
-                        <Input
-                            placeholder="닉네임"
-                            className={classes.input}
-                            type="text"
-                            name="nickName"
-                            onChange={onChange}>
-                        </Input>
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
+                                placeholder="닉네임"
+                                className={classes.input}
+                                type="text"
+                                name="nickName"
+                                onChange={onChange}>
+                            </TextField>
+                        </form>
                     </div>
 
                     <div>
-                        <Input
-                            placeholder="이메일"
-                            className={classes.input}
-                            type="text"
-                            name="email"
-                            onChange={onChange}>
-                        </Input>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                fullWidth
 
-                        <Input
-                            placeholder="비밀번호"
-                            className={classes.input}
-                            type="password"
-                            name="password"
-                            onChange={onChange}>
-                        </Input>
+                                autoComplete="on"
+                                placeholder="이메일"
+                                className={classes.input}
+                                type="text"
+                                name="email"
+                                onChange={onChange}>
+                            </TextField>
 
-                        <Input
-                            placeholder="비밀번호 재확인"
-                            className={classes.input}
-                            type="password"
-                            name="confirmPassword"
-                            onChange={onChange}>
-                        </Input>
+                            <TextField
+                                fullWidth
+                                autoComplete="off"
+                                placeholder="비밀번호"
+                                className={classes.input}
+                                type="password"
+                                name="password"
+                                onChange={onChange}>
+                            </TextField>
+
+                            <TextField
+                                fullWidth
+                                autoComplete="off"
+                                placeholder="비밀번호 재확인"
+                                className={classes.input}
+                                type="password"
+                                name="confirmPassword"
+                                onChange={onChange}>
+                            </TextField>
+                        </form>
                     </div>
 
                     <CheckboxLabels componentName={'serviceCheck'} onChange={onChangeCheck}></CheckboxLabels>
@@ -173,7 +189,7 @@ function signUp(props) {
                     </Button>
 
 
-                    <Typography align="right" className={classes.notYet}>이미 계정이 있으신가요?
+                    <Typography align="right" className={classes.notYet}>이미 계정이 있으신가요? &nbsp;
                         <a href="/users/signin"
                            className={classes.signUp}>로그인</a></Typography>
                 </Paper>

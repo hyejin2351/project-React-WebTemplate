@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Link from 'next/link';
 import WithRoot from '../../lib/withRoot'
+import TextField from '@material-ui/core/TextField';
 
 //Core 컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
 
 //컴포넌트
 import MenuAppBar from '../../components/appBar';
@@ -118,21 +117,27 @@ function SigninPage(props) {
 
 
                     <div className={classes.container}>
-                        <Input
-                            placeholder="이메일"
-                            className={classes.input}
-                            name="email"
-                            onChange={onChange}>
-                        </Input>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
+                                placeholder="이메일"
+                                className={classes.input}
+                                name="email"
+                                onChange={onChange}>
+                            </TextField>
 
 
-                        <Input
-                            placeholder="비밀번호 (6자리 이상)"
-                            className={classes.input}
-                            type="password"
-                            name="password"
-                            onChange={onChange}>
-                        </Input>
+                            <TextField
+                                fullWidth
+                                autoComplete="off"
+                                placeholder="비밀번호 (6자리 이상)"
+                                className={classes.input}
+                                type="password"
+                                name="password"
+                                onChange={onChange}>
+                            </TextField>
+                        </form>
                     </div>
 
 
@@ -141,7 +146,7 @@ function SigninPage(props) {
                     </Button>
 
 
-                    <Typography align="right" className={classes.notYet}>아직 회원이 아니신가요?
+                    <Typography align="right" className={classes.notYet}>아직 회원이 아니신가요? &nbsp;
                         <a href="/users/signup"
                            className={classes.signUp}>회원가입</a></Typography>
                 </Paper>

@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import WithRoot from '../../lib/withRoot';
 import Link from 'next/link';
+import TextField from '@material-ui/core/TextField';
 
 //Core 컴포넌트
 import Button from '@material-ui/core/Button';
@@ -86,7 +87,11 @@ const styles = theme => ({
     },
     pwd_input: {
         padding: theme.spacing.unit * 1
-    }
+    },
+
+    inner_paper: {
+        margin: 10,
+    },
 });
 
 
@@ -123,13 +128,17 @@ function passwordChange(props) {
                                           alignItems="center"
                                     >
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                            <Typography variant="body2"
+                                                        className={classNames(classes.pwd_area, classes.pwd_text)}>
                                                 현재 비밀번호</Typography>
                                         </Paper>
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <p>
-                                                <input type="password" className={classes.pwd_input}/>
-                                            </p>
+                                            <form>
+                                                <TextField
+                                                    autoComplete="off"
+                                                    type="password"
+                                                    className={classes.pwd_input}/>
+                                            </form>
                                         </Paper>
                                     </Grid>
                                 </Paper>
@@ -147,13 +156,17 @@ function passwordChange(props) {
                                           alignItems="center"
                                     >
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                            <Typography variant="body2"
+                                                        className={classNames(classes.pwd_area, classes.pwd_text)}>
                                                 새 비밀번호</Typography>
                                         </Paper>
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <p className={classes.pwd_area}><input type="password"
-                                                                                   className={classes.pwd_input}/>
-                                            </p>
+                                            <form className={classes.pwd_area}>
+                                                <TextField
+                                                    autoComplete="off"
+                                                    type="password"
+                                                    className={classes.pwd_input}/>
+                                            </form>
                                         </Paper>
                                     </Grid>
 
@@ -165,13 +178,17 @@ function passwordChange(props) {
                                           alignItems="center"
                                     >
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <Typography variant="body2" className={classNames(classes.pwd_area, classes.pwd_text)}>
+                                            <Typography variant="body2"
+                                                        className={classNames(classes.pwd_area, classes.pwd_text)}>
                                                 새 비밀번호 재확인</Typography>
                                         </Paper>
                                         <Paper elevation={0} className={classes.inner_paper}>
-                                            <p className={classes.pwd_area}>
-                                                <input type="password" className={classes.pwd_input}/>
-                                            </p>
+                                            <form className={classes.pwd_area}>
+                                                <TextField
+                                                    autoComplete="off"
+                                                    type="password"
+                                                    className={classes.pwd_input}/>
+                                            </form>
                                         </Paper>
 
                                     </Grid>
