@@ -1,6 +1,7 @@
 import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
+import WithAdmin from '../../lib/withAdmin';
 
 import MembersListView from './membersList_.jsx';
 const log = debug('app:membersList');
@@ -26,4 +27,4 @@ class MembersListPage extends React.Component {
     }
 }
 
-export default MembersListPage;
+export default WithAdmin(MembersListPage);

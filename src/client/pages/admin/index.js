@@ -21,6 +21,7 @@ class IndexPage extends React.Component {
                 {client => (
                     <IndexView
                         onHandleClick={e=> this.handleClick(e, client)}
+                        me = {this.props.me}
                     />
                 )}
             </ApolloConsumer>

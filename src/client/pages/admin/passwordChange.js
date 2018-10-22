@@ -1,6 +1,7 @@
 import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
+import WithAdmin from '../../lib/withAdmin';
 
 import PasswordChangeView from './passwordChange_.jsx';
 const log = debug('app:passwordChange');
@@ -26,4 +27,4 @@ class PasswordChangePage extends React.Component {
     }
 }
 
-export default PasswordChangePage;
+export default WithAdmin(PasswordChangePage);

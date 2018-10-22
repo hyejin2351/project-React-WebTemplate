@@ -4,6 +4,7 @@ import { ApolloConsumer } from 'react-apollo';
 
 import ProfileView from './profileChange_.jsx';
 const log = debug('app:profileChange');
+import WithAdmin from '../../lib/withAdmin';
 
 class ProfilePage extends React.Component {
     handleClick(event, client) {
@@ -26,4 +27,4 @@ class ProfilePage extends React.Component {
     }
 }
 
-export default ProfilePage;
+export default WithAdmin(ProfilePage);
