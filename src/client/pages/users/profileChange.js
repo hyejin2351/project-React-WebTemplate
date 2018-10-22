@@ -1,6 +1,7 @@
 import React from 'react';
 import debug from 'debug';
-import { ApolloConsumer } from 'react-apollo';
+import {ApolloConsumer} from 'react-apollo';
+import withAuth from '../../lib/withAuth';
 
 import ProfileView from './profileChange_.jsx';
 const log = debug('app:profileChange');
@@ -26,4 +27,4 @@ class ProfilePage extends React.Component {
     }
 }
 
-export default ProfilePage;
+export default withAuth(ProfilePage);

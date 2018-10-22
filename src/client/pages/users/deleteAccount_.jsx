@@ -62,7 +62,7 @@ const styles = theme => ({
 
 //render
 function DeleteAccountView(props) {
-    const {classes} = props;
+    const {classes, me} = props;
 
     return (
         <React.Fragment>
@@ -80,7 +80,7 @@ function DeleteAccountView(props) {
 
                 <Grid container item xs={12}>
                     <Paper className={classes.outer_spacing}>
-                        <Typography variant="body1" gutterBottom>탈퇴 후에는 이메일 <span className={classes.email_span}>id@email.com</span>
+                        <Typography variant="body1" gutterBottom>탈퇴 후에는 이메일 <span className={classes.email_span}> {me.email} </span>
                             로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수
                             없습니다.</Typography>
                         <Typography variant="body1" gutterBottom>게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</Typography>

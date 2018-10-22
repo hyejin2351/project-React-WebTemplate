@@ -22,9 +22,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 // import TableHead from '@material-ui/core/TableHead';
 
-//이미지
-// let imgUrl = '/static/images/line.png'
-
 // 스타일링
 const styles = theme => ({
     root: {
@@ -88,7 +85,7 @@ const styles = theme => ({
 });
 
 function MyPageView(props) {
-    const {classes, onSignout} = props;
+    const {classes, onSignout, me} = props;
 
     return (
         <React.Fragment>
@@ -110,12 +107,12 @@ function MyPageView(props) {
                                 >
                                     <Paper elevation={0} className={classes.paper_inner_wrap}>
                                         <Paper elevation={0} className={classes.profile_img_area}>
-                                            <img src="/static/images/defaultProfile.png" alt="기본 프로필 사진"
+                                            <img src={me.profileImageURL} alt="기본 프로필 사진"
                                                  className={classes.profile_img}/>
                                         </Paper>
                                         <Paper elevation={0}>
                                             <Typography gutterBottom variant="body1" align="center"><strong>닉네임</strong></Typography>
-                                            <Typography variant="body1" align="center">홍당무</Typography>
+                                            <Typography variant="body1" align="center"> {me.nickName} </Typography>
                                         </Paper>
                                     </Paper>
                                 </Grid>
@@ -145,7 +142,7 @@ function MyPageView(props) {
                                                         <Typography variant="body1"><strong>성명</strong></Typography>
                                                     </TableCell>
                                                     <TableCell className={classes.table_cell}>
-                                                        <Typography variant="body1">홍길동</Typography>
+                                                        <Typography variant="body1">{me.name}</Typography>
                                                     </TableCell>
                                                 </TableRow>
 
@@ -155,7 +152,7 @@ function MyPageView(props) {
                                                         <Typography variant="body1"><strong>이메일</strong></Typography>
                                                     </TableCell>
                                                     <TableCell className={classes.table_cell}>
-                                                        <Typography variant="body1">id@email.com</Typography>
+                                                        <Typography variant="body1">{me.email}</Typography>
                                                     </TableCell>
                                                 </TableRow>
 

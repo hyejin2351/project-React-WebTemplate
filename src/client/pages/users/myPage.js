@@ -1,11 +1,10 @@
 import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
+import withAuth from '../../lib/withAuth';
 
 import redirect from '../../lib/redirect';
 import AuthService from '../../lib/AuthService';
-
-import withAuth from '../../lib/withAuth';
 
 import MyPageView from './myPage_.jsx';
 const log = debug('app:myPage');
@@ -36,6 +35,7 @@ class MyPagePage extends React.Component {
                 {client => (
                     <MyPageView
                         onSignout={this.signout(client)}
+                        me={this.props.me}
                     />
                 )}
             </ApolloConsumer>
