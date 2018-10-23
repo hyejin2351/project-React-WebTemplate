@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Link from 'next/link';
+import debug from 'debug';
 
 // Core 컴포넌트
 import AppBar from '@material-ui/core/AppBar';
@@ -12,6 +13,12 @@ import Grid from '@material-ui/core/Grid';
 
 // 컴포넌트 (drawer)
 import DrawerView from './adminDrawer';
+
+import checkLoggedIn from '../../lib/checkLoggedIn';
+import AuthService from '../../lib/AuthService';
+import redirect from '../../lib/redirect';
+
+const log = debug('app:appBar');
 
 //스타일링
 const styles = theme => ({
@@ -38,27 +45,48 @@ const styles = theme => ({
     }
 });
 class MngBar extends React.Component {
-    state = {
-        auth: true,
-        anchorEl: null,
-    };
+    // 리액트 컴포넌트가 최초에 생성될때 호출되는 함수 -- 변수 선언, 초기화
+    constructor(props) {
+        super(props);
 
-    handleChange = event => {
-        this.setState({auth: event.target.checked});
-    };
+        this.state = {
+            me: {
 
-    handleMenu = event => {
-        this.setState({anchorEl: event.currentTarget});
-    };
+            }
+        };
 
-    handleClose = () => {
-        this.setState({anchorEl: null});
-    };
+        this.signout = this.signout.bind(this);
+    }
 
+    // 리액트 컴포넌트가 화면에 그려지기전에 호출되는 함수 -- 컴포넌트가 필요한 정보를 구하기
+    async componentDidMount() {
+        const me = await checkLoggedIn(this.props);
+        this.setState({
+            ...me
+        });
+    }
+
+    async signout() {
+        const { apolloClient } = this.props;
+        if(apolloClient) {
+            try{
+                await AuthService.logout({
+                    uri: '/api/auth/logout',
+                    apolloClient
+                });
+
+                // Redirect to a more useful page when signed out
+                redirect(null, '/admin/signin');
+            } catch (err) {
+
+            }
+        }
+    }
+
+    // 리액트 컴포넌트가 실제 화면에 그려질때 호출되는 함수
     render() {
         const {classes} = this.props;
-        const {auth, anchorEl} = this.state;
-        const open = Boolean(anchorEl);
+        const { me } = this.state;
 
         return (
             <div className={classes.root}>
@@ -74,18 +102,18 @@ class MngBar extends React.Component {
                             </Typography>
                         </Grid>
 
-
-                        <Button className={classes.right_btn} color="inherit">
-                            <Link href="/admin/signin">
-                                <a className={classes.btn_common}>LOGIN</a>
-                            </Link>
-                        </Button>
-
-                        <Button className={classes.right_btn} color="inherit">
-                            <Link href="/admin">
-                                <a className={classes.btn_common}>LOGOUT</a>
-                            </Link>
-                        </Button>
+                        {
+                            (!me || !me.id) ?
+                                 <Button className={classes.right_btn} color="inherit">
+                                    <Link href="/admin/signin">
+                                        <a className={classes.btn_common}>LOGIN</a>
+                                    </Link>
+                                </Button>
+                                :
+                                <Button className={classes.right_btn} color="inherit" onClick={this.signout}>
+                                    <a className={classes.btn_common}>LOGOUT</a>
+                                </Button>
+                        }
                     </Toolbar>
                 </AppBar>
             </div>
