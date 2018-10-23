@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../lib/withRoot'
-import classNames from 'classnames';
 import Link from 'next/link';
 
 //Core 컴포넌트
@@ -21,7 +19,6 @@ import TableRow from '@material-ui/core/TableRow';
 
 //컴포넌트
 import SimpleAppBar from '../../components/subBar';
-import MngBar from '../../components/admin/mngAppBar';
 
 //아이콘
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -103,7 +100,6 @@ function memberDetailView(props) {
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
             <SimpleAppBar title="회원 정보"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -159,4 +155,4 @@ memberDetailView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(memberDetailView));
+export default withStyles(styles)(memberDetailView);

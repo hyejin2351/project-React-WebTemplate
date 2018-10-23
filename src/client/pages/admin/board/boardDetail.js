@@ -1,7 +1,9 @@
 import React from 'react';
 import debug from 'debug';
-import { ApolloConsumer } from 'react-apollo';
+import {ApolloConsumer} from 'react-apollo';
+
 import WithAdmin from '../../../lib/withAdmin';
+import AdminLayout from '../../../layouts/AdminLayout';
 
 import BoardDetailView from './boardDetail_.jsx';
 const log = debug('app:boardDetail');
@@ -18,9 +20,11 @@ class BoardDetailPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <BoardDetailView
-                        onHandleClick={e=> this.handleClick(e, client)}
-                    />
+                    <AdminLayout apolloClient={client}>
+                        <BoardDetailView
+                            onHandleClick={e=> this.handleClick(e, client)}
+                        />
+                    </AdminLayout>
                 )}
             </ApolloConsumer>
         );

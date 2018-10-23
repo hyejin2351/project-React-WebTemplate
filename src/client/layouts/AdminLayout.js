@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 import debug from 'debug';
 
 import WithRoot from '../lib/withRoot';
-import MenuAppBar from '../components/appBar';
+import MngAppBar from '../components/admin/mngAppBar';
 
-const log = debug('app:MainLayout');
+const log = debug('app:AdminLayout');
 
 class MainLayout extends React.Component {
     /**
@@ -20,7 +20,7 @@ class MainLayout extends React.Component {
 
         return (
             <div>
-                <MenuAppBar apolloClient={apolloClient}></MenuAppBar>
+                <MngAppBar apolloClient={apolloClient}></MngAppBar>
                 {
                     children
                 }

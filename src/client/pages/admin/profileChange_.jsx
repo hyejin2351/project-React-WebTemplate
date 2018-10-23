@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../lib/withRoot'
 import Link from 'next/link';
 
 //Core 컴포넌트
@@ -14,7 +13,6 @@ import TextField from '@material-ui/core/TextField';
 
 //컴포넌트
 import SimpleAppBar from '../../components/subBar';
-import MngBar from '../../components/admin/mngAppBar';
 
 //스타일링
 const styles = theme => ({
@@ -90,7 +88,6 @@ function profile(props) {
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
             <SimpleAppBar title="프로필 수정"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -165,4 +162,4 @@ profile.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(profile));
+export default withStyles(styles)(profile);

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../../lib/withRoot'
 import Link from 'next/link';
 
 //Core 컴포넌트
@@ -16,7 +15,6 @@ import red from '@material-ui/core/colors/red';
 
 //컴포넌트
 import TextFields from '../../../components/boardInput';
-import MngBar from '../../../components/admin/mngAppBar';
 import SimpleAppBar from '../../../components/subBar';
 
 //아이콘
@@ -110,7 +108,6 @@ function boardNew(props) {
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
             <SimpleAppBar title="게시물 등록"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -156,4 +153,4 @@ boardNew.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardNew));
+export default withStyles(styles)(boardNew);

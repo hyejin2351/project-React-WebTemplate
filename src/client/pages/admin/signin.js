@@ -4,6 +4,7 @@ import {ApolloConsumer} from 'react-apollo';
 
 import redirect from '../../lib/redirect';
 import AuthService from '../../lib/AuthService';
+import AdminLayout from '../../layouts/AdminLayout'
 
 import SigninView from './signin_.jsx';
 const log = debug('app:signin');
@@ -42,7 +43,7 @@ class SigninPage extends React.Component {
             const res = await AuthService.login({
                 uri: '/api/auth/login',
                 apolloClient,
-            }, { email: email, password: password });
+            }, {email: email, password: password});
             // success
             // change the component-container state
             this.setState({
@@ -85,11 +86,13 @@ class SigninPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <SigninView
-                        onSubmit={e => this.processForm(e, client)}
-                        onChange={this.changeUser}
-                        errors={this.state.errors}
-                    />
+                    <AdminLayout apolloClient={client}>
+                        <SigninView
+                            onSubmit={e => this.processForm(e, client)}
+                            onChange={this.changeUser}
+                            errors={this.state.errors}
+                        />
+                    </AdminLayout>
                 )}
             </ApolloConsumer>
         );

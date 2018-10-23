@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WithRoot from '../../lib/withRoot'
 import {withStyles} from '@material-ui/core/styles';
 
 //Core 컴포넌트
 import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-
-//컴포넌트
-import MngBar from '../../components/admin/mngAppBar';
 
 //이미지
 let imgUrl = '/static/images/line.png'
@@ -77,7 +72,6 @@ function signinPage(props) {
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
 
             <div className={classes.root}>
 
@@ -126,4 +120,4 @@ signinPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(signinPage));
+export default withStyles(styles)(signinPage);

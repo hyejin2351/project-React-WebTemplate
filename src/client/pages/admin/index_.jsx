@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../lib/withRoot';
 import Link from 'next/link';
 
 //Core 컴포넌트
@@ -18,7 +17,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 // 컴포넌트
-import MngBar from '../../components/admin/mngAppBar';
 import SimpleAppBar from '../../components/subBar';
 
 //스타일링
@@ -83,12 +81,10 @@ const styles = theme => ({
 
 
 function MyIndexPage(props) {
-
     const {classes, me} = props;
 
     return (
         <div>
-            <MngBar></MngBar>
             <SimpleAppBar title="마이 페이지"></SimpleAppBar>
 
 
@@ -190,4 +186,4 @@ MyIndexPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(MyIndexPage));
+export default withStyles(styles)(MyIndexPage);

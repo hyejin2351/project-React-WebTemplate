@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../../lib/withRoot'
-import classNames from 'classnames';
 import Link from 'next/link';
 
 // Core 컴포넌트
@@ -12,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 // 컴포넌트
-import MngBar from '../../../components/admin/mngAppBar';
 import SimpleAppBar from '../../../components/subBar';
 import TextFieldsDisabled from '../../../components/boardInputDisabled';
 
@@ -20,9 +17,9 @@ import TextFieldsDisabled from '../../../components/boardInputDisabled';
 import EditIcon from '@material-ui/icons/Edit';
 import ListIcon from '@material-ui/icons/List';
 
+
 //스타일링
 const styles = theme => ({
-    //틀
     root: {
         minWidth: 450,
         flexGrow: 1,
@@ -85,7 +82,6 @@ function boardDetail(props) {
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
             <SimpleAppBar title="게시물 상세"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -129,4 +125,4 @@ boardDetail.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardDetail));
+export default withStyles(styles)(boardDetail);

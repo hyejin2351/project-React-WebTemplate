@@ -1,19 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../lib/withRoot'
-import Link from 'next/link';
-import classNames from 'classnames';
 
 //Core 컴포넌트
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 
 //컴포넌트
 import SimpleAppBar from '../../components/subBar';
-import MngBar from '../../components/admin/mngAppBar';
 import MemberDetail from '../../components/admin/memberDetail';
 import Search from '../../components/admin/search';
 import CustomPaginationActionsTable from '../../components/pignation';
@@ -87,7 +81,6 @@ function MembersListView(props) {
 
     return (
         <div>
-            <MngBar></MngBar>
             <SimpleAppBar title="회원 관리"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -120,4 +113,4 @@ MembersListView.propTypes = {
 };
 
 //export MembersListView
-export default WithRoot(withStyles(styles)(MembersListView));
+export default withStyles(styles)(MembersListView);

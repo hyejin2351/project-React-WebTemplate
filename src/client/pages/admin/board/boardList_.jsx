@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../../lib/withRoot';
 import Link from 'next/link';
 
 // Core 컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 
 //컴포넌트
 import SimpleAppBar from '../../../components/subBar';
-import MngBar from '../../../components/admin/mngAppBar';
 import SimpleTable from '../../../components/admin/boardTable';
 import CustomPaginationActionsTable from '../../../components/pignation';
 
@@ -87,7 +84,6 @@ function board(props) {
 
     return (
         <React.Fragment>
-            <MngBar></MngBar>
             <SimpleAppBar title="게시판 관리"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -122,4 +118,4 @@ board.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(board));
+export default withStyles(styles)(board);

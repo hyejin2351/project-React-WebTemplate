@@ -1,10 +1,12 @@
 import React from 'react';
 import debug from 'debug';
-import { ApolloConsumer } from 'react-apollo';
+import {ApolloConsumer} from 'react-apollo';
+
+import WithAdmin from '../../lib/withAdmin';
+import AdminLayout from '../../layouts/AdminLayout'
 
 import ProfileView from './profileChange_.jsx';
 const log = debug('app:profileChange');
-import WithAdmin from '../../lib/withAdmin';
 
 class ProfilePage extends React.Component {
     handleClick(event, client) {
@@ -18,9 +20,11 @@ class ProfilePage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <ProfileView
-                        onHandleClick={e=> this.handleClick(e, client)}
-                    />
+                    <AdminLayout apolloClient={client}>
+                        <ProfileView
+                            onHandleClick={e=> this.handleClick(e, client)}
+                        />
+                    </AdminLayout>
                 )}
             </ApolloConsumer>
         );
