@@ -87,13 +87,18 @@ class MenuAppBar extends React.Component {
         };
 
         this.signout = this.signout.bind(this);
+        this.getLoggedIn = this.getLoggedIn.bind(this);
     }
 
-    async componentDidMount() {
+    async getLoggedIn() {
         const me = await checkLoggedIn(this.props);
         this.setState({
             ...me
         });
+    }
+
+    componentDidMount() {
+        this.getLoggedIn();
     }
 
     async signout() {
@@ -104,10 +109,7 @@ class MenuAppBar extends React.Component {
                     uri: '/api/auth/logout',
                     apolloClient
                 });
-                const me = await checkLoggedIn(this.props);
-                this.setState({
-                    ...me
-                });
+                this.getLoggedIn();
                 // Redirect to a more useful page when signed out
                 redirect(null, '/');
             } catch (err) {
