@@ -2,18 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../lib/withRoot';
-import Link from 'next/link';
 
 //Core 컴포넌트
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
 //컴포넌트
-import MenuAppBar from '../../components/appBar';
 import CheckboxLabels from '../../components/checkbox';
 
 //이미지
@@ -112,8 +108,6 @@ function signUp(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
-
             <div className={classes.root}>
 
                 <Paper className={classes.paper}>
@@ -233,4 +227,4 @@ signUp.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(signUp));
+export default withStyles(styles)(signUp);

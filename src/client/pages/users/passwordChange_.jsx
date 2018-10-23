@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../lib/withRoot';
 import Link from 'next/link';
 import TextField from '@material-ui/core/TextField';
 
@@ -13,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 //컴포넌트
-import MenuAppBar from '../../components/appBar';
 import SimpleAppBar from '../../components/subBar';
 
 //스타일링
@@ -100,7 +98,6 @@ function passwordChange(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="비밀번호 변경"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -222,4 +219,4 @@ passwordChange.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(passwordChange));
+export default withStyles(styles)(passwordChange);

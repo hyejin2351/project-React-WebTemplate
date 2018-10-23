@@ -116,19 +116,24 @@ class AuthService {
   static logout(context) {
     const { uri, apolloClient } = context;
     if (uri) {
-      AuthService.fetch(context, `${domain}${uri}`, {
-        method: 'GET',
-      })
-        .then((res) => {
-          if (res.success) {
-            config.setToken(context, null);
-          }
-          // Force a reload of all the current queries
-          if (apolloClient) {
-            return apolloClient.cache.reset().then(() => Promise.reject(res));
-          }
-          return Promise.reject(res);
-        });
+      return new Promise(function(resolve, reject) {
+        AuthService.fetch(context, `${domain}${uri}`, {
+              method: 'GET',
+            })
+            .then((res) => {
+              if (res.success) {
+                config.setToken(context, null);
+              }
+              // Force a reload of all the current queries
+              if (apolloClient) {
+                return apolloClient.cache.reset().then(() => resolve(res));
+              }
+              return resolve(res);
+            })
+            .catch(err => {
+              resolve(err);
+            });
+      });
     } else {
       return AuthService.removeToken(context);
     }

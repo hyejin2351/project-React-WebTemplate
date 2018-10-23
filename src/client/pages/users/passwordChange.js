@@ -1,8 +1,8 @@
 import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
-import withAuth from '../../lib/withAuth';
 
+import MainLayout from '../../layouts/MainLayout';
 import PasswordChangeView from './passwordChange_.jsx';
 import WithAuth from '../../lib/withAuth';
 const log = debug('app:passwordChange');
@@ -19,13 +19,15 @@ class PasswordChangePage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <PasswordChangeView
-                        onHandleClick={e=> this.handleClick(e, client)}
-                    />
+                    <MainLayout apolloClient={client}>
+                        <PasswordChangeView
+                            onHandleClick={e=> this.handleClick(e, client)}
+                        />
+                    </MainLayout>
                 )}
             </ApolloConsumer>
         );
     }
 }
 
-export default withAuth(PasswordChangePage);
+export default WithAuth(PasswordChangePage);

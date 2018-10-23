@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ApolloConsumer } from 'react-apollo';
 import debug from 'debug';
 
@@ -8,6 +7,7 @@ import redirect from '../../lib/redirect';
 import AuthService from '../../lib/AuthService';
 
 //jsx view
+import MainLayout from '../../layouts/MainLayout';
 import SignInForm from './signin_.jsx';
 
 //debug log
@@ -103,14 +103,16 @@ class LoginPage extends React.Component {
     return (
       <ApolloConsumer>
         {client => (
-          <SignInForm
-            onSubmit={e => this.processForm(e, client)}
-            onChange={this.changeUser}
-            onFacebook={e => this.processFacebook(client)}
-            onGoogle={e => this.processGoogle(client)}
-            onKakao={e => this.processKakao(client)}
-            errors={this.state.errors}
-          />
+          <MainLayout apolloClient={client}>
+            <SignInForm
+                onSubmit={e => this.processForm(e, client)}
+                onChange={this.changeUser}
+                onFacebook={e => this.processFacebook(client)}
+                onGoogle={e => this.processGoogle(client)}
+                onKakao={e => this.processKakao(client)}
+                errors={this.state.errors}
+            />
+          </MainLayout>
         )}
       </ApolloConsumer>
     );

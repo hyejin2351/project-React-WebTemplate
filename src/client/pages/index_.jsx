@@ -4,7 +4,6 @@ import {withStyles} from '@material-ui/core/styles';
 import WithRoot from '../lib/withRoot';
 
 // 컴포넌트
-import MenuAppBar from '../components/appBar';
 import PaperSheet from '../components/visual';
 import MediaCard from '../components/mediaCard';
 
@@ -45,9 +44,6 @@ class IndexView extends React.Component {
         return (
             <React.Fragment>
                 <div className={classes.root}>
-
-                    <MenuAppBar></MenuAppBar>
-
                     <PaperSheet></PaperSheet>
 
                     <MediaCard></MediaCard>
@@ -62,4 +58,5 @@ IndexView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(IndexView));
+// export default WithRoot(withStyles(styles)(IndexView));
+export default withStyles(styles)(IndexView);

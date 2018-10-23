@@ -3,6 +3,8 @@ import debug from 'debug';
 import { ApolloConsumer } from 'react-apollo';
 
 import WidtAuth from '../../../lib/withAuth';
+
+import MainLayout from '../../../layouts/MainLayout';
 import BoardNewView from './boardNew_.jsx';
 const log = debug('app:boardNew');
 
@@ -18,9 +20,11 @@ class BoardNewPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <BoardNewView
-                        onHandleClick={e=> this.handleClick(e, client)}
-                    />
+                    <MainLayout apolloClient={client}>
+                        <BoardNewView
+                            onHandleClick={e=> this.handleClick(e, client)}
+                        />
+                    </MainLayout>
                 )}
             </ApolloConsumer>
         );

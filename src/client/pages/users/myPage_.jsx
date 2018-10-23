@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Link from 'next/link';
-import WithRoot from '../../lib/withRoot';
 
 // Core 컴포넌트
 import Button from '@material-ui/core/Button';
@@ -12,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 // 컴포넌트
-import MenuAppBar from '../../components/appBar';
 import SimpleAppBar from '../../components/subBar';
 
 // 테이블
@@ -20,7 +18,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-// import TableHead from '@material-ui/core/TableHead';
 
 // 스타일링
 const styles = theme => ({
@@ -85,11 +82,10 @@ const styles = theme => ({
 });
 
 function MyPageView(props) {
-    const {classes, onSignout, me} = props;
+    const {classes, me} = props;
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="마이 페이지"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -196,11 +192,6 @@ function MyPageView(props) {
                         </Paper>
                     </div>
                 </Grid>
-
-                <Button variant="contained" color="primary" size="medium"
-                        className={classes.float_right} onClick={onSignout}>
-                    로그아웃
-                </Button>
             </div>
         </React.Fragment>
     )
@@ -211,4 +202,4 @@ MyPageView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(MyPageView));
+export default withStyles(styles)(MyPageView);

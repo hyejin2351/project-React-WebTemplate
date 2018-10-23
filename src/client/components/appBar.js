@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Link from 'next/link';
+import debug from 'debug';
 
 //Core 컴포넌트
 import AppBar from '@material-ui/core/AppBar';
@@ -11,10 +12,17 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 
 import IconButton from '@material-ui/core/IconButton';
-import PersonIcon from '@material-ui/icons/Person';
 
 // 컴포넌트 (drawer)
 import DrawerView from './adminDrawer';
+
+import redirect from '../lib/redirect';
+import AuthService from '../lib/AuthService';
+
+import checkLoggedIn from '../lib/checkLoggedIn';
+
+//debug log
+const log = debug('app:appBar');
 
 //스타일링
 const styles = theme => ({
@@ -69,29 +77,47 @@ const styles = theme => ({
     },
 })
 
-
 class MenuAppBar extends React.Component {
-    state = {
-        auth: true,
-        anchorEl: null,
-    };
+    constructor(props) {
+        super(props);
+        // set the initial component state
+        this.state = {
+            me: {
+            }
+        };
 
-    handleChange = event => {
-        this.setState({auth: event.target.checked});
-    };
+        this.signout = this.signout.bind(this);
+    }
 
-    handleMenu = event => {
-        this.setState({anchorEl: event.currentTarget});
-    };
+    async componentDidMount() {
+        const me = await checkLoggedIn(this.props);
+        this.setState({
+            ...me
+        });
+    }
 
-    handleClose = () => {
-        this.setState({anchorEl: null});
-    };
-
+    async signout() {
+        const { apolloClient } = this.props;
+        if(apolloClient) {
+            try {
+                await AuthService.logout({
+                    uri: '/api/auth/logout',
+                    apolloClient
+                });
+                const me = await checkLoggedIn(this.props);
+                this.setState({
+                    ...me
+                });
+                // Redirect to a more useful page when signed out
+                redirect(null, '/');
+            } catch (err) {
+            }
+        }
+    }
+    
     render() {
         const {classes} = this.props;
-        const {auth, anchorEl} = this.state;
-        const open = Boolean(anchorEl);
+        const { me } = this.state;
 
         return (
             <React.Fragment>
@@ -105,31 +131,33 @@ class MenuAppBar extends React.Component {
                                 <a className={classes.logo_text}>로고</a>
                             </Link>
                         </Typography>
-                        <Button color="inherit">
-                            <Link href="/users/signin">
-                                <a className={classes.button_text}>로그인</a>
-                            </Link>
-                        </Button>
-                        <Button color="inherit">
-                            <Link href="/users/signup">
-                                <a className={classes.button_text}>회원가입</a>
-                            </Link>
-                        </Button>
+                        { (!me || !me.id) ?
+                            <div>
+                                <Button color="inherit">
+                                    <Link href="/users/signin">
+                                        <a className={classes.button_text}>로그인</a>
+                                    </Link>
+                                </Button>
+                                <Button color="inherit">
+                                    <Link href="/users/signup">
+                                        <a className={classes.button_text}>회원가입</a>
+                                    </Link>
+                                </Button>
+                            </div> :
+                            <div>
+                                <IconButton color="inherit">
+                                    <Link href="/users/myPage">
+                                        <Avatar src={ me ? (me.profileImageURL || '') : '' }
+                                                className={classes.profile_img}
+                                        ></Avatar>
+                                    </Link>
+                                </IconButton>
 
-                        <IconButton color="inherit">
-                            <Link href="/users/myPage">
-                                <Avatar src="/static/images/defaultProfile.png"
-                                        className={classes.profile_img}
-                                ></Avatar>
-                            </Link>
-                        </IconButton>
-
-                        <Button color="inherit">
-                            <Link href="/">
-                                <a className={classes.button_text}>로그아웃</a>
-                            </Link>
-                        </Button>
-
+                                <Button color="inherit" onClick={this.signout}>
+                                    <a className={classes.button_text}>로그아웃</a>
+                                </Button>
+                            </div>
+                        }
                     </Toolbar>
                 </AppBar>
             </React.Fragment>

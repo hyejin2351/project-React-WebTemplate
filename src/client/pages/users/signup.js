@@ -7,6 +7,7 @@ import redirect from '../../lib/redirect';
 import AuthService from '../../lib/AuthService';
 
 //jsx view
+import MainLayout from '../../layouts/MainLayout';
 import SignUpForm from './signup_.jsx';
 
 //debug log
@@ -116,15 +117,17 @@ class SignUpPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <SignUpForm
-                        onSubmit={e => this.processForm(e, client)}
-                        onChange={this.changeUser}
-                        onChangeCheck={this.changeCheck}
-                        onFacebook={e => this.processFacebook(client)}
-                        onGoogle={e => this.processGoogle(client)}
-                        onKakao={e => this.processKakao(client)}
-                        errors={this.state.errors}
-                    />
+                    <MainLayout apolloClient={client}>
+                        <SignUpForm
+                            onSubmit={e => this.processForm(e, client)}
+                            onChange={this.changeUser}
+                            onChangeCheck={this.changeCheck}
+                            onFacebook={e => this.processFacebook(client)}
+                            onGoogle={e => this.processGoogle(client)}
+                            onKakao={e => this.processKakao(client)}
+                            errors={this.state.errors}
+                        />
+                    </MainLayout>
                 )}
             </ApolloConsumer>
         );

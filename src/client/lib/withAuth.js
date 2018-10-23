@@ -27,9 +27,9 @@ export default Component => class WithAuth extends React.Component {
 
   render() {
     if (!this.props.me) return (<div>Loading...</div>);
-    
+
     return (
-      <Component {...this.props} me={this.props.me} />
+        <Component {...this.props} me={this.props.me} />
     );
   }
 };

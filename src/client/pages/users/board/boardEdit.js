@@ -4,6 +4,7 @@ import { ApolloConsumer } from 'react-apollo';
 
 import WidtAuth from '../../../lib/withAuth';
 
+import MainLayout from '../../../layouts/MainLayout';
 import BoardEditView from './boardEdit_.jsx';
 const log = debug('app:boardEdit');
 
@@ -19,9 +20,11 @@ class BoardEditPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <BoardEditView
-                        onHandleClick={e=> this.handleClick(e, client)}
-                    />
+                    <MainLayout apolloClient={client}>
+                        <BoardEditView
+                            onHandleClick={e=> this.handleClick(e, client)}
+                        />
+                    </MainLayout>
                 )}
             </ApolloConsumer>
         );

@@ -216,6 +216,13 @@ query {
   }
 }
 
+ # changePassword
+ mutation {
+  changePassword(curPassword: "qw12QW!@", newPassword: "12qw!@QW") {
+    id
+  }
+}
+
 # createUser(email, name)
  mutation {
   createUser(userData: {

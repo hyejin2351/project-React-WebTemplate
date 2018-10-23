@@ -3,7 +3,6 @@ import Link from '../../../../../node_modules/next/link';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../../lib/withRoot'
 
 //컴포넌트
 import Button from '@material-ui/core/Button';
@@ -12,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 // 컴포넌트
-import MenuAppBar from '../../../components/appBar';
 import SimpleAppBar from '../../../components/subBar';
 import TextFields from '../../../components/boardInput';
 
@@ -110,7 +108,6 @@ function boardNewView(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="게시물 등록"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -155,4 +152,4 @@ boardNewView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardNewView));
+export default withStyles(styles)(boardNewView);

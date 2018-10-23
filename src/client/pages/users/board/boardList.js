@@ -4,6 +4,7 @@ import { ApolloConsumer } from 'react-apollo';
 
 import articlesApi from '../../../lib/gqlApi/articlesApi';
 
+import MainLayout from '../../../layouts/MainLayout';
 import BoardListView from './boardList_.jsx';
 const log = debug('app:boardList');
 
@@ -34,11 +35,13 @@ class BoardListPage extends React.Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <BoardListView
-                        onHandleClick={e=> this.handleClick(e, client)}
-                        getArticles={getArticles}
-                        getArticlesCount={getArticlesCount}
-                    />
+                    <MainLayout apolloClient={client}>
+                        <BoardListView
+                            onHandleClick={e=> this.handleClick(e, client)}
+                            getArticles={getArticles}
+                            getArticlesCount={getArticlesCount}
+                        />
+                    </MainLayout>
                 )}
             </ApolloConsumer>
         );

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import WithRoot from '../../lib/withRoot';
 import Link from 'next/link';
 
 //Core 컴포넌트
@@ -13,11 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 //컴포넌트
-import MenuAppBar from '../../components/appBar';
 import SimpleAppBar from '../../components/subBar';
-
-//이미지
-// let imgUrl = '/static/images/line.png'
 
 //스타일링
 const styles = theme => ({
@@ -96,7 +91,6 @@ function profileChange(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="프로필 수정"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -171,4 +165,4 @@ profileChange.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default WithRoot(withStyles(styles)(profileChange));
+export default withStyles(styles)(profileChange);

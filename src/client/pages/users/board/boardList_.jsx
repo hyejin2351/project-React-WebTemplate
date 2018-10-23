@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../../lib/withRoot';
 import Link from 'next/link';
 
 //Core 컴포넌트
@@ -10,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
 //컴포넌트
-import MenuAppBar from '../../../components/appBar';
 import SimpleAppBar from '../../../components/subBar';
 import SimpleTable from '../../../components/simpleTable';
 import CustomPaginationActionsTable from '../../../components/pignation';
@@ -88,7 +86,6 @@ function BoardLIstView(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="게시판"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -123,4 +120,4 @@ BoardLIstView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(BoardLIstView));
+export default withStyles(styles)(BoardLIstView);

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../lib/withRoot'
-import classNames from 'classnames';
 import Link from 'next/link';
 
 // Core 컴포넌트
@@ -66,7 +64,6 @@ function DeleteAccountView(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="계정 탈퇴"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -115,4 +112,4 @@ DeleteAccountView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(DeleteAccountView));
+export default withStyles(styles)(DeleteAccountView);

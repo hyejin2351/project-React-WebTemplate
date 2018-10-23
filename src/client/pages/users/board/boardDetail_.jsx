@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import WithRoot from '../../../lib/withRoot'
-import classNames from 'classnames';
 import Link from '../../../../../node_modules/next/link';
 
 //Core 컴포넌트
@@ -12,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 //컴포넌트
-import MenuAppBar from '../../../components/appBar';
 import SimpleAppBar from '../../../components/subBar';
 import TextFieldsDisabled from '../../../components/boardInputDisabled';
 
@@ -84,7 +81,6 @@ function boardDetailPage(props) {
 
     return (
         <React.Fragment>
-            <MenuAppBar></MenuAppBar>
             <SimpleAppBar title="게시물 상세"></SimpleAppBar>
 
             <div className={classes.root}>
@@ -130,4 +126,4 @@ boardDetailPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default WithRoot(withStyles(styles)(boardDetailPage));
+export default withStyles(styles)(boardDetailPage);
