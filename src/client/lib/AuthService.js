@@ -164,20 +164,24 @@ class AuthService {
   }
 
   static unregister(context) {
-    const { uri, apolloClient } = context;
-    AuthService.fetch(context, `${domain}${uri}`, {
-      method: 'POST',
-    })
-      .then((res) => {
-        if (res.success) {
-          config.setToken(context, null);
-        }
-        // Force a reload of all the current queries
-        if (apolloClient) {
-          return apolloClient.cache.reset().then(() => Promise.reject(res));
-        }
-        return Promise.reject(res);
-      });
+    return new Promise(function(resolve, reject) {
+      const { uri, apolloClient } = context;
+      AuthService.fetch(context, `${domain}${uri}`, {
+            method: 'POST',
+          })
+          .then((res) => {
+            if (res.success) {
+              config.setToken(context, null);
+            }
+            // Force a reload of all the current queries
+            if (apolloClient) {
+              return apolloClient.cache.reset().then(() => Promise.reject(res));
+            }
+            return resolve(res);
+          }).catch(err => {
+            resolve(err);
+          });
+    });
   }
 
   static _checkStatus(response) {
