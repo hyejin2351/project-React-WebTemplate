@@ -82,7 +82,7 @@ const styles = theme => ({
 
 
 function BoardLIstView(props) {
-    const {classes, getArticles, getArticlesCount} = props;
+    const {classes, totalCount, articlesList, changePage, changeRowsPerPage, rowsPerPage, pageNo} = props;
 
     return (
         <React.Fragment>
@@ -94,7 +94,7 @@ function BoardLIstView(props) {
                         <div className={classes.title_left}>
                             <Typography component="h3" className={classes.paper_title}>게시판</Typography>
                             <Typography variant="caption" className={classes.total}>총 <span
-                                className={classes.total_span}>{getArticlesCount}</span>개</Typography>
+                                className={classes.total_span}>{totalCount}</span>개</Typography>
                         </div>
 
                         <div className={classes.title_right}>
@@ -107,8 +107,10 @@ function BoardLIstView(props) {
                         </div>
                     </Paper>
 
-                    <SimpleTable></SimpleTable>
-                    <CustomPaginationActionsTable></CustomPaginationActionsTable>
+                    <SimpleTable articlesList={articlesList} rowsPerPage={rowsPerPage} pageNo={pageNo}></SimpleTable>
+                    <CustomPaginationActionsTable
+                        totalCount={totalCount} changePage={changePage} changeRowsPerPage={changeRowsPerPage} rowsPerPage={rowsPerPage} pageNo={pageNo}>
+                    </CustomPaginationActionsTable>
                 </Paper>
 
             </div>

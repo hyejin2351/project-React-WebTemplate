@@ -27,8 +27,6 @@ const types = `
 
 const queries = `
   getArticles(
-    # 데이터를 정렬, 필드명 : 오름차순 정렬, -필드명 : 내림차순 정렬
-    sort: String
     # 출력할 데이터 갯수를 제한
     limit: Int
     # 시작부분을 설정
@@ -62,13 +60,12 @@ const mutations = `
 
 const resolvers = {
   Query: {
-    getArticles: (_, { sort, limit, skip, author}, { userId, roles }) => {
+    getArticles: (_, { limit, skip, author}, { userId, roles }) => {
       const query = author ? { author: author} : {}
-      const sortS = sort ? sort : '';
       const limitI = limit ? limit : 0;
       const skipI = skip ? skip : 0;
 
-      return ArticleModel.find( query ).skip(skipI).limit(limitI).sort(sortS).populate('author');
+      return ArticleModel.find( query ).skip(skipI).limit(limitI).populate('author');
     },
 
     getArticle: (_, { id }, { userId, roles }) => {
