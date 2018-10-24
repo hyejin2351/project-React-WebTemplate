@@ -94,7 +94,7 @@ const styles = theme => ({
 
 
 function passwordChange(props) {
-    const {classes} = props;
+    const {classes, onChange, onSubmit} = props;
 
     return (
         <React.Fragment>
@@ -108,16 +108,11 @@ function passwordChange(props) {
                     </Typography>
                 </Paper>
 
-
                 <Grid container item xs={12}>
                     <Paper className={classes.outer_spacing}>
-                        <Paper square={true} elevation={0}
-                               className={classNames(classes.outer_paper, classes.border_bottom)}>
-
+                        <Paper square={true} elevation={0} className={classNames(classes.outer_paper, classes.border_bottom)}>
                             <Grid item xs={12}>
                                 <Paper elevation={0} className={classes.mid_paper}>
-
-
                                     <Grid item xs={12} sm={12}
                                           container
                                           direction="row"
@@ -134,7 +129,10 @@ function passwordChange(props) {
                                                 <TextField
                                                     autoComplete="off"
                                                     type="password"
-                                                    className={classes.pwd_input}/>
+                                                    className={classes.pwd_input}
+                                                    name="curPassword"
+                                                    onChange={onChange}
+                                                />
                                             </form>
                                         </Paper>
                                     </Grid>
@@ -162,7 +160,9 @@ function passwordChange(props) {
                                                 <TextField
                                                     autoComplete="off"
                                                     type="password"
-                                                    className={classes.pwd_input}/>
+                                                    className={classes.pwd_input}
+                                                    name="newPassword"
+                                                    onChange={onChange}/>
                                             </form>
                                         </Paper>
                                     </Grid>
@@ -184,7 +184,9 @@ function passwordChange(props) {
                                                 <TextField
                                                     autoComplete="off"
                                                     type="password"
-                                                    className={classes.pwd_input}/>
+                                                    className={classes.pwd_input}
+                                                    name="newConfirmPassword"
+                                                    onChange={onChange}/>
                                             </form>
                                         </Paper>
 
@@ -198,10 +200,8 @@ function passwordChange(props) {
 
 
             <Paper elevation={0} className={classes.two_btn_wrap}>
-                <Button variant="contained" color="primary" size="medium" className={classes.float_right}>
-                    <Link href="/users/myPage">
-                        <a className={classes.btn_color}>적용</a>
-                    </Link>
+                <Button variant="contained" color="primary" size="medium" className={classes.float_right} onClick={onSubmit}>
+                    <a className={classes.btn_color}>적용</a>
                 </Button>
 
                 <Button variant="outlined" size="medium"
