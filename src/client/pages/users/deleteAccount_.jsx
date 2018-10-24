@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Link from 'next/link';
 
 // Core 컴포넌트
 import Button from '@material-ui/core/Button';
@@ -11,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 
 // 컴포넌트
 import CheckboxAllCheck from '../../components/checkboxAllCheck';
-import MenuAppBar from '../../components/appBar';
 import SimpleAppBar from '../../components/subBar';
 
 
@@ -58,9 +56,9 @@ const styles = theme => ({
     }
 });
 
-//render
+
 function DeleteAccountView(props) {
-    const {classes, me} = props;
+    const {classes, me, unregister} = props;
 
     return (
         <React.Fragment>
@@ -96,10 +94,8 @@ function DeleteAccountView(props) {
                 alignItems="center"
             >
                 <Paper elevation={0} className={classes.one_btn_wrap}>
-                    <Button variant="contained" color="primary" size="medium">
-                        <Link href="/" prefetch>
+                    <Button variant="contained" color="primary" size="medium" onClick={unregister}>
                             <a className={classes.btn_color}>계정 탈퇴하기</a>
-                        </Link>
                     </Button>
                 </Paper>
             </Grid>
