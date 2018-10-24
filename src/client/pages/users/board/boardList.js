@@ -1,33 +1,11 @@
 import React from 'react';
 import debug from 'debug';
 import { Query, ApolloConsumer } from 'react-apollo';
-import gql from 'graphql-tag';
 
+import { ArticlesCountQuery, ArticlesQuery } from '../../../lib/gqlApi/articlesApi';
 import MainLayout from '../../../layouts/MainLayout';
 import BoardListView from './boardList_.jsx';
 const log = debug('app:boardList');
-
-export const getArticlesCountQuery = gql`
-  query {
-    getArticlesCount
-  }
-`
-
-const getArticlesQuery = gql`
-  query getArticles($limit: Int!, $skip: Int!) {
-    getArticles(limit: $limit, skip: $skip) {
-        id
-        title
-        content
-        views
-        created
-        author {
-            id
-            name
-        }
-    }
-  }
-`
 
 class BoardListPage extends React.Component {
     constructor(props) {
@@ -64,12 +42,12 @@ class BoardListPage extends React.Component {
         const { pageNo, rowsPerPage } = this.state;
 
         return (
-            <Query query={getArticlesCountQuery}>
+            <Query query={ArticlesCountQuery}>
                 {({ loading, error, data: { getArticlesCount } }) => {
                     if (error) return <ErrorMessage message='Error loading Articles count.' />
 
                     return (
-                        <Query query={getArticlesQuery} variables={ {limit: rowsPerPage, skip: pageNo * rowsPerPage} }>
+                        <Query query={ArticlesQuery} variables={ {limit: rowsPerPage, skip: pageNo * rowsPerPage} }>
                             {({ loading, error, data: { getArticles } }) => {
                                 if (error) return <ErrorMessage message='Error loading Articles.' />
 
