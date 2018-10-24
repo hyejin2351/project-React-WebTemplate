@@ -27,6 +27,9 @@ const styles = theme => ({
 function SimpleTable(props) {
     const {classes, articlesList, rowsPerPage, pageNo} = props;
 
+    // Uncaught TypeError: Cannot read property 'map' of undefined 발생
+    if(!articlesList)
+        return (<div></div>)
     return (
         <React.Fragment>
             <Paper elevation={0}  className={classes.root}>
@@ -41,7 +44,7 @@ function SimpleTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {articlesList.map((article, index) => {
+                        { articlesList.map((article, index) => {
                             return (
                                 <TableRow key={article.id}>
                                     <TableCell component="th" scope="row">

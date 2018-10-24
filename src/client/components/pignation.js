@@ -116,6 +116,9 @@ class CustomPaginationActionsTable extends React.Component {
         const {classes, totalCount, changePage, changeRowsPerPage, rowsPerPage, pageNo} = this.props;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalCount - pageNo * rowsPerPage);
 
+        // warning.js:33 Warning: Failed prop type: The prop `count` is marked as required in `TablePagination`, but its value is `undefined`. 발생
+        if(!totalCount)
+            return (<div></div>)
         return (
             <Paper elevation={0} className={classes.root}>
                 <div className={classes.tableWrapper}>

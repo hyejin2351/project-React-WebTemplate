@@ -38,7 +38,6 @@ class BoardListPage extends React.Component {
      * Render the component.
      */
     render() {
-        log('render');
         const { pageNo, rowsPerPage } = this.state;
 
         return (
@@ -72,7 +71,7 @@ class BoardListPage extends React.Component {
                     )
                 }}
             </Query>
-        )
+        );
     }
 }
 
