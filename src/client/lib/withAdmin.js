@@ -11,6 +11,8 @@ const log = debug('app:withAdmin');
 
 export default Component => class WithAdmin extends React.Component {
   static async getInitialProps(context, apolloClient) {
+    const { query } = context;
+
     let ipAddress;
 
     if (typeof window === 'undefined') {
@@ -42,7 +44,7 @@ export default Component => class WithAdmin extends React.Component {
     if (Component.getInitialProps) {
       compProps = await Component.getInitialProps(context);
     }
-    return { me, ipAddress };
+    return { me, query, ipAddress };
   }
 
   constructor(props) {

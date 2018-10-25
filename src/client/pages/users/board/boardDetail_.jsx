@@ -77,7 +77,7 @@ const styles = theme => ({
 
 //render
 function boardDetailPage(props) {
-    const {classes} = props;
+    const {classes, article, goChangePage} = props;
 
     return (
         <React.Fragment>
@@ -91,11 +91,9 @@ function boardDetailPage(props) {
                         </div>
 
                         <div className={classes.title_right}>
-                            <Button color="primary" className={classes.edit_btn}>
+                            <Button color="primary" className={classes.edit_btn} onClick={goChangePage}>
                                 <EditIcon className={classes.icon}/>
-                                <Link href="/users/board/boardEdit">
-                                    <a className={classes.edit_btn_props}>수정</a>
-                                </Link>
+                                <a className={classes.edit_btn_props}>수정</a>
                             </Button>
 
                             <Button color="primary" className={classes.edit_btn}>
@@ -110,7 +108,7 @@ function boardDetailPage(props) {
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
-                                <TextFieldsDisabled></TextFieldsDisabled>
+                                <TextFieldsDisabled article={article}></TextFieldsDisabled>
                             </Paper>
                         </Grid>
                     </Paper>

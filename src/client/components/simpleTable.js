@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
+
 import {withStyles} from '@material-ui/core/styles';
 
 //Core 컴포넌트
@@ -50,7 +52,11 @@ function SimpleTable(props) {
                                     <TableCell component="th" scope="row">
                                         {(pageNo * rowsPerPage) + index + 1}
                                     </TableCell>
-                                    <TableCell><a href="/users/board/boardDetail">{article.title}</a></TableCell>
+                                    <TableCell>
+                                        <Link href={{ pathname: '/users/board/boardDetail', query: { id: article.id } }}>
+                                            <a>{article.title}</a>
+                                        </Link>
+                                    </TableCell>
                                     <TableCell>{article.author.name}</TableCell>
                                     <TableCell>{(new Date(article.created).toDateString())}</TableCell>
                                     <TableCell numeric>{article.views}</TableCell>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 
 // Core 컴포넌트
@@ -40,7 +39,7 @@ class TextFieldsDisabled extends React.Component {
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, article} = this.props;
 
         return (
             <Paper elevation={0} className={classes.container} noValidate autoComplete="off">
@@ -53,8 +52,9 @@ class TextFieldsDisabled extends React.Component {
                     margin="normal"
                     disabled
                     InputLabelProps={{
-            shrink: true,
-          }}
+                        shrink: true,
+                      }}
+                    value={article.title}
                 />
 
                 <TextField
@@ -68,8 +68,9 @@ class TextFieldsDisabled extends React.Component {
                     margin="normal"
                     disabled
                     InputLabelProps={{
-            shrink: true,
-          }}
+                        shrink: true,
+                      }}
+                    value={article.content}
                 />
             </Paper>
         );

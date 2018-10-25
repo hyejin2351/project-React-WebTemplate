@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
@@ -29,21 +27,8 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-    state = {
-        name: '',
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-    };
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-    };
-
     render() {
-        const {classes} = this.props;
+        const {classes, article, changeData} = this.props;
 
         return (
             <Paper elevation={0} className={classes.container} noValidate autoComplete="off">
@@ -55,8 +40,11 @@ class TextFields extends React.Component {
                     placeholder=""
                     margin="normal"
                     InputLabelProps={{
-            shrink: true,
-          }}
+                        shrink: true,
+                      }}
+                    defaultValue={article.title}
+                    name="title"
+                    onChange={changeData}
                 />
 
                 <TextField
@@ -69,8 +57,11 @@ class TextFields extends React.Component {
                     rows="20"
                     margin="normal"
                     InputLabelProps={{
-            shrink: true,
-          }}
+                        shrink: true,
+                      }}
+                    defaultValue={article.content}
+                    name="content"
+                    onChange={changeData}
                 />
             </Paper>
         );

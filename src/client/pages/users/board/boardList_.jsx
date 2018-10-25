@@ -100,7 +100,7 @@ function BoardListView(props) {
                         <div className={classes.title_right}>
                             <Button color="primary" className={classes.add_btn}>
                                 <AddIcon className={classes.icon}/>
-                                <Link href="/users/board/boardNew">
+                                <Link prefetch href="/users/board/boardNew">
                                     <a className={classes.new_btn}>등록</a>
                                 </Link>
                             </Button>

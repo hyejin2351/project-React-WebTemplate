@@ -25,3 +25,51 @@ export const ArticlesQuery = gql`
     }
   }
 `
+
+export const ArticleQuery = gql`
+  query getArticle($id: String!) {
+    getArticle(id: $id) {
+        id
+        title
+        content
+        views
+        created
+        author {
+            id
+            name
+        }
+    }
+  }
+`
+
+export const ArticleUpdate = gql`
+  mutation updateArticle($id: String!, $articleData: ArticleData!) {
+    updateArticle(id: $id, articleData: $articleData) {
+        id
+        title
+        content
+        views
+        created
+        author {
+            id
+            name
+        }
+    }
+  }
+`
+
+export const ArticleDelete = gql`
+  mutation deleteArticle($id: String!) {
+    deleteArticle(id: $id) {
+        id
+        title
+        content
+        views
+        created
+        author {
+            id
+            name
+        }
+    }
+  }
+`

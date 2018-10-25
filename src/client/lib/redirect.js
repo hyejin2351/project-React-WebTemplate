@@ -1,6 +1,6 @@
 import Router from 'next/router';
 
-export default (context, target) => {
+export default (context, target, isReplace = true) => {
   console.log('>>>>>>>>>>>>>>>>>>> REDIRECTING: context is ', !!(context));
   if (context) {
     // server
@@ -9,6 +9,13 @@ export default (context, target) => {
     context.res.end();
   } else {
     // In the browser, we just pretend like this never even happened ;)
-    Router.replace(target);
+    if(isReplace)
+      Router.replace(target);
+    else
+      Router.push(target);
   }
+};
+
+export function historyBack() {
+  Router.back();
 };

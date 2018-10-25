@@ -1,6 +1,7 @@
 //
 // Schema
 //
+const mongoose = require('mongoose');
 const d = require('debug')('app:mod-articles');
 const ArticleModel = require('../models');
 
@@ -103,7 +104,7 @@ const resolvers = {
         return new Error('Must be logged');
 
       return ArticleModel.findById(id).then(article => {
-        if (!isAdminUser(roles) || article.id === userId) {
+        if (!isEqualsObjectId(article.author, userId) && !isAdminUser(roles) ) {
           return new Error('No permission');
         }
 
@@ -119,7 +120,7 @@ const resolvers = {
         return new Error('Must be logged');
 
       return ArticleModel.findById(id).then(article => {
-        if (!isAdminUser(roles) || article.id === userId) {
+        if (!isEqualsObjectId(article.author, userId) && !isAdminUser(roles) ) {
           return new Error('No permission');
         }
 
@@ -137,7 +138,13 @@ function isAdminUser(roles) {
   if(roles && roles.includes('admin'))
     isAdmin = true;
 
+  console.log('isAdmin = ' + isAdmin);
+
   return isAdmin;
+}
+
+function isEqualsObjectId(id1, id2) {
+  return id1.equals(id2);
 }
 
 /*

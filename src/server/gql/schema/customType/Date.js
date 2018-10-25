@@ -4,7 +4,7 @@
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 
-const customdate = new GraphQLScalarType({
+const customDate = new GraphQLScalarType({
     // http://dev.apollodata.com/tools/graphql-tools/scalars.html#Date-as-a-scalar
     name: 'Date',
     description: 'UTC number of milliseconds since midnight Jan 1 1970 as in JS date',
@@ -29,4 +29,4 @@ const customdate = new GraphQLScalarType({
     },
 })
 
-module.exports = customdate;
+module.exports = customDate;
