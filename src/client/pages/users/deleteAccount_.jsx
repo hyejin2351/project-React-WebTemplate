@@ -58,7 +58,7 @@ const styles = theme => ({
 
 
 function DeleteAccountView(props) {
-    const {classes, me, unregister} = props;
+    const {classes, me, unregister, onChangeCheck, label, componentName} = props;
 
     return (
         <React.Fragment>
@@ -83,7 +83,8 @@ function DeleteAccountView(props) {
                     </Paper>
                 </Grid>
 
-                <CheckboxAllCheck></CheckboxAllCheck>
+                <CheckboxAllCheck onChangeCheck={onChangeCheck} label={label} componentName={componentName}>
+                </CheckboxAllCheck>
             </div>
 
 

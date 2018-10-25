@@ -22,35 +22,38 @@ const styles = {
 };
 
 class CheckboxAllCheck extends React.Component {
-    state = {
-        checkedA: true,
-        checkedB: true,
-        checkedF: true,
-        checkedG: true,
-    };
-
-    handleChange = name => event => {
-        this.setState({[name]: event.target.checked});
-    };
-
     render() {
-        const {classes} = this.props;
+        const {classes, onChangeCheck, label, componentName} = this.props;
 
         return (
             <div>
                 <FormGroup row>
-
-                    <FormControlLabel
-                        control={
-            <Checkbox color="primary"
-              icon={<CheckBoxOutlineBlankIcon />}
-              checkedIcon={<CheckBoxIcon  />}
-              value="checkedI"
-            />}
-                        label="안내 사항을 모두 확인하였으며, 이에 동의합니다."
-                    />
-
-
+                    {
+                        ( onChangeCheck && label && componentName) ?
+                            <FormControlLabel
+                                control={
+                                    <Checkbox color="primary"
+                                      icon={<CheckBoxOutlineBlankIcon />}
+                                      checkedIcon={<CheckBoxIcon  />}
+                                      value="checkedI"
+                                      onChange={onChangeCheck}
+                                      name={componentName}
+                                    />
+                                }
+                                label={label}
+                            />
+                            :
+                            <FormControlLabel
+                                control={
+                                <Checkbox color="primary"
+                                  icon={<CheckBoxOutlineBlankIcon />}
+                                  checkedIcon={<CheckBoxIcon  />}
+                                  value="checkedI"
+                                />
+                            }
+                                label="안내 사항을 모두 확인하였으며, 이에 동의합니다."
+                            />
+                    }
                 </FormGroup>
             </div>
         );
