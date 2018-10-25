@@ -81,7 +81,7 @@ const styles = theme => ({
 });
 
 
-function BoardLIstView(props) {
+function BoardListView(props) {
     const {classes, totalCount, articlesList, changePage, changeRowsPerPage, rowsPerPage, pageNo} = props;
 
     return (
@@ -118,8 +118,8 @@ function BoardLIstView(props) {
     );
 }
 
-BoardLIstView.propTypes = {
+BoardListView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BoardLIstView);
+export default withStyles(styles)(BoardListView);
