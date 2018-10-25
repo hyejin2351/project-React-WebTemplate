@@ -24,23 +24,12 @@ const styles = theme => ({
     },
 });
 
-let id = 0;
-function createData(번호, 제목, 작성자, 날짜, 조회) {
-    id += 1;
-    return {id, 번호, 제목, 작성자, 날짜, 조회};
-}
-
-const rows = [
-    createData(1, '게시물1', '관리자', '2018/01/01', 15),
-    createData(2, '-', '-', '-', '-'),
-    createData(3, '-', '-', '-', '-'),
-    createData(4, '-', '-', '-', '-'),
-    createData(5, '-', '-', '-', '-'),
-];
-
 function SimpleTable(props) {
-    const {classes} = props;
+    const {classes, articlesList, rowsPerPage, pageNo} = props;
 
+    // Uncaught TypeError: Cannot read property 'map' of undefined 발생
+    if(!articlesList)
+        return (<div></div>)
     return (
         <React.Fragment>
             <Paper elevation={0}  className={classes.root}>
@@ -55,16 +44,16 @@ function SimpleTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => {
+                        { articlesList.map((article, index) => {
                             return (
-                                <TableRow key={row.id}>
+                                <TableRow key={article.id}>
                                     <TableCell component="th" scope="row">
-                                        {row.번호}
+                                        {(pageNo * rowsPerPage) + index + 1}
                                     </TableCell>
-                                    <TableCell ><a href="/users/board/boardDetail">{row.제목}</a></TableCell>
-                                    <TableCell >{row.작성자}</TableCell>
-                                    <TableCell >{row.날짜}</TableCell>
-                                    <TableCell numeric>{row.조회}</TableCell>
+                                    <TableCell><a href="/users/board/boardDetail">{article.title}</a></TableCell>
+                                    <TableCell>{article.author.name}</TableCell>
+                                    <TableCell>{(new Date(article.created).toDateString())}</TableCell>
+                                    <TableCell numeric>{article.views}</TableCell>
                                 </TableRow>
                             );
                         })}
