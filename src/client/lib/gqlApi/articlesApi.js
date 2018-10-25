@@ -42,6 +42,22 @@ export const ArticleQuery = gql`
   }
 `
 
+export const ArticleCreate = gql`
+  mutation createArticle($articleData: ArticleData!) {
+    createArticle(articleData: $articleData) {
+        id
+        title
+        content
+        views
+        created
+        author {
+            id
+            name
+        }
+    }
+  }
+`
+
 export const ArticleUpdate = gql`
   mutation updateArticle($id: String!, $articleData: ArticleData!) {
     updateArticle(id: $id, articleData: $articleData) {

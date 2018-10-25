@@ -46,10 +46,11 @@ class BoardListPage extends React.Component {
                     if (error) return <ErrorMessage message='Error loading Articles count.' />
 
                     return (
-                        <Query query={ArticlesQuery} variables={ {limit: rowsPerPage, skip: pageNo * rowsPerPage} }>
+                        <Query query={ArticlesQuery} variables={ { limit: rowsPerPage, skip: pageNo * rowsPerPage } }>
                             {({ loading, error, data: { getArticles } }) => {
                                 if (error) return <ErrorMessage message='Error loading Articles.' />
 
+                                log(getArticles);
                                 return (
                                     <ApolloConsumer>
                                         {client => (

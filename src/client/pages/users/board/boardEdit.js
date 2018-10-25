@@ -3,7 +3,7 @@ import debug from 'debug';
 import { ApolloConsumer, Query, Mutation } from 'react-apollo';
 
 import { ArticleQuery, ArticleUpdate, ArticleDelete } from '../../../lib/gqlApi/articlesApi';
-import redirect, {historyBack} from '../../../lib/redirect';
+import { historyBack } from '../../../lib/redirect';
 
 import WidtAuth from '../../../lib/withAuth';
 

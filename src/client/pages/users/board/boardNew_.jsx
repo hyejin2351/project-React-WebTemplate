@@ -104,7 +104,7 @@ const styles = theme => ({
 
 //render
 function boardNewView(props) {
-    const {classes} = props;
+    const {classes, onCreate, onCancel, changeData} = props;
 
     return (
         <React.Fragment>
@@ -121,7 +121,7 @@ function boardNewView(props) {
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
-                                <TextFields></TextFields>
+                                <TextFields changeData={changeData}></TextFields>
                             </Paper>
                         </Grid>
                     </Paper>
@@ -135,11 +135,14 @@ function boardNewView(props) {
                 >
                     <Paper elevation={0} className={classes.two_btn_wrap}>
                         <Button variant="contained" color="primary" size="medium"
-                                className={classNames(classes.save_btn, classes.btn_common)}>
+                                className={classNames(classes.save_btn, classes.btn_common)} onClick={onCreate}>
                             <SaveIcon className={classes.icon}/>
-                            <Link href="/users/board/boardList">
-                                <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
-                            </Link>
+                            <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
+                        </Button>
+
+                        <Button variant="outlined" size="medium"
+                                className={classNames(classes.cancel_btn, classes.btn_common)} onClick={onCancel}>
+                            <a className={classNames(classes.cancel_btn_color, classes.no_a)}>취소</a>
                         </Button>
                     </Paper>
                 </Grid>

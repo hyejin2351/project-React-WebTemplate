@@ -2,7 +2,7 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer, Query } from 'react-apollo';
 
-import { ArticleQuery} from '../../../lib/gqlApi/articlesApi';
+import { ArticleQuery } from '../../../lib/gqlApi/articlesApi';
 import redirect from '../../../lib/redirect';
 import withAuthInfo from '../../../lib/withAuthInfo';
 

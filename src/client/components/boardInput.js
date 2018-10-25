@@ -30,6 +30,9 @@ class TextFields extends React.Component {
     render() {
         const {classes, article, changeData} = this.props;
 
+        const title = article ? article.title : '';
+        const content = article ? article.content : '';
+
         return (
             <Paper elevation={0} className={classes.container} noValidate autoComplete="off">
 
@@ -42,7 +45,7 @@ class TextFields extends React.Component {
                     InputLabelProps={{
                         shrink: true,
                       }}
-                    defaultValue={article.title}
+                    defaultValue={title}
                     name="title"
                     onChange={changeData}
                 />
@@ -59,7 +62,7 @@ class TextFields extends React.Component {
                     InputLabelProps={{
                         shrink: true,
                       }}
-                    defaultValue={article.content}
+                    defaultValue={content}
                     name="content"
                     onChange={changeData}
                 />
