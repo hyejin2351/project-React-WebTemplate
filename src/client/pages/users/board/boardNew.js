@@ -2,7 +2,7 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer, Mutation } from 'react-apollo';
 
-import { ArticlesQuery, ArticleCreate } from '../../../lib/gqlApi/articlesApi';
+import { AllArticlesQuery, ArticleCreate } from '../../../lib/gqlApi/articlesApi';
 import { historyBack } from '../../../lib/redirect';
 
 import WidtAuth from '../../../lib/withAuth';
@@ -40,9 +40,11 @@ class BoardNewPage extends React.Component {
         const { articleData } = this.state;
 
         createArticle({ variables: { articleData } }).then(res => {
+            log('onCreate');
+            log(res);
             historyBack();
         }).catch(err => {
-            log(err)
+            log(err);
         });
     }
 
@@ -62,18 +64,9 @@ class BoardNewPage extends React.Component {
     /**
      * Render the component.
      */
-
     render() {
         return (
-                <Mutation mutation={ArticleCreate}
-                    update={(cache, { data: { createArticle } }) => {
-                        const { getArticles } = cache.readQuery({ query: ArticlesQuery, variables: { limit: 10, skip: 0 } });
-                        cache.writeQuery({
-                            query: ArticlesQuery,
-                            data: { getArticles: getArticles.concat([createArticle]) }
-                        });
-                    }}
-                >
+            <Mutation mutation={ArticleCreate} refetchQueries={[{ query: AllArticlesQuery , variables: { limit: 10, skip: 0 }}]} >
                 {createArticle => {
                     return (
                         <ApolloConsumer>

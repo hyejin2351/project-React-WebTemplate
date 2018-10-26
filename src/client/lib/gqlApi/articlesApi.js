@@ -4,9 +4,20 @@
 
 import gql from 'graphql-tag';
 
-export const ArticlesCountQuery = gql`
-  query {
+export const AllArticlesQuery = gql`
+  query AllArticlesQuery($limit: Int!, $skip: Int!) {
     getArticlesCount
+    getArticles(limit: $limit, skip: $skip) {
+        id
+        title
+        content
+        views
+        created
+        author {
+            id
+            name
+        }
+    }
   }
 `
 
@@ -23,6 +34,12 @@ export const ArticlesQuery = gql`
             name
         }
     }
+  }
+`
+
+export const ArticlesCountQuery = gql`
+  query {
+    getArticlesCount
   }
 `
 

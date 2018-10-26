@@ -2,7 +2,7 @@ import React from 'react';
 import debug from 'debug';
 import { Query, ApolloConsumer } from 'react-apollo';
 
-import { ArticlesCountQuery, ArticlesQuery } from '../../../lib/gqlApi/articlesApi';
+import { AllArticlesQuery } from '../../../lib/gqlApi/articlesApi';
 import MainLayout from '../../../layouts/MainLayout';
 import BoardListView from './boardList_.jsx';
 const log = debug('app:boardList');
@@ -41,38 +41,32 @@ class BoardListPage extends React.Component {
         const { pageNo, rowsPerPage } = this.state;
 
         return (
-            <Query query={ArticlesCountQuery}>
-                {({ loading, error, data: { getArticlesCount } }) => {
-                    if (error) return <ErrorMessage message='Error loading Articles count.' />
+            <Query query={AllArticlesQuery} variables={ { limit: rowsPerPage, skip: pageNo * rowsPerPage } }>
+                {({ loading, error, data: { getArticles, getArticlesCount } }) => {
+                    if (error) return <ErrorMessage message='Error loading Articles.' />
+
+                    log(getArticles);
+                    log(getArticlesCount);
 
                     return (
-                        <Query query={ArticlesQuery} variables={ { limit: rowsPerPage, skip: pageNo * rowsPerPage } }>
-                            {({ loading, error, data: { getArticles } }) => {
-                                if (error) return <ErrorMessage message='Error loading Articles.' />
-
-                                log(getArticles);
-                                return (
-                                    <ApolloConsumer>
-                                        {client => (
-                                            <MainLayout apolloClient={client}>
-                                                <BoardListView
-                                                    totalCount={getArticlesCount}
-                                                    articlesList={getArticles}
-                                                    changePage={this.changePage}
-                                                    changeRowsPerPage={this.changeRowsPerPage}
-                                                    rowsPerPage={rowsPerPage}
-                                                    pageNo={pageNo}
-                                                />
-                                            </MainLayout>
-                                        )}
-                                    </ApolloConsumer>
-                                )
-                            }}
-                        </Query>
+                        <ApolloConsumer>
+                            {client => (
+                                <MainLayout apolloClient={client}>
+                                    <BoardListView
+                                        totalCount={getArticlesCount}
+                                        articlesList={getArticles}
+                                        changePage={this.changePage}
+                                        changeRowsPerPage={this.changeRowsPerPage}
+                                        rowsPerPage={rowsPerPage}
+                                        pageNo={pageNo}
+                                    />
+                                </MainLayout>
+                            )}
+                        </ApolloConsumer>
                     )
                 }}
             </Query>
-        );
+        )
     }
 }
 

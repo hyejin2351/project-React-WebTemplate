@@ -2,7 +2,7 @@ import React from 'react';
 import debug from 'debug';
 import { ApolloConsumer, Query, Mutation } from 'react-apollo';
 
-import { ArticleQuery, ArticleUpdate, ArticleDelete } from '../../../lib/gqlApi/articlesApi';
+import { AllArticlesQuery, ArticleQuery, ArticleUpdate, ArticleDelete } from '../../../lib/gqlApi/articlesApi';
 import { historyBack } from '../../../lib/redirect';
 
 import WidtAuth from '../../../lib/withAuth';
@@ -86,7 +86,7 @@ class BoardEditPage extends React.Component {
                     if (error) return <ErrorMessage message='Error loading Article.' />
 
                     return (
-                        <Mutation mutation={ArticleDelete} key={id}>
+                        <Mutation mutation={ArticleDelete} key={id} refetchQueries={[{ query: AllArticlesQuery , variables: { limit: 10, skip: 0 }}]} >
                             {deleteArticle => {
                                 return (
                                     <Mutation mutation={ArticleUpdate} key={id}>
