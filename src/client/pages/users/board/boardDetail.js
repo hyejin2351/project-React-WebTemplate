@@ -11,8 +11,6 @@ import BoardDetailView from './boardDetail_.jsx';
 import ErrorMessage from '../../../components/ErrorMessage';
 const log = debug('app:boardDetail');
 
-let article = null;
-
 class BoardDetailPage extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +18,7 @@ class BoardDetailPage extends React.Component {
         this.goChangePage = this.goChangePage.bind(this);
     }
 
-    goChangePage(event) {
+    goChangePage(event, getArticle) {
         event.preventDefault();
         const { query: { id }, me } = this.props;
 
@@ -28,7 +26,7 @@ class BoardDetailPage extends React.Component {
             log('로그인 사용자만 접근이 가능합니다.');
             redirect(null, '/users/signin');
         } else {
-            if(me.id !== article.author.id)
+            if(me.id !== getArticle.author.id)
                 log('작성자만 수정이 가능합니다.');
             else
                 redirect(null, { pathname: '/users/board/boardEdit',  query: { id: id }}, false )
@@ -49,15 +47,13 @@ class BoardDetailPage extends React.Component {
                 {({ loading, error, data: { getArticle } }) => {
                     if (error) return <ErrorMessage message='Error loading Article.' />
 
-                    article = getArticle;
-
                     return (
                         <ApolloConsumer>
                             {client => (
                                 <MainLayout apolloClient={client}>
                                     <BoardDetailView
                                         article={getArticle}
-                                        goChangePage={this.goChangePage}
+                                        goChangePage={e => this.goChangePage(e, getArticle)}
                                     />
                                 </MainLayout>
                             )}

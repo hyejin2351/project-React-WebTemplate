@@ -36,17 +36,24 @@ class BoardEditPage extends React.Component {
         historyBack();
     }
 
-    onUpdate(event, updateArticle) {
+    onUpdate(event, updateArticle, getArticle) {
         event.preventDefault();
 
         const { query: { id} } = this.props;
-        const { articleData } = this.state;
+        let { articleData } = this.state;
 
-        updateArticle({ variables: { id, articleData } }).then(res => {
-            historyBack();
-        }).catch(err => {
-            log(err)
-        });
+        if(!articleData.title && !articleData.content) {
+            log('변경사항이 없습니다. 제목 또는 내용을 수정 해주세요.');
+        } else {
+            articleData.title = articleData.title ? articleData.title : getArticle.title;
+            articleData.content = articleData.content ? articleData.content : getArticle.content;
+
+            updateArticle({ variables: { id, articleData } }).then(res => {
+                historyBack();
+            }).catch(err => {
+                log(err)
+            });
+        }
     }
 
     onDelete(event, deleteArticle) {
@@ -98,7 +105,7 @@ class BoardEditPage extends React.Component {
                                                         <AdminLayout apolloClient={client}>
                                                             <BoardEditView
                                                                 article={getArticle}
-                                                                onUpdate={e => this.onUpdate(e, updateArticle)}
+                                                                onUpdate={e => this.onUpdate(e, updateArticle, getArticle)}
                                                                 onDelete={e => this.onDelete(e, deleteArticle)}
                                                                 onCancel={this.onCancel}
                                                                 changeData={this.changeData}

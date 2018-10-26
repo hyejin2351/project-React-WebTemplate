@@ -12,8 +12,6 @@ import ErrorMessage from '../../../components/ErrorMessage';
 
 const log = debug('app:boardDetail');
 
-let article = null;
-
 class BoardDetailPage extends React.Component {
     constructor(props) {
         super(props);
@@ -41,8 +39,6 @@ class BoardDetailPage extends React.Component {
             <Query query={ArticleQuery} variables={ {id: id} }>
                 {({ loading, error, data: { getArticle } }) => {
                     if (error) return <ErrorMessage message='Error loading Article.' />
-
-                    article = getArticle;
 
                     return (
                         <ApolloConsumer>
