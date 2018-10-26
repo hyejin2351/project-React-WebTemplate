@@ -94,7 +94,7 @@ const styles = theme => ({
 
 
 function passwordChange(props) {
-    const {classes, onChange, onSubmit} = props;
+    const {classes, onChange, onSubmit, onCancel} = props;
 
     return (
         <React.Fragment>
@@ -204,11 +204,8 @@ function passwordChange(props) {
                     <a className={classes.btn_color}>적용</a>
                 </Button>
 
-                <Button variant="outlined" size="medium"
-                        className={classes.right_btn}>
-                    <Link href="/users/myPage">
-                        <a className={classes.black_color_btn}>취소</a>
-                    </Link>
+                <Button variant="outlined" size="medium" className={classes.right_btn} onClick={onCancel}>
+                    <a className={classes.black_color_btn}>취소</a>
                 </Button>
             </Paper>
         </React.Fragment>

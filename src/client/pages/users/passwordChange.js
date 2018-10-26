@@ -5,7 +5,7 @@ import { ApolloConsumer } from 'react-apollo';
 import MainLayout from '../../layouts/MainLayout';
 import PasswordChangeView from './passwordChange_.jsx';
 import WithAuth from '../../lib/withAuth';
-import redirect from '../../lib/redirect';
+import redirect, { historyBack } from '../../lib/redirect';
 
 import usersApi from '../../lib/gqlApi/usersApi';
 
@@ -25,18 +25,31 @@ class PasswordChangePage extends React.Component {
         };
 
         this.changeData = this.changeData.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.changePassword = this.changePassword.bind(this);
+    }
+
+    onCancel(event) {
+        event.preventDefault();
+
+        historyBack();
     }
 
     async changePassword(event, apolloClient) {
         const { curPassword, newPassword, newConfirmPassword } = this.state.inputData;
 
-        try{
-            const res = await usersApi.changePassword( { apolloClient, curPassword, newPassword} );
+        if(curPassword === newPassword)
+            log('현재 비밀번호 새 비밀번호가 동일합니다.')
+        else if (newPassword !== newConfirmPassword)
+            log('새 비밀번호와 새 비밀번호 재확인 비밀번호가 다릅니다.');
+        else {
+            try{
+                const res = await usersApi.changePassword( { apolloClient, curPassword, newPassword} );
 
-            redirect(null, '/users/myPage');
-        } catch (err){
-            log(err);
+                redirect(null, '/users/myPage');
+            } catch (err){
+                log(err);
+            }       
         }
     }
 
@@ -60,6 +73,7 @@ class PasswordChangePage extends React.Component {
                     <MainLayout apolloClient={client}>
                         <PasswordChangeView
                             onChange={this.changeData}
+                            onCancel={this.onCancel}
                             onSubmit={e => this.changePassword(e, client)}
                         />
                     </MainLayout>
