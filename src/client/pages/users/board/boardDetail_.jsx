@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Link from '../../../../../node_modules/next/link';
+import Link from 'next/link';
 
 //Core 컴포넌트
 import Button from '@material-ui/core/Button';
@@ -75,8 +75,7 @@ const styles = theme => ({
 
 });
 
-//render
-function boardDetailPage(props) {
+function boardDetailView(props) {
     const {classes, article, goChangePage} = props;
 
     return (
@@ -120,8 +119,8 @@ function boardDetailPage(props) {
     );
 }
 
-boardDetailPage.propTypes = {
+boardDetailView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(boardDetailPage);
+export default withStyles(styles)(boardDetailView);

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
+
 import { withStyles } from '@material-ui/core/styles';
 
 // Core 컴포넌트
@@ -25,52 +27,47 @@ const styles = theme => ({
     },
 });
 
-let id = 0;
-function createData(번호, 제목, 작성자, 날짜, 조회) {
-    id += 1;
-    return { id, 번호, 제목, 작성자, 날짜, 조회 };
-}
-
-const rows = [
-    createData(1, '게시물1', '관리자', '2018/01/01', 15),
-    createData(2, '-', '-', '-', '-'),
-    createData(3, '-', '-', '-', '-'),
-    createData(4, '-', '-', '-', '-'),
-    createData(5, '-', '-', '-', '-'),
-];
-
 function SimpleTable(props) {
-    const { classes } = props;
+    const {classes, articlesList, rowsPerPage, pageNo} = props;
 
+    // Uncaught TypeError: Cannot read property 'map' of undefined 발생
+    if(!articlesList)
+        return (<div></div>)
     return (
-        <Paper elevation={0} className={classes.root}>
-            <Table className={classes.table}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>번호</TableCell>
-                        <TableCell>제목</TableCell>
-                        <TableCell>작성자</TableCell>
-                        <TableCell>날짜</TableCell>
-                        <TableCell numeric>조회</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map(row => {
-                        return (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {row.번호}
-                                </TableCell>
-                                <TableCell ><a href="/admin/board/boardDetail">{row.제목}</a></TableCell>
-                                <TableCell >{row.작성자}</TableCell>
-                                <TableCell >{row.날짜}</TableCell>
-                                <TableCell numeric>{row.조회}</TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-        </Paper>
+        <React.Fragment>
+            <Paper elevation={0}  className={classes.root}>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>번호</TableCell>
+                            <TableCell>제목</TableCell>
+                            <TableCell>작성자</TableCell>
+                            <TableCell>날짜</TableCell>
+                            <TableCell numeric>조회</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        { articlesList.map((article, index) => {
+                            return (
+                                <TableRow key={article.id}>
+                                    <TableCell component="th" scope="row">
+                                        {(pageNo * rowsPerPage) + index + 1}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Link href={{ pathname: '/admin/board/boardDetail', query: { id: article.id } }}>
+                                            <a>{article.title}</a>
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell>{article.author.name}</TableCell>
+                                    <TableCell>{(new Date(article.created).toDateString())}</TableCell>
+                                    <TableCell numeric>{article.views}</TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </Paper>
+        </React.Fragment>
     );
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Link from '../../../../../node_modules/next/link';
+import Link from 'next/link';
 
 //Core 컴포넌트
 import Button from '@material-ui/core/Button';
@@ -103,7 +103,7 @@ const styles = theme => ({
 });
 
 
-function boardEditPage(props) {
+function boardEditView(props) {
     const {classes, article, onDelete, onUpdate, onCancel, changeData} = props;
 
     return (
@@ -159,8 +159,8 @@ function boardEditPage(props) {
         ;
 }
 
-boardEditPage.propTypes = {
+boardEditView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(boardEditPage);
+export default withStyles(styles)(boardEditView);

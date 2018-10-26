@@ -79,8 +79,8 @@ const styles = theme => ({
 });
 
 
-function board(props) {
-    const {classes} = props;
+function BoardListView(props) {
+    const {classes, totalCount, articlesList, changePage, changeRowsPerPage, rowsPerPage, pageNo} = props;
 
     return (
         <React.Fragment>
@@ -92,21 +92,23 @@ function board(props) {
                         <div className={classes.title_left}>
                             <Typography component="h3" className={classes.paper_title}>게시판 관리</Typography>
                             <Typography variant="caption" className={classes.total}>총 <span
-                                className={classes.total_span}>70</span>개</Typography>
+                                className={classes.total_span}>{totalCount}</span>개</Typography>
                         </div>
 
                         <div className={classes.title_right}>
                             <Button color="primary" className={classes.add_btn}>
                                 <AddIcon className={classes.icon}/>
-                                <Link href="/admin/board/boardNew">
+                                <Link prefetch href="/admin/board/boardNew">
                                     <a className={classes.new_btn}>등록</a>
                                 </Link>
                             </Button>
                         </div>
                     </Paper>
 
-                    <SimpleTable></SimpleTable>
-                    <CustomPaginationActionsTable></CustomPaginationActionsTable>
+                    <SimpleTable articlesList={articlesList} rowsPerPage={rowsPerPage} pageNo={pageNo}></SimpleTable>
+                    <CustomPaginationActionsTable
+                        totalCount={totalCount} changePage={changePage} changeRowsPerPage={changeRowsPerPage} rowsPerPage={rowsPerPage} pageNo={pageNo}>
+                    </CustomPaginationActionsTable>
                 </Paper>
 
             </div>
@@ -114,8 +116,8 @@ function board(props) {
     )
 }
 
-board.propTypes = {
+BoardListView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(board);
+export default withStyles(styles)(BoardListView);

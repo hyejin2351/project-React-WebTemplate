@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from '../../../../../node_modules/next/link';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 //컴포넌트
 import Button from '@material-ui/core/Button';
@@ -102,7 +102,6 @@ const styles = theme => ({
     },
 });
 
-//render
 function boardNewView(props) {
     const {classes, onCreate, onCancel, changeData} = props;
 

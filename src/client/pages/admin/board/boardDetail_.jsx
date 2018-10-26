@@ -77,8 +77,8 @@ const styles = theme => ({
 });
 
 
-function boardDetail(props) {
-    const {classes} = props;
+function boardDetailView(props) {
+    const {classes, article, goChangePage} = props;
 
     return (
         <React.Fragment>
@@ -92,11 +92,9 @@ function boardDetail(props) {
                         </div>
 
                         <div className={classes.title_right}>
-                            <Button color="primary" className={classes.edit_btn}>
+                            <Button color="primary" className={classes.edit_btn} onClick={goChangePage}>
                                 <EditIcon className={classes.icon}/>
-                                <Link href="/admin/board/boardEdit">
-                                    <a className={classes.edit_btn_props}>수정</a>
-                                </Link>
+                                <a className={classes.edit_btn_props}>수정</a>
                             </Button>
 
                             <Button color="primary" className={classes.edit_btn}>
@@ -111,7 +109,7 @@ function boardDetail(props) {
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
-                                <TextFieldsDisabled></TextFieldsDisabled>
+                                <TextFieldsDisabled article={article}></TextFieldsDisabled>
                             </Paper>
                         </Grid>
                     </Paper>
@@ -121,8 +119,8 @@ function boardDetail(props) {
     )
 }
 
-boardDetail.propTypes = {
+boardDetailView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(boardDetail);
+export default withStyles(styles)(boardDetailView);

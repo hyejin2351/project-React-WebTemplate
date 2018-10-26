@@ -45,9 +45,6 @@ class BoardListPage extends React.Component {
                 {({ loading, error, data: { getArticles, getArticlesCount } }) => {
                     if (error) return <ErrorMessage message='Error loading Articles.' />
 
-                    log(getArticles);
-                    log(getArticlesCount);
-
                     return (
                         <ApolloConsumer>
                             {client => (

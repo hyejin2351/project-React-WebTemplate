@@ -104,8 +104,8 @@ const styles = theme => ({
 });
 
 
-function boardEdit(props) {
-    const {classes} = props;
+function boardEditView(props) {
+    const {classes, article, onDelete, onUpdate, onCancel, changeData} = props;
 
     return (
         <React.Fragment>
@@ -119,18 +119,16 @@ function boardEdit(props) {
                         </div>
 
                         <div className={classes.title_right}>
-                            <Button className={classes.delete_btn}>
+                            <Button className={classes.delete_btn} onClick={onDelete}>
                                 <DeleteIcon className={classes.icon}/>
-                                <Link href="/admin/board/boardList">
-                                    <a className={classes.delete_btn_props}>삭제</a>
-                                </Link>
+                                <a className={classes.delete_btn_props}>삭제</a>
                             </Button>
                         </div>
                     </Paper>
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
-                                <TextFields></TextFields>
+                                <TextFields article={article} changeData={changeData}></TextFields>
                             </Paper>
                         </Grid>
                     </Paper>
@@ -144,18 +142,14 @@ function boardEdit(props) {
                 >
                     <Paper elevation={0} className={classes.two_btn_wrap}>
                         <Button variant="contained" color="primary" size="medium"
-                                className={classNames(classes.save_btn, classes.btn_common)}>
+                                className={classNames(classes.save_btn, classes.btn_common)} onClick={onUpdate}>
                             <SaveIcon className={classes.icon}/>
-                            <Link href="/admin/board/boardDetail">
-                                <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
-                            </Link>
+                            <a className={classNames(classes.save_btn_color, classes.no_a)}>저장</a>
                         </Button>
 
                         <Button variant="outlined" size="medium"
-                                className={classNames(classes.cancel_btn, classes.btn_common)}>
-                            <Link href="/admin/board/boardDetail">
-                                <a className={classNames(classes.cancel_btn_color, classes.no_a)}>취소</a>
-                            </Link>
+                                className={classNames(classes.cancel_btn, classes.btn_common)} onClick={onCancel}>
+                            <a className={classNames(classes.cancel_btn_color, classes.no_a)}>취소</a>
                         </Button>
                     </Paper>
                 </Grid>
@@ -165,8 +159,8 @@ function boardEdit(props) {
     )
 }
 
-boardEdit.propTypes = {
+boardEditView.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(boardEdit);
+export default withStyles(styles)(boardEditView);
