@@ -42,3 +42,33 @@ export const AllUsersQuery = gql`
     }
   }
 `
+
+export const GetUserQuery = gql`
+  query getUser($id: String!) {
+    getUser(id: $id) {
+      id,
+      name,
+      email,
+      nickName,
+      profileImageURL
+      roles,
+      providerType,
+      created
+    }
+  }
+`
+
+export const UserDelete = gql`
+  mutation deleteUser($id: String!) {
+    deleteUser(id: $id) {
+      id,
+      name,
+      email,
+      nickName,
+      profileImageURL
+      roles,
+      providerType,
+      created
+    }
+  }
+`

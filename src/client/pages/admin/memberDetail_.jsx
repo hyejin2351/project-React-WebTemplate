@@ -13,8 +13,6 @@ import red from '@material-ui/core/colors/red';
 //Core 컴포넌트 (테이블)
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 //컴포넌트
@@ -96,7 +94,7 @@ const styles = theme => ({
 
 
 function memberDetailView(props) {
-    const {classes} = props;
+    const {classes, userInfo, onDelete} = props;
 
     return (
         <React.Fragment>
@@ -110,11 +108,9 @@ function memberDetailView(props) {
                         </div>
 
                         <div className={classes.blue_border_upper_right}>
-                            <Button className={classes.delete_btn}>
+                            <Button className={classes.delete_btn} onClick={onDelete}>
                                 <DeleteIcon className={classes.icon}/>
-                                <Link href="/admin/membersList">
-                                    <a className={classes.delete_btn_props}>삭제</a>
-                                </Link>
+                                <a className={classes.delete_btn_props}>삭제</a>
                             </Button>
                         </div>
                     </Paper>
@@ -126,19 +122,19 @@ function memberDetailView(props) {
                                     <TableBody>
                                         <TableRow className={classes.table_border}>
                                             <th className={classes.table_head}>성명</th>
-                                            <td className={classes.table_data}>홍길동</td>
+                                            <td className={classes.table_data}>{userInfo.name}</td>
                                         </TableRow>
                                         <TableRow className={classes.table_border}>
                                             <th className={classes.table_head}>닉네임</th>
-                                            <td className={classes.table_data}>홍당무</td>
+                                            <td className={classes.table_data}>{userInfo.nickName}</td>
                                         </TableRow>
                                         <TableRow className={classes.table_border}>
                                             <th className={classes.table_head}>이메일</th>
-                                            <td className={classes.table_data}>id@email.com</td>
+                                            <td className={classes.table_data}>{userInfo.email}</td>
                                         </TableRow>
                                         <TableRow className={classes.table_border}>
                                             <th className={classes.table_head}>가입날짜</th>
-                                            <td className={classes.table_data}>2016/05/27</td>
+                                            <td className={classes.table_data}>{(new Date(userInfo.created).toDateString())}</td>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
