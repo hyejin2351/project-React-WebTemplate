@@ -57,10 +57,8 @@ export default Component => class WithAdmin extends React.Component {
   componentDidMount() {
     const { ipAddress, me } = this.props;
 
-    console.log('--------------------------');
-
-    console.log(ipAddress);
-    console.log(me);
+    log(ipAddress);
+    log(me);
 
     // 서버에 SSH 터널링이 된 경우
     if(config.ADMIN_IP.includes(ipAddress)) {
@@ -76,14 +74,10 @@ export default Component => class WithAdmin extends React.Component {
       this.setState({
         statusCode: 401,
       });
-
-      console.log('go error page');
     }
   }
 
   render() {
-    console.log('this.props = ' + JSON.stringify(this.props));
-    
     if (this.state.statusCode !== 200) {
       return <Error statusCode={this.state.statusCode} />
     }

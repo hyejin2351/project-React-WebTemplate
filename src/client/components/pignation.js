@@ -91,12 +91,6 @@ const TablePaginationActionsWrapped = withStyles(actionsStyles, {withTheme: true
     TablePaginationActions,
 );
 
-let counter = 0;
-function createData(name, calories, fat) {
-    counter += 1;
-    return {id: counter, name, calories, fat};
-}
-
 const styles = theme => ({
     root: {
         width: '100%',
@@ -111,7 +105,6 @@ const styles = theme => ({
 });
 
 class CustomPaginationActionsTable extends React.Component {
-
     render() {
         const {classes, totalCount, changePage, changeRowsPerPage, rowsPerPage, pageNo} = this.props;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalCount - pageNo * rowsPerPage);
@@ -119,6 +112,7 @@ class CustomPaginationActionsTable extends React.Component {
         // warning.js:33 Warning: Failed prop type: The prop `count` is marked as required in `TablePagination`, but its value is `undefined`. 발생
         if(!totalCount)
             return (<div></div>)
+
         return (
             <Paper elevation={0} className={classes.root}>
                 <div className={classes.tableWrapper}>
