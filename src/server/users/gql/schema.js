@@ -100,7 +100,7 @@ const resolvers = {
       console.log('search = ' + search);
       const limitI = limit ? limit : 0;
       const skipI = skip ? skip : 0;
-      const query = search ? { name : search, roles: { $ne: 'admin'}} : { roles: { $ne: 'admin'}}
+      const query = search ? { name : { $regex: search+'.*'} , roles: { $ne: 'admin'}} : { roles: { $ne: 'admin'}}
 
       return UserModel.find( query ).skip(skipI).limit(limitI).sort({ created: -1});
     },

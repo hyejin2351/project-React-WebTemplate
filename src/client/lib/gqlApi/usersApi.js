@@ -25,6 +25,8 @@ export function changePassword( {apolloClient, curPassword, newPassword} ) {
     })
 }
 
+// apolloClient api 이용한 방법 구현 하려고 햇으나, 샘플이 별루 없어서...
+// component 이용한 방법 구현
 export const AllUsersQuery = gql`
   query allUsersQuery($limit: Int!, $skip: Int!, $search: String) {
     getUsersCount

@@ -22,6 +22,7 @@ class MembersListPage extends React.Component {
 
         this.changePage = this.changePage.bind(this);
         this.changeRowsPerPage = this.changeRowsPerPage.bind(this);
+        this.changeSearch = this.changeSearch.bind(this);
     }
 
     changePage(event, page) {
@@ -46,6 +47,7 @@ class MembersListPage extends React.Component {
      */
     changeSearch(event) {
         const search = event.target.value;
+        log('search = ' + search);
         this.setState({
             search: search
         });

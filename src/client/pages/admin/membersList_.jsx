@@ -93,7 +93,7 @@ function MembersListView(props) {
                         </div>
 
                         <div className={classes.title_right}>
-                            <Search></Search>
+                            <Search changeSearch={changeSearch}></Search>
                         </div>
                     </Paper>
 
