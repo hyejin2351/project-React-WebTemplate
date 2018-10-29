@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import Link from 'next/link';
 
 // Core 컴포넌트
 import Paper from '@material-ui/core/Paper';
@@ -24,23 +25,8 @@ const styles = theme => ({
     },
 });
 
-
-let id = 0;
-function createData(번호, 제목, 작성자, 날짜, 조회) {
-    id += 1;
-    return {id, 번호, 제목, 작성자, 날짜, 조회};
-}
-
-const rows = [
-    createData(1, '게시물1', '관리자', '2018/01/01', 15),
-    createData(2, '-', '-', '-', '-'),
-    createData(3, '-', '-', '-', '-'),
-    createData(4, '-', '-', '-', '-'),
-    createData(5, '-', '-', '-', '-'),
-];
-
 function MemberDetail(props) {
-    const {classes} = props;
+    const {classes ,usersList, rowsPerPage, pageNo} = props;
 
     return (
         <Paper elevation={0} className={classes.root}>
@@ -48,28 +34,40 @@ function MemberDetail(props) {
                 <TableBody>
                     <TableRow>
                         <TableCell>번호</TableCell>
-                        <TableCell>제목</TableCell>
-                        <TableCell>작성자</TableCell>
-                        <TableCell>날짜</TableCell>
-                        <TableCell numeric>조회</TableCell>
+                        <TableCell>성명</TableCell>
+                        <TableCell>닉네임</TableCell>
+                        <TableCell>이메일</TableCell>
+                        <TableCell>가입날짜</TableCell>
                     </TableRow>
                 </TableBody>
-                <TableBody>
-                    {rows.map(row => {
-                        return (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {row.번호}
-                                </TableCell>
-                                <TableCell ><a href="/admin/memberDetail">{row.제목}</a></TableCell>
-                                <TableCell >{row.작성자}</TableCell>
-                                <TableCell >{row.날짜}</TableCell>
-                                <TableCell numeric>{row.조회}</TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
+                {
+                    usersList &&
+                    <TableBody>
+                        {usersList.map((user, index) => {
+                            return (
+                                <TableRow key={user.id}>
+                                    <TableCell component="th" scope="row">
+                                        {(pageNo * rowsPerPage) + index + 1}
+                                    </TableCell>
+                                    <TableCell >
+                                        <Link href={{ pathname: '/admin/memberDetail', query: { id: user.id } }}>
+                                            <a>{user.name}</a>
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell >{user.nickName}</TableCell>
+                                    <TableCell >{user.email}</TableCell>
+                                    <TableCell >{(new Date(user.created).toDateString())}</TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                }
             </Table>
+            { !usersList &&
+                <div>
+                    등록된 회원이 없습니다.
+                </div>
+            }
         </Paper>
     );
 }

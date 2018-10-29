@@ -8,6 +8,7 @@ import WithAdmin from '../../../lib/withAdmin';
 import AdminLayout from '../../../layouts/AdminLayout';
 
 import BoardListView from './boardList_.jsx';
+import ErrorMessage from '../../../components/ErrorMessage';
 const log = debug('app:boardList');
 
 class BoardListPage extends React.Component {

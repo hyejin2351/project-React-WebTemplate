@@ -2,6 +2,7 @@
  * Created by jcdev00 on 18. 10. 24.
  */
 
+// component 이용한 방법
 import gql from 'graphql-tag';
 
 export const AllArticlesQuery = gql`

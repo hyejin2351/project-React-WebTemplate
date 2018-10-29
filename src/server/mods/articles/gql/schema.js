@@ -65,8 +65,7 @@ const resolvers = {
       const query = author ? { author: author} : {}
       const limitI = limit ? limit : 0;
       const skipI = skip ? skip : 0;
-
-      return ArticleModel.find( query ).skip(skipI).limit(limitI).populate('author');
+      return ArticleModel.find( query ).skip(skipI).limit(limitI).sort({ created: -1}).populate('author');
     },
 
     getArticle: (_, { id }, { userId, roles }) => {

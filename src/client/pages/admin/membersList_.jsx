@@ -77,7 +77,7 @@ const styles = theme => ({
 
 
 function MembersListView(props) {
-    const {classes} = props;
+    const {classes, totalCount, usersList, changePage, changeRowsPerPage, changeSearch, rowsPerPage, pageNo} = props;
 
     return (
         <div>
@@ -89,7 +89,7 @@ function MembersListView(props) {
                         <div className={classes.title_left}>
                             <Typography component="h3" className={classes.paper_title}>회원 관리</Typography>
                             <Typography variant="caption" className={classes.total}>총 <span
-                                className={classes.total_span}>35</span>개</Typography>
+                                className={classes.total_span}>{totalCount}</span>명</Typography>
                         </div>
 
                         <div className={classes.title_right}>
@@ -97,8 +97,10 @@ function MembersListView(props) {
                         </div>
                     </Paper>
 
-                    <MemberDetail></MemberDetail>
-                    <CustomPaginationActionsTable></CustomPaginationActionsTable>
+                    <MemberDetail usersList={usersList} rowsPerPage={rowsPerPage} pageNo={pageNo}></MemberDetail>
+                    <CustomPaginationActionsTable
+                        totalCount={totalCount} changePage={changePage} changeRowsPerPage={changeRowsPerPage} rowsPerPage={rowsPerPage} pageNo={pageNo}>
+                    </CustomPaginationActionsTable>
                 </Paper>
 
             </div>

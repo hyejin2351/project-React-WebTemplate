@@ -7,7 +7,7 @@ import AdminLayout from '../../layouts/AdminLayout'
 import PasswordChangeView from './passwordChange_.jsx';
 import WithAdmin from '../../lib/withAdmin';
 import redirect, { historyBack } from '../../lib/redirect';
-import usersApi from '../../lib/gqlApi/usersApi';
+import { changePassword } from '../../lib/gqlApi/usersApi';
 
 const log = debug('app:passwordChange');
 
@@ -26,7 +26,7 @@ class PasswordChangePage extends React.Component {
 
         this.changeData = this.changeData.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        this.changePassword = this.changePassword.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onCancel(event) {
@@ -35,7 +35,7 @@ class PasswordChangePage extends React.Component {
         historyBack();
     }
 
-    async changePassword(event, apolloClient) {
+    async onSubmit(event, apolloClient) {
         const { curPassword, newPassword, newConfirmPassword } = this.state.inputData;
 
         if(curPassword === newPassword)
@@ -44,7 +44,7 @@ class PasswordChangePage extends React.Component {
             log('새 비밀번호와 새 비밀번호 재확인 비밀번호가 다릅니다.');
         else {
             try{
-                const res = await usersApi.changePassword( { apolloClient, curPassword, newPassword} );
+                const res = await changePassword( { apolloClient, curPassword, newPassword} );
 
                 redirect(null, '/admin');
             } catch (err){
@@ -74,7 +74,7 @@ class PasswordChangePage extends React.Component {
                         <PasswordChangeView
                             onChange={this.changeData}
                             onCancel={this.onCancel}
-                            onSubmit={e => this.changePassword(e, client)}
+                            onSubmit={e => this.onSubmit(e, client)}
                         />
                     </AdminLayout>
                 )}

@@ -30,8 +30,8 @@ const types = `
 
 const queries = `
     getUsers(
-      # 데이터를 정렬, 필드명 : 오름차순 정렬, -필드명 : 내림차순 정렬
-      sort: String
+      # 검색어
+      search: String
       # 출력할 데이터 갯수를 제한
       limit: Int
       # 시작부분을 설정
@@ -45,6 +45,9 @@ const queries = `
 
     me
     : User
+    
+    getUsersCount
+   : Int
 `;
 
 const mutations = `
@@ -86,7 +89,7 @@ const resolvers = {
       return UserModel.findById(id);
     },
 
-    getUsers: (_, { sort, limit, skip}, { userId, roles }) => {
+    getUsers: (_, { limit, skip, search}, { userId, roles }) => {
       if(!userId)
         return new Error('Must be logged');
 
@@ -94,11 +97,20 @@ const resolvers = {
         return new Error('No permission');
       }
 
-      const sortS = sort ? sort : '';
+      console.log('search = ' + search);
       const limitI = limit ? limit : 0;
       const skipI = skip ? skip : 0;
+      const query = search ? { name : search, roles: { $ne: 'admin'}} : { roles: { $ne: 'admin'}}
 
-      return UserModel.find({ roles: { $ne: 'admin'} }).skip(skipI).limit(limitI).sort(sortS);
+      return UserModel.find( query ).skip(skipI).limit(limitI).sort({ created: -1});
+    },
+
+    getUsersCount: (_, __, context) => {
+      return UserModel.find( { roles: { $ne: 'admin'}} ).then( users => {
+        return users ? users.length : 0
+      }).catch(err => {
+        return 0;
+      })
     },
   },
 

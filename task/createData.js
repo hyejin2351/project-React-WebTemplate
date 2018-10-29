@@ -192,7 +192,7 @@ function exitCallback(err) {
 function randomDate() {
     const curDate = new Date();
     const nYear = curDate.getFullYear() - getRandomInt(0, 2);
-    const nMonth = getRandomInt(0, 12);
+    const nMonth = (curDate.getFullYear() === nYear ) ? getRandomInt(0, curDate.getMonth()) : getRandomInt(0, 12);
     const nDay = getRandomInt(0, 31);
 
     return new Date(nYear, nMonth, nDay);

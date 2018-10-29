@@ -106,12 +106,8 @@ const styles = theme => ({
 
 class CustomPaginationActionsTable extends React.Component {
     render() {
-        const {classes, totalCount, changePage, changeRowsPerPage, rowsPerPage, pageNo} = this.props;
+        const {classes, totalCount=0, rowsPerPage, pageNo, changePage, changeRowsPerPage} = this.props;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalCount - pageNo * rowsPerPage);
-
-        // warning.js:33 Warning: Failed prop type: The prop `count` is marked as required in `TablePagination`, but its value is `undefined`. 발생
-        if(!totalCount)
-            return (<div></div>)
 
         return (
             <Paper elevation={0} className={classes.root}>
@@ -139,6 +135,19 @@ class CustomPaginationActionsTable extends React.Component {
 
 CustomPaginationActionsTable.propTypes = {
     classes: PropTypes.object.isRequired,
+    totalCount: PropTypes.number,
+    rowsPerPage: PropTypes.number,
+    pageNo: PropTypes.number,
+    changePage: PropTypes.func,
+    changeRowsPerPage: PropTypes.func,
+};
+
+CustomPaginationActionsTable.defaultProps = {
+    totalCount: 0,
+    rowsPerPage: 10,
+    pageNo: 0,
+    changePage: () => {},
+    changeRowsPerPage: () => {}
 };
 
 export default withStyles(styles)(CustomPaginationActionsTable);

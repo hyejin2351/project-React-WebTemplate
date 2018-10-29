@@ -30,9 +30,6 @@ const styles = theme => ({
 function SimpleTable(props) {
     const {classes, articlesList, rowsPerPage, pageNo} = props;
 
-    // Uncaught TypeError: Cannot read property 'map' of undefined 발생
-    if(!articlesList)
-        return (<div></div>)
     return (
         <React.Fragment>
             <Paper elevation={0}  className={classes.root}>
@@ -46,26 +43,35 @@ function SimpleTable(props) {
                             <TableCell numeric>조회</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
-                        { articlesList.map((article, index) => {
-                            return (
-                                <TableRow key={article.id}>
-                                    <TableCell component="th" scope="row">
-                                        {(pageNo * rowsPerPage) + index + 1}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Link href={{ pathname: '/admin/board/boardDetail', query: { id: article.id } }}>
-                                            <a>{article.title}</a>
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{article.author.name}</TableCell>
-                                    <TableCell>{(new Date(article.created).toDateString())}</TableCell>
-                                    <TableCell numeric>{article.views}</TableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
+                    {
+                        articlesList &&
+                        <TableBody>
+                            { articlesList.map((article, index) => {
+                                return (
+                                    <TableRow key={article.id}>
+                                        <TableCell component="th" scope="row">
+                                            {(pageNo * rowsPerPage) + index + 1}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Link href={{ pathname: '/admin/board/boardDetail', query: { id: article.id } }}>
+                                                <a>{article.title}</a>
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>{article.author.name}</TableCell>
+                                        <TableCell>{(new Date(article.created).toDateString())}</TableCell>
+                                        <TableCell numeric>{article.views}</TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    }
                 </Table>
+                {
+                    !articlesList &&
+                    <div>
+                        등록된 계시글이 없습니다.
+                    </div>
+                }
             </Paper>
         </React.Fragment>
     );
