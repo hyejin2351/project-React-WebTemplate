@@ -45,23 +45,26 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2
     },
 
-    //프로필 이미지 영역 + 닉네임 영역
     paper_inner_wrap: {
         minHeight: 300,
         maxHeight: 300,
     },
 
-    //프로필 이미지 영역
+    //프로필 이미지
     profile_img_area: {
-        minHeight: 225,
-        marginBottom: 15
+        width: 250,
+        height: 250,
+        marginBottom: 20,
     },
     profile_img: {
         overflow: 'hidden',
-        maxWidth: 300,
-        maxHeight: 225,
-        borderRadius: 360,
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        borderRadius: '100%',
     },
+
+
     table_wrap: {},
     table: {
         minWidth: 300,
