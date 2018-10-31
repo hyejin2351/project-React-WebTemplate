@@ -3,6 +3,15 @@
 //
 const d = require('debug')('app:gql');
 const UserModel = require('../models/user');
+const {
+    DEFAULT_PROFILE,
+    UPLOAD_DIR
+} = require('../config');
+
+const fs = require('fs');
+const shortid = require('shortid');
+const mkdirp = require('mkdirp');
+mkdirp.sync(UPLOAD_DIR);
 
 //
 // See https://www.apollographql.com/docs/apollo-server/example.html
@@ -25,6 +34,13 @@ const types = `
     email: String
     name: String
     nickName: String
+  }
+  
+  type File {
+    id: ID!
+    path: String!
+    filename: String!
+    mimetype: String!
   }
 `;
 
@@ -55,6 +71,18 @@ const mutations = `
       curPassword: String!
       newPassword: String!
     ): User
+    
+    changeProfile (
+      nickName: String
+      file: Upload
+      isDelete: Boolean
+    ): User
+    
+    updateMe (
+      userData: UserData
+    ): User
+    
+    singleUpload(file: Upload!): User!
     
     createUser (
       userData: UserData!
@@ -123,6 +151,64 @@ const resolvers = {
       return UserModel.findByIdChangePassword(userId, curPassword, newPassword)
     },
 
+    changeProfile: async (obj, { nickName, file, isDelete }, { userId }) => {
+      try {
+        const { path } = file ? (await processUpload(file)) : {};
+        const user = await UserModel.findById(userId);
+        const profileImageURL = path ? path.substring('./public'.length) : (isDelete ? DEFAULT_PROFILE : null)
+
+        //이미지 변경이거나 이미지 삭제이면
+        if(file || isDelete) {
+          // /uploads/으로 시작하면 사용자가 업로드한 이미지이므로
+          if(user.profileImageURL.includes('/uploads/')) {
+            // file delete
+            // 실제 경로는 ./public/uploads/~ 이므로 파일을 삭제 할때는 실제 경로 지정
+            await fs.unlinkSync('./public'.concat(user.profileImageURL));
+          }
+        }
+
+        let update = {}
+
+        if(profileImageURL)
+            update['profileImageURL'] = profileImageURL;
+        if(nickName)
+          update['nickName'] = nickName;
+
+        console.log(update);
+
+        // 접속 url을 /uploads/~ 이므로 db에 저장할때는 ./public/ 제외하고 저장
+        return await UserModel.findByIdAndUpdate(userId, { $set: update } , { new: true });
+      } catch( err) {
+        return err;
+      }
+    },
+
+    updateMe: (_, { userData }, { userId }) => {
+      if(!userId)
+        return new Error('Must be logged');
+
+      return UserModel.findByIdAndUpdate(userId, userData, { new: true });
+    },
+
+    singleUpload: async (obj, { file }, { userId }) => {
+      try {
+        const { path } = await processUpload(file);
+        const user = await UserModel.findById(userId);
+
+        // /uploads/으로 시작하면 사용자가 업로드한 이미지이므로
+        if(user.profileImageURL.includes('/uploads/')) {
+          // file delete
+          // 실제 경로는 ./public/uploads/~ 이므로 파일을 삭제 할때는 실제 경로 지정
+          await fs.unlinkSync('./public'.concat(user.profileImageURL));
+        }
+
+        // 접속 url을 /uploads/~ 이므로 db에 저장할때는 ./public/ 제외하고 저장
+        return await UserModel.findByIdAndUpdate(userId, { profileImageURL: path.substring('./public'.length) } , { new: true });
+      } catch( err) {
+        return err;
+      }
+    },
+
     //admin
     createUser: (_, { userData, password }, { userId, roles }) => {
       if(!userId)
@@ -167,6 +253,30 @@ function isAdminUser(roles) {
     isAdmin = true;
 
   return isAdmin;
+}
+
+
+const storeUpload = async ({ stream, filename }) => {
+  const id = shortid.generate()
+  const path = `${UPLOAD_DIR}/${id}-${filename}`;
+
+  return new Promise((resolve, reject) =>
+      stream
+          .on('error', error => {
+            if (stream.truncated)
+            // Delete the truncated file
+              fs.unlinkSync(path)
+            reject(error)
+          })
+          .pipe(fs.createWriteStream(path))
+          .on('error', error => reject(error))
+          .on('finish', () => resolve({ id, path }))
+  )
+}
+
+const processUpload = async ( upload ) => {
+  const { stream, filename, mimetype } = await upload
+  return { id, path } = await storeUpload({ stream, filename });
 }
 
 module.exports = {

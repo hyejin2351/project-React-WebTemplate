@@ -72,3 +72,33 @@ export const UserDelete = gql`
     }
   }
 `
+
+export const SingleUpload = gql`
+  mutation singleUpload($file: Upload!) {
+    singleUpload(file: $file) {
+      id,
+      name,
+      email,
+      nickName,
+      profileImageURL
+      roles,
+      providerType,
+      created
+    }
+  }
+`
+
+export const ChangeProfile = gql`
+  mutation changeProfile($nickName: String, $file: Upload, $isDelete: Boolean) {
+    changeProfile(nickName: $nickName, file: $file, isDelete: $isDelete) {
+      id,
+      name,
+      email,
+      nickName,
+      profileImageURL
+      roles,
+      providerType,
+      created
+    }
+  }
+`

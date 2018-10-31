@@ -104,7 +104,7 @@ const styles = theme => ({
 
 
 function boardEditView(props) {
-    const {classes, article, onDelete, onUpdate, onCancel, changeData} = props;
+    const {classes, article, onDelete, onUpdate, onCancel, onChange} = props;
 
     return (
         <React.Fragment>
@@ -128,7 +128,7 @@ function boardEditView(props) {
                     <Paper elevation={0}>
                         <Grid>
                             <Paper elevation={0} className={classes.paper_bottom}>
-                                <TextFields article={article} changeData={changeData}></TextFields>
+                                <TextFields article={article} onChange={onChange}></TextFields>
                             </Paper>
                         </Grid>
                     </Paper>

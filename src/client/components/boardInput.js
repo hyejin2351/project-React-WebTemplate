@@ -28,7 +28,7 @@ const styles = theme => ({
 
 class TextFields extends React.Component {
     render() {
-        const {classes, article, changeData} = this.props;
+        const {classes, article, onChange} = this.props;
 
         const title = article ? article.title : '';
         const content = article ? article.content : '';
@@ -47,7 +47,7 @@ class TextFields extends React.Component {
                       }}
                     defaultValue={title}
                     name="title"
-                    onChange={changeData}
+                    onChange={onChange}
                 />
 
                 <TextField
@@ -64,7 +64,7 @@ class TextFields extends React.Component {
                       }}
                     defaultValue={content}
                     name="content"
-                    onChange={changeData}
+                    onChange={onChange}
                 />
             </Paper>
         );

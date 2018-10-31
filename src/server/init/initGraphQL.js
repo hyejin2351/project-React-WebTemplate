@@ -10,6 +10,8 @@ const {
   graphiqlExpress,
 } = require('apollo-server-express');
 
+const { graphqlUploadExpress } = require('graphql-upload');
+
 const {
   isDev,
 } = require('../config');
@@ -69,6 +71,7 @@ module.exports = (server, { // express app
   server.use(
     graphQLPath,
     bodyParser.json(),
+    graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
     graphqlExpress(fnOptions));
 
   // use graphiql feature

@@ -46,6 +46,9 @@ exports.kakao = {
     callbackURL: '/api/auth/kakao/callback'
 }
 
+exports.DEFAULT_PROFILE = '/static/images/defaultProfile.png';
+
+exports.UPLOAD_DIR = './public/uploads'
 /*
  Cryptography
  https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2_password_salt_iterations_keylen_digest_callback

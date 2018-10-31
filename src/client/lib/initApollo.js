@@ -3,6 +3,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'isomorphic-unfetch';
+import { createUploadLink } from 'apollo-upload-client'
 
 import {
   GRAPHQL_URL,
@@ -19,6 +20,11 @@ if (!isBrowser) {
 }
 
 function create(initialState, { getToken }) {
+  const uploadLink = createUploadLink({
+    uri: GRAPHQL_URL,
+    credentials: 'same-origin'
+  });
+
   const httpLink = createHttpLink({
     uri: GRAPHQL_URL,
     credentials: 'same-origin'
@@ -41,7 +47,7 @@ function create(initialState, { getToken }) {
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser, // Disables forceFetch on the server (so queries are only run once)
-    link: authLink.concat(httpLink),
+    link: authLink.concat(uploadLink),
     cache: new InMemoryCache().restore(initialState || {})
   });
 }

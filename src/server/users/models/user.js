@@ -4,7 +4,8 @@ const modAuth = require('./plugin');
 const {
   USERNAME_FIELD_NAME,
   PASSWORD_FIELD_NAME,
-  SALT_LENGTH
+  SALT_LENGTH,
+  DEFAULT_PROFILE
 } = require('../config');
 
 // define the User model schema
@@ -17,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   nickName: String,
   profileImageURL: {
     type: String,
-    default: '/static/images/defaultProfile.png'
+    default: DEFAULT_PROFILE
   },
   roles: {
     type: [{

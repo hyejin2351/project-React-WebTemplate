@@ -26,7 +26,7 @@ class BoardEditPage extends React.Component {
         this.onUpdate = this.onUpdate.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        this.changeData = this.changeData.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     onCancel(event) {
@@ -68,7 +68,7 @@ class BoardEditPage extends React.Component {
         });
     }
 
-    changeData(event) {
+    onChange(event) {
         const field = event.target.name;
         const articleData = this.state.articleData;
         articleData[field] = event.target.value;
@@ -107,7 +107,7 @@ class BoardEditPage extends React.Component {
                                                                 onUpdate={e => this.onUpdate(e, updateArticle, getArticle)}
                                                                 onDelete={e => this.onDelete(e, deleteArticle)}
                                                                 onCancel={this.onCancel}
-                                                                changeData={this.changeData}
+                                                                onChange={this.onChange}
                                                             />
                                                         </MainLayout>
                                                     )}

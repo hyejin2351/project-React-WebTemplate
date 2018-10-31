@@ -5,7 +5,7 @@ import { ApolloConsumer } from 'react-apollo';
 import MainLayout from '../../layouts/MainLayout';
 import PasswordChangeView from './passwordChange_.jsx';
 import WithAuth from '../../lib/withAuth';
-import redirect, { historyBack } from '../../lib/redirect';
+import { historyBack } from '../../lib/redirect';
 
 import { changePassword } from '../../lib/gqlApi/usersApi';
 
@@ -24,7 +24,7 @@ class PasswordChangePage extends React.Component {
             }
         };
 
-        this.changeData = this.changeData.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -36,6 +36,8 @@ class PasswordChangePage extends React.Component {
     }
 
     async onSubmit(event, apolloClient) {
+        event.preventDefault();
+
         const { curPassword, newPassword, newConfirmPassword } = this.state.inputData;
 
         if(curPassword === newPassword)
@@ -46,14 +48,14 @@ class PasswordChangePage extends React.Component {
             try{
                 const res = await changePassword( { apolloClient, curPassword, newPassword} );
 
-                redirect(null, '/users/myPage');
+                historyBack();
             } catch (err){
                 log(err);
             }       
         }
     }
 
-    changeData(event) {
+    onChange(event) {
         const field = event.target.name;
         const inputData = this.state.inputData;
         inputData[field] = event.target.value;
@@ -72,7 +74,7 @@ class PasswordChangePage extends React.Component {
                 {client => (
                     <MainLayout apolloClient={client}>
                         <PasswordChangeView
-                            onChange={this.changeData}
+                            onChange={this.onChange}
                             onCancel={this.onCancel}
                             onSubmit={e => this.onSubmit(e, client)}
                         />
