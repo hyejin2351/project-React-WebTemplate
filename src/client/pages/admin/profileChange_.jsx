@@ -45,9 +45,6 @@ const styles = theme => ({
         minHeight: 350,
         maxHeight: 350
     },
-    paper_inner_wrap: {
-        minHeight: 265
-    },
     profile_img: {
         display: 'block',
         maxWidth: 300
@@ -55,6 +52,20 @@ const styles = theme => ({
     body_title: {
         padding: theme.spacing.unit * 1,
         backgroundColor: 'transparent'
+    },
+
+    //프로필 이미지
+    profile_img_area: {
+        width: 250,
+        height: 250,
+        marginBottom: 20,
+    },
+    profile_img: {
+        overflow: 'hidden',
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        borderRadius: '100%',
     },
 
     //하얀 버튼 두개
@@ -113,15 +124,23 @@ function profileChange(props) {
                                         {
                                             file && file.name ?
                                                 <FilePreview file={file}>
-                                                    {(preview) => <img src={preview} alt="변경 또는 삭제할 프로필 사진" className={classes.profile_img}/>}
+                                                    {(preview) =>
+                                                        <Paper elevation={0} className={classes.profile_img_area}>
+                                                            <img src={preview} alt="변경 또는 삭제할 프로필 사진"
+                                                                 className={classes.profile_img}/>
+                                                        </Paper>
+                                                    }
                                                 </FilePreview>
                                                 :
-                                                <img src={profileImageURL} alt="변경 또는 삭제할 프로필 사진"
-                                                     className={classes.profile_img}/>
+                                                <Paper elevation={0} className={classes.profile_img_area}>
+                                                    <img src={profileImageURL} alt="변경 또는 삭제할 프로필 사진"
+                                                         className={classes.profile_img}/>
+                                                </Paper>
                                         }
                                         <Paper elevation={0} className={classes.two_btn_wrap}>
                                             <Button variant="outlined" size="small" onClick={onFileOpen}>변경</Button>
-                                            <Button variant="outlined" size="small" className={classes.right_btn} onClick={onFileDelete}>삭제</Button>
+                                            <Button variant="outlined" size="small" className={classes.right_btn}
+                                                    onClick={onFileDelete}>삭제</Button>
                                         </Paper>
                                     </Paper>
                                 </Grid>
@@ -137,7 +156,8 @@ function profileChange(props) {
                                     <Paper elevation={0} className={classes.nick_paper_wrap}>
                                         <Typography
                                             className={classes.paper_title}>닉네임</Typography>
-                                        <TextField type="text" className={classes.nick_input} defaultValue={me.nickName} onChange={onChange}></TextField>
+                                        <TextField type="text" className={classes.nick_input} defaultValue={me.nickName}
+                                                   onChange={onChange}></TextField>
                                     </Paper>
                                 </Grid>
                             </Paper>
@@ -148,7 +168,8 @@ function profileChange(props) {
 
 
             <Paper elevation={0} className={classes.two_btn_wrap}>
-                <Button variant="contained" color="primary" size="medium" className={classes.float_right} onClick={onSubmit}>
+                <Button variant="contained" color="primary" size="medium" className={classes.float_right}
+                        onClick={onSubmit}>
                     <a className={classes.btn_color}>적용</a>
                 </Button>
 

@@ -49,16 +49,20 @@ const styles = theme => ({
         maxHeight: 300,
     },
 
-    //프로필 이미지 영역
+    //프로필 이미지
     profile_img_area: {
-        minHeight: 225,
-        marginBottom: 15
+        width: 250,
+        height: 250,
+        marginBottom: 20,
     },
     profile_img: {
         overflow: 'hidden',
-        maxWidth: 300,
-        maxHeight: 225,
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        borderRadius: '100%',
     },
+    
     table_wrap: {
     },
     table: {
