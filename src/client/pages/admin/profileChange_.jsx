@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Link from 'next/link';
+import FilePreview from 'react-preview-file';
 
 //Core 컴포넌트
 import Button from '@material-ui/core/Button';
@@ -83,8 +84,8 @@ const styles = theme => ({
 });
 
 
-function profile(props) {
-    const {classes} = props;
+function profileChange(props) {
+    const {classes, onFileOpen, onFileDelete, onChange, onSubmit, onCancel, me, file, profileImageURL} = props;
 
     return (
         <React.Fragment>
@@ -109,12 +110,18 @@ function profile(props) {
                                     alignItems="center"
                                 >
                                     <Paper elevation={0} className={classes.paper_inner_wrap}>
-                                        <img src="/static/images/defaultProfile.png" alt="변경 또는 삭제할 프로필 사진"
-                                             className={classes.profile_img}/>
+                                        {
+                                            file && file.name ?
+                                                <FilePreview file={file}>
+                                                    {(preview) => <img src={preview} alt="변경 또는 삭제할 프로필 사진" className={classes.profile_img}/>}
+                                                </FilePreview>
+                                                :
+                                                <img src={profileImageURL} alt="변경 또는 삭제할 프로필 사진"
+                                                     className={classes.profile_img}/>
+                                        }
                                         <Paper elevation={0} className={classes.two_btn_wrap}>
-                                            <Button variant="outlined" size="small">변경</Button>
-                                            <Button variant="outlined" size="small"
-                                                    className={classes.right_btn}>삭제</Button>
+                                            <Button variant="outlined" size="small" onClick={onFileOpen}>변경</Button>
+                                            <Button variant="outlined" size="small" className={classes.right_btn} onClick={onFileDelete}>삭제</Button>
                                         </Paper>
                                     </Paper>
                                 </Grid>
@@ -130,7 +137,7 @@ function profile(props) {
                                     <Paper elevation={0} className={classes.nick_paper_wrap}>
                                         <Typography
                                             className={classes.paper_title}>닉네임</Typography>
-                                        <TextField type="text" className={classes.nick_input}></TextField>
+                                        <TextField type="text" className={classes.nick_input} defaultValue={me.nickName} onChange={onChange}></TextField>
                                     </Paper>
                                 </Grid>
                             </Paper>
@@ -141,25 +148,20 @@ function profile(props) {
 
 
             <Paper elevation={0} className={classes.two_btn_wrap}>
-                <Button variant="contained" color="primary" size="medium" className={classes.float_right}>
-                    <Link href="/admin">
-                        <a className={classes.btn_color}>적용</a>
-                    </Link>
+                <Button variant="contained" color="primary" size="medium" className={classes.float_right} onClick={onSubmit}>
+                    <a className={classes.btn_color}>적용</a>
                 </Button>
 
-                <Button variant="outlined" size="medium"
-                        className={classes.right_btn}>
-                    <Link href="/admin">
-                        <a className={classes.black_color_btn}>취소</a>
-                    </Link>
+                <Button variant="outlined" size="medium" className={classes.right_btn} onClick={onCancel}>
+                    <a className={classes.black_color_btn}>취소</a>
                 </Button>
             </Paper>
         </React.Fragment>
     );
 }
 
-profile.propTypes = {
+profileChange.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(profile);
+export default withStyles(styles)(profileChange);
