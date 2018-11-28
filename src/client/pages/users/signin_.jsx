@@ -1,184 +1,218 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
-import classNames from 'classnames';
-import TextField from '@material-ui/core/TextField';
+/* eslint-disable import/no-extraneous-dependencies */
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+import TextField from "@material-ui/core/TextField";
 
 //Core 컴포넌트
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
 //이미지
-let imgUrl = '/static/images/line.png';
+const imgUrl = "/static/images/line.png";
 
 //스타일링
 const styles = theme => ({
-    root: {
-        textAlign: 'center',
-        paddingTop: theme.spacing.unit * 20,
-        backgroundColor: '#f5f6f8',
-        paddingBottom: theme.spacing.unit * 20
-    },
-    paper: {
-        width: 350,
-        paddingBottom: theme.spacing.unit * 5,
-        margin: '0 auto',
-        backgroundColor: '#f5f6f8',
-        overflow: 'hidden'
-    },
-    input: {
-        display: 'block',
-        width: 350,
-        height: 40,
-        marginTop: theme.spacing.unit * 2
-    },
-    SigninPage: {},
-    bold: {
-        fontWeight: 'bold',
-        paddingBottom: theme.spacing.unit * 1
-    },
-    signUp: {
-        color: '#3e9bff'
-    },
-    signUpBtn: {
-        marginTop: theme.spacing.unit * 3,
-        height: 40
-    },
-    notYet: {
-        marginTop: theme.spacing.unit * 2
-    },
-    social: {
-        width: '100%'
-    },
-    or: {
-        backgroundImage: 'url(' + imgUrl + ')',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        overflow: 'hidden'
-    },
+  root: {
+    textAlign: "center",
+    paddingTop: theme.spacing.unit * 20,
+    backgroundColor: "#f5f6f8",
+    paddingBottom: theme.spacing.unit * 20
+  },
+  paper: {
+    width: 350,
+    paddingBottom: theme.spacing.unit * 5,
+    margin: "0 auto",
+    backgroundColor: "#f5f6f8",
+    overflow: "hidden"
+  },
+  input: {
+    display: "block",
+    width: 350,
+    height: 40,
+    marginTop: theme.spacing.unit * 2
+  },
+  SigninPage: {},
+  bold: {
+    fontWeight: "bold",
+    paddingBottom: theme.spacing.unit * 1
+  },
+  signUp: {
+    color: "#3e9bff"
+  },
+  signUpBtn: {
+    marginTop: theme.spacing.unit * 3,
+    height: 40
+  },
+  notYet: {
+    marginTop: theme.spacing.unit * 2
+  },
+  social: {
+    width: "100%"
+  },
+  or: {
+    backgroundImage: `url(${imgUrl})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    overflow: "hidden"
+  },
 
-    //SNS 버튼
-    sns: {
-        margin: theme.spacing.unit * 3,
-        width: 50,
-        height: 50
+  //SNS 버튼
+  sns: {
+    margin: theme.spacing.unit * 3,
+    width: 50,
+    height: 50
+  },
+  sns_1: {
+    "&": {
+      backgroundColor: "#3b5999"
     },
-    sns_1: {
-        '&': {
-            backgroundColor: '#3b5999'
-        },
-        '&:hover': {
-            backgroundColor: '#3b5999'
-        }
-    },
-    sns_2: {
-        '&': {
-            backgroundColor: '#dc4e41'
-        },
-        '&:hover': {
-            backgroundColor: '#dc4e41'
-        }
-    },
-    sns_3: {
-        '&': {
-            backgroundColor: '#ffde00'
-        },
-        '&:hover': {
-            backgroundColor: '#ffde00'
-        }
-    },
-    paper_trans: {
-        background: 'transparent'
-    },
-    sns_img_size: {
-        width: 25
+    "&:hover": {
+      backgroundColor: "#3b5999"
     }
+  },
+  sns_2: {
+    "&": {
+      backgroundColor: "#dc4e41"
+    },
+    "&:hover": {
+      backgroundColor: "#dc4e41"
+    }
+  },
+  sns_3: {
+    "&": {
+      backgroundColor: "#ffde00"
+    },
+    "&:hover": {
+      backgroundColor: "#ffde00"
+    }
+  },
+  paper_trans: {
+    background: "transparent"
+  },
+  sns_img_size: {
+    width: 25
+  }
 });
 
 function SigninPage(props) {
-    const {classes, onSubmit, onChange, onFacebook, onGoogle, onKakao} = props;
+  const { classes, onSubmit, onChange, onFacebook, onGoogle, onKakao } = props;
 
-    return (
-        <React.Fragment>
-            <div className={classes.root}>
+  return (
+    <React.Fragment>
+      <div className={classes.root}>
+        <Paper elevation={0} className={classes.paper}>
+          <div className={classes.SigninPage}>
+            <Typography variant="h6" align="left" className={classes.bold}>
+              로그인
+            </Typography>
+            <Typography variant="caption" align="left">
+              로그인 후 모든 서비스를 이용하세요.
+            </Typography>
+          </div>
 
-                <Paper elevation={0} className={classes.paper}>
-                    <div className={classes.SigninPage}>
-                        <Typography variant="h6" align="left" className={classes.bold}>로그인</Typography>
-                        <Typography variant="caption" align="left">로그인 후 모든 서비스를 이용하세요.</Typography>
-                    </div>
+          <div className={classes.container}>
+            <form noValidate autoComplete="off">
+              <TextField
+                fullWidth
+                autoComplete="on"
+                placeholder="이메일"
+                className={classes.input}
+                name="email"
+                onChange={onChange}
+              />
 
+              <TextField
+                fullWidth
+                autoComplete="off"
+                placeholder="비밀번호 (6자리 이상)"
+                className={classes.input}
+                type="password"
+                name="password"
+                onChange={onChange}
+              />
+            </form>
+          </div>
 
-                    <div className={classes.container}>
-                        <form noValidate autoComplete="off">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                placeholder="이메일"
-                                className={classes.input}
-                                name="email"
-                                onChange={onChange}>
-                            </TextField>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.signUpBtn}
+            onClick={onSubmit}
+          >
+            로그인하기
+          </Button>
 
+          <Typography align="right" className={classes.notYet}>
+            아직 회원이 아니신가요? &nbsp;
+            <a href="/users/signup" className={classes.signUp}>
+              회원가입
+            </a>
+          </Typography>
+        </Paper>
 
-                            <TextField
-                                fullWidth
-                                autoComplete="off"
-                                placeholder="비밀번호 (6자리 이상)"
-                                className={classes.input}
-                                type="password"
-                                name="password"
-                                onChange={onChange}>
-                            </TextField>
-                        </form>
-                    </div>
+        <Paper elevation={0} className={classes.paper}>
+          <Typography variant="caption" className={classes.or}>
+            또는
+          </Typography>
+        </Paper>
 
+        <Paper elevation={0} className={classes.paper} align="left">
+          <div align="left">
+            <Typography variant="h6" className={classes.bold}>
+              소셜 로그인
+            </Typography>
+            <Typography variant="caption">
+              SNS 계정으로 간편하게 로그인하세요.
+            </Typography>
+          </div>
 
-                    <Button fullWidth={true} variant="contained" color="primary"
-                            className={classes.signUpBtn} onClick={onSubmit}>로그인하기
-                    </Button>
-
-
-                    <Typography align="right" className={classes.notYet}>아직 회원이 아니신가요? &nbsp;
-                        <a href="/users/signup"
-                           className={classes.signUp}>회원가입</a></Typography>
-                </Paper>
-
-                <Paper elevation={0} className={classes.paper}><Typography variant="caption"
-                                                                           className={classes.or}>또는</Typography></Paper>
-
-                <Paper elevation={0} className={classes.paper} align="left">
-                    <div align="left">
-                        <Typography variant="h6" className={classes.bold}>소셜 로그인</Typography>
-                        <Typography variant="caption">SNS 계정으로 간편하게 로그인하세요.</Typography>
-                    </div>
-
-                    <Paper align="center" elevation={0} className={classes.paper_trans}>
-                        <Button variant="fab"
-                                className={classNames(classes.sns, classes.sns_1)} onClick={onFacebook}><img
-                            src="/static/images/sns_1.png"
-                            className={classes.sns_img_size}
-                            alt="Facebook으로 로그인하기 버튼"/></Button>
-                        <Button variant="fab"
-                                className={classNames(classes.sns, classes.sns_2)} onClick={onGoogle}><img
-                            src="/static/images/sns_2.png"
-                            className={classes.sns_img_size}
-                            alt="Google로 로그인하기 버튼"/></Button>
-                        <Button variant="fab"
-                                className={classNames(classes.sns, classes.sns_3)} onClick={onKakao}><img
-                            src="/static/images/sns_3.png"
-                            className={classes.sns_img_size}
-                            alt="Kakaotalk으로 로그인하기 버튼"/></Button>
-                    </Paper>
-                </Paper>
-            </div>
-        </React.Fragment>
-    );
+          <Paper align="center" elevation={0} className={classes.paper_trans}>
+            <Button
+              variant="fab"
+              className={classNames(classes.sns, classes.sns_1)}
+              onClick={onFacebook}
+            >
+              <img
+                src="/static/images/sns_1.png"
+                className={classes.sns_img_size}
+                alt="Facebook으로 로그인하기 버튼"
+              />
+            </Button>
+            <Button
+              variant="fab"
+              className={classNames(classes.sns, classes.sns_2)}
+              onClick={onGoogle}
+            >
+              <img
+                src="/static/images/sns_2.png"
+                className={classes.sns_img_size}
+                alt="Google로 로그인하기 버튼"
+              />
+            </Button>
+            <Button
+              variant="fab"
+              className={classNames(classes.sns, classes.sns_3)}
+              onClick={onKakao}
+            >
+              <img
+                src="/static/images/sns_3.png"
+                className={classes.sns_img_size}
+                alt="Kakaotalk으로 로그인하기 버튼"
+              />
+            </Button>
+          </Paper>
+        </Paper>
+      </div>
+    </React.Fragment>
+  );
 }
 
 SigninPage.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SigninPage);

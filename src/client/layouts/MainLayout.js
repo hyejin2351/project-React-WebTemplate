@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 /**
  * Created by jcdev00 on 18. 10. 23.
  */

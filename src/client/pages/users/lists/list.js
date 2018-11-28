@@ -2,14 +2,14 @@
 import React from "react";
 import debug from "debug";
 import { ApolloConsumer } from "react-apollo";
-import withAuth from "../../lib/withAuth";
+import withAuth from "../../../lib/withAuth";
 
-import MainLayout from "../../layouts/MainLayout";
-import MyPageView from "./myPage_.jsx";
+import MainLayout from "../../../layouts/MainLayout";
+import ListViewRender from "./list_.jsx";
 
 const log = debug("app:myPage");
 
-class MyPagePage extends React.Component {
+class listsView extends React.Component {
   /**
    * Render the component.
    */
@@ -18,7 +18,7 @@ class MyPagePage extends React.Component {
       <ApolloConsumer>
         {client => (
           <MainLayout apolloClient={client}>
-            <MyPageView me={this.props.me} />
+            <ListViewRender me={this.props.me} />
           </MainLayout>
         )}
       </ApolloConsumer>
@@ -26,4 +26,4 @@ class MyPagePage extends React.Component {
   }
 }
 
-export default withAuth(MyPagePage);
+export default withAuth(listsView);

@@ -1,17 +1,17 @@
-import React from 'react';
-import { ApolloConsumer } from 'react-apollo';
-import debug from 'debug';
+import React from "react";
+import { ApolloConsumer } from "react-apollo";
+import debug from "debug";
 
 //lib
-import redirect from '../../lib/redirect';
-import AuthService from '../../lib/AuthService';
+import redirect from "../../lib/redirect";
+import AuthService from "../../lib/AuthService";
 
 //jsx view
-import MainLayout from '../../layouts/MainLayout';
-import SignInForm from './signin_.jsx';
+import MainLayout from "../../layouts/MainLayout";
+import SignInForm from "./signin_.jsx";
 
 //debug log
-const log = debug('app:signin');
+const log = debug("app:signin");
 
 //Login page
 class LoginPage extends React.Component {
@@ -22,8 +22,8 @@ class LoginPage extends React.Component {
     this.state = {
       errors: {},
       user: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       }
     };
 
@@ -42,13 +42,16 @@ class LoginPage extends React.Component {
 
     const email = this.state.user.email;
     const password = this.state.user.password;
-    log('processForm: ', email);
+    log("processForm: ", email);
 
     try {
-      const res = await AuthService.login({
-        uri: '/api/auth/login',
-        apolloClient,
-      }, { email: email, password: password });
+      const res = await AuthService.login(
+        {
+          uri: "/api/auth/login",
+          apolloClient
+        },
+        { email, password }
+      );
       // success
       // change the component-container state
       this.setState({
@@ -58,7 +61,7 @@ class LoginPage extends React.Component {
       // logged in, so we don't accidentally leave any state around.
       apolloClient.cache.reset().then(() => {
         // redirect signed-in user to other page
-        redirect(null, '/');
+        redirect(null, "/");
       });
     } catch (err) {
       // failure
@@ -85,15 +88,15 @@ class LoginPage extends React.Component {
   }
 
   async processFacebook(apolloClient) {
-    redirect(null, '/api/auth/facebook');
+    redirect(null, "/api/auth/facebook");
   }
 
   async processGoogle(apolloClient) {
-    redirect(null, '/api/auth/google');
+    redirect(null, "/api/auth/google");
   }
 
   async processKakao(apolloClient) {
-    redirect(null, '/api/auth/kakao');
+    redirect(null, "/api/auth/kakao");
   }
 
   /**
@@ -105,12 +108,12 @@ class LoginPage extends React.Component {
         {client => (
           <MainLayout apolloClient={client}>
             <SignInForm
-                onSubmit={e => this.processForm(e, client)}
-                onChange={this.changeUser}
-                onFacebook={e => this.processFacebook(client)}
-                onGoogle={e => this.processGoogle(client)}
-                onKakao={e => this.processKakao(client)}
-                errors={this.state.errors}
+              onSubmit={e => this.processForm(e, client)}
+              onChange={this.changeUser}
+              onFacebook={e => this.processFacebook(client)}
+              onGoogle={e => this.processGoogle(client)}
+              onKakao={e => this.processKakao(client)}
+              errors={this.state.errors}
             />
           </MainLayout>
         )}
