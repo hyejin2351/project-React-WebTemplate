@@ -1,16 +1,13 @@
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import fetch from 'isomorphic-unfetch';
-import { createUploadLink } from 'apollo-upload-client'
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { setContext } from "apollo-link-context";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import fetch from "isomorphic-unfetch";
+import { createUploadLink } from "apollo-upload-client";
 
-import {
-  GRAPHQL_URL,
-  isBrowser
-} from '../config';
+import { GRAPHQL_URL, isBrowser } from "../config";
 
-const log = require('debug')('app:initApollo');
+const log = require("debug")("app:initApollo");
 
 let apolloClient = null;
 
@@ -22,23 +19,23 @@ if (!isBrowser) {
 function create(initialState, { getToken }) {
   const uploadLink = createUploadLink({
     uri: GRAPHQL_URL,
-    credentials: 'same-origin'
+    credentials: "same-origin"
   });
 
   const httpLink = createHttpLink({
     uri: GRAPHQL_URL,
-    credentials: 'same-origin'
+    credentials: "same-origin"
   });
 
   const authLink = setContext((_, { headers }) => {
     const token = getToken();
-    log('TOKEN: ', token);
+    log("TOKEN: ", token);
     return {
       headers: {
         ...headers,
         // HTTP Header:  Cookie: <cookiename>=<cookievalue>
-        // The setting below make it work on SSR 
-        Cookie: `connect.sid=${token['connect.sid']}; token=${token.token}`,
+        // The setting below make it work on SSR
+        Cookie: `connect.sid=${token["connect.sid"]}; token=${token.token}`
         // authorization: token ? `Bearer ${token}` : ''
       }
     };
