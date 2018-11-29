@@ -12,6 +12,13 @@ import Paper from "@material-ui/core/Paper";
 import SimpleAppBar from "../../../components/subBar";
 import NestedList from "../../../components/list/NestedList";
 import FolderList from "../../../components/list/FolderList";
+import SimpleList from "../../../components/list/SimpleList";
+import SelectedListItem from "../../../components/list/SelectedListItem";
+import AlignItemsList from "../../../components/list/AlignItemsList";
+import CheckboxList from "../../../components/list/CheckboxList";
+import CheckboxListSecondary from "../../../components/list/CheckboxListSecondary";
+import SwitchListSecondary from "../../../components/list/SwitchListSecondary";
+import PinnedSubheaderList from "../../../components/list/PinnedSubheaderList";
 
 const styles = theme => ({
   root: {
@@ -31,9 +38,9 @@ const styles = theme => ({
 
   //페이퍼
   paper: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 5,
     overflow: "hidden",
-    marginBottom: theme.spacing.unit * 5
+    margin: theme.spacing.unit * 2
   },
   paper_title: {
     fontWeight: "bold",
@@ -67,14 +74,90 @@ function listsView(props) {
 
   return (
     <React.Fragment>
-      <SimpleAppBar title="List 컴포넌트" />
+      <SimpleAppBar title="List" />
       <div className={classes.root}>
-        <Paper className={classes.paper}>
-          <NestedList />
-        </Paper>
-        <Paper className={classes.paper}>
-          <FolderList />
-        </Paper>
+        <Grid container direction="row" justify="left" alignItems="top">
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"SimpleList"}
+                <SimpleList />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"NestedList"}
+                <NestedList />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"FolderList"}
+                <FolderList />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"SelectedListItem"}
+                <SelectedListItem />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"AlignItemsList"}
+                <AlignItemsList />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"CheckboxList"}
+                <CheckboxList />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"CheckboxListSecondary"}
+                <CheckboxListSecondary />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"SwitchListSecondary"}
+                <SwitchListSecondary />
+              </Typography>
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">
+                {"PinnedSubheaderList"}
+                <PinnedSubheaderList />
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     </React.Fragment>
   );
