@@ -76,7 +76,7 @@ function listsView(props) {
     <React.Fragment>
       <SimpleAppBar title="List" />
       <div className={classes.root}>
-        <Grid container direction="row" justify="left" alignItems="top">
+        <Grid container direction="row" justify="flex-start" alignItems="flex-start">
           <Grid>
             <Paper className={classes.paper}>
               <Typography variant="h6">

@@ -33,5 +33,21 @@ export const mailFolderListItems = (
                 <ListItemText primary="Lists" />
             </ListItem>
         </Link>
+        <Link href="/users/drawers/drawer">
+            <ListItem button>
+                <ListItemIcon>
+                    <ListAltIcon />
+                </ListItemIcon>
+                <ListItemText primary="Drawer" />
+            </ListItem>
+        </Link>
+        <Link href="/users/snackbars/snackbar">
+            <ListItem button>
+                <ListItemIcon>
+                    <ListAltIcon />
+                </ListItemIcon>
+                <ListItemText primary="Snackbar" />
+            </ListItem>
+        </Link>
   </div>
 );

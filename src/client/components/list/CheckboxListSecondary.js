@@ -68,6 +68,7 @@ class CheckboxListSecondary extends React.Component {
                 onChange={this.handleToggle(value)}
                 //현재 checked된 인덱스 값이 -1이 아니면 checked 됨
                 checked={this.state.checked.indexOf(value) !== -1}
+                color="primary"
               />
             </ListItemSecondaryAction>
           </ListItem>

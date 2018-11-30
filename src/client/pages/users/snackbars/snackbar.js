@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 /* eslint-disable react/prefer-stateless-function */
 import React from "react";
 import debug from "debug";
@@ -6,11 +5,11 @@ import { ApolloConsumer } from "react-apollo";
 import withAuth from "../../../lib/withAuth";
 
 import MainLayout from "../../../layouts/MainLayout";
-import DrawewrViewRender from "./drawer_.jsx";
+import SimpleSnackbarRender from "./snackbar_.jsx";
 
 const log = debug("app:myPage");
 
-class drawerView extends React.Component {
+class snackbarView extends React.Component {
   /**
    * Render the component.
    */
@@ -19,7 +18,7 @@ class drawerView extends React.Component {
       <ApolloConsumer>
         {client => (
           <MainLayout apolloClient={client}>
-            <DrawewrViewRender me={this.props.me} />
+            <SimpleSnackbarRender me={this.props.me} />
           </MainLayout>
         )}
       </ApolloConsumer>
@@ -27,4 +26,4 @@ class drawerView extends React.Component {
   }
 }
 
-export default withAuth(drawerView);
+export default withAuth(snackbarView);

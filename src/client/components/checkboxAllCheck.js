@@ -1,3 +1,5 @@
+/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable import/no-duplicates */
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";

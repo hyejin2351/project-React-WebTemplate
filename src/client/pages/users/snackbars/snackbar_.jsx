@@ -10,7 +10,9 @@ import Paper from "@material-ui/core/Paper";
 
 // 컴포넌트
 import SimpleAppBar from "../../../components/subBar";
-import TemporaryDrawer from "../../../components/drawer/TemporaryDrawer";
+import SimpleSnackbar from "../../../components/snackbar/SimpleSnackbar";
+import CustomizedSnackbars from "../../../components/snackbar/CustomizedSnackbars";
+import PositionedSnackbar from "../../../components/snackbar/PositionedSnackbar";
 
 const styles = theme => ({
   root: {
@@ -54,7 +56,7 @@ const styles = theme => ({
   }
 });
 
-function drawerView(props) {
+function snackbarView(props) {
   const {
     classes,
     me,
@@ -66,25 +68,38 @@ function drawerView(props) {
 
   return (
     <React.Fragment>
-      <SimpleAppBar title="Drawer" />
+      <SimpleAppBar title="Snackbar" />
       <div className={classes.root}>
         <Grid container direction="row" justify="flex-start" alignItems="flex-start">
           <Grid>
             <Paper className={classes.paper}>
-              <Typography variant="h6">
-                {"TemporaryDrawer"}
-                <TemporaryDrawer />
-              </Typography>
+              <Typography variant="h6">{"SimpleSnackbar"}</Typography>
+              <SimpleSnackbar />
             </Paper>
           </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"CustomizedSnackbars"}</Typography>
+              <CustomizedSnackbars />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"PositionedSnackbar"}</Typography>
+              <PositionedSnackbar />
+            </Paper>
+          </Grid>
+
         </Grid>
       </div>
     </React.Fragment>
   );
 }
 
-drawerView.propTypes = {
+snackbarView.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(drawerView);
+export default withStyles(styles)(snackbarView);

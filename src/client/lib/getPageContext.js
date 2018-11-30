@@ -5,9 +5,6 @@ import {
   createMuiTheme,
   createGenerateClassName
 } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/purple";
-import green from "@material-ui/core/colors/green";
-import red from "@material-ui/core/colors/red";
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -19,14 +16,14 @@ const theme = createMuiTheme({
       dark: "#0050cb"
     },
     secondary: {
-      light: green[300],
-      main: green[500],
-      dark: green[700]
+      light: "#3949ab",
+      main: "#6f74dd",
+      dark: "#00227b"
     },
     error: {
-      light: "#6ed2bc",
-      main: "#39a08c",
-      dark: "#00715f"
+      light: "#ff5c8d",
+      main: "#d81b60",
+      dark: "#a00037"
     }
   },
   typography: {

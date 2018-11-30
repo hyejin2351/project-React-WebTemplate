@@ -67,6 +67,7 @@ class SwitchListSecondary extends React.Component {
               onChange={this.handleToggle("wifi")}
               //checked 배열 중 wifi의 인덱스 값이 -1이 아니면 checked 표시함
               checked={this.state.checked.indexOf("wifi") !== -1}
+              color="primary"
             />
           </ListItemSecondaryAction>
         </ListItem>
@@ -83,6 +84,7 @@ class SwitchListSecondary extends React.Component {
             <Switch
               onChange={this.handleToggle("bluetooth")}
               checked={this.state.checked.indexOf("bluetooth") !== -1}
+              color="primary"
             />
           </ListItemSecondaryAction>
         </ListItem>

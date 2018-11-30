@@ -82,6 +82,7 @@ class CheckboxList extends React.Component {
               tabIndex={-1}
               //클릭 시 물결 효과가 안일어난다.
               disableRipple
+              color="primary"
             />
             {/* 텍스트 */}
             <ListItemText primary={`아이템 ${value + 1}`} />
