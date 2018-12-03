@@ -13,6 +13,12 @@ import SimpleAppBar from "../../../components/subBar";
 import SimpleSnackbar from "../../../components/snackbar/SimpleSnackbar";
 import CustomizedSnackbars from "../../../components/snackbar/CustomizedSnackbars";
 import PositionedSnackbar from "../../../components/snackbar/PositionedSnackbar";
+import LongTextSnackbar from "../../../components/snackbar/LongTextSnackbar";
+import ConsecutiveSnackbars from "../../../components/snackbar/ConsecutiveSnackbars";
+import DirectionSnackbar from "../../../components/snackbar/DirectionSnackbar";
+import FadeSnackbar from "../../../components/snackbar/FadeSnackbar";
+import IntegrationNotistack from "../../../components/snackbar/IntegrationNotistack";
+
 
 const styles = theme => ({
   root: {
@@ -92,6 +98,41 @@ function snackbarView(props) {
             </Paper>
           </Grid>
 
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"LongTextSnackbar"}</Typography>
+              <LongTextSnackbar />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"ConsecutiveSnackbars"}</Typography>
+              <ConsecutiveSnackbars />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"DirectionSnackbar"}</Typography>
+              <DirectionSnackbar />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"FadeSnackbar"}</Typography>
+              <FadeSnackbar />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"IntegrationNotistack"}</Typography>
+              <IntegrationNotistack />
+            </Paper>
+          </Grid>
+          
         </Grid>
       </div>
     </React.Fragment>

@@ -19,9 +19,19 @@ class PositionedSnackbar extends React.Component {
 
   //handleClose 메서드
   //handleClose() 실행시 open: false; 닫히게 된다.
-  handleClose = () => {
+  handleClose = (event, reason) => {
     this.setState({ open: false });
   };
+
+  //clickaway 속성을 넣고자 할 떄
+  /*
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({ open: false });
+  };
+  */
 
   render() {
     //vertical, horizontal, open 은 모두 PositionedSnackbar 컴포넌트의 상태값으로 앞으로 이벤트 핸들러를 작성할 때 쓸 것이다.
