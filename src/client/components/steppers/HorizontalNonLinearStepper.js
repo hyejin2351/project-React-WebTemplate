@@ -32,11 +32,11 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0: //step이 0일 때
-      return "Step 1: Select campaign settings..."; //Step 1 텍스트를 반환
+      return "Step 1: 스텝 1 텍스트 입니다."; //Step 1 텍스트를 반환
     case 1: //step이 1일 때
-      return "Step 2: What is an ad group anyways?"; //Step 2 텍스트를 반환
+      return "Step 2: 스텝 2 텍스트 입니다."; //Step 2 텍스트를 반환
     case 2: //step이 2일 때
-      return "Step 3: This is the bit I really care about!"; //Step 3 텍스트를 반환
+      return "Step 3: 스텝 3 텍스트 입니다."; //Step 3 텍스트를 반환
     default:
       //step이 비어있는 값이 있으면
       return "Unknown step"; //default 텍스트를 반환
@@ -170,7 +170,7 @@ class HorizontalNonLinearStepper extends React.Component {
                 {activeStep !== steps.length && //activeStep이 모든 단계의 끝에 도달하지 않았고,
                   (this.state.completed[this.state.activeStep] ? ( //현재의 activeStep가 completed된 상태가 아니면?
                     <Typography variant="caption" className={classes.completed}>
-                      Step {activeStep + 1} already completed
+                      Step {activeStep + 1} 이미 completed 표시가 완료되었습니다.
                     </Typography>
                   ) : ( //activeStep이 모든 단계의 끝에 도달했고, 현재의 activeStep가 completed된 상태이면?
                     <Button
