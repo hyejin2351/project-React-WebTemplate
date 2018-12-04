@@ -14,6 +14,8 @@ import HorizontalLinearStepper from "../../../components/steppers/HorizontalLine
 import HorizontalNonLinearStepper from "../../../components/steppers/HorizontalNonLinearStepper";
 import HorizontalLabelPositionBelowStepper from "../../../components/steppers/HorizontalLabelPositionBelowStepper";
 import HorizontalNonLinearAlternativeLabelStepper from "../../../components/steppers/HorizontalNonLinearAlternativeLabelStepper";
+import TextMobileStepper from "../../../components/steppers/TextMobileStepper";
+import SwipeableTextMobileStepper from "../../../components/steppers/SwipeableTextMobileStepper";
 
 const styles = theme => ({
   root: {
@@ -99,7 +101,21 @@ function stepperView(props) {
               <HorizontalNonLinearAlternativeLabelStepper />
             </Paper>
           </Grid>
-          
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"TextMobileStepper"}</Typography>
+              <TextMobileStepper />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"SwipeableTextMobileStepper"}</Typography>
+              <SwipeableTextMobileStepper />
+            </Paper>
+          </Grid>
+
         </Grid>
       </div>
     </React.Fragment>
