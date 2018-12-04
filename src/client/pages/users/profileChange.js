@@ -9,6 +9,7 @@ import { ChangeProfile } from "../../lib/gqlApi/usersApi";
 
 import MainLayout from "../../layouts/MainLayout";
 import ProfileView from "./profileChange_.jsx";
+
 const log = debug("app:profileChange");
 
 class ProfilePage extends React.Component {
@@ -32,7 +33,7 @@ class ProfilePage extends React.Component {
 
   onFileOpen(event) {
     event.preventDefault();
-    fileDialog({ accept: "image/*" }).then(files => {
+    fileDialog({ accept: "image/*" }).then((files) => {
       // files contains an array of FileList
       this.setState({
         file: files[0],
@@ -47,20 +48,21 @@ class ProfilePage extends React.Component {
 
     const { profileImageURL } = this.state;
 
-    log("profileImageURL = " + profileImageURL);
-    if ("/static/images/defaultProfile.png" !== profileImageURL)
+    log(`profileImageURL = ${profileImageURL}`);
+    if (profileImageURL !== "/static/images/defaultProfile.png") {
       this.setState({
         file: null,
         profileImageURL: "/static/images/defaultProfile.png",
         isDelete: true
-      });
+      }); 
+    }
   }
 
   onChange(event) {
     const nickName = event.target.value;
 
     this.setState({
-      nickName: nickName
+      nickName
     });
   }
 
@@ -73,10 +75,10 @@ class ProfilePage extends React.Component {
       log("변경된사항이 없습니다. 확인 해주세요.");
     } else {
       changeProfile({ variables: { file, isDelete, nickName } })
-        .then(res => {
+        .then((res) => {
           historyBack();
         })
-        .catch(err => {
+        .catch((err) => {
           log(err);
         });
     }
@@ -97,26 +99,24 @@ class ProfilePage extends React.Component {
 
     return (
       <Mutation mutation={ChangeProfile}>
-        {changeProfile => {
-          return (
-            <ApolloConsumer>
-              {client => (
-                <MainLayout apolloClient={client}>
-                  <ProfileView
-                    onFileOpen={this.onFileOpen}
-                    onFileDelete={this.onFileDelete}
-                    onChange={this.onChange}
-                    onSubmit={e => this.onSubmit(e, changeProfile)}
-                    onCancel={this.onCancel}
-                    me={me}
-                    file={file}
-                    profileImageURL={profileImageURL}
-                  />
-                </MainLayout>
-              )}
-            </ApolloConsumer>
-          );
-        }}
+        {changeProfile => (
+          <ApolloConsumer>
+            {client => (
+              <MainLayout apolloClient={client}>
+                <ProfileView
+                  onFileOpen={this.onFileOpen}
+                  onFileDelete={this.onFileDelete}
+                  onChange={this.onChange}
+                  onSubmit={e => this.onSubmit(e, changeProfile)}
+                  onCancel={this.onCancel}
+                  me={me}
+                  file={file}
+                  profileImageURL={profileImageURL}
+                />
+              </MainLayout>
+            )}
+          </ApolloConsumer>
+        )}
       </Mutation>
     );
   }

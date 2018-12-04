@@ -5,6 +5,7 @@ import WithRoot from "../lib/withRoot";
 
 // 컴포넌트
 import PaperSheet from "../components/visual";
+import SwipeableTextMobileStepper from "../components/steppers/SwipeableTextMobileStepper";
 import MediaCard from "../components/mediaCard";
 
 //스타일링
@@ -42,7 +43,7 @@ class IndexView extends React.Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-          <PaperSheet />
+          <SwipeableTextMobileStepper />
 
           <MediaCard />
         </div>
