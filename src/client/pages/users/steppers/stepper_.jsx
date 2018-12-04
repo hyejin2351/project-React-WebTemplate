@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 // 컴포넌트
 import SimpleAppBar from "../../../components/subBar";
 import HorizontalLinearStepper from "../../../components/steppers/HorizontalLinearStepper";
-
+import HorizontalNonLinearStepper from "../../../components/steppers/HorizontalNonLinearStepper";
 
 const styles = theme => ({
   root: {
@@ -74,6 +74,13 @@ function stepperView(props) {
             <Paper className={classes.paper}>
               <Typography variant="h6">{"HorizontalLinearStepper"}</Typography>
               <HorizontalLinearStepper />
+            </Paper>
+          </Grid>
+
+          <Grid>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">{"HorizontalNonLinearStepper"}</Typography>
+              <HorizontalNonLinearStepper />
             </Paper>
           </Grid>
           
