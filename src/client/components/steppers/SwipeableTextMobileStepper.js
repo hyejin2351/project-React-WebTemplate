@@ -87,7 +87,7 @@ const styles = theme => ({
     top: -350,
     left: 0,
     backgroundColor: "transparent",
-    position: "relative"
+    position: 'relative'
   },
   //arrow
   arrowColor: {
@@ -128,9 +128,9 @@ class SwipeableTextMobileStepper extends React.Component {
     const { activeStep } = this.state; //현재 상태 값 = activeStep
     const maxSteps = tutorialSteps.length; //모든 라벨과 이미지의 개수 = maxSteps
     const springConfig = {
-      easeFunction: 'cubic-bezier(0.42, 0, 0.58, 1)',
-      duration: '3s', //easeFunction duration
-      delay: '0s' //현재 슬라이드에 머무는 시간 //delay를 사용하면 왜 화면이 깨질까?
+      duration: "3s", //easeFunction이 작동하는 기간
+      easeFunction: "cubic-bezier(0.15, 0.3, 0.25, 1)", //넘어가는 느낌
+      delay: "0s" //넘어가는 시간이 지연됨. 버튼을 눌러도 delay되는 시간만큼 늦게 넘어감
     };
 
     return (

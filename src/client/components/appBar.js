@@ -56,7 +56,8 @@ const styles = theme => ({
   },
   root: {
     flexGrow: 1,
-    backgroundColor: "#333"
+    backgroundColor: "#333",
+    position: "relative"
   },
   grow: {
     flexGrow: 1,
