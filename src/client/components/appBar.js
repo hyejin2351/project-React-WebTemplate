@@ -67,6 +67,9 @@ const styles = theme => ({
     marginRight: 20
   },
   logo_text: {
+    letterSpacing: 3,
+    textTransform: 'uppercase',
+    fontSize: "2vh", //폰트 높이가 스크린 사이즈와 상관없이 2
     color: "white",
     textDecoration: "none",
     fontWeight: "bold",
@@ -128,7 +131,7 @@ class MenuAppBar extends React.Component {
 
             <Typography variant="h1" color="inherit" className={classes.grow}>
               <Link href="/">
-                <a className={classes.logo_text}>로고</a>
+                <a className={classes.logo_text}>React Web Template</a>
               </Link>
             </Typography>
             {!me || !me.id ? (
