@@ -22,21 +22,21 @@ const tutorialSteps = [
   {
     label: "라벨1",
     imgPath:
-      "https://images.unsplash.com/photo-1462518461546-dfaf9f1a616a?ixlib=rb-0.3.5&s=c98b64ef8005a895a89d590f01ecf0ed&auto=format&fit=crop&w=1350&q=80",
+      "https://images.unsplash.com/photo-1468657988500-aca2be09f4c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
     text: "인덱스1",
     subText: "서브텍스트1"
   },
   {
     label: "라벨2",
     imgPath:
-      "https://images.unsplash.com/photo-1504462357410-c9058337b1c8?ixlib=rb-0.3.5&s=ee8817bb67121c1bdd6fb49e2baad6e0&auto=format&fit=crop&w=1351&q=80",
+      "https://images.unsplash.com/photo-1504672281656-e4981d70414b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     text: "인덱스2",
     subText: "서브텍스트2"
   },
   {
     label: "라벨3",
     imgPath:
-      "https://images.unsplash.com/photo-1464869372688-a93d806be852?ixlib=rb-0.3.5&s=39045b93169f7a2b8fc8d77eabee87a5&auto=format&fit=crop&w=1350&q=80",
+      "https://images.unsplash.com/photo-1530020793049-23eafadd208b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
     text: "인덱스3",
     subText: "서브텍스트3"
   }

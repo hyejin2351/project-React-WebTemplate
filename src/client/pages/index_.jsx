@@ -1,12 +1,16 @@
+/* eslint-disable import/first */
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import WithRoot from "../lib/withRoot";
 
 // 컴포넌트
-import PaperSheet from "../components/visual";
 import SwipeableTextMobileStepper from "../components/steppers/SwipeableTextMobileStepper";
 import MediaCard from "../components/mediaCard";
+import IndexIntro from "../components/IndexIntro";
+// import Paper from "@material-ui/core/Paper";
+// import Typography from "@material-ui/core/Typography";
+// import Grid from "@material-ui/core/Grid";
 
 //스타일링
 const styles = theme => ({
@@ -16,6 +20,12 @@ const styles = theme => ({
   back: {
     textAlign: "center",
     paddingTop: theme.spacing.unit * 7
+  },
+  paper: {
+    textAlign: "center"
+  },
+  iconSize: {
+    fontSize: 80
   }
 });
 
@@ -45,6 +55,8 @@ class IndexView extends React.Component {
         <div className={classes.root}>
           <SwipeableTextMobileStepper />
 
+          <IndexIntro />
+
           <MediaCard />
         </div>
       </React.Fragment>
@@ -56,5 +68,4 @@ IndexView.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-// export default WithRoot(withStyles(styles)(IndexView));
 export default withStyles(styles)(IndexView);
