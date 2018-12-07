@@ -16,8 +16,7 @@ import Grid from "@material-ui/core/Grid";
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 5,
-    marginTop: -65
+    padding: theme.spacing.unit * 5
   },
   media: {
     height: 140
@@ -32,9 +31,6 @@ function MediaCard(props) {
   return (
     <React.Fragment>
       <Grid className={classes.root}>
-        <Typography variant="h6" className={classes.margin_bottom}>
-          카테고리 영역1
-        </Typography>
 
         <Grid
           container

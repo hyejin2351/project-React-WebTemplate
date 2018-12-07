@@ -23,22 +23,22 @@ const tutorialSteps = [
     label: "라벨1",
     imgPath:
       "https://images.unsplash.com/photo-1468657988500-aca2be09f4c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-    text: "인덱스1",
-    subText: "서브텍스트1"
+    text: "Title",
+    subText: "Subtext"
   },
   {
     label: "라벨2",
     imgPath:
       "https://images.unsplash.com/photo-1504672281656-e4981d70414b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    text: "인덱스2",
-    subText: "서브텍스트2"
+    text: "Title",
+    subText: "Subtext"
   },
   {
     label: "라벨3",
     imgPath:
       "https://images.unsplash.com/photo-1530020793049-23eafadd208b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
-    text: "인덱스3",
-    subText: "서브텍스트3"
+    text: "Title",
+    subText: "Subtext"
   }
 ];
 
@@ -87,7 +87,7 @@ const styles = theme => ({
     top: -350,
     left: 0,
     backgroundColor: "transparent",
-    position: 'relative'
+    position: "relative"
   },
   //arrow
   arrowColor: {
@@ -182,7 +182,7 @@ class SwipeableTextMobileStepper extends React.Component {
 
         {/* MobileStepper : 자체에 dot 기능이 내장되어 있음 */}
         <MobileStepper
-          infinite 
+          infinite
           variant="text" //dots, text, progress
           steps={maxSteps}
           activeStep={activeStep}

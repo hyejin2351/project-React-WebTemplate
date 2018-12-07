@@ -15,26 +15,34 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 //스타일링
 const styles = theme => ({
   root: {
-    background: "#f5f6f8"
-  },
-  back: {
-    textAlign: "center",
-    paddingTop: theme.spacing.unit * 7
+    background: "#f5f6f8",
+    marginTop: -35
   },
   paper: {
-    textAlign: "center"
+    margin: theme.spacing.unit * 5,
+    textAlign: "center",
+    backgroundColor: "transparent"
   },
   iconSize: {
     fontSize: 80
-  }
+  },
+  innerGrid: {
+    float: "left",
+  },
+  titleFont: {
+    fontWeight: "bold"
+  },
+  textFull: {
+    width: 380
+  },
 });
 
 function IndexIntro(props) {
   const { classes } = props;
   return (
     <React.Fragment>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Paper elevation="0">
+      <Grid container direction="row" justify="center" alignItems="center" className={classes.root}>
+        <Paper elevation="0" className={classes.paper}>
           <Grid
             item
             xs={12}
@@ -47,10 +55,16 @@ function IndexIntro(props) {
           >
             <Paper elevation="0" className={classes.paper}>
               <PersonalVideoIcon color="primary" className={classes.iconSize} />
-              <Typography gutterBottom variant="title">
-                타이틀
+              <Typography
+                gutterBottom
+                variant="title"
+                className={classes.titleFont}
+              >
+                Fully Responsive
               </Typography>
-              <Typography variant="body3">서브 텍스트</Typography>
+              <Typography variant="body3" className={classes.textFull}>
+                This theme will look great on any device, <br /> no matter the size!
+              </Typography>
             </Paper>
           </Grid>
 
@@ -66,10 +80,16 @@ function IndexIntro(props) {
           >
             <Paper elevation="0" className={classes.paper}>
               <ViewCompactIcon color="primary" className={classes.iconSize} />
-              <Typography gutterBottom variant="title">
-                타이틀
+              <Typography
+                gutterBottom
+                variant="title"
+                className={classes.titleFont}
+              >
+                Material-UI Ready
               </Typography>
-              <Typography variant="body3">서브 텍스트</Typography>
+              <Typography variant="body3" className={classes.textFull}>
+                Featuring the latest build of <br /> the new Material-UI framework!
+              </Typography>
             </Paper>
           </Grid>
 
@@ -85,10 +105,16 @@ function IndexIntro(props) {
           >
             <Paper elevation="0" className={classes.paper}>
               <CheckCircleIcon color="primary" className={classes.iconSize} />
-              <Typography gutterBottom variant="title">
-                타이틀
+              <Typography
+                gutterBottom
+                variant="title"
+                className={classes.titleFont}
+              >
+                Easy to Use
               </Typography>
-              <Typography variant="body3">서브 텍스트</Typography>
+              <Typography variant="body3" className={classes.textFull}>
+                Ready to use with your own content,<br /> or customize the source files!
+              </Typography>
             </Paper>
           </Grid>
         </Paper>

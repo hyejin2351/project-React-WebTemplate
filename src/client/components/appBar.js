@@ -14,6 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 
 // 컴포넌트 (drawer)
@@ -27,59 +28,35 @@ const log = debug("app:appBar");
 
 //스타일링
 const styles = theme => ({
-  logo_text: {
-    textAlign: "center",
-    textDecoration: "none",
-    color: "#fff"
-  },
-  right_area: {
-    float: "right"
-  },
-  //right btn
-  right_btn: {
-    width: 60,
-    color: "white",
-    textDecoration: "none"
-  },
-  btn: {
-    fontSize: 13,
-    width: 60,
-    color: "white",
-    textDecoration: "none"
-  },
-  float_right: {
-    float: "right"
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  },
   root: {
     flexGrow: 1,
     backgroundColor: "#333",
     position: "relative"
   },
-  grow: {
-    flexGrow: 1,
-    fontSize: 25
-  },
+  //menu
   menuButton: {
     marginLeft: -12,
     marginRight: 20
   },
+  //logo
+  grow: {
+    flexGrow: 1,
+    fontSize: 18,
+    marginLeft: 20
+  },
   logo_text: {
     letterSpacing: 3,
     textTransform: 'uppercase',
-    fontSize: "2vh", //폰트 높이가 스크린 사이즈와 상관없이 2
     color: "white",
     textDecoration: "none",
     fontWeight: "bold",
-    marginLeft: 20
   },
+  //필수 버튼
   button_text: {
     color: "white",
     textDecoration: "none"
-  }
+  },
+  //아바타
 });
 
 class MenuAppBar extends React.Component {
@@ -136,20 +113,20 @@ class MenuAppBar extends React.Component {
               </Link>
             </Typography>
             {!me || !me.id ? (
-              <div>
+              <Grid>
                 <Button color="inherit">
                   <Link href="/users/signin">
-                    <a className={classes.button_text}>로그인</a>
+                    <a className={classes.button_text}>Login</a>
                   </Link>
                 </Button>
                 <Button color="inherit">
                   <Link href="/users/signup">
-                    <a className={classes.button_text}>회원가입</a>
+                    <a className={classes.button_text}>Join</a>
                   </Link>
                 </Button>
-              </div>
+              </Grid>
             ) : (
-              <div>
+              <Grid>
                 <IconButton color="inherit">
                   <Link href="/users/myPage">
                     <Avatar
@@ -160,9 +137,9 @@ class MenuAppBar extends React.Component {
                 </IconButton>
 
                 <Button color="inherit" onClick={this.signout}>
-                  <a className={classes.button_text}>로그아웃</a>
+                  <a className={classes.button_text}>Logout</a>
                 </Button>
-              </div>
+              </Grid>
             )}
           </Toolbar>
         </AppBar>
