@@ -6,11 +6,9 @@ import WithRoot from "../lib/withRoot";
 
 // 컴포넌트
 import SwipeableTextMobileStepper from "../components/steppers/SwipeableTextMobileStepper";
-import MediaCard from "../components/mediaCard";
-import IndexIntro from "../components/IndexIntro";
-// import Paper from "@material-ui/core/Paper";
-// import Typography from "@material-ui/core/Typography";
-// import Grid from "@material-ui/core/Grid";
+import IndexIntro from "../components/mainComponents/IndexIntro";
+import IndexMain from "../components/mainComponents/IndexMain";
+// import MediaCard from "../components/mediaCard";
 
 //스타일링
 const styles = theme => ({
@@ -57,7 +55,7 @@ class IndexView extends React.Component {
 
           <IndexIntro />
 
-          <MediaCard />
+          <IndexMain />
         </div>
       </React.Fragment>
     );

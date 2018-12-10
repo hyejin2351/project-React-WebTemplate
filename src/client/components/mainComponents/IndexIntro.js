@@ -16,7 +16,7 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 const styles = theme => ({
   root: {
     background: "#f5f6f8",
-    marginTop: -35
+    marginTop: -65
   },
   paper: {
     margin: theme.spacing.unit * 5,
@@ -42,7 +42,7 @@ function IndexIntro(props) {
   return (
     <React.Fragment>
       <Grid container direction="row" justify="center" alignItems="center" className={classes.root}>
-        <Paper elevation="0" className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <Grid
             item
             xs={12}
@@ -53,16 +53,16 @@ function IndexIntro(props) {
             alignItems="center"
             className={classes.innerGrid}
           >
-            <Paper elevation="0" className={classes.paper}>
+            <Paper elevation={0} className={classes.paper}>
               <PersonalVideoIcon color="primary" className={classes.iconSize} />
               <Typography
                 gutterBottom
-                variant="title"
+                variant="h5"
                 className={classes.titleFont}
               >
                 Fully Responsive
               </Typography>
-              <Typography variant="body3" className={classes.textFull}>
+              <Typography variant="body2" className={classes.textFull}>
                 This theme will look great on any device, <br /> no matter the size!
               </Typography>
             </Paper>
@@ -78,16 +78,16 @@ function IndexIntro(props) {
             alignItems="center"
             className={classes.innerGrid}
           >
-            <Paper elevation="0" className={classes.paper}>
+            <Paper elevation={0} className={classes.paper}>
               <ViewCompactIcon color="primary" className={classes.iconSize} />
               <Typography
                 gutterBottom
-                variant="title"
+                variant="h5"
                 className={classes.titleFont}
               >
                 Material-UI Ready
               </Typography>
-              <Typography variant="body3" className={classes.textFull}>
+              <Typography variant="body2" className={classes.textFull}>
                 Featuring the latest build of <br /> the new Material-UI framework!
               </Typography>
             </Paper>
@@ -103,16 +103,16 @@ function IndexIntro(props) {
             alignItems="center"
             className={classes.innerGrid}
           >
-            <Paper elevation="0" className={classes.paper}>
+            <Paper elevation={0} className={classes.paper}>
               <CheckCircleIcon color="primary" className={classes.iconSize} />
               <Typography
                 gutterBottom
-                variant="title"
+                variant="h5"
                 className={classes.titleFont}
               >
                 Easy to Use
               </Typography>
-              <Typography variant="body3" className={classes.textFull}>
+              <Typography variant="body2" className={classes.textFull}>
                 Ready to use with your own content,<br /> or customize the source files!
               </Typography>
             </Paper>

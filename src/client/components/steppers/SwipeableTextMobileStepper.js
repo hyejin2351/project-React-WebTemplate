@@ -161,7 +161,7 @@ class SwipeableTextMobileStepper extends React.Component {
                     justify="center"
                     alignItems="center"
                   >
-                    <Paper elevation="0" className={classes.typoPaper}>
+                    <Paper elevation={0} className={classes.typoPaper}>
                       <Typography
                         gutterBottom
                         variant="h2"
@@ -182,7 +182,6 @@ class SwipeableTextMobileStepper extends React.Component {
 
         {/* MobileStepper : 자체에 dot 기능이 내장되어 있음 */}
         <MobileStepper
-          infinite
           variant="text" //dots, text, progress
           steps={maxSteps}
           activeStep={activeStep}
