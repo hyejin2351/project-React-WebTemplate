@@ -8,7 +8,8 @@ import WithRoot from "../lib/withRoot";
 import SwipeableTextMobileStepper from "../components/steppers/SwipeableTextMobileStepper";
 import IndexIntro from "../components/mainComponents/IndexIntro";
 import IndexMain from "../components/mainComponents/IndexMain";
-// import MediaCard from "../components/mediaCard";
+import IndexBar from "../components/mainComponents/IndexBar";
+import IndexTeam from "../components/mainComponents/IndexTeam";
 
 //스타일링
 const styles = theme => ({
@@ -17,7 +18,6 @@ const styles = theme => ({
   },
   back: {
     textAlign: "center",
-    paddingTop: theme.spacing.unit * 7
   },
   paper: {
     textAlign: "center"
@@ -56,6 +56,10 @@ class IndexView extends React.Component {
           <IndexIntro />
 
           <IndexMain />
+          
+          <IndexTeam />
+          
+          <IndexBar />
         </div>
       </React.Fragment>
     );
