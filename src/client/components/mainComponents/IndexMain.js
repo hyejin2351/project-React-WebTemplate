@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 //스타일링
 const styles = theme => ({
   root: {
-    background: "#f5f6f8"
+    background: "#fff"
   },
   paper: {
     margin: theme.spacing.unit * 5,
@@ -28,15 +28,15 @@ const styles = theme => ({
     fontWeight: "bold"
   },
   textFull: {
-    width: 380,
+    width: 380
   },
   //textPaper
   textPaper: {
-    height: "100%",
+    height: 420
   },
   innerTextPaper: {
-    height: 420,
-    padding: theme.spacing.unit * 15,
+    height: "100%",
+    padding: theme.spacing.unit * 10
   },
   imgPaper: {
     height: 420
@@ -51,7 +51,7 @@ const styles = theme => ({
     backgroundSize: "cover",
     backgroundPosition: "45% 30%",
     background:
-      "url(https://material-ui.com/static/images/material-ui-logo.svg) no-repeat"
+      "url(https://process.filestackapi.com/cache=expiry:max/resize=width:700/compress/5yjLJYBrQ6EHpN9dK0ak) no-repeat"
   },
   img3: {
     backgroundSize: "cover",
@@ -59,11 +59,9 @@ const styles = theme => ({
     background:
       "url(https://images.unsplash.com/photo-1524439210809-5b21a2e18582?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80) no-repeat"
   },
-  textPaper_content_title: {
-    padding: theme.spacing.unit * 5
-  },
+  textPaper_content_title: {},
   textPaper_content_sub: {
-    // paddingTop: theme.spacing.unit * 3
+    paddingTop: theme.spacing.unit
   }
 });
 
@@ -88,30 +86,20 @@ function IndexMain(props) {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Paper square elevation={0} className={classes.textPaper}>
-            <Grid
-              container
-              direction="row-reverse"
-              justify="center"
-              alignItems="center"
+          <Paper square elevation={0} className={classes.innerTextPaper}>
+            <Typography
+              variant="h4"
+              className={classes.textPaper_content_title}
             >
-              <Paper square elevation={0} className={classes.innerTextPaper}>
-                <Typography
-                  variant="h4"
-                  className={classes.textPaper_content_title}
-                >
-                  Fully Responsive <br />
-                  <Typography
-                    variant="body1"
-                    className={classes.textPaper_content_sub}
-                  >
-                    When you use a theme created by Start Material-UI, you know
-                    that the theme will look great on any device, whether it's a
-                    phone, tablet, or desktop the page will behave responsively!
-                  </Typography>
-                </Typography>
-              </Paper>
-            </Grid>
+              Fully Responsive Design <br />
+              <Typography
+                variant="body1"
+                className={classes.textPaper_content_sub}
+              >
+                The theme will look great on any device, whether it's a phone,
+                tablet, or desktop the page will behave responsively!
+              </Typography>
+            </Typography>
           </Paper>
         </Grid>
       </Grid>
@@ -143,9 +131,9 @@ function IndexMain(props) {
                 variant="body1"
                 className={classes.textPaper_content_sub}
               >
-                Newly improved, and full of great utility classes, Material-UI
-                is leading the way in mobile responsive web development! All of
-                the themes on Start Bootstrap are now using Material-UI!
+                React components that implement Google's Material Design. Newly
+                improved, and full of great utility classes, Material-UI v3.6.2
+                is leading the way in mobile responsive web development!
               </Typography>
             </Typography>
           </Paper>
@@ -174,7 +162,7 @@ function IndexMain(props) {
               variant="h4"
               className={classes.textPaper_content_title}
             >
-              Easy to Use &amp; Customize
+              Easy to Use &amp; Customize <br />
               <Typography
                 variant="body1"
                 className={classes.textPaper_content_sub}
