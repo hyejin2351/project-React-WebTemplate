@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -42,28 +43,26 @@ function MemberDetail(props) {
         </TableBody>
         {usersList && (
           <TableBody>
-            {usersList.map((user, index) => {
-              return (
-                <TableRow key={user.id}>
-                  <TableCell component="th" scope="row">
-                    {pageNo * rowsPerPage + index + 1}
-                  </TableCell>
-                  <TableCell>
-                    <Link
-                      href={{
-                        pathname: "/admin/memberDetail",
-                        query: { id: user.id }
-                      }}
-                    >
-                      <a>{user.name}</a>
-                    </Link>
-                  </TableCell>
-                  <TableCell>{user.nickName}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{new Date(user.created).toDateString()}</TableCell>
-                </TableRow>
-              );
-            })}
+            {usersList.map((user, index) => (
+              <TableRow key={user.id}>
+                <TableCell component="th" scope="row">
+                  {pageNo * rowsPerPage + index + 1}
+                </TableCell>
+                <TableCell>
+                  <Link
+                    href={{
+                      pathname: "/admin/memberDetail",
+                      query: { id: user.id }
+                    }}
+                  >
+                    <a>{user.name}</a>
+                  </Link>
+                </TableCell>
+                <TableCell>{user.nickName}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{new Date(user.created).toDateString()}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         )}
       </Table>

@@ -10,6 +10,7 @@ import IndexIntro from "../components/mainComponents/IndexIntro";
 import IndexMain from "../components/mainComponents/IndexMain";
 import IndexBar from "../components/mainComponents/IndexBar";
 import IndexTeam from "../components/mainComponents/IndexTeam";
+import IndexFooter from "../components/mainComponents/IndexFooter";
 
 //스타일링
 const styles = theme => ({
@@ -58,8 +59,10 @@ class IndexView extends React.Component {
           <IndexMain />
           
           <IndexTeam />
-          
+
           <IndexBar />
+
+          <IndexFooter />
         </div>
       </React.Fragment>
     );
